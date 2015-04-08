@@ -1,0 +1,314 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/nmap-port-scan-graph-gui.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Some nmap examples in the terminal, as well as some graphical front ends and GUI interfaces you can install on Linux and Mac OS X powered systems" />
+
+        <!-- End SEO includes -->
+        <title>nmap | Port scan tool for .nix systems | nmap GUI interfaces for Linux and Mac</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="nmap | Port scan tool for .nix systems | nmap GUI interfaces for Linux and Mac">
+        <meta name="twitter:description" content="Some nmap examples in the terminal, as well as some graphical front ends and GUI interfaces you can install on Linux and Mac OS X powered systems">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">nmap | Port scan tool for .nix systems | nmap GUI interfaces for Linux and Mac</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/nmap-port-scan-graph-gui.html">nmap | Port scan tool for .nix systems | nmap GUI interfaces for Linux and Mac</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-07-03 10:36:30 -0400</h6>
+
+<hr>
+<p>Note: This is a repost of an old post I’ve made in 2008.</p>
+
+<p>nmap is a wonderful tool specially for debugging, there are lots of times when you need to know if a port is open in a server, or maybe blocked by a firewall, or just to test your iptables rules.</p>
+
+<p>Here we will learn how to use it at the command line, and using its GUI front end, nmapFE and Knmap.</p>
+
+<p><strong>Introduction</strong></p>
+
+<p>From the man page:</p>
+
+<blockquote>
+  <p>Nmap (“Network Mapper”) is an open source tool for network exploration and security auditing. It was designed to rapidly scan large networks, although it works fine against single hosts. Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services (application name and version) those hosts are offering, what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use, and dozens of other characteristics. While Nmap is commonly used for security audits, many systems and network administrators find it useful for routine tasks such as network inventory, managing service upgrade schedules, and monitoring host or service uptime.</p>
+</blockquote>
+
+<p>As you can see it is a really useful tool.</p>
+
+<p><strong>Using nmap from the console or command line</strong></p>
+
+<p>Nmap has a lot of options. We are going to focus only on some of them.</p>
+
+<pre><code>sudo nmap -sS -O 127.0.0.1
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+  <li>-sS: TCP SYN scan</li>
+  <li>
+    <p>-O: Enable Operating System detection</p>
+
+    <p>sudo nmap -sU 127.0.0.1</p>
+  </li>
+</ul>
+
+<p>Where:</p>
+
+<ul>
+  <li>
+    <p>-sU UDP ports scan</p>
+
+    <p>sudo nmap -sS -O -p 20-25 127.0.0.1</p>
+  </li>
+</ul>
+
+<p>Where:</p>
+
+<ul>
+  <li>-sS: TCP SYN scan</li>
+  <li>
+    <p>-p 20-25: Scan on ports 20 to 25</p>
+
+    <p>sudo nmap -sS -F 127.0.0.1</p>
+  </li>
+</ul>
+
+<p>Where:</p>
+
+<ul>
+  <li>-sS: TCP SYN scan</li>
+  <li>-F: Fast (limited port) scan</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>**Graphical interfaces</td>
+      <td>nmap GUI**</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>nmap Front End (nmapFE)</em></p>
+
+<p>This one can be installed on Linux or Mac OS X</p>
+
+<p>For Ubuntu is as simple as:</p>
+
+<pre><code>sudo aptitude install nmapfe
+</code></pre>
+
+<p>For Mac OS X, you can compile it in your system or, use the <a href="http://nmap.org/book/inst-macosx.html#inst-macosx-installer">nmapFE Mac installer</a></p>
+
+<p>Once installed, it will look like this:</p>
+
+<p><img src="/images/2012/07/nmapFE.jpg" alt="nmapFE nmap GUI" class="img-responsive" /></p>
+
+<p>On target you put the IP or IPs you want to scan, select the scan type, if you want TCP SYN, UDP, Connect scan, or other, the most used are SYN and UDP. If you want to scan for UDP ports. Also select the scanned ports, you can scan the default ones, All, fast (only the ports in nmap-services file).</p>
+
+<p><img src="/images/2012/07/nmapFE_discover.jpg" alt="nmapFE discover screen" class="img-responsive" /></p>
+
+<p>Select if you want to use the discovery option, if you want to ping and which type of ping you want to use to discover network nodes if you have specified an IP range to scan.</p>
+
+<p><img src="/images/2012/07/nmapFE_files.jpg" alt="nmapFE GUI files screen" class="img-responsive" /></p>
+
+<p>Useful if you want to send the output to a file.</p>
+
+<p><img src="/images/2012/07/nmapFE_options.jpg" alt="nmapFE nmap GUI options screen" class="img-responsive" /></p>
+
+<p>Lots of other tools, if you want you can enable verbosity of debugging, and if you want IPv6 support.</p>
+
+<p><em>KDE Nmap (knmap)</em></p>
+
+<p>This is only for Linux.</p>
+
+<p>For ubuntu and specially if you are using KDE (kubuntu) run:</p>
+
+<pre><code>sudo aptitude install knmap
+</code></pre>
+
+<p><img src="/images/2012/07/knmap.jpg" alt="knmap nmap GUI for KDE kubuntu" class="img-responsive" /></p>
+
+<p>Its interface has divided the options in a very convenient way. In the common options you will see the target IPs, the port range and if you want it to resolve names.</p>
+
+<p><img src="/images/2012/07/knmap_simple_options.jpg" alt="knmap nmap GUI for KDE kubuntu options" class="img-responsive" /></p>
+
+<p>Here you select if you want to scan all ports, perform a fast scan, IPv6 support, Operating System detection, verbose, and other options.</p>
+
+<p><img src="/images/2012/07/knmap_compound_options.jpg" alt="knmap nmap GUI for KDE kubuntu compound options" class="img-responsive" /></p>
+
+<p>In compound options, you will find a lot more options to play with, you can select which interface to use, which IP, and even if you want to spoof your Mac address!</p>
+
+<p><img src="/images/2012/07/knmap_ping_scan.jpg" alt="knmap nmap GUI for KDE kubuntu ping scan" class="img-responsive" /></p>
+
+<p>Ping and scan options is like the discover and the scan tabs of nmapFE together.</p>
+
+<p><em>Zenmap</em></p>
+
+<p>Zenmap is another <code>nmap</code> GUI front end, I’m currently using it on my Arch Linux PC as well as with my Mac laptop.</p>
+
+<p><img src="/images/2012/07/zenmap.png" alt="zenmap nmap GUI frontend" class="img-responsive" /></p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>Nmap is a must have tool for network and security administrators. Using its GUI frontend you will find good and easy ways to use them, and also to learn how to use them, because you can discover new applications. With nmapFE you can see the command that is going to be executed, another good point for knmap is that it has the possibility to save profiles, with all the options you have enabled, so your next scan is easier.</p>
+
+<p>This is a tool you must master, and no matter if you are running Linux or Mac, you have it disposable.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/nmap-port-scan-graph-gui.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/nmap-port-scan-graph-gui.html&text=nmap | Port scan tool for .nix systems | nmap GUI interfaces for Linux and Mac&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/nmap-port-scan-graph-gui.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/nmap-port-scan-graph-gui.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/nmap-port-scan-graph-gui.html">linkedin</a> | <a href="mailto:?Subject=nmap | Port scan tool for .nix systems | nmap GUI interfaces for Linux and Mac&Body=http://www.garron.me/en/linux/nmap-port-scan-graph-gui.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/nmap-port-scan-graph-gui.html&title=nmap | Port scan tool for .nix systems | nmap GUI interfaces for Linux and Mac" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

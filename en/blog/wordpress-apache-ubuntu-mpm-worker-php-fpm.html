@@ -1,0 +1,307 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Wordpress with Batcache and Apache2 MPM worker and PHP-FPM" />
+
+        <!-- End SEO includes -->
+        <title>Lightning fast Wordpress on Apache and PHP-FPM with Batcache</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Lightning fast Wordpress on Apache and PHP-FPM with Batcache">
+        <meta name="twitter:description" content="How to have a lightning fast Wordpress installation with Batcache and Apache2 working in worker MPM mode, all over an Ubuntu server">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Lightning fast Wordpress on Apache and PHP-FPM with Batcache</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html">Lightning fast Wordpress on Apache and PHP-FPM with Batcache</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-12-26 20:00:00 -0500</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/wordpress.html">wordpress</a>,<a href="/en/tag/tutorial.html">tutorial</a>,</small></p>
+
+<hr>
+<p>This is the third (and last) post of the series where the first two are:</p>
+
+<ul>
+  <li><a href="/en/blog/apache2-mpm-worker-prefork-php.html">Apache MPM Worker and Prefork</a></li>
+  <li><a href="/en/blog/ubuntu-lamp-apache2-mpm-worker-and-php-fpm.html">Install Apache MPM Worker and PHP-FPM LAMP Stack on Ubuntu</a></li>
+</ul>
+
+<p>In this post I will show you how to install Wordpress on LAMP (Apache2 MPM worker, PHP-FPM, MySQL) on Ubuntu server.</p>
+
+<p>We will assume we already have the LAMP server installed and ready.</p>
+
+<p><strong>Install Wordpress</strong></p>
+
+<p>When installing Wordpress on Ubuntu I like to do it with one of these two options:</p>
+
+<ul>
+  <li>Using apt</li>
+  <li>Using svn</li>
+</ul>
+
+<p><strong>Using svn</strong></p>
+
+<p>I recommend you using this or apt rather than the tradicional way of downloading the .tar.gz file as upgrades are easier this way.</p>
+
+<p>To install create a folder where you will install wordpress.</p>
+
+<pre><code> sudo mkdir -p /var/www/yoursite/{public_html,logs}
+</code></pre>
+
+<p>Then download the latest stable copy of Wordpress in the <em>public_html</em> folder.</p>
+
+<pre><code> cd /var/www/yoursite/public_html
+</code></pre>
+
+<p>Using svn, if subversion is not installed run: <code>sudo apt-get install subversion</code> and install Wordpress with:</p>
+
+<pre><code> sudo svn co http://core.svn.wordpress.org/tags/3.5 .
+</code></pre>
+
+<p>To update:</p>
+
+<pre><code> sudo svn sw http://core.svn.wordpress.org/tags/3.5.1/ .
+</code></pre>
+
+<p>You can read more about it <a href="http://codex.wordpress.org/Installing/Updating_WordPress_with_Subversion">here</a></p>
+
+<p><strong>Using apt</strong></p>
+
+<p>This is very easy, and the to keep the code up to date is also easy.</p>
+
+<p>To install:</p>
+
+<pre><code> sudo apt-get install wordpress
+</code></pre>
+
+<p>To update:</p>
+
+<pre><code> sudo apt-get update
+</code></pre>
+
+<p>and:</p>
+
+<pre><code> sudo apt-get upgrade wordpress
+</code></pre>
+
+<p>That will install wordpress on <em>/usr/share/wordpress/</em> folder. You can create a symlink to <em>/var/www/your-site/</em> and create the corresponding virtual host under <em>/etc/apache2/sites-available/</em>. Read more <a href="https://help.ubuntu.com/community/WordPress">here</a></p>
+
+<p><strong>Configure Wordpress</strong></p>
+
+<p>Now that we have the code installed we need to finish the configuration, I am not going to go through the whole process as it is well documented all over the web. Your best shot is to follow the official instructions <a href="http://codex.wordpress.org/Installing_WordPress">here</a></p>
+
+<p>What I am going to cover here is how to make it really fast and efficient. Because we have installed <a href="/en/blog/ubuntu-lamp-apache2-mpm-worker-and-php-fpm.html">Apache MPM worker and PHP-FPM</a> serving static files like .css .js and others will be really efficient, maybe as efficient as with NGINX.</p>
+
+<p><strong>Caching Wordpress</strong></p>
+
+<p>The only way to make Wordpress fast in a small VPS server is by caching. Which method of caching should you choose? That depends on your needs and your configuration and the type of traffic you have.</p>
+
+<p>If you have thousands of posts and your traffic is spread all over them, your best option is <a href="http://wordpress.org/extend/plugins/wp-super-cache/">WP Super-Cache</a>. And configure it to save the file for a long time on disk. The disk is always bigger than RAM and if you have the traffic spread between thousands of posts the provability to hit a post in RAM is small, but big to hit a WP-Super-Cache generated file on disk.</p>
+
+<p>On the other hand, disk is slower than RAM so, if you have rather small traffic, but burst from time to time to a popular post, then any RAM option is better than disk. One option is <a href="/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">Vanilla Wordpress and Varnish</a>. Another is using Batcache, which is what I am going to cover here.</p>
+
+<p><strong>Installing APC</strong></p>
+
+<p>Make sure you have php-apc installed</p>
+
+<pre><code> sudo apt-get install php-apc
+</code></pre>
+
+<p>Then install the <a href="http://wordpress.org/extend/plugins/apc/">APC Object cache backend</a>. To activate this plugin:</p>
+
+<ol>
+  <li>Verify that you have PHP 5.2.4+ and a compatible APC version installed.</li>
+  <li>Copy object-cache.php to your WordPress content directory (wp-content/ by default).</li>
+  <li>Done!</li>
+</ol>
+
+<p><strong>Installing Batcache</strong></p>
+
+<p>We will now install <a href="http://wordpress.org/extend/plugins/batcache/">Batcache</a>, which is used by wordpress.com.</p>
+
+<p>To install it:</p>
+
+<ol>
+  <li>
+    <p>Upload advanced-cache.php to the /wp-content/ directory</p>
+  </li>
+  <li>
+    <p>Add this line the top of wp-config.php to activate Batcache:</p>
+  </li>
+</ol>
+
+<pre><code> define('WP_CACHE', true);
+</code></pre>
+
+<p>Done. Now if suddenly one of your posts become popular, your site will be able to manage the load.</p>
+
+<p><strong>Final step</strong></p>
+
+<p>Restart Apache</p>
+
+<pre><code>sudo service apache2 restart
+</code></pre>
+
+<p>And you may restart php-fpm too.</p>
+
+<pre><code>sudo service php5-fpm restart
+</code></pre>
+
+<p>Done!</p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>I have performed tests with <a href="http://blitz.io/">blitz.io</a> and for 250 concurrent users the server does not even see the load, the CPU use is under 1%. These results show that this configuration is really efficient.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html&text=Lightning fast Wordpress on Apache and PHP-FPM with Batcache&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html">linkedin</a> | <a href="mailto:?Subject=Lightning fast Wordpress on Apache and PHP-FPM with Batcache&Body=http://www.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/wordpress-apache-ubuntu-mpm-worker-php-fpm.html&title=Lightning fast Wordpress on Apache and PHP-FPM with Batcache" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

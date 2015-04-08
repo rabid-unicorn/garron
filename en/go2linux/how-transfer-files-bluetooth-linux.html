@@ -1,0 +1,388 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to transfer files between smartphones and Linux using bluetooth" />
+
+        <!-- End SEO includes -->
+        <title>How to transfer files via bluetooth on Linux</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="How to transfer files via bluetooth on Linux">
+        <meta name="twitter:description" content="How to transfer files between smartphones and Linux using bluetooth">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">How to transfer files via bluetooth on Linux</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/how-transfer-files-bluetooth-linux.html">How to transfer files via bluetooth on Linux</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2007-11-08 09:36:30 -0500</h6>
+
+<hr>
+<p>Today I have bought a cheap Msi Star Key Bluetooth USB DongleUSB Bluetooth dongle, and start working to download my pictures from my cellular to my Linux PC.</p>
+
+<p>It is actually not difficult and here is how.</p>
+
+<h3 id="install-the-software">Install the software</h3>
+
+<pre><code>apt-get install obexftp bluetooth
+</code></pre>
+
+<h3 id="connect-your-cellular-to-your-pc">Connect your cellular to your PC</h3>
+
+<p>Connect the Dongle to your PC it should be recognized immediately, Now on your cellular scan for new devices, once you have found your PC try to connect to it, both your cellular and your PC will ask for a password, choose any (4 digits) but the same on both.</p>
+
+<p>With this there is a trusted relationship between the cellular and the PC.</p>
+
+<h3 id="scan-for-your-cellular-address">Scan for your cellular address</h3>
+
+<pre><code>hcitool scan
+</code></pre>
+
+<p>you should have something like this.</p>
+
+<pre><code>Scanning ...
+    00:16:20:60:7C:36       K510a
+</code></pre>
+
+<h3 id="search-for-the-appropriate-channel-for-file-transfers">Search for the appropriate channel for file transfers</h3>
+
+<pre><code>sdptool browse 00:16:20:60:7C:36
+</code></pre>
+
+<p>You will see something like this:</p>
+
+<pre><code>Browsing 00:16:20:60:7C:36 ...
+Service Description: Sony Ericsson K510
+Service RecHandle: 0x10000
+Service Class ID List:
+  "PnP Information" (0x1200)
+
+Service Name: OBEX SyncML Client
+Service RecHandle: 0x10001
+Service Class ID List:
+  UUID 128: 00000002-0000-1000-8000-0002ee000002
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 1
+  "OBEX" (0x0008)
+
+Service Name: Dial-up Networking
+Service RecHandle: 0x10002
+Service Class ID List:
+  "Dialup Networking" (0x1103)
+  "Generic Networking" (0x1201)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 2
+Profile Descriptor List:
+  "Dialup Networking" (0x1103)
+    Version: 0x0100
+
+Service Name: Serial Port
+Service RecHandle: 0x10003
+Service Class ID List:
+  "Serial Port" (0x1101)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 3
+
+Service Name: HF Voice Gateway
+Service RecHandle: 0x10004
+Service Class ID List:
+  "Handfree Audio Gateway" (0x111f)
+  "Generic Audio" (0x1203)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 4
+Profile Descriptor List:
+  "Handsfree" (0x111e)
+    Version: 0x0101
+
+Service Name: HS Voice Gateway
+Service RecHandle: 0x10005
+Service Class ID List:
+  "Headset Audio Gateway" (0x1112)
+  "Generic Audio" (0x1203)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 5
+Profile Descriptor List:
+  "Headset" (0x1108)
+    Version: 0x0100
+
+Service Name: OBEX Object Push
+Service RecHandle: 0x10006
+Service Class ID List:
+  "OBEX Object Push" (0x1105)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 6
+  "OBEX" (0x0008)
+Profile Descriptor List:
+  "OBEX Object Push" (0x1105)
+    Version: 0x0100
+
+Service Name: OBEX File Transfer
+Service RecHandle: 0x10007
+Service Class ID List:
+  "OBEX File Transfer" (0x1106)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 7
+  "OBEX" (0x0008)
+Profile Descriptor List:
+  "OBEX File Transfer" (0x1106)
+    Version: 0x0100
+
+Service Name: OBEX IrMC Sync Server
+Service RecHandle: 0x10008
+Service Class ID List:
+  "IrMC Sync" (0x1104)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+  "RFCOMM" (0x0003)
+    Channel: 8
+  "OBEX" (0x0008)
+Profile Descriptor List:
+  "IrMC Sync" (0x1104)
+    Version: 0x0100
+
+Service Name: NAP service
+Service Description: NAP description
+Service RecHandle: 0x10009
+Service Class ID List:
+  "Network Access Point" (0x1116)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+    PSM: 15
+  "BNEP" (0x000f)
+    Version: 0x0100
+    SEQ8: 0 6 dd
+Language Base Attr List:
+  code_ISO639: 0x656e
+  encoding:    0x6a
+  base_offset: 0x100
+Profile Descriptor List:
+  "Network Access Point" (0x1116)
+    Version: 0x0100
+
+Service Name: Mouse &amp; Keyboard
+Service Description: Remote Control
+Service Provider: Sony Ericsson
+Service RecHandle: 0x1000a
+Service Class ID List:
+  "Human Interface Device" (0x1124)
+Protocol Descriptor List:
+  "L2CAP" (0x0100)
+    PSM: 17
+  "HIDP" (0x0011)
+Language Base Attr List:
+  code_ISO639: 0x656e
+  encoding:    0x6a
+  base_offset: 0x100
+Profile Descriptor List:
+  "Human Interface Device" (0x1124)
+    Version: 0x0100
+</code></pre>
+
+<p>Look for this:</p>
+
+<p>Service Name: OBEX File Transfer</p>
+
+<p>and below you will find the right channel in my case is 7.</p>
+
+<p>Once you have all of this, you can start browsing, getting and putting files from/to your cellular.</p>
+
+<h3 id="browse-your-cellulars-files">Browse your cellular’s files</h3>
+
+<p>You will now use obexftp command</p>
+
+<p>First get the tree of directories.</p>
+
+<pre><code>obexftp -b 00:16:20:60:7C:36 -c / -l
+</code></pre>
+
+<p>This command will access the cellular of the given address the “/” (root) directory and will list its contents, something like this:</p>
+
+<pre><code>Browsing 00:16:20:60:7C:36 ...
+Channel: 7
+Connecting...done
+Sending ""... done
+Receiving "(null)"...  XML Coder, Mar  9 2006, 03:09:28, (C) 2001 Sony Ericsson Mobile Communications AB
+
+folder-listing version="1.0" folder name="Pictures"
+folder name="Sounds"
+folder name="Themes"
+folder name="Videos"
+folder name="Other"
+folder-listing
+done
+Disconnecting...done
+</code></pre>
+
+<h3 id="download-files">Download files</h3>
+
+<pre><code>obexftp -b 00:16:20:60:7C:36 -c /Pictures -g picture1.jpg
+</code></pre>
+
+<h3 id="upload-files">Upload Files</h3>
+
+<pre><code>obexftp -b 00:16:20:60:7C:36 -c /Pictures -p file.jpg
+</code></pre>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html&text=How to transfer files via bluetooth on Linux&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html">linkedin</a> | <a href="mailto:?Subject=How to transfer files via bluetooth on Linux&Body=http://www.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/how-transfer-files-bluetooth-linux.html&title=How to transfer files via bluetooth on Linux" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

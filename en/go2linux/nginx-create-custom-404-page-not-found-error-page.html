@@ -1,0 +1,247 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to create custom 404 not found error page with Nginx" />
+
+        <!-- End SEO includes -->
+        <title>Nginx | Create custom 404 page not found error page</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Nginx | Create custom 404 page not found error page">
+        <meta name="twitter:description" content="How to create custom 404 not found error page with Nginx">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Nginx | Create custom 404 page not found error page</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html">Nginx | Create custom 404 page not found error page</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2010-12-06 09:50:30 -0500</h6>
+
+<hr>
+<h2 id="introduction">Introduction</h2>
+
+<p>I’m working with Nginx since more than a year ago, it is an extremely fast web server, specially to work in front of Apache serving static content.</p>
+
+<p>Well, if you need to customize your 404 (file not found) error page in Nginx, you are in the right place.</p>
+
+<p>First what is a 404 error, from Wikipedia:</p>
+
+<blockquote>
+  <p>The 404 or Not Found error message is a HTTP standard response code indicating that the client was able to communicate with the server, but the server could not find what was requested. 404 errors should not be confused with “server not found” or similar errors, in which a connection to the destination server could not be made at all. A 404 error indicates that the requested resource may be available again in the future</p>
+</blockquote>
+
+<h2 id="creating-your-own-404-error-page">Creating your own 404 error page</h2>
+
+<p>In the event some of your users get a 404 (page not found) error, it is better if you provide him with a good page, so he can stay at your site.</p>
+
+<p>Some simple example can be this one:</p>
+
+<pre><code>&lt;html&gt;
+  	  &lt;Title&gt;Page Not Found&lt;/title&gt;
+  	  &lt;h2&gt;Page Not Found&lt;/h2&gt;
+  	  &lt;p&gt;We're very sorry to inform you that the page you are looking for could not be found, please accept our apologies, and follow one of the following options&lt;/p&gt;
+
+    &lt;ol&gt;
+        &lt;li&gt;Contact the &lt;a href="mailto:webmaster@site.com"&gt;webmaster&lt;/a&gt; and send him the link of the page you were trying to reach, and the page where it is published&lt;/li&gt;
+        &lt;li&gt;Go to our &lt;a href="http://www.site.com"&gt;Homepage&lt;/a&gt;, and use our search box, to find what you were looking for.&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2 id="configure-nginx-to-use-your-custom-page">Configure Nginx to use your custom page</h2>
+
+<p>Now to make Nginx use your custom page instead of the default one, edit the file nginx.conf which could be at /etc/nginx/</p>
+
+<p>Inside the server section, add:</p>
+
+<pre><code>error_page  404              /404.html;
+</code></pre>
+
+<p>It is a good idea, to block the access to that page, unless there is an error, so add this below the above line:</p>
+
+<pre><code>location  /404.html {
+    internal;
+}
+</code></pre>
+
+<p>So the complete and simple conf file may look like this:</p>
+
+<pre><code>worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    gzip  on;
+    server {
+        listen       80;
+        server_name  localhost;
+        location / {
+            root   /srv/http/nginx;
+            index  index.html index.htm;
+        }
+        error_page  404              /404.html;
+    location  /404.html {
+        internal;
+    }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+    }
+}
+</code></pre>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html&text=Nginx | Create custom 404 page not found error page&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html">linkedin</a> | <a href="mailto:?Subject=Nginx | Create custom 404 page not found error page&Body=http://www.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html&title=Nginx | Create custom 404 page not found error page" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

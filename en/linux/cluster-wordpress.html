@@ -1,0 +1,531 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/cluster-wordpress.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to setup a cluster of PHP-FPM servers to power a Wordpress Installation with Nginx doing reverse proxy and cache in front of them" />
+
+        <!-- End SEO includes -->
+        <title>Wordpress Cluster Powered</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Wordpress Cluster Powered">
+        <meta name="twitter:description" content="How to setup a cluster of PHP-FPM servers to power a Wordpress Installation with Nginx doing reverse proxy and cache in front of them">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Wordpress Cluster Powered</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/cluster-wordpress.html">Wordpress Cluster Powered</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2014-12-21 18:37:35 -0500</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/tutorial.html">tutorial</a>,<a href="/en/tag/wordpress.html">wordpress</a>,</small></p>
+
+<hr>
+<h2 id="wordpress-installation-on-a-cluster-of-servers">Wordpress installation on a cluster of servers</h2>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Blogging is very popular even though a lot of people believe it is not anymore, and Wordpress is still the most used technology, to share your thoughts or work online.</p>
+
+<p>Now if you want to have a server with multiple installations of Wordpress maybe for your family and friends, and want to be sure it will support the load now, and any future load if one or more of the hosted blogs become popular. Then, you want to prepare the infrastructure to be able to handle a big load.</p>
+
+<p>Today we are going to see how to accomplish that.</p>
+
+<h3 id="the-ingredients">The ingredients</h3>
+
+<p>What we are going to use for this setup is:</p>
+
+<ul>
+  <li>Ubuntu LTS (14.04 at the time of this writing)</li>
+  <li>Nginx (As a web server and cache)</li>
+  <li>MySQL (To host the databases)</li>
+  <li>PHP-FPM to handle the code.</li>
+</ul>
+
+<h3 id="the-setup">The setup</h3>
+
+<p>We will have and Nginx server in front of the cluster of servers, one or more PHP-FPM servers behind and MySQL server behind all of that, the MySQL server can be a cluster too, but that is beyond the scope of this tutorial.</p>
+
+<p><strong>MySQL as StandAlone</strong></p>
+
+<p>Let’s first prepare the MySQL server, I recommend you using Linode or Digital Ocean.</p>
+
+<pre><code>sudo apt-get install mysql-server
+</code></pre>
+
+<p>Then run security installation program.</p>
+
+<pre><code>sudo mysql_secure_installation
+</code></pre>
+
+<p>Then you have to make MySQL to listen to the NIC instead of only localhost, to do that edit file: <code>/etc/mysql/my.conf</code> and change this line:</p>
+
+<pre><code>bind-address            = 127.0.0.1
+</code></pre>
+
+<p>To a new one with the IP you need it to listen on, something like this:</p>
+
+<pre><code>bind-address            = 10.1.1.2
+</code></pre>
+
+<p>You better use private network IPs, both Digital Ocean and Linode offer you that.</p>
+
+<p><strong>PHP server</strong></p>
+
+<p>Usually PHP is installed with Apache and mod_php module, which is far from ideal, because it forces Apache to run in prefork MPM (here you can read <a href="http://www.garron.me/en/blog/apache2-mpm-worker-prefork-php.html">prefork vs worker</a></p>
+
+<p>What we are going to do now is to install PHP-FPM which is a standalone PHP server that can be invoked by Nginx or any other web server, proceses the code the return back the result.</p>
+
+<pre><code>sudo apt-get update &amp;&amp; sudo apt-get install php5-fpm php5-cli php5-mysql
+</code></pre>
+
+<p>Now edit the file <code>/etc/php5/fpm/php.ini</code> and be sure you have this line.</p>
+
+<pre><code>upload_max_filesize = 8M
+</code></pre>
+
+<p>And this one too:</p>
+
+<pre><code>post_max_size = 8M
+</code></pre>
+
+<p>That is going to set the upload size limit for the files uploaded, like pictures to 8M, you can increase it even more if you want.</p>
+
+<p>Set the port to listen for request, better if on a private IP where only your server can access.</p>
+
+<p>Edit the file: <code>/etc/php5/fpm/pool.d/www.conf</code></p>
+
+<p>Look for this line: <code>listen = /var/run/php5-fpm.sock</code> and change to something like this: <code>listen = 10.132.150.129:9000</code>, be sure to set the right IP</p>
+
+<p>Finally restart PHP-FPM</p>
+
+<pre><code>sudo service php5-fpm restart
+</code></pre>
+
+<p>Do it again with all other PHP-FPM servers you are installing.</p>
+
+<p><strong>Nginx for Wordpress with caching enabled</strong></p>
+
+<p>It is now the turn for the Nginx server, we will configure it to also cache responses for not logged users, Nginx is great at serving static content and also as a reverse cache proxy server.</p>
+
+<p>We will be installing the latest version available from PPA maintained by the official Nginx team.</p>
+
+<pre><code>sudo add-apt-repository ppa:nginx/stable
+sudo apt-get update &amp;&amp; sudo apt-get upgrade
+sudo apt-get install nginx
+</code></pre>
+
+<p>It is now time to configure Nginx to work with Wordpress, I will be following the instructions in <a href="http://codex.wordpress.org/Nginx">Wordpress Site</a>.</p>
+
+<p>First create the global folder inside the Nginx configuration main folder.</p>
+
+<pre><code>mkdir /etc/nginx/global
+</code></pre>
+
+<p>And put this two files there:</p>
+
+<p><code>restrictions.conf</code></p>
+
+<pre><code># Global restrictions configuration file.
+# Designed to be included in any server {} block.&lt;/p&gt;
+location = /favicon.ico {
+	log_not_found off;
+	access_log off;
+}
+
+location = /robots.txt {
+	allow all;
+	log_not_found off;
+	access_log off;
+}
+
+# Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
+# Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
+location ~ /\. {
+	deny all;
+}
+
+# Deny access to any files with a .php extension in the uploads directory
+# Works in sub-directory installs and also in multisite network
+# Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
+location ~* /(?:uploads|files)/.*\.php$ {
+	deny all;
+}
+</code></pre>
+
+<p>And wordpress.conf</p>
+
+<pre><code># WordPress single blog rules.
+# Designed to be included in any server {} block.
+
+# This order might seem weird - this is attempted to match last if rules below fail.
+# http://wiki.nginx.org/HttpCoreModule
+location / {
+	try_files $uri $uri/ /index.php?$args;
+}
+
+# Add trailing slash to */wp-admin requests.
+rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+
+# Directives to send expires headers and turn off 404 error logging.
+location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|   gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
+       access_log off; log_not_found off; expires max;
+}
+
+# Uncomment one of the lines below for the appropriate caching plugin (if used).
+#include global/wordpress-wp-super-cache.conf;
+#include global/wordpress-w3-total-cache.conf;
+
+# Pass all .php files onto a php-fpm/php-fcgi server.
+location ~ [^/]\.php(/|$) {
+	fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+	if (!-f $document_root$fastcgi_script_name) {
+		return 404;
+	}
+	# This is a robust solution for path info security issue and works with    "cgi.fix_pathinfo = 1" in /etc/php.ini (default)
+
+	include fastcgi.conf;
+	fastcgi_index index.php;
+#	fastcgi_intercept_errors on;
+	fastcgi_pass php;
+    fastcgi_cache_bypass $no_cache;
+    fastcgi_no_cache $no_cache;
+
+    fastcgi_cache WORDPRESS;
+    fastcgi_cache_valid 200 5m;
+}
+</code></pre>
+
+<p>These files are for single Wordpress installations, and not for multisite ones, if you are planning to install multisite read <a href="http://codex.wordpress.org/Nginx">here</a> again.</p>
+
+<p>In the above files fast CGI cache is already included.</p>
+
+<p>We now have almost everything ready to create our first site, so let’s create it, go to <code>/etc/nginx/conf.d/</code> and create a file called <code>www.your-url.com.conf</code> (change name to reflect a real url you own and can use, actually the name is not important, but for better debugging in the future this name convention is a good one).</p>
+
+<p>There are still few things to tweak.</p>
+
+<pre><code>mkdir -p /var/cache/nginx/cache/wordpress.garron.me
+</code></pre>
+
+<p>To create the place where cache files are going to be stored. And make sure the <code>/etc/nginx/nginx.conf</code> file looks like this one:</p>
+
+<pre><code>user www-data;
+worker_processes 4;
+pid /run/nginx.pid;
+
+events {
+	worker_connections 768;
+	# multi_accept on;
+}
+
+http {
+
+	##
+	# Basic Settings
+	##
+
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+	# server_tokens off;
+
+	# server_names_hash_bucket_size 64;
+	# server_name_in_redirect off;
+
+	include /etc/nginx/mime.types;
+	default_type application/octet-stream;
+
+	##
+	# SSL Settings
+	##
+
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+	ssl_prefer_server_ciphers on;
+
+	##
+	# Logging Settings
+	##
+
+	access_log /var/log/nginx/access.log;
+	error_log /var/log/nginx/error.log;
+
+	##
+	# Gzip Settings
+	##
+
+	gzip on;
+	gzip_disable "msie6";
+
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_buffers 16 8k;
+	gzip_http_version 1.1;
+	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+
+                   '"$status" $body_bytes_sent "$http_referer" '
+
+                   '"$http_user_agent" "$http_x_forwarded_for"';
+
+	upstream php {
+    server 10.132.150.129:9000;
+    server 10.132.150.130:9000;
+}
+
+	##
+	# Virtual Host Configs
+	##
+
+        fastcgi_cache_path /var/cache/nginx/cache/wordpress.garron.me levels=1:2 keys_zone=WORDPRESS:50m inactive=60m;
+		     fastcgi_cache_key "$scheme$request_method$host$request_uri";
+		     fastcgi_cache_use_stale error timeout invalid_header http_500;
+
+
+	include /etc/nginx/conf.d/*.conf;
+	include /etc/nginx/sites-enabled/*;
+}
+</code></pre>
+
+<p>Be sure that this part is correctly configured:</p>
+
+<pre><code>	upstream php {
+    server 10.132.150.129:9000;
+    server 10.132.150.130:9000;
+}
+</code></pre>
+
+<p>It should point to all the PHP server you have available.</p>
+
+<p><strong>Synchronizing servers</strong></p>
+
+<p>Nginx does not sent the whole file to the PHP server it just sent the location of the file, so PHP server can parse it and return with a result.</p>
+
+<p>Because of that all PHP-FPM stand alone servers need to have the same info in the same places, therefore we need to copy all wordpress installation folder from the main Nginx server to all PHP-FPM servers.</p>
+
+<p>We will use NFS share to sync data between servers, there are other ways to do this, but this way is simpler.</p>
+
+<p><em>On the server side:</em></p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install nfs-kernel-server
+</code></pre>
+
+<p>Then share the web root folder</p>
+
+<pre><code>vim /etc/exports
+</code></pre>
+
+<p>Add this to the file:</p>
+
+<pre><code>/var/www/wordpress.garron.me 10.132.150.129(rw,sync,no_root_squash,no_subtree_check)
+/var/www/wordpress.garron.me 10.132.150.130(rw,sync,no_root_squash,no_subtree_check)
+</code></pre>
+
+<p>Create the table of your exports.</p>
+
+<pre><code>sudo exportfs -a
+</code></pre>
+
+<p>And start the NFS server:</p>
+
+<pre><code>sudo service nfs-kernel-server start
+</code></pre>
+
+<p><em>On the client side</em></p>
+
+<p>This will have to be done twice, or more, one per each PHP server you have.</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install nfs-common
+</code></pre>
+
+<p>Create the folder where the shares are going to be mounted, should be the same place where they are in the Nginx server.</p>
+
+<pre><code>sudo mkdir -p /var/www/wordpress.garron.me
+</code></pre>
+
+<p>That is for this example only, be sure to match the Nginx path.</p>
+
+<p>Finally configure the client to mount the shares every time it is booted.</p>
+
+<pre><code>vim /etc/fstab
+</code></pre>
+
+<p>And add something like this:</p>
+
+<pre><code>1.2.3.4:/home    /var/www/wordpress.garron.me   nfs auto,noatime,nolock,bg,nfsvers=4,intr,tcp,actimeo=1800 0 0
+</code></pre>
+
+<p>Be sure to change 1.2.3.4 to match the IP of your Nginx server. (better using internal private IPs)</p>
+
+<h3 id="installing-wordpress">Installing Wordpress</h3>
+
+<p>You can now follow the famous 5 minutes installation guide from the Wordpress site:</p>
+
+<p>Just be sure to create the Database using something like the command below in order to permit remote access, remember that the PHP server is not the same as the MySQL one.</p>
+
+<pre><code>GRANT ALL PRIVILEGES ON *.* TO 'USERNAME'@'%' IDENTIFIED BY 'PASSWORD' WITH GRANT OPTION;
+</code></pre>
+
+<p><a href="http://codex.wordpress.org/Installing_WordPress#Detailed_Instructions">Here</a> is the detailed installation instructions for Wordpress.</p>
+
+<hr>
+<a href="http://www.garron.me/en/linux/cluster-wordpress.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/cluster-wordpress.html&text=Wordpress Cluster Powered&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/cluster-wordpress.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/cluster-wordpress.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/cluster-wordpress.html">linkedin</a> | <a href="mailto:?Subject=Wordpress Cluster Powered&Body=http://www.garron.me/en/linux/cluster-wordpress.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/cluster-wordpress.html&title=Wordpress Cluster Powered" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

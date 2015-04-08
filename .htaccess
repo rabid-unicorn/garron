@@ -1,0 +1,139 @@
+AddDefaultCharset utf-8
+
+RewriteEngine On
+RewriteBase /
+
+# Remove Query String
+RewriteCond %{QUERY_STRING} .
+RewriteCond %{QUERY_STRING} !^(s|p)=.*
+RewriteCond %{REQUEST_URI} !.*wp-admin.*
+RewriteRule .* http://www.garron.me%{REQUEST_URI}? [R=301,L]
+
+# Protect htaccess file
+<Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Custom 404
+
+ErrorDocument 404 /404.html
+
+# Trailing slash
+
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_URI} (.+)/$
+#RewriteRule ^ %1 [L,R=301]
+
+
+# 4 weeks
+<filesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|woff|ttf|eot)$">
+Header set Cache-Control "max-age=2419200, public"
+</filesMatch>
+ 
+# 2 DAYS
+<filesMatch ".(mmd|txt)$">
+Header set Cache-Control "max-age=172800, public, must-revalidate"
+</filesMatch>
+ 
+# 5 mins
+<filesMatch ".(html|htm|xml)$">
+Header set Cache-Control "max-age=3600, must-revalidate"
+</filesMatch>
+
+# Moving food posts from blog to food
+
+Redirect 301 /blog/broasted-chicken.html /food/broasted-chicken.html
+Redirect 301 /blog/meat-beef-tacos-corn-beans-avocado-salad.html /food/meat-beef-tacos-corn-beans-avocado-salad.html
+Redirect 301 /blog/egg-chorizo-tortilla-paleo-diet.html /food/egg-chorizo-tortilla-paleo-diet.html
+Redirect 301 /blog/chicken-salad-recipe.html /food/chicken-salad-recipe.html
+Redirect 301 /blog/low-carb-sausage-vegetables-recipe-lunch-breakfast.html /food/low-carb-sausage-vegetables-recipe-lunch-breakfast.html
+
+# Moving some bad urls
+
+Redirect 301 /en/linux/upgrade-debian-squeeze-wheeze-6.0-7.0.html /en/linux/upgrade-debian-squeeze-wheezy-6.0-7.0.html
+Redirect 301 /es/fotos/promo-91-goss/ /es/album-personal/promo-91-goss/
+Redirect 301 /en/blog/elementary-luna.html /en/linux/elementary-luna.html
+
+# Video type addtype directives
+
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+# Temporary 301 redirects Made on January 16th .. Keep them for a week and comment them out then.
+
+Redirect 301 /go2linux/useradd-vs /go2linux/useradd-vs-adduser-ubuntu-linux.html
+Redirect 301 /blog/people-with-low-iq-use-internet-explorer.html/ /blog/people-with-low-iq-use-internet-explorer.html
+Redirect 301 /linux/turn-off /linux/turn-off-stop-ubuntu-automatic-update.html
+Redirect 301 /pictures/la-paz-bolivia-buildings/ /pictures/la-paz-2012/
+Redirect 301 /mac/mac-os-x-lion-not-coming-yet.html/ /mac/mac-os-x-lion-not-coming-yet.html
+Redirect 301 /linux/nginx-remove-trailing-slash.html/?utm_medium=twitter&utm_source=twitterfeed /linux/nginx-remove-trailing-slash.html
+Redirect 301 /linux/exclude-folder-rsync-backup.html/ /linux/exclude-folder-rsync-backup.html
+Redirect 301 /archives/ /archives.html
+Redirect 301 /go /go2linux/useradd-vs-adduser-ubuntu-linux.html
+Redirect 301 /ar /articles/latex-tutorial.html
+Redirect 301 /linux/thoughts-on-google-chrome-os.html/ /linux/thoughts-on-google-chrome-os.html
+Redirect 301 /blog/pigeons-at-santa-cruz-main-square.html/ /blog/pigeons-at-santa-cruz-main-square.html
+Redirect 301 /mac/print-export-to-pdf-only-one-sheet-in-mac-numbers.html/ /mac/print-export-to-pdf-only-one-sheet-in-mac-numbers.html
+Redirect 301 /linux/nginx-php-fpm /linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html
+Redirect 301 /mac/could-not-purchase-5002-error.htmlAuthor /mac/could-not-purchase-5002-error.html
+Redirect 301 /blog/orchidea-santa-cruz-bolivia.html/ /blog/orchidea-santa-cruz-bolivia.html
+Redirect 301 /tag/food/ /en/food/
+Redirect 301 /tag/photography/ /en/pictures/
+Redirect 301 /blog/2011/07/blogging-on-movable-type.html /en/blog/blogging-on-movable-type.html
+
+# Permanent redirects
+
+Redirect 301 /en/bits/msql-select-from-range-dates.html /en/bits/mysql-select-from-range-dates.html
+Redirect 301 /en/linux/scp-linux-mac-command-windows-copy-files-over-ssh.html /en/articles/scp.html
+Redirect 301 /en/articles/low-carb-diet.html /en/blog/low-carb-diet.html
+
+
+Redirect 301 /blog/ /en/blog/
+Redirect 301 /linux/ /en/linux/
+Redirect 301 /mac/ /en/mac/
+Redirect 301 /bits/ /en/bits/
+Redirect 301 /pictures/ /en/pictures/
+Redirect 301 /articles/ /en/articles/
+Redirect 301 /food/ /en/food/
+Redirect 301 /tech/ /en/tech/
+Redirect 301 /go2linux/ /en/go2linux/
+Redirect 301 /about.html /en/about.html
+Redirect 301 /subscribe.html /en/subscribe.html
+Redirect 301 /contact.html /en/contact.html
+Redirect 301 /facebook.html /en/facebook.html
+Redirect 301 /atom.xml /en/atom.xml
+Redirect 301 /archives.html /en/archives.html
+Redirect 301 /channel.html /en/channel.html
+Redirect 301 /linux/resize-window-gnome-out-bounders.html /en/linux/resize-window-gnome-out-bounders.html
+Redirect 301 /photoblog/ /en/pictures/
+
+
+
+# Apache mod_pagespeed
+
+# SetOutputFilter MOD_PAGESPEED_OUTPUT_FILTER
+ModPagespeed on
+
+ModPagespeedModifyCachingHeaders off
+
+ModPagespeedEnableFilters prioritize_critical_css,defer_javascript
+ModPagespeedEnableFilters convert_jpeg_to_webp
+ModPagespeedEnableFilters lazyload_images,inline_preview_images
+ModPagespeedEnableFilters canonicalize_javascript_libraries
+ModPagespeedEnableFilters extend_cache
+ModPagespeedEnableFilters combine_css
+ModPagespeedEnableFilters inline_css
+ModPagespeedEnableFilters inline_google_font_css
+ModPagespeedEnableFilters combine_javascript
+ModPagespeedEnableFilters move_css_above_scripts
+ModPagespeedEnableFilters rewrite_css,sprite_images
+ModPagespeedEnableFilters collapse_whitespace
+ModPagespeedEnableFilters rewrite_javascript
+ModPagespeedEnableFilters rewrite_images
+ModPagespeedEnableFilters remove_comments
+ModPagespeedEnableFilters trim_urls
+ModPagespeedEnableFilters convert_meta_tags
+ModPagespeedEnableFilters rewrite_images
+

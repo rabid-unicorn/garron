@@ -1,0 +1,271 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Tests and results of Wordpress running on Apache with APC and Nginx with APC, final using Varnish as reverse Cache for Wordpress" />
+
+        <!-- End SEO includes -->
+        <title>Wordpress Performance Comparison: Using Nginx, Apache, APC and Varnish in Different Scenarios</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Wordpress Performance Comparison: Using Nginx, Apache, APC and Varnish in Different Scenarios">
+        <meta name="twitter:description" content="Tests and results of Wordpress running on Apache with APC and Nginx with APC, final using Varnish as reverse Cache for Wordpress">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Wordpress Performance Comparison: Using Nginx, Apache, APC and Varnish in Different Scenarios</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">Wordpress Performance Comparison: Using Nginx, Apache, APC and Varnish in Different Scenarios</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-04-27 18:17:39 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/wordpress.html">wordpress</a>,</small></p>
+
+<hr>
+<h3 id="introduction">Introduction</h3>
+
+<p>If you follow this blog, you may already know that I’m somehow obsessed with performance. But performance with low resources.</p>
+
+<p>I like to try to squeeze every drop of power from a server before upgrading it. Usually this is achievable tweaking configuration of the server.</p>
+
+<p>This time, I’ve been playing with <a href="http://www.wordpress.org">Wordpress</a> and a Small VPS server. Here the specs:</p>
+
+<ul>
+  <li>512 MB RAM</li>
+  <li>Shared CPU</li>
+  <li>Shared Disk</li>
+  <li>Arch Linux 32 Bits</li>
+</ul>
+
+<p>It is the smallest <a href="http://www.linode.com/">Linode</a> available by the time of this writing.</p>
+
+<p>I’ve tested Wordpress on different possible configurations:</p>
+
+<ul>
+  <li>Apache, PHP, MySQL Standard</li>
+  <li>Apache, PHP, MySQL and APC</li>
+  <li>Nginx, PHP-FPM, MySQL</li>
+  <li>Nginx, PHP-FPM, MySQL and APC</li>
+  <li>Nginx, PHP-FPM, MySQL, APC and Varnish</li>
+  <li>Apache, PHP, MySQL, APC and Varnish</li>
+</ul>
+
+<p>I’ve used the standard Wordpress installation, with no extra plugins installed, not even Total Cache or Super Cache. I think that if you have Varnish Cache running on the server, there is no need for another Cache. Varnish uses RAM so it is more efficient than any Wordpress plugin. RAM is small in this server, if you need more space you can configure Varnish to also use disk as cache and then you have less used files on disk, and most accessed files on RAM.</p>
+
+<p>Full configurations facts can be found at: <a href="/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">Increase Wordpress performance</a></p>
+
+<h3 id="the-tests">The tests</h3>
+
+<p>I’ve used  <a href="http://blitz.io">blitz.io</a> to measure the performance of each configuration.</p>
+
+<p>With Apache as well as with Nginx when APC was not installed, I used 1 to 40 concurrent sessions in one minute. Anything else put the VPS on its knees.</p>
+
+<p>With the aid of APC, both Apache and Nginx could handle twice as load, so 1 to 80 concurrent sessions in one minute.</p>
+
+<p>Finally Varnish made the site really fly, and supported 1 to 250 concurrent sessions in one minute, for a potential of <strong>9 Million hits per day</strong></p>
+
+<h3 id="the-results">The results</h3>
+
+<p><strong>Apache + PHP, no APC or any other aid or cache.</strong></p>
+
+<p>Dotted line = Response times
+Line = Users</p>
+
+<p><img src="/images/2012-04/1-40-60-apache-php.png" alt="blitz.io result, wordpress on Apache" class="img-responsive" /></p>
+
+<p>You can download the PDF of the report <a href="/uploaded-files/2012-04/1-40_60-apache-php.pdf">here</a></p>
+
+<p><strong>Nginx + PHP-FPM, no APC or any other aid or cache</strong></p>
+
+<p><img src="/images/2012-04/1-40-60-nginx-php-fpm.png" alt="blitz.io result, wordpress on Nginx" class="img-responsive" /></p>
+
+<p>You can download the PDF of the report <a href="/uploaded-files/2012-04/1-40_60-nginx-php-fpm.pdf">here</a></p>
+
+<p><strong>Apache + PHP + APC</strong></p>
+
+<p><img src="/images/2012-04/apache-apc.png" alt="blitz.io result, wordpress, apache, php with APC" class="img-responsive" /></p>
+
+<p>You can download the PDF of the report <a href="/uploaded-files/2012-04/1-80_60-apache-php-apc.pdf">here</a></p>
+
+<p><strong>Nginx + PHP-FPM + APC</strong></p>
+
+<p><img src="/images/2012-04/nginx-php-fpm-apc-80.png" alt="blitz.io result, wordpress, Nginx, php-fpm and APC" class="img-responsive" /></p>
+
+<p>You can download the PDF of the report <a href="/uploaded-files/2012-04/1-80-60-varnish-nginx-php-fpm-apc.pdf">here</a></p>
+
+<p><strong>Nginx + PHP-FPM + APC + Varnish</strong></p>
+
+<p>Finally when Varnish is installed it really makes a difference, and you can go from 3+ million visits per day to 9 million visits per day.</p>
+
+<p><img src="/images/2012-04/1-250-60-nginx-varnish.png" alt="blitz.io result, wordpress, Nginx, php-fpm, APC and Varnish, 9 million visits per day" class="img-responsive" /></p>
+
+<p>You can download the PDF report <a href="/uploaded-files/2012-04/1-250-60-nginx-varnish.pdf">here</a></p>
+
+<p>Edit: Because one reader asked, here are the results of:</p>
+
+<p><strong>Apache + PHP with APC and Varnish.</strong></p>
+
+<p><img src="/images/2012-04/apache-php-varnish-apc.png" alt="apache, php, apc, varnish, wordpress" class="img-responsive" /></p>
+
+<p>You can download the PDF report <a href="/uploaded-files/2012-04/apache-php-apc-varnish.pdf">here</a></p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>As you can see, with a kind-of-well-configured server, you can use a standard copy of Wordpress with no Total Cache or Super Cache plugins, so keeping a very clean and standard Wordpress configuration.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html&text=Wordpress Performance Comparison: Using Nginx, Apache, APC and Varnish in Different Scenarios&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">linkedin</a> | <a href="mailto:?Subject=Wordpress Performance Comparison: Using Nginx, Apache, APC and Varnish in Different Scenarios&Body=http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html&title=Wordpress Performance Comparison: Using Nginx, Apache, APC and Varnish in Different Scenarios" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

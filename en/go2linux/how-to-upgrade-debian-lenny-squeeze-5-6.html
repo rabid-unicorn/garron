@@ -1,0 +1,228 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Step by step Debian upgrade tutorial. This tutorial needs access to the console, and it is great to upgrade servers. This is meant for the upgrade of Lenny to Squeeze, but may work with other releases as well" />
+
+        <!-- End SEO includes -->
+        <title>How to upgrade Debian Lenny to Squeeze (5.0 to 6.0)</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="How to upgrade Debian Lenny to Squeeze (5.0 to 6.0)">
+        <meta name="twitter:description" content="Step by step Debian upgrade tutorial. This tutorial needs access to the console, and it is great to upgrade servers. This is meant for the upgrade of Lenny to Squeeze, but may work with other releases as well">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">How to upgrade Debian Lenny to Squeeze (5.0 to 6.0)</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html">How to upgrade Debian Lenny to Squeeze (5.0 to 6.0)</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-01-21 09:36:30 -0500</h6>
+
+<hr>
+<p><strong>Introduction</strong></p>
+
+<p><em>Updated 02/15/2011</em></p>
+
+<p>Please be sure to read the release notes for your architecture: for <a href="http://www.debian.org/releases/squeeze/i386/release-notes/ch-upgrading.en.html">i386</a> and for <a href="http://www.debian.org/releases/squeeze/amd64/release-notes/ch-upgrading.en.html">x64</a></p>
+
+<p>I’ve used the method below to upgrade my Debian Lenny to Squeeze and had not problems at all, but in the release notes are considerations you should follow depending on your configuration. Be sure to read those, specially if your Debian PC is mission critical.</p>
+
+<p><em>Updated 01/21/2011</em></p>
+
+<p>Debian Squeeze is going to be released on February 5th or 6th this 2011, so I am updating this how-to a little bit.</p>
+
+<p><strong>How to upgrade Debian from Lenny to Squeeze</strong></p>
+
+<p><em>First edit your sources.list</em></p>
+
+<pre><code>sudo vim /etc/apt/sources.list
+</code></pre>
+
+<p>Now change there, any word lenny to squeeze,(or from stable to testing -This will not work after the release date, so use squeeze, or stable after that date-) and save it, it could be a good idea to backup your original file before, just in case.</p>
+
+<p><em>Updating and upgrading</em></p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install apt dpkg apt-get
+sudo apt-get dist-upgrade
+</code></pre>
+
+<p>And that is it, now you are running Debian Squeeze, it is better to use squeeze instead of testing, so when it change from testing to stable, you can decide when to go to testing again.</p>
+
+<p>Remember to read the <a href="http://www.debian.org/releases/squeeze/releasenotes">Squeeze release notes</a></p>
+
+<p>One of the most important thing I have read is about back up.</p>
+
+<p><strong>Be sure to back up your data</strong></p>
+
+<blockquote>
+  <p>Before upgrading your system, it is strongly recommended that you make a full backup, or at least back up any data or configuration information you can’t afford to lose. The upgrade tools and process are quite reliable, but a hardware failure in the middle of an upgrade could result in a severely damaged system.</p>
+</blockquote>
+
+<blockquote>
+  <p>The main things you’ll want to back up are the contents of /etc, /var/lib/dpkg, /var/lib/apt/extended_states and the output of dpkg –get-selections <code>"*"</code> (the quotes are important). If you use aptitude to manage packages on your system, you will also want to back up /var/lib/aptitude/pkgstates.</p>
+</blockquote>
+
+<blockquote>
+  <p>The upgrade process itself does not modify anything in the /home directory. However, some applications (e.g. parts of the Mozilla suite, and the GNOME and KDE desktop environments) are known to overwrite existing user settings with new defaults when a new version of the application is first started by a user. As a precaution, you may want to make a backup of the hidden files and directories (“dotfiles”) in users’ home directories. This backup may help to restore or recreate the old settings. You may also want to inform users about this.</p>
+</blockquote>
+
+<blockquote>
+  <p>Any package installation operation must be run with superuser privileges, so either log in as root or use su or sudo to gain the necessary access rights.</p>
+</blockquote>
+
+<blockquote>
+  <p>The upgrade has a few preconditions; you should check them before actually executing the upgrade.</p>
+</blockquote>
+
+<p>Finally, thanks go to <a href="http://raphaelhertzog.com/about-me/">Raphael Hertzog</a> for helping me with this tutorial.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html&text=How to upgrade Debian Lenny to Squeeze (5.0 to 6.0)&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html">linkedin</a> | <a href="mailto:?Subject=How to upgrade Debian Lenny to Squeeze (5.0 to 6.0)&Body=http://www.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/how-to-upgrade-debian-lenny-squeeze-5-6.html&title=How to upgrade Debian Lenny to Squeeze (5.0 to 6.0)" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

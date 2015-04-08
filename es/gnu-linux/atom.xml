@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title type="text" xml:lang="en">GNU Linux</title>
+    <link type="application/atom+xml" href="http://www.garron.me/es/gnu-linux/atom.xml" rel="self"/>
+    <link type="text" href="http://www.garron.me/es" rel="alternate"/>
+    <updated>2015-04-08T02:13:48-04:00</updated>
+    <id>http://www.garron.me/es</id>
+    <author>
+        <name>Guillermo Garron</name>
+    </author>
+    <rights>Creative Commons Guillermo Garron</rights>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <entry>
+        <title>Tamaño máximo de archivo en Wordpress con Nginx y PHP-FPM</title>
+        <link href="http://www.garron.me/es/gnu-linux/limite-tamano-archivo-nginx-php.html"/>
+        <updated>2015-03-08T19:05:00-04:00</updated>
+        <id>http://www.garron.me/es/gnu-linux/limite-tamano-archivo-nginx-php.html</id>
+        <summary type="html">&lt;h2 id=&quot;como-incrementar-el-tamao-mximo-permitido-para-subir-subir-archivo-a-wordpress-con-nginx-y-php-fpm&quot;&gt;Como incrementar el tamaño máximo permitido para subir subir archivo a Wordpress con Nginx y PHP-FPM&lt;/h2&gt;
+
+&lt;p&gt;Estoy usando Wordpress en un servidor Ubuntu LTS y funciona sobre Nginx y PHP-FPM, es realmente escalable y soporta mucha carga muy fácilmente debido a las capacidades de cache de Nginx.&lt;/p&gt;
+
+&lt;p&gt;De todos modos he tenido algunos problemas para subir unos temas debido a que sobrepasan el límite máximo de carga de archivos, para arreglar esto debemos verificar en dos lugares, &lt;strong&gt;Nginx&lt;/strong&gt; y &lt;strong&gt;PHP&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;nginx&quot;&gt;Nginx&lt;/h3&gt;
+
+&lt;p&gt;Vamos primero por Nginx, y vamos a asegurarnos de tener esta línea en el bloque &lt;strong&gt;http&lt;/strong&gt; del archivo de configuración de Nginx.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;client_max_body_size 20m;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ajusta los valores de acuerdo a tus necesidades, el ejemplo de arriba permite subir archivos de hasta 20 Mbytes&lt;/p&gt;
+
+&lt;h3 id=&quot;php-fpm&quot;&gt;PHP-FPM&lt;/h3&gt;
+
+&lt;p&gt;Para arreglar el problema desde PHP, debes editar el archivo &lt;code&gt;/etc/php5/fpm/php.ini&lt;/code&gt; y asegurarte de que estas dos líneas esten presentes y tengan valores similares al que hayas puesto en Nginx.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;upload_max_filesize = 20M
+post_max_size = 20M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ahora estas listo para subir archivos más grandes de Wordpress, sean estos videos, fotografías o temas y plugins.&lt;/p&gt;
+</summary>
+    </entry>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <entry>
+        <title>Servidor de correo en Ubuntu, la alternativa a Gmail</title>
+        <link href="http://www.garron.me/es/gnu-linux/ubuntu-push-email.html"/>
+        <updated>2015-02-17T14:05:00-05:00</updated>
+        <id>http://www.garron.me/es/gnu-linux/ubuntu-push-email.html</id>
+        <summary type="html">&lt;h2 id=&quot;alojando-mi-correo-personal-en-mi-propio-servidor&quot;&gt;Alojando mi correo personal en mi propio servidor&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduccin&quot;&gt;Introducción&lt;/h3&gt;
+
+&lt;p&gt;Es normal o al menos más común mantener tu blog o página web en tu propio servidor que hacer lo mismo con tu servidor de correos, principalmente por el spam, y por que es más dificil mantener un servidor de correos que un servidor web. Esto porque debido al spam es posible que algunos de tus correos no lleguen a destino debido a el IP de tu servidor no sea conocida o hubiera sido utilizada en algún momento para enviar spam.&lt;/p&gt;
+
+&lt;p&gt;Igualmente muchos hackers tratarán de hacerse de tu servidor para enviar campañas de spam a travéz de él.&lt;/p&gt;
+
+&lt;p&gt;Pero la satisfacción de tener tu información contigo y no dependiendo de otros, especialmente Google, es grande y el trabajo extra a veces vale la pena.&lt;/p&gt;
+
+&lt;p&gt;Algunas cosas han cambiado desde los días en que la única forma de acceder tu correo era a travéz de Eudora, POP3 y desde tu computador, hoy en día llevamos el correo a todas partes en nuestro teléfono, y normalmente quienes te envían correos esperan una respuesta pronta.&lt;/p&gt;
+
+&lt;p&gt;Yo había dejado de alojar mi propio correo sobre todo debido a activesync, que es por el momento la mejor tecnología para sincronizar tu correo con el móvil, pero ahora esta disponible una versión opensource, ya veremos como se usa.&lt;/p&gt;
+
+&lt;h3 id=&quot;configurando-tu-propio-servidor-de-correos&quot;&gt;Configurando tu propio servidor de correos&lt;/h3&gt;
+
+&lt;p&gt;Los requerimientos para mi correo son, pues la verdad solo una, correo electrónico confiable, calendario ya lo tengo disponible en el servidor Exchange de la oficina, y el directorio de contactos aún no estoy seguro de donde lo alojare, pero puede que lo haga con CardDav o con mi cuenta de Gmail, despues de todo tengo una para mis aplicaciones Android, solo que no la uso para correo. Por lo tanto, considerando que lo único que requiero es correo, y que lo acceso principalmente del celular y de Microsoft Outlook cuando estoy en la máquina de la oficina (Windows 8) o Mail.app en Mac, por lo tanto no requiero una interfaz gráfica.&lt;/p&gt;
+
+&lt;p&gt;El software que voy a utilizar para cubrir mis necesidades es:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu (El sistema operativo)&lt;/li&gt;
+  &lt;li&gt;Postfix (Para recibir el correo y enviarlo via SMTP)&lt;/li&gt;
+  &lt;li&gt;Dovecot (Para recuperar el correo vía IMAP para los clientes de escritorio)&lt;/li&gt;
+  &lt;li&gt;Procmail (Para clasificar correo)&lt;/li&gt;
+  &lt;li&gt;D-push (Para recuperar el correo vía ActiveSync para el cliente de mi Android)&lt;/li&gt;
+  &lt;li&gt;Amazon SES&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Vamos a explicar un poco como se configura cada uno de estos componentes para lograr lo deseado, no vamos a mostrar como instalar Ubuntu, normalmente es solo arrancarlo en algún proveedor de VPS&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Postfix&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Vamos a comenzar con &lt;strong&gt;postfix&lt;/strong&gt;, que es un servidor que nos permite recibir y enviar correos mediante el protocolo SMTP, existen otras opciones como &lt;strong&gt;sendmail&lt;/strong&gt; o &lt;strong&gt;exim&lt;/strong&gt;, que son tan buenas como esta, pero vamos a utilizar &lt;strong&gt;postfix&lt;/strong&gt;, comencemos instalandolo.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install postfix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y vamos a configurarlo para recibir nuestros correos, colocarlos en nuestro buzón (vamos a usar Maildir), igualmente vamos a configurarlo para que podamos autenticar contra él y que reciba de esta manera nuestros correos para enviarlos al mundo, para esto último vamos a optar por un relay-host, es decir un servidor que hará las verdaderas entregas, al cual le entregaremos toda la correspondencia que tenemos. Hacemos esto porque de este modo evitamos que nuestro correo sea considerado spam, por que el IP no estuviera limpio, o por que algo en la configuración no es correcta.&lt;/p&gt;
+
+&lt;p&gt;Vamos a utilizar Amazon SES para que entregue nuestros correos, el precio es totalmente acequible, solo 10 centavos de dólar por cada 1.000 correos.&lt;/p&gt;
+
+&lt;p&gt;El principal archivo de configuracion es &lt;strong&gt;main.cf&lt;/strong&gt;, vamos a colocar este contenido dentro de él.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+biff = no
+append_dot_mydomain = no
+delay_warning_time = 4h
+mydomain = dominio.com
+myhostname = mail.dominio.com
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+myorigin = /etc/mailname
+mydestination = mail.dominio.com, localhost.example.com, localhost, dominio.com
+relayhost = email-smtp.us-east-1.amazonaws.com
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = static:tu-login-ses:tu-password-ses
+smtp_sasl_security_options = noanonymous
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+smtpd_sasl_local_domain =
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+broken_sasl_auth_clients = yes
+smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination
+smtpd_tls_auth_only = no
+smtp_tls_security_level = may
+smtpd_tls_security_level = may
+smtp_tls_note_starttls_offer = yes
+smtpd_tls_loglevel = 1
+smtpd_tls_received_header = yes
+smtpd_tls_session_cache_timeout = 3600s
+tls_random_source = dev:/dev/urandom
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_use_tls=yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+home_mailbox = Maildir/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Eso es todo, vamos con el siguiente.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dovecot&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Dovecot, es la interfaz que vamos a utilizar para exponer nuestros buzones de correo al mundo mediante IMAP o POP3, en este caso vamos a configurar IMAP, pues hoy en día casi todos verificamos el correo de varios lugares a la vez.&lt;/p&gt;
+
+&lt;p&gt;También vamos a utilizar dovecot para darnos la autenticación requerida para que postfix nos permita enviar correos solo a los usuarios con cuenta en el servidor. La configuración de Dovecot en Ubuntu no es monolítica, es decir no esta en un solo archivo, por lo que veamos a ver solo los que se requieren cambiar, es decir que no tengan los valores por defecto.&lt;/p&gt;
+
+&lt;p&gt;Este es contenido de &lt;code&gt;/etc/dovecot/dovecot.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;!include_try /usr/share/dovecot/protocols.d/*.protocol
+listen = *, ::
+!include conf.d/*.conf
+!include_try local.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Este el de &lt;code&gt;/etc/dovecot/conf.d/10-auth.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;auth_mechanisms = plain login
+!include auth-system.conf.ext
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Este el de &lt;code&gt;/etc/dovecot/conf.d/10-mail.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mail_location = maildir:~/Maildir
+namespace inbox {
+  inbox = yes
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Vamos con &lt;code&gt;/etc/dovecot/conf.d/10-master.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service imap-login {
+  inet_listener imap {
+    #port = 143
+  }
+  inet_listener imaps {
+    #port = 993
+    #ssl = yes
+  }
+}
+service pop3-login {
+  inet_listener pop3 {
+    #port = 110
+  }
+  inet_listener pop3s {
+    #port = 995
+    #ssl = yes
+  }
+}
+service lmtp {
+  unix_listener lmtp {
+    #mode = 0666
+  }
+}
+service imap {
+}
+service pop3 {
+}
+service auth {
+  # Postfix smtp-auth
+  unix_listener /var/spool/postfix/private/auth {
+    mode = 0666
+    user = postfix
+    group = postfix
+  }
+}
+service auth-worker {
+}
+service dict {
+  unix_listener dict {
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y finalmente &lt;code&gt;/etc/dovecot/conf.d/10-ssl.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssl = yes
+ssl_cert = &amp;lt;/etc/dovecot/dovecot.pem
+ssl_key = &amp;lt;/etc/dovecot/private/dovecot.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Con esto tenemos &lt;strong&gt;Dovecot&lt;/strong&gt; configurado y listo para entregarnos las correspondencia via IMAP, esto es más que suficiente para la PC de escritorio o para nuestra laptop, pero para la tablet y en especial para nuestro celular tenemos que tener una mejor opción. IMAP puede funcionar en el celular pero no es muy eficiente desde el punto de vista de consumo de batería, algo que siempre debemos cuidar con los celulares hoy en día, pero para ello existe ActiveSync.&lt;/p&gt;
+
+&lt;p&gt;Para implementar ActiveSync en Ubuntu vamos a utilizar el paquete z-push, que en Debian se llama d-push, debe tener alguna diferencia pero no lo investigue.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;d-push&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Para funcionar correctamente &lt;strong&gt;d-push&lt;/strong&gt; requiere de Apache o algún otro servidor web, y de PHP, en general si instalas el paquete este instalará todo lo necesario, pero lo que hace es instalar mod-php de Apache y no es la manera más eficiente de interactuar con PHP, si solo usarás el servidor para tu correo y solo tendras pocos clientes, entonces adelante. Si por el contrario, tendras uno o más blogs de Wordpress o Drupal y además varios clientes usando ActiveSync, entonces lo que haremos es instalar &lt;a href=&quot;/es/gnu-linux/apache-php-fpm-mpm-worker-mariadb-ubuntu.html&quot;&gt;Apache + PHP-FPM&lt;/a&gt; y luego asegurarnos que Ubuntu &lt;a href=&quot;/es/cortos/apt-get-dependencias.html&quot;&gt;no instale mod-php&lt;/a&gt; luego de ello podemos instalar &lt;strong&gt;d-push&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install d-push
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Asegurate de marcar la autoconfiguración de Apache cuando se te pregunte si deseas hacerlo, yo lo hice para Apache &lt;sup&gt;&lt;a href=&quot;#fn1&quot; id=&quot;ref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; ya que es automático. En general no tienes que hacer ningun cambio a la configuracion de &lt;strong&gt;d-push&lt;/strong&gt;, solo debes crear un sitio al que apuntaras tus dispositivos móviles. E aquí un ejemplo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;VirtualHost localhost:8080&amp;gt;
+        ServerName mail.dominio.com
+        DocumentRoot /var/www/mail.dominio.com
+   DirectoryIndex index.php
+   &amp;lt;Directory /var/www/mail.dominio.com/&amp;gt;
+      AllowOverride All
+      Require all granted
+      #Order Deny,Allow
+      #Allow from all
+   &amp;lt;/Directory&amp;gt;
+
+&amp;lt;Directory /usr/lib/cgi-bin/&amp;gt;
+        Require all granted
+&amp;lt;/Directory&amp;gt;
+
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Dado que tengo Nginx delante, es Nginx con el que manejo https requerido para &lt;strong&gt;d-push&lt;/strong&gt;, en realidad no es requerido y se puede trabajar con el puerto 80 u 8080, pero es buena idea tener una conexión segura, asi que vamos con Nginx.&lt;/p&gt;
+
+&lt;p&gt;Lo primero es preparar &lt;a href=&quot;/es/cortos/ssl-https-nginx.html&quot;&gt;Nginx para manejar una conexión encriptada&lt;/a&gt;, luego configuras el sitio como en el ejemplo de abajo.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server {
+    listen 80;
+    listen 443 ssl;
+
+    root /var/www/mail.dominio.com/;
+    index index.html index.htm;
+
+    server_name mail.dominio.com;
+        ssl_certificate /etc/nginx/ssl/nginx.crt;
+        ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Como puede verse, Nginx se encarga de la conexión segura, y luego pasa el requerimiento a Apache que opera tras bambalinas.&lt;/p&gt;
+
+&lt;p&gt;Con eso hemos terminado, ya tenemos un servidor de correos que envía correos de forma segura mediante Amazon SES, y que recibe el correo dirigido a nosotros y nos lo entrega de manera eficiente en nuestras aplicaciones de escritorio y móviles utilizadon conexiones seguras y encriptadas.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Procmail&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;En mi caso re-envío correo de otras cuentas a esta cuenta para tener todo el correo en un solo lugar, utilizo una cuenta para facebook, Twitter, LinkedIn y demás subscripciones que no es mi cuenta principal, por lo que todo el correo enviado a esa cuenta y luego re-enviado aquí lo filtro y archivo en un directorio específico, la forma en que lo hago es mediante &lt;strong&gt;procmail&lt;/strong&gt; al momento de recibir el correo.&lt;/p&gt;
+
+&lt;p&gt;Vamos a ver como se puede configurar.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install procmail
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;El primer archivo que vamos crear es &lt;code&gt;/etc/procmailrc&lt;/code&gt; y tendrá este contenido.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DROPPRIVS=yes
+ORGMAIL=${HOME}/Maildir/
+DEFAULT=${ORGMAIL}
+:0
+* ? /usr/bin/test -d $DEFAULT || /bin/mkdir $DEFAULT
+{ }
+:0 E
+{
+        EXITCODE=127
+        HOST=bail.out
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Luego en directorio del usuario que va a clasificar su correo mediante &lt;strong&gt;procmail&lt;/strong&gt; son necesarios otros archivos. Vamos crearlos. Asegurate de estar conectado al servidor usando el usuario del que quieres clasificar su correo. Creamos el archivo &lt;code&gt;.forward&lt;/code&gt; y ponemos este contenido adentro:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&quot;|IFS=&#39; &#39; &amp;amp;&amp;amp; exec /usr/bin/procmail || exit 75 g&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Luego creamos el archivo &lt;code&gt;.procmailrc&lt;/code&gt; e insertamos este contenido:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;VERBOSE=no
+PMDIR=$HOME/Procmail 
+LOGFILE=$PMDIR/log
+INCLUDERC=$PMDIR/filtros.rc
+SHELL=/bin/sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finalmente creamos el archivo &lt;code&gt;~/Procmail/filtros.rc&lt;/code&gt; y colocamos allí los filtros, veamos solo un ejemplo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:0
+* ^TO_cuenta-social@gmail.com
+.social/
+
+:0
+$HOME/Maildir/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Puedes buscar más ejemplos en Google, o &lt;a href=&quot;https://duckduckgo.com/&quot;&gt;DuckDuckGo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Amazon SES&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Finalmente, tenemos que configurar Amazon SES, eso lo vamos a dejar fuera del alcance de este sitio, pues esta suficientemente bien explicado en el sitio de &lt;a href=&quot;http://aws.amazon.com/es/ses/faqs/&quot;&gt;Amazon&lt;/a&gt;. Puedes utilizar MailGuy o Mandrill o cualquier otro servicio, solo asegurate de cambiar estas lineas en &lt;code&gt;/etc/postfix/main.cf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;relayhost = email-smtp.us-east-1.amazonaws.com
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = static:tu-login-ses:tu-password-ses
+smtp_sasl_security_options = noanonymous
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Las mismas deben ser cambiadas de acuerdo al servicio que utilices.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h3&gt;
+
+&lt;p&gt;Como puedes ver, es posible instalar y configurar un servidor de correos eficiente y que tenga lo requerido las comunicaciones de hoy en día. Quedó por ver como instalar Spamassassin, y actualizaré el artículo para hacerlo, de momento no lo instalé debido a que gracias a Dios no tengo mucho spam en la cuenta de correos que manejo con este servidor.&lt;/p&gt;
+
+&lt;p&gt;&lt;small id=&quot;fn1&quot;&gt;1. En mi caso incluso tengo Nginx como proxy delante de Apache, de este modo puedo correr blogs de Wordpress directo con Nginx y sitios estáticos con Nginx, o cachear el contenido que sirve Apache, si te preguntas para que tengo Apache, pues porque algún software es más sencillo de configurar con Apache y a veces quiero evitar la molestia.&lt;a href=&quot;#ref1&quot; title=&quot;Vuelve al artículo&quot;&gt;↩&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+</summary>
+    </entry>
+    
+    
+    
+    
+</feed>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/multi-blog-site-jekyll.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Multi Blog Site with Jekyll" />
+
+        <!-- End SEO includes -->
+        <title>Create a Multi Blog Site with Jekyll</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Create a Multi Blog Site with Jekyll">
+        <meta name="twitter:description" content="Multi Blog Site with Jekyll">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Create a Multi Blog Site with Jekyll</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/multi-blog-site-jekyll.html">Create a Multi Blog Site with Jekyll</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-04-06 22:20:00 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/jekyll.html">jekyll</a>,</small></p>
+
+<hr>
+<h3 id="introduction">Introduction</h3>
+
+<p>One of the best platforms to run a multi blog site is Drupal. You can create a lot of accounts and each one can own a blog in the site. Wordpress also have its solution, it started as Wordpress MU, but since version 3.0 that feature is embedded in the core code.</p>
+
+<p>But for those of you who like to <a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">blog like a hacker</a>, there is also way to do it.</p>
+
+<p>Most of Jekyll users may already know this, I’m writing this for the newcomers.</p>
+
+<p>This all started almost a year ago, when I started writing about Android in my Linux related blog, one of my readers told me.</p>
+
+<blockquote>
+  <p>You may blog about Android here, but just be sure all your readers do not get confused. Android is not Linux.</p>
+</blockquote>
+
+<p>I then realized that I needed a multi blog site. And I created this site. I wanted it to be static pages and Nginx powered, so I had to find the way to make Jekyll create a multi blog site. Each with its own index page, and with its own RSS feed too.</p>
+
+<h3 id="create-the-site-structure">Create the site structure</h3>
+
+<p>Usually Jekyll structure is:</p>
+
+<pre><code>|--_config.yml
+|--_includes
+|--_layouts
+|  |--default.html
+|  |--post.html
+|--_posts
+|  |--2012-04-06-title-of-post.md
+|--_site
+|--index.html
+|--css
+|--js
+</code></pre>
+
+<p>But for a multi blog site, you will create something like this:</p>
+
+<pre><code>|--_config.yml
+|--_includes
+|--_layouts
+|  |--default.html
+|  |--post.html
+|--blog1
+|  |--index.html
+|  |--_posts
+|  |  |--2012-04-06-hello-world.md
+|  |--images
+|--blog2
+|  |--index.html
+|  |--_posts
+|  |--images
+|--blog3
+|  |--index.html
+|  |--_posts
+|  |--images
+|--index.html
+|--css
+|--js
+</code></pre>
+
+<h3 id="yaml-front-matter">Yaml Front Matter</h3>
+
+<p>One thing to consider in the <em>Yaml Front Matter</em> is that we need to include a way to separate one blog from the other. I’m using <em>category</em> to do that, but you can use another variable, which may be a better idea.</p>
+
+<p>Here is an example of how I do it:</p>
+
+<pre><code>---
+layout: post
+category: blog1
+title: 'My first post'
+date: 2012-04-06 21:35
+---
+</code></pre>
+
+<p>I’m going to filter posts by <em>category</em> to create a different index and atom feed for each blog. So blog 2 should look like this:</p>
+
+<pre><code>---
+layout: post
+category: blog2
+title: 'My first post'
+date: 2012-04-06 21:35
+---
+</code></pre>
+
+<h3 id="creating-index-and-atom-feed-for-each-blog">Creating Index and Atom Feed for Each Blog</h3>
+
+<p>Here is an example of and index page on one blog:</p>
+
+<pre><code>---
+layout: default
+title: Blog1
+category: blog1
+---
+
+{% for post in site.posts %}
+  {% if post.categories contains 'blog1' %}
+	&lt;div class="post"&gt;
+		&lt;h3 class="title"&gt;&lt;a href="{{ post.url }}"&gt;{{ post.title }}&lt;/a&gt;&lt;/h3&gt;
+		&lt;p class="meta"&gt;Date: {{ post.date }}&lt;/p&gt;
+		&lt;div class="entry"&gt;
+			{{ post.content | strip_html | truncatewords: 100 }}
+		&lt;/div&gt;
+	&lt;/div&gt;
+  {% endif %}
+{% endfor %}
+</code></pre>
+
+<p>And for the atom feed:</p>
+
+<pre><code>---
+layout: nil
+---
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;feed xmlns="http://www.w3.org/2005/Atom"&gt;
+    &lt;title type="text" xml:lang="en"&gt;Blog 1&lt;/title&gt;
+    &lt;link type="application/atom+xml" href="http://www.example.com/blog1/atom.xml" rel="self"/&gt;
+    &lt;link type="text" href="http://garron.me" rel="alternate"/&gt;
+    &lt;updated&gt;2015-04-08T02:13:48-04:00&lt;/updated&gt;
+    &lt;id&gt;http://example.com&lt;/id&gt;
+    &lt;author&gt;
+        &lt;name&gt;Guillermo Garron&lt;/name&gt;
+    &lt;/author&gt;
+    &lt;rights&gt;Copyright (c) 2010-2011 Guillermo Garron&lt;/rights&gt;
+    
+    {% for post in site.posts limit:20 %}
+    {% if post.categories contains 'blog1' %}
+    &lt;entry&gt;
+        &lt;title&gt;{{ post.title }}&lt;/title&gt;
+        &lt;link href="http://garron.me{{ post.url }}"/&gt;
+        &lt;updated&gt;{{ post.date | date_to_xmlschema }}&lt;/updated&gt;
+        &lt;id&gt;http://garron.me{{ post.url }}&lt;/id&gt;
+        &lt;summary type="html"&gt;{{ post.content | xml_escape }}&lt;/summary&gt;
+    &lt;/entry&gt;
+    {% endif %}
+    {% endfor %}
+    
+&lt;/feed&gt;
+</code></pre>
+
+<h3 id="finishing-the-site">Finishing the site</h3>
+
+<p>You can create a common index page in the root directory, that includes all posts from all blogs, or create a single page with a menu navigation for all other blogs. The same way you can include a general atom file, or just do not have one.</p>
+
+<h3 id="multi-author-site">Multi Author Site</h3>
+
+<p>If the site is not only multi-blog, but also multi-writer, you may create symbolic links between blog1, blog2, etc folders, to /home/user1/public_html/ of each user.</p>
+
+<h3 id="to-do">To do</h3>
+
+<p>I’m not a ruby coder, so I can’t do this part, but it could be great to have rake file to create posts for each users, that will include the yaml front matter, with the specific information of his blog.</p>
+
+<p>You can download the structure here explained from my <a href="https://github.com/ggarron/multi-blog-jekyll">github repository</a></p>
+
+<p>If you find any error, or a better way to do something, please contact using the contact page.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/multi-blog-site-jekyll.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/multi-blog-site-jekyll.html&text=Create a Multi Blog Site with Jekyll&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/multi-blog-site-jekyll.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/multi-blog-site-jekyll.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/multi-blog-site-jekyll.html">linkedin</a> | <a href="mailto:?Subject=Create a Multi Blog Site with Jekyll&Body=http://www.garron.me/en/blog/multi-blog-site-jekyll.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/multi-blog-site-jekyll.html&title=Create a Multi Blog Site with Jekyll" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

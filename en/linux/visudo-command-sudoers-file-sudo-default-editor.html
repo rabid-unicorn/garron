@@ -1,0 +1,314 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Using visudo to edit sudoers file, so you can control your Linux with sudo command | bonus: Set nano or vim as default editor" />
+
+        <!-- End SEO includes -->
+        <title>Take Control of your Linux | sudoers file: How to with Examples</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Take Control of your Linux | sudoers file: How to with Examples">
+        <meta name="twitter:description" content="Using visudo to edit sudoers file, so you can control your Linux with sudo command | bonus: Set nano or vim as default editor">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Take Control of your Linux | sudoers file: How to with Examples</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/visudo-command-sudoers-file-sudo-default-editor.html">Take Control of your Linux | sudoers file: How to with Examples</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-05-22 10:56:30 -0400</h6>
+
+<hr>
+<p>The <code>sudoers</code> file located at: <code>/etc/sudoers</code>, contains the rules that users must follow when using the sudo command.</p>
+
+<p>If you have ever used used Ubuntu, you know that the root account is disabled. This is because the root password is not set in Ubuntu, you can assign one and use it as with every other Linux distribution. That anyway is another story. On normal Ubuntu Linux computers you need to use <code>sudo</code> to act as root.</p>
+
+<p>I like using <code>sudo</code>, I’m not using Ubuntu anymore. The first thing I do when I install a new Linux is to use <code>visudo</code> to edit the sudoers file. And I always give my account root rights, then I can run commands as root without switching users.</p>
+
+<p>The best way to understand the <code>sudo</code> command, and the rules in sudoers file, the funny way is by this comics.</p>
+
+<p><img src="/images/2012-05/sudo-sudoers-make-me-sandwich.png" class="img-responsive" title="sudo make me a sandwich | sudoers file" alt="sudo make me a sandwich sudoers file" /></p>
+
+<p><em>credit to: <a href="http://xkcd.com/149/">XKCD</a></em></p>
+
+<p>As you can see from this funny picture, using <code>sudo</code> command, makes the system obey any given order.</p>
+
+<p>The two best advantages about using <code>sudo</code> command are:</p>
+
+<ul>
+  <li>Restricted privileges</li>
+  <li>Logs of the actions taken by users</li>
+</ul>
+
+<p>I’m sure you are now fully aware of the advantages of using <code>sudo</code> command in a daily basis, how to use it?</p>
+
+<p>In order to use <code>sudo</code> you first need to configure the sudoers file. The sudoers file is located at <code>/etc/sudoers</code>. And you should not edit it directly, you need to use the <code>visudo</code> command.</p>
+
+<p>Once you enter <code>visudo</code> command, you will see something like this:</p>
+
+<pre><code># /etc/sudoers
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# See the man page for details on how to write a sudoers file.
+#
+
+Defaults        env_reset
+
+# Host alias specification
+
+# User alias specification
+
+# Cmnd alias specification
+
+# User privilege specification
+root    ALL=(ALL) ALL
+</code></pre>
+
+<p>Almost all lines are commented out, the one that matters in this sudoers file example is:</p>
+
+<pre><code>root ALL=(ALL) ALL
+</code></pre>
+
+<p>This line means:  The root user can execute from <em>ALL</em> terminals, acting as <em>ALL</em> (any) users, and run <em>ALL</em> (any) command.</p>
+
+<p>The first part is the user, the second is the terminal from where the user can use <code>sudo</code> command, the third part is which users he may act as, and the last one, is which commands he may run when using <code>sudo</code>.</p>
+
+<h4 id="sudoers-examples">sudoers examples</h4>
+
+<pre><code>operator ALL= /sbin/poweroff
+</code></pre>
+
+<p>The above command, makes the user operator can from any terminal, run the command power off.</p>
+
+<p>You can also create aliases for: users -&gt; User_Alias, run commands as other users -&gt; Runas_Alias, host -&gt; Host_Alias and command -&gt; Cmnd_Alias</p>
+
+<pre><code>User_Alias OPERATORS = joe, mike, jude Runas_Alias OP = root, operator Host_Alias OFNET = 10.1.2.0/255.255.255.0 Cmnd_Alias PRINTING = /usr/sbin/lpc, /usr/bin/lprm
+</code></pre>
+
+<p>As you can see the alias OPERATORS includes the users joe, mike and jude, the alias OP includes the users root and operator, alias OFNET includes the network 10.1.2.0 (all the C class), and the command alias PRINTING includes the commands lpc and lprm.</p>
+
+<p>So, a typical sudoers file may look like this:</p>
+
+<pre><code> User_Alias     OPERATORS = joe, mike, jude
+ Runas_Alias    OP = root, operator
+ Host_Alias     OFNET = 10.1.2.0/255.255.255.0
+ Cmnd_Alias     PRINTING = /usr/sbin/lpc, /usr/bin/lprm
+
+OPERATORS ALL=ALL
+
+#The users in the OPERATORS group can run any command from
+ any terminal.
+
+linus ALL=(OP) ALL
+
+# The user linus can run any command from any terminal as any 
+user in the OP group (root or operator).
+
+user2 OFNET=(ALL) ALL
+
+# user user2 may run any command from any machine in the 
+OFNET network, as any user.
+
+user3 ALL= PRINTING
+
+# user user3 may run lpc and lprm from any machine.
+
+go2linux ALL=(ALL) ALL
+
+# user go2linux may run any command from any machine acting
+ as any user. (like Ubuntu)
+</code></pre>
+
+<p>If you want not to be asked for a password use this form:</p>
+
+<pre><code>go2linux ALL=(ALL) NOPASSWD: ALL
+</code></pre>
+
+<p>You may want to read sudoers man page</p>
+
+<p>Considering that you are still reading here a bonus:</p>
+
+<p><code>visudo</code> command uses <code>vi</code> as the editor here some tips to use it:</p>
+
+<ol>
+  <li>Switch to root, (su root), then run visudo, (as above).</li>
+  <li>Find where it says “root ALL=(ALL) ALL”.</li>
+  <li>Type “o” to insert a new line below it.</li>
+  <li>Now type what you want to insert, eg “username ALL=(ALL) ALL”.</li>
+  <li>Hit esc to exit insert-mode.</li>
+  <li>Type “:x” to save and exit.</li>
+</ol>
+
+<p><strong>Can I change the default <code>visudo</code> editor?</strong></p>
+
+<p>Yes, changing the default <code>visudo</code> editor is easy.</p>
+
+<p>And just because of your dedication, and still reading until here, I’ll show you how to set <code>nano</code> or <code>vim</code> to use with <code>visudo</code> command as default editor.</p>
+
+<p><strong>Using vim with visudo</strong></p>
+
+<pre><code>export VISUAL=vim; visudo
+</code></pre>
+
+<p><strong>Using nano with visudo</strong></p>
+
+<pre><code>export VISUAL=nano; visudo
+</code></pre>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html&text=Take Control of your Linux | sudoers file: How to with Examples&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html">linkedin</a> | <a href="mailto:?Subject=Take Control of your Linux | sudoers file: How to with Examples&Body=http://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html&title=Take Control of your Linux | sudoers file: How to with Examples" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to install Nginx with gzip static support on Arch Linux, using ABS" />
+
+        <!-- End SEO includes -->
+        <title>Nginx with gzip static (gzip_static) support on Arch Linux ABS</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Nginx with gzip static (gzip_static) support on Arch Linux ABS">
+        <meta name="twitter:description" content="How to install Nginx with gzip static support on Arch Linux, using ABS">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Nginx with gzip static (gzip_static) support on Arch Linux ABS</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/nginx-gzip-static-arch-linux.html">Nginx with gzip static (gzip_static) support on Arch Linux ABS</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2010-03-29 10:36:30 -0400</h6>
+
+<hr>
+<p>Nginx is a web server / proxy server, according to Wikipedia, this is the description:</p>
+
+<blockquote>
+  <p>nginx (pronounced as “engine X”) is a lightweight, high performance web server/reverse proxy and e-mail (IMAP/POP3) proxy, licensed under a BSD-like license. It runs on UNIX, GNU/Linux, BSD variants, Mac OS X, Solaris, and Microsoft Windows[2]. According to Netcraft, 7% of all domains on the internet use nginx.</p>
+</blockquote>
+
+<p>It is really fast serving static content, so a lot of sites are using it as a front end to Apache, where Nginx is only serving the static content and proxying the dynamic content to be processed by Apache.</p>
+
+<p>Nginx, has a lot of features, and one I really like is its capacity to serve gzipped content, I mean it can gzip it on the fly before serving it, but this requires CPU power, but it can also sent previously gzipped content. For instance, you have a file custom_style.css and also have the same file in the same directory gzipped as custom_style.css.gz, this way if the browser accept gzipped files, Nginx will serve the .gz version, if not the not gzipped version.</p>
+
+<p>As you can see this really efficient, and that is what IMHO defines Nginx efficiency.</p>
+
+<p>Normally the most of distros versions of Nginx does not support gzip static out of the box, I have read that Ubuntu does, but if you are running nginx on an Arch Linux operating system, you will have to recompile it to support that version (maybe the same with Debian or CentOS), I will cover how to use ABS from Arch Linux to recompile Nginx to support this feature.</p>
+
+<h3 id="install-abs">Install ABS</h3>
+
+<p>Arch Build System <a href="http://wiki.archlinux.org/index.php/Arch_Build_System">ABS</a> lets you re-compile Arch Linux software from source to add or removes features, in way that is still pacman who takes care for the install un-install package, so lets install ABS on our system.</p>
+
+<pre><code>sudo pacman -Sy abs base-devel
+</code></pre>
+
+<h3 id="download-the-tree-from-abs">Download the tree from ABS</h3>
+
+<p>I will only download the info for nginx, and not the whole tree</p>
+
+<pre><code>sudo abs community/nginx
+</code></pre>
+
+<h3 id="copy-the-downloaded-info-your-build-directory">Copy the downloaded info your build directory</h3>
+
+<pre><code>mkdir $HOME/abs
+
+cd $HOME/abs
+
+cp -r /var/abs/community/nginx/ $HOME/abs
+</code></pre>
+
+<h3 id="edit-the-pkgbuild-file">Edit the PKGBUILD file</h3>
+
+<pre><code>vim $HOME/build/nginx/PKGBUILD
+</code></pre>
+
+<p>look for this section:</p>
+
+<pre><code>./configure \
+    --prefix=${_server_root} \
+    --sbin-path=/usr/sbin/nginx \
+    --pid-path=/var/run/nginx.pid \
+    --lock-path=/var/lock/nginx.lock \
+    --http-client-body-temp-path=${_tmp_path}/client_body_temp \
+    --http-proxy-temp-path=${_tmp_path}/proxy_temp \
+    --http-fastcgi-temp-path=${_tmp_path}/fastcgi_temp \
+    --http-log-path=${_log_path}/access.log \
+    --error-log-path=${_log_path}/error.log \
+    --user=${_user} --group=${_group} \
+    --with-imap --with-imap_ssl_module --with-http_ssl_module \
+    --with-http_stub_status_module \
+    --with-http_dav_module \
+    --with-ipv6 
+
+    make || return 1
+</code></pre>
+
+<p>And add this line –with-http_gzip_static_module after –with-ipv6, I will look like this:</p>
+
+<pre><code>./configure \
+    --prefix=${_server_root} \
+    --sbin-path=/usr/sbin/nginx \
+    --pid-path=/var/run/nginx.pid \
+    --lock-path=/var/lock/nginx.lock \
+    --http-client-body-temp-path=${_tmp_path}/client_body_temp \
+    --http-proxy-temp-path=${_tmp_path}/proxy_temp \
+    --http-fastcgi-temp-path=${_tmp_path}/fastcgi_temp \
+    --http-log-path=${_log_path}/access.log \
+    --error-log-path=${_log_path}/error.log \
+    --user=${_user} --group=${_group} \
+    --with-imap --with-imap_ssl_module --with-http_ssl_module \
+    --with-http_stub_status_module \
+    --with-http_dav_module \
+    --with-ipv6 \
+    --with-http_gzip_static_module
+
+    make || return 1
+</code></pre>
+
+<h3 id="compile-the-software">Compile the software</h3>
+
+<pre><code>cd ~/abs/nginx
+
+makepkg -s
+</code></pre>
+
+<h3 id="and-install-it">And install it</h3>
+
+<pre><code>sudo pacman -U nginx-0.7.65-1-i686.pkg.tar.gz
+</code></pre>
+
+<p>Your version may be different</p>
+
+<h3 id="finally-configure-it-to-server-gzipped-files">Finally configure it to server gzipped files</h3>
+
+<p>Add this line to the http section of your /etc/nginx/conf/nginx.conf file</p>
+
+<pre><code>gzip              on;
+gzip_buffers      16 8k;
+gzip_comp_level   9;
+gzip_http_version 1.1;
+gzip_min_length   10;
+gzip_types        text/plain text/css image/png image/gif image/jpeg application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+gzip_vary         on;
+gzip_static       on;
+gzip_proxied      any;
+gzip_disable      "MSIE [1-6]\.";
+</code></pre>
+
+<h3 id="restart-the-server">Restart the server</h3>
+
+<pre><code>sudo /etc/rc.d/nginx restart
+</code></pre>
+
+<p>Now you have nginx serving static gzipped content, and gzipping on the fly those files that does not have a gzipped version.</p>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html&text=Nginx with gzip static (gzip_static) support on Arch Linux ABS&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html">linkedin</a> | <a href="mailto:?Subject=Nginx with gzip static (gzip_static) support on Arch Linux ABS&Body=http://www.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/nginx-gzip-static-arch-linux.html&title=Nginx with gzip static (gzip_static) support on Arch Linux ABS" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

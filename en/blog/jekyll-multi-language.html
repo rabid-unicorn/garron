@@ -1,0 +1,528 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/jekyll-multi-language.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to create a multi language site using Jekyll" />
+
+        <!-- End SEO includes -->
+        <title>Multi language site with Jekyll</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Multi language site with Jekyll">
+        <meta name="twitter:description" content="How to create a multi language site using Jekyll">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Multi language site with Jekyll</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/jekyll-multi-language.html">Multi language site with Jekyll</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-07-04 17:22:35 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/jekyll.html">jekyll</a>,<a href="/en/tag/tutorial.html">tutorial</a>,</small></p>
+
+<hr>
+<h2 id="introduction">Introduction</h2>
+
+<p>It’s been a while that I am writing a blog, but mostly in English, being my native tongue Spanish I wanted to also write in that language, but I needed to find the way to keep one site being it multi-lingual. Now that I am using Jekyll for more than a year, I started to look a way to write in English and Spanish in this site. But of course following the best practices about having a site in two or more languages.</p>
+
+<p>You need to have all labels, and menus in one language per page, you do not have to mix both languages in a single page, I have found the way, and now I want to share it with you.</p>
+
+<h2 id="jekyll-installation">Jekyll installation</h2>
+
+<p>Let’s assume you are using Mac OS X, or Ubuntu/Debian GNU Linux, if you are using any other operating system you will have to find the way to install it.</p>
+
+<p><strong>Mac OS X</strong></p>
+
+<p>There are a lot of ways to do this, the one that I am going to show here, is just the one I use not the best, not the worst.</p>
+
+<p>First you need to install XCode, you can download it from the <a href="https://developer.apple.com/technologies/mac/#xcode">Mac App Store</a></p>
+
+<p>Then let’s install homebrew</p>
+
+<pre><code>ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+</code></pre>
+
+<p>Now, we can get the lastest version of Ruby, or at least a newer version than the one that is packed with Mac</p>
+
+<pre><code>brew install ruby
+</code></pre>
+
+<p>We now have newer version of ruby, let’s tell our Mac to use it.</p>
+
+<pre><code>echo 'export PATH=/usr/local/Cellar/ruby/1.9.3-p194/bin:$PATH' &gt;&gt; ~/.bash_profile
+</code></pre>
+
+<p>Reload the profile</p>
+
+<pre><code>source ~/.bash_profile
+</code></pre>
+
+<p>It is advisable to use <a href="https://rvm.io/">rvm</a> instead of homebrew, but I use this method because I do not need two or more versions of Ruby.</p>
+
+<p>Finally, we can install Jekyll</p>
+
+<pre><code>gem install jekyll
+</code></pre>
+
+<p><strong>Debian or Ubuntu</strong></p>
+
+<p>If you are working with Debian or Ubuntu it will be easier.</p>
+
+<pre><code>sudo apt-get install ruby1.9.1-dev
+</code></pre>
+
+<p>and then.</p>
+
+<pre><code>sudo gem install jekyll
+</code></pre>
+
+<p>That is it, done.</p>
+
+<h2 id="structure-of-the-site">Structure of the site</h2>
+
+<p><strong>Note: There is no need to download anything from the links below, at the end of this post, you will find a link to download the full project</strong></p>
+
+<p>With Jekyll installed you need to create the basic structure of the site.</p>
+
+<pre><code>/
+|
+/_layouts/en-default.html
+         /en-post.html
+         /es-default.html
+		 /es-post.html
+/css/main.css
+/es/index.html
+/es/atom.xml
+/es/_posts/
+            |
+			/2013-07-04-hola-mundo.md
+/en/index.html
+/en/atom.xml
+/en/_posts/
+            |
+			/2013-07-04-hello-world.md
+</code></pre>
+
+<p>With this basic structure, we can continue, we will need the css files, and the basic layout. I will use <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Notice that the site is divided into two categories, or main categories <em>es</em> and <em>en</em>, one for each language.</p>
+
+<p><strong>Creating the new site</strong></p>
+
+<p>It is not needed to use git, but I like to use it, so, the next steps are:</p>
+
+<pre><code>mkdir ~/jekyll/
+cd  ~/jekyll/
+git init
+</code></pre>
+
+<p>Let’s download foundation</p>
+
+<pre><code>wget http://foundation.zurb.com/files/foundation-4.2.3.zip
+</code></pre>
+
+<p>uncompress it.</p>
+
+<pre><code>unzip foundation-4.2.3.zip
+</code></pre>
+
+<p>Delete the zip file</p>
+
+<pre><code>rm foundation-4.2.3.zip
+</code></pre>
+
+<p>Go for the first commit.</p>
+
+<pre><code>git add -A
+git commit -m 'foundation'
+</code></pre>
+
+<p>I will use the blog template from Foundation for this example, you can see it, <a href="http://foundation.zurb.com/templates.php">here</a></p>
+
+<p>The most important part is the layout, I will use for this small example two files to create the basic layout. default.html and post.html. Because this is a two language site, I will create these files. <strong>en-default.html</strong>, <strong>en-post.html</strong>, <strong>es-default.html</strong> and <strong>es-post.html</strong>.</p>
+
+<p>Let’s see the default layout in English:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;!--[if IE 8]&gt; 				 &lt;html class=&quot;no-js lt-ie9&quot; lang=&quot;en&quot; &gt; &lt;![endif]--&gt;
+&lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html class=&quot;no-js&quot; lang=&quot;en&quot; &gt; &lt;!--&lt;![endif]--&gt;
+
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
+    &lt;title&gt;Jekyll Multi Language&lt;/title&gt;
+    
+  
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/foundation.css&quot; /&gt;
+  
+
+    &lt;script src=&quot;/js/vendor/custom.modernizr.js&quot;&gt;&lt;/script&gt;
+
+  &lt;/head&gt;
+  &lt;body&gt;
+    
+    &lt;!-- Nav Bar --&gt;
+    
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;large-12 columns&quot;&gt;
+	&lt;div class=&quot;nav-bar right&quot;&gt;
+	  &lt;ul class=&quot;button-group&quot;&gt;
+	    &lt;li&gt;&lt;a href=&quot;/en/&quot; class=&quot;button&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+	    &lt;li&gt;&lt;a href=&quot;/en/about.html&quot; class=&quot;button&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+	  &lt;/ul&gt;
+	&lt;/div&gt;
+	&lt;h1&gt;Blog &lt;small&gt;This is my blog. It&#39;s awesome.&lt;/small&gt;&lt;/h1&gt;
+	&lt;hr /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- End Nav --&gt;
+    
+    
+    &lt;!-- Main Page Content and Sidebar --&gt;
+    
+    &lt;div class=&quot;row&quot;&gt;
+      
+      &lt;!-- Main Blog Content --&gt;
+      &lt;div class=&quot;large-9 columns&quot; role=&quot;content&quot;&gt;
+	
+	&lt;article&gt;
+	  {{ content }}
+	&lt;/article&gt;
+ 
+      &lt;/div&gt;
+ 
+      &lt;!-- End Main Content --&gt;
+ 
+ 
+      &lt;!-- Sidebar --&gt;
+ 
+      &lt;aside class=&quot;large-3 columns&quot;&gt;
+ 
+	&lt;h5&gt;Categories&lt;/h5&gt;
+	&lt;ul class=&quot;side-nav&quot;&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;News&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Code&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Design&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Fun&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Weasels&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+ 
+	&lt;div class=&quot;panel&quot;&gt;
+	  &lt;h5&gt;Featured&lt;/h5&gt;
+	  &lt;p&gt;Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.&lt;/p&gt;
+	  &lt;a href=&quot;#&quot;&gt;Read More &amp;rarr;&lt;/a&gt;
+	&lt;/div&gt;
+ 
+      &lt;/aside&gt;
+ 
+      &lt;!-- End Sidebar --&gt;
+    &lt;/div&gt;
+ 
+    &lt;!-- End Main Content and Sidebar --&gt;
+ 
+ 
+    &lt;!-- Footer --&gt;
+    
+    &lt;footer class=&quot;row&quot;&gt;
+      &lt;div class=&quot;large-12 columns&quot;&gt;
+	&lt;hr /&gt;
+	&lt;div class=&quot;row&quot;&gt;
+	  &lt;div class=&quot;large-6 columns&quot;&gt;
+	    &lt;p&gt;&amp;copy; Copyright no one at all. Go to town.&lt;/p&gt;
+	  &lt;/div&gt;
+	  &lt;div class=&quot;large-6 columns&quot;&gt;
+	    &lt;ul class=&quot;inline-list right&quot;&gt;
+	      &lt;li&gt;&lt;a href=&quot;/en/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+	      &lt;li&gt;&lt;a href=&quot;/en/about.html&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+	    &lt;/ul&gt;
+	  &lt;/div&gt;
+	&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/footer&gt;
+    
+    
+    
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>Now the one in Spanish.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;!--[if IE 8]&gt; 				 &lt;html class=&quot;no-js lt-ie9&quot; lang=&quot;en&quot; &gt; &lt;![endif]--&gt;
+&lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html class=&quot;no-js&quot; lang=&quot;en&quot; &gt; &lt;!--&lt;![endif]--&gt;
+
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
+    &lt;title&gt;Jekyll Multi Lenguaje&lt;/title&gt;
+    
+  
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/foundation.css&quot; /&gt;
+  
+
+    &lt;script src=&quot;/js/vendor/custom.modernizr.js&quot;&gt;&lt;/script&gt;
+
+  &lt;/head&gt;
+  &lt;body&gt;
+    
+    &lt;!-- Nav Bar --&gt;
+    
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;large-12 columns&quot;&gt;
+	&lt;div class=&quot;nav-bar right&quot;&gt;
+	  &lt;ul class=&quot;button-group&quot;&gt;
+	    &lt;li&gt;&lt;a href=&quot;/es/&quot; class=&quot;button&quot;&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+	    &lt;li&gt;&lt;a href=&quot;/es/acerca.html&quot; class=&quot;button&quot;&gt;Acerca de&lt;/a&gt;&lt;/li&gt;
+	  &lt;/ul&gt;
+	&lt;/div&gt;
+	&lt;h1&gt;Bitácora &lt;small&gt;Esta es mi maravillosa bitácora en línea &lt;/small&gt;&lt;/h1&gt;
+	&lt;hr /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- End Nav --&gt;
+    
+    
+    &lt;!-- Main Page Content and Sidebar --&gt;
+    
+    &lt;div class=&quot;row&quot;&gt;
+      
+      &lt;!-- Main Blog Content --&gt;
+      &lt;div class=&quot;large-9 columns&quot; role=&quot;content&quot;&gt;
+	
+	&lt;article&gt;
+	  {{ content }}
+	&lt;/article&gt;
+ 
+      &lt;/div&gt;
+ 
+      &lt;!-- End Main Content --&gt;
+ 
+ 
+      &lt;!-- Sidebar --&gt;
+ 
+      &lt;aside class=&quot;large-3 columns&quot;&gt;
+ 
+	&lt;h5&gt;Categorias&lt;/h5&gt;
+	&lt;ul class=&quot;side-nav&quot;&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Noticias&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Codigo&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Diseño&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Diversión&lt;/a&gt;&lt;/li&gt;
+	  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Comadrejas&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+ 
+	&lt;div class=&quot;panel&quot;&gt;
+	  &lt;h5&gt;Featured&lt;/h5&gt;
+	  &lt;p&gt;Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.&lt;/p&gt;
+	  &lt;a href=&quot;#&quot;&gt;Leer más&amp;rarr;&lt;/a&gt;
+	&lt;/div&gt;
+ 
+      &lt;/aside&gt;
+ 
+      &lt;!-- End Sidebar --&gt;
+    &lt;/div&gt;
+ 
+    &lt;!-- End Main Content and Sidebar --&gt;
+ 
+ 
+    &lt;!-- Footer --&gt;
+    
+    &lt;footer class=&quot;row&quot;&gt;
+      &lt;div class=&quot;large-12 columns&quot;&gt;
+	&lt;hr /&gt;
+	&lt;div class=&quot;row&quot;&gt;
+	  &lt;div class=&quot;large-6 columns&quot;&gt;
+	    &lt;p&gt;&amp;copy; Sin derechos de autor&lt;/p&gt;
+	  &lt;/div&gt;
+	  &lt;div class=&quot;large-6 columns&quot;&gt;
+	    &lt;ul class=&quot;inline-list right&quot;&gt;
+	      &lt;li&gt;&lt;a href=&quot;/es/&quot;&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+	      &lt;li&gt;&lt;a href=&quot;/es/acerca.html&quot;&gt;Acerca de&lt;/a&gt;&lt;/li&gt;
+	    &lt;/ul&gt;
+	  &lt;/div&gt;
+	&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/footer&gt;
+    
+    
+    
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>As you can see the basic differences are just the translation of all menus, and labels. It is of course needed to have even the html comments translated to make Google sure which is the language used by each category.</p>
+
+<p>The Spanish posts should go to <em>/es/_posts/</em> and the English ones to <em>/en/_posts/</em>, with Jekyll, each folder is a category, so in this case we have two English and Spanish. And we will use these categories to filter the posts in the index file of each one of the sections.</p>
+
+<p>See the <em>index</em> file of the English category to see how this works.</p>
+
+<pre><code>---
+layout: en-default
+title: Blog Posts
+---
+{% for post in site.posts %}      
+  {% if post.categories contains &#39;en&#39; %}
+          &lt;h4&gt;&lt;a href=&quot;{{ post.url }}&quot;&gt;{{ post.title | truncate:200 }}&lt;/a&gt;&lt;/h4&gt;
+  {% endif %}
+{% endfor %}  
+</code></pre>
+
+<p>You can use the same method to create the atom.xml for each language.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Maintain a single site with two languages is easier to keep one for each language, that is why I decided to go this way, and at the same time I have learned how flexible Jekyll is.</p>
+
+<p>You can download all files of this project <a href="/uploaded-files/2013/07/jekyll-multi.tar.gz">here</a></p>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/jekyll-multi-language.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/jekyll-multi-language.html&text=Multi language site with Jekyll&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/jekyll-multi-language.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/jekyll-multi-language.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/jekyll-multi-language.html">linkedin</a> | <a href="mailto:?Subject=Multi language site with Jekyll&Body=http://www.garron.me/en/blog/jekyll-multi-language.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/jekyll-multi-language.html&title=Multi language site with Jekyll" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

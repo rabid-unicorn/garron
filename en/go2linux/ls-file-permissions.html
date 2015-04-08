@@ -1,0 +1,282 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/ls-file-permissions.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="What is the meaning of the output in the Linux command ls -l" />
+
+        <!-- End SEO includes -->
+        <title>ls -l explained</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="ls -l explained">
+        <meta name="twitter:description" content="What is the meaning of the output in the Linux command ls -l">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">ls -l explained</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/ls-file-permissions.html">ls -l explained</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2010-03-31 10:36:30 -0400</h6>
+
+<hr>
+<p>There is a command I use a lot and it is <code>ls -l</code></p>
+
+<p>The <code>-l</code> switch turns on long listing format</p>
+
+<p>Here is an example of its output:</p>
+
+<pre><code>drwxr-xr-x 2 root    root      4096 Mar  9 11:49 modprobe.d
+-rw-r--r-- 1 root    root         0 Jan 11  2009 motd
+drwxr-xr-x 2 root    root      4096 Feb 23 17:17 mplayer
+-rw-r--r-- 1 root    root       311 Mar 31 10:01 mtab
+-rw------- 1 root    ggarron      0 Feb 24 18:07 mtab.fuselock
+-rw-r--r-- 1 root    root      2614 Jul 13  2009 mtools.conf
+drwxr-xr-x 2 root    root      4096 Mar  9 11:48 mysql
+-rw-r--r-- 1 root    root      8728 Feb 13 14:30 nanorc
+-rw-r--r-- 1 root    root       767 Jan  4 04:40 netconfig
+drwxr-xr-x 3 root    root      4096 Feb 23 17:17 nginx
+-rw-r--r-- 1 root    root      2147 Jan 29  2009 nscd.conf
+-rw-r--r-- 1 root    root       223 Jul 17  2009 nsswitch.conf
+-rw-r--r-- 1 root    root      1451 Jun 19  2009 ntp.conf
+-rw-r--r-- 1 root    root       415 Nov 13 19:47 ntpd.conf
+-rw-r--r-- 1 root    root         0 Jun 18  2009 odbc.ini
+-rw-r--r-- 1 root    root         0 Jun 18  2009 odbcinst.ini
+drwxr-xr-x 2 root    root      4096 Feb 23 17:10 openldap
+-rw-r--r-- 1 root    root      2408 Nov 10 20:05 pacman.conf
+drwxr-xr-x 2 root    root      4096 Feb 23 17:18 pacman.d
+drwxr-xr-x 2 root    root      4096 Mar  9 11:52 pam.d
+drwxr-xr-x 2 root    root      4096 Dec 29 10:40 pango
+-rw-r--r-- 1 root    root       737 Jun 26  2009 passwd
+-rw------- 1 root    root       681 Jun 12  2009 passwd-
+drwxr-xr-x 2 root    root      4096 Nov  2 16:38 pcmcia
+drwxr-xr-x 3 root    root      4096 Mar  9 11:52 php
+drwxr-xr-x 5 root    root      4096 Jan  7 12:44 pm
+drwxr-xr-x 2 root    root      4096 Aug 21  2009 polipo
+drwxr-xr-x 5 root    root      4096 Jan 31 06:37 polkit-1
+drwxr-xr-x 5 root    root      4096 Feb 23 17:18 ppp
+-rw-r--r-- 1 root    root       209 Mar 30 17:41 printcap
+drwxrwx--- 3 privoxy privoxy   4096 Feb 23 17:18 privoxy
+</code></pre>
+
+<p>Let’s take this one to analyse</p>
+
+<pre><code>-rw-r--r-- 1 root    root       209 Mar 30 17:41 printcap
+</code></pre>
+
+<p>We will split the output for better understanding.</p>
+
+<table class="table table-condensed table-bordered">
+    <tr>
+        <td>Field 1</td>
+        <td>Field 2</td>
+        <td>Field 3</td>
+        <td>Field 4</td>
+        <td>Field 5</td>
+        <td>Field 6</td>
+        <td>Field 7</td>
+        <td>Field 8</td>
+        <td>Field 9</td>
+        <td>Field 10</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>rw-</td>
+        <td>r--</td>
+        <td>r--</td>
+        <td>1</td>
+        <td>root</td>
+        <td>root</td>
+        <td>209</td>
+        <td>Mar 30 17:41</td>
+        <td>printcap</td>
+    </tr>
+</table>
+
+<p><strong>The first field could be</strong></p>
+
+<p><strong>-</strong> for File, <strong>d</strong> for Directory, <strong>l</strong> for Link</p>
+
+<p><strong>The second,third,fourth fields</strong></p>
+
+<p>Those are permissions that means read, write and execute, and comes in three different fields that belongs to the permission the:</p>
+
+<ul>
+  <li>second: The owner has over the file</li>
+  <li>third: The group has over the file</li>
+  <li>fourth: Everybody else has over the file</li>
+</ul>
+
+<p><strong>The fifth field</strong></p>
+
+<p>This field specifies the number of links or directories inside this directory.</p>
+
+<p><strong>The sixth field is the user</strong></p>
+
+<p>The user that owns the file, or directory</p>
+
+<p><strong>The seventh field is te group</strong></p>
+
+<p>The group that file belongs to, and any user in that group will have the permissions given in the third field over that file.</p>
+
+<p><strong>The eighth field</strong></p>
+
+<p>The size in bytes, you may modify this by using the -h option together with -l this will have the output in k,M,G for a better understanding.</p>
+
+<p><strong>The ninth field</strong></p>
+
+<p>The date of last modification</p>
+
+<p><strong>The tenth field</strong></p>
+
+<p>The name of the file</p>
+
+<p>And that is it, hope you now understand better the output of <code>ls -l</code> command.</p>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/ls-file-permissions.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/ls-file-permissions.html&text=ls -l explained&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/ls-file-permissions.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/ls-file-permissions.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/ls-file-permissions.html">linkedin</a> | <a href="mailto:?Subject=ls -l explained&Body=http://www.garron.me/en/go2linux/ls-file-permissions.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/ls-file-permissions.html&title=ls -l explained" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

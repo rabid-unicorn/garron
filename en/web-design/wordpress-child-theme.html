@@ -1,0 +1,346 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/web-design/wordpress-child-theme.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to customize a Wordpress theme using a child theme" />
+
+        <!-- End SEO includes -->
+        <title>Wordpress Child Themes</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Wordpress Child Themes">
+        <meta name="twitter:description" content="How to create a Wordpress Child Theme and use it to customize the parent to fit your needs">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/web-design/index.html">Web Design</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Wordpress Child Themes</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/web-design/wordpress-child-theme.html">Wordpress Child Themes</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2014-12-25 15:31:35 -0500</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/tutorial.html">tutorial</a>,<a href="/en/tag/wordpress.html">wordpress</a>,</small></p>
+
+<hr>
+<h2 id="developing-a-wordpress-child-theme">Developing a Wordpress Child Theme</h2>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Wordpress is the most widely used CMS software to develop websites by the time of this writing.</p>
+
+<p>With Wordpress you can power complex sites as well as simple blogs, you can customize almost every aspect of it with the use of plugins or rich feature themes with lots of functions build in.</p>
+
+<p>Lots of its customization can be done with themes or changes to them, but when you change something in a theme and then that theme gets an upgrade your changes are overwritten, there is a way to overcome that, and that is creating a child theme.</p>
+
+<h3 id="definition">Definition</h3>
+
+<p>A child theme is a theme that inherits its functions and styling from the parent theme, and where you can change or add any functionality or styling without the risk of losing them when the parent is upgraded.</p>
+
+<h3 id="creating-the-child-theme">Creating the child theme</h3>
+
+<p>Let’s go to hands job training and see step by step how to accomplish our task.</p>
+
+<p>We are going to “fork” the newest Wordpress official theme to just change the font it uses.</p>
+
+<p>Twenty Fifteen uses Google’s Noto Sans and Serif fonts, we are going to change it to use</p>
+
+<h4 id="choosing-the-parent-theme">Choosing the parent theme</h4>
+
+<p>The first thing you need to do is to find a parent theme you want to modify or add features to.</p>
+
+<p>Considering that your newly created theme will inherit everything from the parent one, you will want to choose wisely, go with a solid theme with good SEO, good layout options so you can have solid bases for your work.</p>
+
+<p>Once you have learned and mastered the child theme creation, you can start building your themes over popular frameworks like:</p>
+
+<ul>
+  <li><a href="http://my.studiopress.com/themes/genesis/">Genesis</a></li>
+  <li><a href="http://www.woothemes.com/products/canvas/">Canvas</a></li>
+  <li><a href="http://diythemes.com">Thesis</a></li>
+</ul>
+
+<p>Or go with some Open Source frameworks:</p>
+
+<ul>
+  <li><a href="http://themeshaper.com/thematic/">Thematic</a></li>
+  <li><a href="http://upplex.de/bootstrap-3-wordpress-theme-framework/">Bootstrap Framework</a></li>
+  <li><a href="http://roots.io">Roots.io</a></li>
+</ul>
+
+<p>For this tutorial, we will simply start with Wordpress’ <a href="https://wordpress.org/themes/twentyfifteen">Twenty Fifteen</a> theme.</p>
+
+<h3 id="install-the-parent-theme">Install the parent theme</h3>
+
+<p>If you have not done this already, you need to download and install the theme that is going to be the base of your work.</p>
+
+<p>First go to the admin section of your Wordpress installation, which is http://your-site-url/wp-admin/. Then choose Appearance -&gt; Themes from the left side of your screen.</p>
+
+<p>Once there select <em>Add New</em> and look for <strong>Twenty Fifteen</strong> if it is not already installed (if you have the latest version of Wordpress, it should be already installed).</p>
+
+<h3 id="create-the-child-folder-and-add-minimum-files">Create the child folder and add minimum files</h3>
+
+<p>First thing you need to do, is to create the child theme folder, where its files are going to be.</p>
+
+<p>You can do this in very different ways, being FTP and ssh the most common ones, how to do it via either of them is outside the scope of this tutorial, but it has be be located in: <em>wp-content/themes/</em>, if you are on a fresh Wordpress installation you will find these folders inside <em>wp-content/themes/</em></p>
+
+<ul>
+  <li>twentyfifteen</li>
+  <li>twentyfourteen</li>
+  <li>twentythirteen</li>
+  <li>twentytwelve</li>
+</ul>
+
+<p>So let’s create a new one, which can be named, twentyfifteen-child pretty obvious right?</p>
+
+<p>Inside that folder there are two files that are a must:</p>
+
+<ul>
+  <li>style.css</li>
+  <li>functions.php</li>
+</ul>
+
+<p>Once you have those files in place, add this to style.css.</p>
+
+<pre><code>/*
+ Theme Name:   Twenty Fifteen Child
+ Theme URI:    http://the-url-where-theme/can-be-downloaded
+ Description:  Twenty Fifteen Child Theme
+ Author:       Your name
+ Author URI:   http://your-website
+ Template:     twentyfifteen
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         responsive, blog
+ Text Domain:  twenty-fifteen-child
+*/
+</code></pre>
+
+<p>You can change any of those lines according to your needs, the only one you can’t write at your discretion, is the <strong>Template</strong> line, it must reflect the folder of the parent theme.</p>
+
+<p>You also have to create a <em>functions.php</em> which we will keep empty for a while.</p>
+
+<p>You now have a new theme that you can activate from the *Appearance -&gt; Themes * menu in the Admin page of your Wordpress Admin Panel.</p>
+
+<p>Once activated, you will see that you have a blog with no theme at all, so it is time to start customizing your new theme.</p>
+
+<h3 id="customize-your-newly-created-theme">Customize your newly created theme</h3>
+
+<p>The first thing we need to know is how files are treated, any file you have in your child theme’s folder is going to replace the original one in parent folder, this with the exception of <code>functions.php</code> which contents are going to be added to the parent’s <code>functions.php</code> file, but at top of it, so child’s functions are loaded before parent’s ones.</p>
+
+<p><strong>Import parents styling</strong></p>
+
+<p>Maybe the very first thing we need to do is to import the parent’s styling so we can modify them instead of creating everything again.</p>
+
+<p>In order to do it, copy this snippet in your child’s functions file.</p>
+
+<pre><code>&lt;?php 
+add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+function theme_enqueue_styles() {
+wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+wp_enqueue_style( 'child-style', get_stylesheet_uri(), array( 'parent-style' ) );
+}
+</code></pre>
+
+<p>Once that is done you have a child theme that is equal to the parent one, but now you are really ready to start customizing it.</p>
+
+<p><strong>Change the font of the theme</strong></p>
+
+<p>In this example we have decided to change the default font family of TwentyFifteen theme in order to show how to customize a child theme.</p>
+
+<p>To do that, we are going to edit the /wp-content/themes/twentyfifteen-child/style.css file, and add this lines to it:</p>
+
+<pre><code>@import url(http://fonts.googleapis.com/css?family=Raleway);
+body {
+    font-family: 'Raleway', sans-serif;
+}
+</code></pre>
+
+<p>So the complete new style.css file will look like this:</p>
+
+<pre><code>/*
+    Theme Name:   Twenty Fifteen Child
+    Theme URI:    http://the-url-where-theme/can-be-downloaded
+    Description:  Twenty Fifteen Child Theme
+    Author:       Guillermo Garron
+    Author URI:   http://www.garron.me
+    Template:     twentyfifteen
+    Version:      1.0.0
+    License:      GNU General Public License v2 or later
+    License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+    Tags:         responsive, blog
+    Text Domain:  twenty-fifteen-child
+*/
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+body {
+    font-family: 'Raleway', sans-serif;
+}
+</code></pre>
+
+<p>The added lines will import a new font from Google fonts, Raleway in this case, and the rest of lines tells The browser to use Raleway instead of Noto which is the default for TwentyFifteen theme.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>We have learned how to customize a Wordpress theme in a way we will not lose any change when upgrading the theme. To accomplish that we have taken this steps.</p>
+
+<ul>
+  <li>Create a child theme
+    <ul>
+      <li>In a new theme folder add style.css and functions.php</li>
+      <li>In style.css declare the parent theme</li>
+      <li>In functions.php import the parent theme’s style to the child</li>
+    </ul>
+  </li>
+  <li>Add your style changes to the child’s style.css file</li>
+</ul>
+
+<p>Of course you can do more elaborated changes, and not only change the font of the theme.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/web-design/wordpress-child-theme.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/web-design/wordpress-child-theme.html&text=Wordpress Child Themes&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/web-design/wordpress-child-theme.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/web-design/wordpress-child-theme.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/web-design/wordpress-child-theme.html">linkedin</a> | <a href="mailto:?Subject=Wordpress Child Themes&Body=http://www.garron.me/en/web-design/wordpress-child-theme.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/web-design/wordpress-child-theme.html&title=Wordpress Child Themes" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

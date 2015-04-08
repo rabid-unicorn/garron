@@ -1,0 +1,393 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+
+        <link rel="canonical" href="http://www.garron.me/en/articles/sftp.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="sftp tutorial, ports, server, uses and examples GUI clients for Windows and Mac OS X" />
+
+        <!-- End SEO includes -->
+        <title>sftp</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="sftp">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/articles/index.html">Articles</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">sftp</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h2 id="sftp-tutorial">sftp Tutorial</h2>
+
+<p><strong>Contents</strong></p>
+
+<ol>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#syntax">Syntax</a></li>
+  <li><a href="#examples">Examples</a></li>
+  <li><a href="#windows">Windows</a></li>
+  <li><a href="#macosx">Mac OS X</a></li>
+</ol>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>sftp stands for (Secure File Transfer Protocol) and it is another implementation of file transfer protocol over ssh (Secure Shell) like <a href="/en/articles/scp.html">scp</a> but newer and trying a more platform independent.</p>
+
+<p>sftp is now a days mostly implemented as a replacement for FTP, mainly in web hosting providers, because of its security and because passwords are not passed unencrypted as they are in FTP.</p>
+
+<h3 id="syntax">Syntax</h3>
+
+<p>There are three different ways to invoke <code>sftp</code> program.</p>
+
+<pre><code>sftp [-1Cv] [-B buffer_size] [-b batchfile] [-F ssh_config] [-o ssh_option] [-P sftp_server_path] [-R num_requests] [-S program] [-s subsystem | sftp_server] host
+
+sftp [user@]host[:file ...]
+
+sftp [user@]host[:dir[/]]
+
+sftp -b batchfile [user@]host
+</code></pre>
+
+<p>The first one is very similar to the ftp command, when you use this form, you enter in an interactive mode, you can create folders, navigate in the structure and retrieve and put files from and to the server.</p>
+
+<p>The second way, works almost the same as <code>scp</code> it will ask for the password (unless you are using secret/public key to authenticate) and once you are authenticated the files will be downloaded or uploaded depending on the case.</p>
+
+<p>The third form works almost the same as the first one but it let’s you start in a specific remote folder.</p>
+
+<p>The fourth form let’s you specify a batch file where the commands to be run should be, in that case you need to enable a way to log in with no password, you can use this <a href="/en/bits/ssh-key-keygen-login-no-password.html">guide</a></p>
+
+<h3 id="examples">Examples</h3>
+
+<h4>sftp interactive mode</h4>
+
+<p><strong>Download a file with sftp</strong></p>
+
+<p>If you want to retrieve a file from a sftp server, you can do so by using the interactive mode in the next way. First log into the server.</p>
+
+<pre><code>sftp user@server
+</code></pre>
+
+<p>Once logged in, you can list files with <code>ls</code> command, or navigate in the folders with <code>cd</code> command, just like as if you were using the shell. To retrieve a file, use this command.</p>
+
+<pre><code>get /path/to/remote/file
+</code></pre>
+
+<p><strong>Download multiple files with sftp</strong></p>
+
+<pre><code>mget *.txt
+</code></pre>
+
+<p>Will download all .txt files from current remote folder to current local folder</p>
+
+<pre><code>mget *
+</code></pre>
+
+<p>Will download all files from current remote folder to current local folder</p>
+
+<p><strong>Upload a file with sftp</strong></p>
+
+<p>If you want to put a file into the server, you can use something similar.</p>
+
+<pre><code>put /path/to/local/file
+</code></pre>
+
+<p><strong>Download multiple files at once</strong></p>
+
+<pre><code>mput *.txt
+</code></pre>
+
+<p>Will upload all .txt files</p>
+
+<pre><code>mput *
+</code></pre>
+
+<p>Will upload all files in current local folder to current remote folder.</p>
+
+<p><strong>Navigate in local and remote sides</strong></p>
+
+<p>In the above examples we assume you are located where you want to be, in case you may need to change your local or remote location, that can be done.</p>
+
+<p><strong>List files in remote side</strong></p>
+
+<pre><code>ls
+</code></pre>
+
+<p><strong>List files in local side</strong></p>
+
+<pre><code>lls
+</code></pre>
+
+<p><strong>Change folder in remote side</strong></p>
+
+<pre><code>cd /path/to/remote-folder
+</code></pre>
+
+<p><strong>Change folder in local side</strong></p>
+
+<pre><code>lcd /path/to/local-folder
+</code></pre>
+
+<p><strong>Create folders in remote side</strong></p>
+
+<pre><code>mkdir folder
+</code></pre>
+
+<p><strong>Create folders in local side</strong></p>
+
+<pre><code>lmkdir folder
+</code></pre>
+
+<p><strong>Getting help</strong></p>
+
+<p>You can get the complete set of commands available under interactive mode with the <code>help</code> command, once logged in run:</p>
+
+<pre><code>help
+</code></pre>
+
+<p>You will get this set of commands:</p>
+
+<pre><code>Available commands:
+bye                                Quit sftp
+cd path                            Change remote directory to 'path'
+chgrp grp path                     Change group of file 'path' to 'grp'
+chmod mode path                    Change permissions of file 'path' to 'mode'
+chown own path                     Change owner of file 'path' to 'own'
+df [-hi] [path]                    Display statistics for current directory or
+                                   filesystem containing 'path'
+exit                               Quit sftp
+get [-Ppr] remote [local]          Download file
+help                               Display this help text
+lcd path                           Change local directory to 'path'
+lls [ls-options [path]]            Display local directory listing
+lmkdir path                        Create local directory
+ln [-s] oldpath newpath            Link remote file (-s for symlink)
+lpwd                               Print local working directory
+ls [-1afhlnrSt] [path]             Display remote directory listing
+lumask umask                       Set local umask to 'umask'
+mkdir path                         Create remote directory
+progress                           Toggle display of progress meter
+put [-Ppr] local [remote]          Upload file
+pwd                                Display remote working directory
+quit                               Quit sftp
+rename oldpath newpath             Rename remote file
+rm path                            Delete remote file
+rmdir path                         Remove remote directory
+symlink oldpath newpath            Symlink remote file
+version                            Show SFTP version
+!command                           Execute 'command' in local shell
+!                                  Escape to local shell
+?                                  Synonym for help
+</code></pre>
+
+<h4>sftp non-interactive mode</h4>
+
+<p>You can download files from a single command when using not interactive mode:</p>
+
+<p><strong>Retrieve a single file</strong></p>
+
+<pre><code>sftp user@host:/path/to/file
+</code></pre>
+
+<p><strong>Retrieve multiple files</strong></p>
+
+<pre><code>sftp user@host:/path/to/files/*
+</code></pre>
+
+<p>That will get all files in the remote folder, if you want a specific type of files, narrow the option using wildcards.</p>
+
+<pre><code>sftp user@host:/paht/to/files/*.txt
+</code></pre>
+
+<p>Will get all files with .txt extension.</p>
+
+<p><strong>Download multiple files recursively</strong></p>
+
+<pre><code>sftp -r user@host:/path/to/files/*
+</code></pre>
+
+<p>That command will copy all files from the remote folder and its sub-folders with all its contents.</p>
+
+<h3 id="windows">Windows</h3>
+
+<h4>WinSCP</h4>
+
+<p>When you are working on a Windows machine your best bet to use sftp protocol is <strong>WinSCP</strong> which is a scp, sftp and ftp client for Windows.</p>
+
+<p>WinSCP is a complete SFTP client, and it has lots of features like:</p>
+
+<dl class="dl-horizontal text-overflow">
+<dt>Full Sync</dt>
+<dd>This feature will keep both remote and local folders in sync, so any change you perform in any of the ends of the connection will be updated on the other end. The application should be kept on, and connected to keep this functionality running</dd>
+<dt>Sync Remote</dt>
+<dd><p>This feature will keep only the remote end in sync with the local, so any change made on the local side, will be updated in the remote side. But this will not work in other way. That is any change in remote will not be updated in local.</p>
+<p>You can decide to delete remote files or not at the time of starting the syncronization. If you turn it on, any files deleted on local, will be deleted on remote, but if not, only new added files or changes to existing ones will be updated</p></dd>
+<dt>Drag and Drop</dt>
+<dd><p>You can also use the drag and drop feature to copy files from remote to local or viceversa</p></dd>
+</dl>
+
+<p><img src="/images/2015/01/winscp.png" class="img-responsive" alt="WinSCP screenshot, SFTP for Windows" /></p>
+
+<h4>Cyberduck</h4>
+
+<p>Another open source GUI tool for Windows is Cyberduck, released under the GNU licence, you can perform the same things with Cyberduck that you can with WinSCP, the main difference is that Cyberduck does not have the two panes window, and I must say I prefer the WinSCP two panes window for better browsing on both remote and local sides of the sftp connection.</p>
+
+<p>With Cyberduck you need to open the Windows Explorer to copy files and paste them later on Cyberduck window, or you can drag and drop from one window to the other. Here is how it looks when loggin in:</p>
+
+<p><img src="/images/2015/01/cyberduck-windows.png" class="img-responsive" alt="Cyberduck on Windows loggin in" /></p>
+
+<p>And the main window looks this way.</p>
+
+<p><img src="/images/2015/01/cyberduck-windows-2.png" class="img-responsive" alt="Cyberduck on Windows loggin in" /></p>
+
+<p>You can emulate the view of WinSCP by putting both Windows Explorer and Cyberduck windows side by side in the screen, like this:</p>
+
+<p><img src="/images/2015/01/cyberduck-two-panes.png" class="img-responsive" alt="Cyberduck on Windows two panes" /></p>
+
+<h3 id="macosx">Mac OS X</h3>
+
+<p>Bein Mac OS X an Operating System based on Unix, you have both sftp client and sftp server (which is OpenSSH) already installed out of the box from the command line.</p>
+
+<p>There are of course a lot of GUI clientes available for Mac</p>
+
+<p><strong>Paid Ones</strong></p>
+
+<ul>
+  <li><a href="https://itunes.apple.com/bo/app/forklift-file-manager-ftp/id412448059?l=en&amp;mt=12">ForkLift</a></li>
+  <li><a href="https://itunes.apple.com/bo/app/transmit/id403388562?l=en&amp;mt=12">Transmit</a></li>
+</ul>
+
+<p><strong>Open Source Client</strong></p>
+
+<p>The one I use is <a href="https://cyberduck.io/">CyberDuck</a>, It supports Amazon S3 connection besides SFTP, you can drag and drop to and from the Finder app, you can keep folders in sync between your Mac and the remote OpenSSH server, you can create and delete files and folders.</p>
+
+<p><img src="/images/2015/01/cyberduck.png" class="img-responsive" alt="CyberDuck SFTP GUI client for Mac OS X" /></p>
+
+<p>You can do anything available from the command line, but using a graphic interface, which makes it a lot easier to work with sftp servers.</p>
+
+<hr />
+
+<p><em>Last edit on: January 17, 2015</em></p>
+
+<p><em>By: Guillermo Garron</em></p>
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

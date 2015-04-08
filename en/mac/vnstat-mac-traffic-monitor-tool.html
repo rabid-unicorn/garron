@@ -1,0 +1,245 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Monitor your capped connection to the Internet while working on your Mac" />
+
+        <!-- End SEO includes -->
+        <title>Network Traffic Monitor Tool for Mac</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Network Traffic Monitor Tool for Mac">
+        <meta name="twitter:description" content="Monitor your capped connection to the Internet while working on your Mac">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/mac/index.html">Mac</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Network Traffic Monitor Tool for Mac</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/mac/vnstat-mac-traffic-monitor-tool.html">Network Traffic Monitor Tool for Mac</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2014-06-28 23:05:00 -0400</h6>
+
+<hr>
+<p>If you have a capped connection to the Internet, something like LTE o 3G connection, then you may want to monitor how much bandwidth your Mac is using. There are some tools to help you on this.</p>
+
+<p>The best option for me is <strong>vnstat</strong>, it will let you monitor the monthly used bandwidth by your Mac, then you can add it to what was used by your phone, and know how much your bill is going to be.</p>
+
+<p>Of course this is an estimation, but it is better than nothing.</p>
+
+<p><strong>Install vnstat</strong></p>
+
+<p>To install vnstat, I used <a href="http://brew.sh/">brew</a>.</p>
+
+<pre><code>brew install vnstat
+</code></pre>
+
+<p><strong>How to use it</strong></p>
+
+<p>The first time you run it, it will initialize the database, after that, you just run.</p>
+
+<pre><code>vnstat
+</code></pre>
+
+<p>And it will have and output like this one:</p>
+
+<pre><code> en1:
+       May '14    991.13 MiB  /  243.85 MiB  /    1.21 GiB
+       Jun '14      3.47 GiB  /  308.60 MiB  /    3.77 GiB  /    	4.04 GiB
+     yesterday    206.69 MiB  /   11.44 MiB  /  218.13 MiB
+         today    536.80 MiB  /   33.95 MiB  /  570.75 MiB  /     	587 MiB
+</code></pre>
+
+<p>You can have a daily usage report.</p>
+
+<pre><code>vnstat -d -i en1
+</code></pre>
+
+<p>The <em>-d</em> option tells the command to show the <em>day</em> usage, and <em>-i en1</em> tells it to show that data from the <strong>en1</strong> interface, which is my wifi interface in my Mac. The output will be something like this:</p>
+
+<pre><code> en1  /  daily
+
+         day         rx      |     tx      |    total    |   	avg. rate
+     ------------------------+-------------+-------------+---------------
+      05/24/14      4.67 MiB |    1.14 MiB |    5.80 MiB |    0.55 kbit/s
+      05/25/14    461.26 MiB |   19.67 MiB |  480.93 MiB |   45.60 kbit/s
+      05/26/14     47.67 MiB |    7.03 MiB |   54.70 MiB |    5.19 kbit/s
+      05/27/14    202.47 MiB |   19.53 MiB |  222.00 MiB |   21.05 kbit/s
+      05/28/14     38.70 MiB |  164.02 MiB |  202.71 MiB |   19.22 kbit/s
+      05/29/14    122.98 MiB |   11.75 MiB |  134.73 MiB |   12.77 kbit/s
+      05/30/14     64.29 MiB |   11.86 MiB |   76.14 MiB |    7.22 kbit/s
+      05/31/14     49.10 MiB |    8.85 MiB |   57.96 MiB |    5.49 kbit/s
+      06/01/14     84.87 MiB |   11.63 MiB |   96.50 MiB |    9.15 kbit/s
+      06/02/14     64.61 MiB |    3.34 MiB |   67.95 MiB |    6.44 kbit/s
+      06/06/14     99.24 MiB |   16.25 MiB |  115.49 MiB |   10.95 kbit/s
+      06/07/14     97.61 MiB |   29.81 MiB |  127.42 MiB |   12.08 kbit/s
+      06/08/14    189.66 MiB |   17.25 MiB |  206.91 MiB |   19.62 kbit/s
+      06/09/14     17.85 MiB |    6.21 MiB |   24.07 MiB |    2.28 kbit/s
+      06/11/14     17.63 MiB |    7.67 MiB |   25.30 MiB |    2.40 kbit/s
+      06/13/14     23.33 MiB |    3.25 MiB |   26.58 MiB |    2.52 kbit/s
+      06/14/14    293.95 MiB |   12.74 MiB |  306.69 MiB |   29.08 kbit/s
+      06/15/14    262.32 MiB |   83.59 MiB |  345.91 MiB |   32.80 kbit/s
+      06/16/14     48.44 MiB |    1.34 MiB |   49.78 MiB |    4.72 kbit/s
+      06/17/14         0 KiB |       0 KiB |       0 KiB |    0.00 kbit/s
+      06/19/14     14.34 MiB |    2.16 MiB |   16.50 MiB |    1.56 kbit/s
+      06/20/14      3.29 MiB |     979 KiB |    4.24 MiB |    0.40 kbit/s
+      06/21/14      1.52 GiB |   62.21 MiB |    1.58 GiB |  153.10 kbit/s
+      06/22/14      6.46 MiB |    1.43 MiB |    7.89 MiB |    0.75 kbit/s
+      06/24/14     29.54 MiB |    3.03 MiB |   32.56 MiB |    3.09 kbit/s
+      06/25/14       570 KiB |     361 KiB |     931 KiB |    0.09 kbit/s
+      06/27/14    206.69 MiB |   11.44 MiB |  218.13 MiB |   20.68 kbit/s
+      06/28/14    536.80 MiB |   33.95 MiB |  570.75 MiB |   55.86 kbit/s
+     ------------------------+-------------+-------------+---------------
+     estimated       553 MiB |      34 MiB |     587 MiB |
+</code></pre>
+
+<p>As you can see I don’t use my Mac everyday.</p>
+
+<p>Hope this may help someone having the same needs I had.</p>
+
+<hr>
+<a href="http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html&text=Network Traffic Monitor Tool for Mac&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html">linkedin</a> | <a href="mailto:?Subject=Network Traffic Monitor Tool for Mac&Body=http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html&title=Network Traffic Monitor Tool for Mac" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

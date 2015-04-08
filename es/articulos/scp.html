@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- SEO includes -->
+        
+
+        <link rel="canonical" href="http://www.garron.me/es/articulos/scp.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Guía completa del comand scp para copiar a travez de ssh" />
+
+        <!-- End SEO includes -->    
+        <title>Comando scp</title>
+        <!-- CSS -->
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Vollkorn|Old+Standard+TT|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.journal.min.css" rel="stylesheet">
+        <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet">
+        <!-- Custom Css -->
+        <!-- <style>body {background-color: #FFFFFF;}
+
+body,
+input,
+small,
+button,
+select,
+textarea,
+.navbar-search .search-query {
+  font-family: "Source Sans Pro", "Vollkorn", Georgia, "Times New Roman", Times, serif; font-weight: 300; font-size: 18px; line-height: 26px; color: #404040;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josefin Slab", Georgia, "Times New Roman", Times, serif; font-weight: 400; color: #101010;
+}
+
+.gallery-image-wrapper {
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+  margin: 1em;
+  position: relative;
+  text-align: left;
+}
+.gallery-image {
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#text-center {
+text-align: center
+}
+</style> -->
+        <!-- End custom css -->
+        <!-- End CSS -->
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Comando scp">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+            <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-static-top visible-xs visible-sm">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/es/"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/es/">Inicio</a></li>
+            <li><a href="/es/gnu-linux/">Linux</a></li>
+            <li><a href="/es/mac-os/">Mac</a></li>
+            <li><a href="/es/cortos/">Tips</a></li>
+            <li><a href="/es/articulos/">Artículos</a></li>
+            <li><a href="/es/archivos.html">Archivos</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Personales <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/es/bitacora/">Bitacora</a></li>
+                <li><a href="/es/fotos/">Fotos</a></li>
+                <li><a href="/es/recetas/">Comida</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div class="container">
+    <!-- Nav Bar -->
+    <H1><a href="/es/">Guillermo Garron</a></h1>
+<p>Suscribete: <a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p>
+<ol class="breadcrumb">
+
+	<li><a href="/index.html">Geeking</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/index.html">Tecnología</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/articulos/index.html">Artículos</a>
+	<li class="divider">&gt;</li>
+
+	<li class="active">Comando scp</li>
+</ol>
+
+
+    <!-- Nav Bar -->
+    <div id="content" class="row">
+        <div class="col-md-2 visible-lg visible-md">
+            <h4>Categorias</h4>
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li><h4>Tecnicas</h4></li>
+    <li><a href="/es/gnu-linux/">Linux</a></li>
+    <li><a href="/es/mac-os/">Mac</a></li>
+    <li><a href="/es/cortos/">Tips</a></li>
+    <li><a href="/es/articulos/">Artículos</a></li>
+    <hr>
+    <li><h4>Personales</h4></li>
+    <li><a href="/es/bitacora/">Reflexiones</a></li>
+    <li><a href="/es/fotos/">Fotos</a></li>
+    <li><a href="/es/recetas/">Cocinando</a></li>
+    <hr>
+    <li><a href="/es/archivos.html">Archivos</a></li>
+    <hr>
+    <li><p><a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p></li>
+  </ul>
+</div>
+
+        </div>
+        <div class="col-md-7">
+            <h2 id="comando-scp">Comando scp</h2>
+
+<p><strong>Contenido</strong></p>
+
+<ol>
+  <li><a href="#introduccion">Introducción</a></li>
+  <li><a href="#sintaxis">Sintaxis</a></li>
+  <li><a href="#ejemplos">Ejemplos</a></li>
+  <li><a href="#trucos">Trucos</a></li>
+  <li><a href="#windows">Windows</a></li>
+</ol>
+
+<h3 id="introduccion">Introducción</h3>
+
+<p>scp significa <em>copiado seguro</em> del ingles <em>secure copy</em>, esto quiere decir que se copiara archivos de un ordenador a otro a través de una conexión segura y encriptada.</p>
+
+<p>El comando <code>scp</code> utiliza por defecto el puerto 22, y se conecta mediante un enlace encriptado ssh</p>
+
+<p>Se puede utilizar <code>scp</code> para copiar archivos de un ordenador local a otro remoto, también se puede copiar del remoto al local y también se puede copiar entre dos remotos, mientras estas conectado a un tercer ordenador, y el tráfico no pasará por el ordenador en que estás.</p>
+
+<p>Se puede usar <code>scp</code> en Linux, Mac y Windows.</p>
+
+<h3 id="sintaxis">Sintaxis</h3>
+
+<pre><code>scp [-12346BCEpqrv] [-c cipher] [-F ssh_config] [-i identity_file] [-l limit] [-o ssh_option] [-P port] [-S program] [[user@]host1:]file1 ... [[user@]host2:]file2
+</code></pre>
+
+<p>Explicar la sintáxis completa y cada opción del comando <code>scp</code> esta fuera del alcance de este artículo, pero puedes obtener más ayuda usando el siguiente comando, desde cualquier sistema .nix</p>
+
+<pre><code>man scp
+</code></pre>
+
+<p>O, lo puedes leer en línea <a href="http://linux.die.net/man/1/scp">aquí</a> (en inglés)</p>
+
+<p>Pero vamos, veamos lo básico al menos.</p>
+
+<pre><code>scp [[user@]host1:]file1 ... [[user@]host2:]file2
+</code></pre>
+
+<dl class="dl-horizontal">
+<dt>scp</dt><dd>Es el comando en sí, le indica al sistema operativo que copie uno más archivos por medio de una conexión segura, mejor conocida como conexión ssh</dd>
+<dt>[[user@]host1:]file1</dt><dd>El origen, donde se especifica él archivo o archivos que serán copiados, puede o no contener la información del ordenador remoto, y también puede contener la información del usuario que es dueño del archivo o archivos en el ordenador remoto. Si el usuario no esta especificado, entonces por defecto usará los datos del usuario actual en el ordenador donde estas escribiendo el comando. Y si ningún ordenador remoto es especificado, entonces buscará el archivo localmente</dd>
+<dt>[[user@]host2:]file2</dt><dd>El destino, donde se especifica la vía donde los archivos serán copiados, es decir el destino de los mismos, y de nuevo, puede o no contener la información sobre el ordenador remoto y el usuario en ese ordenador. Al igual que fuera explicado arriba, si el usuario no se especifica pero si el nombre o el IP de un ordenador, en ese caso tratará de obtener acceso a ese ordenador remoto usando las credenciales del usuario actual, y si no se especifica ordenador remoto, se asume que el destino de los archivos es local.</dd>
+</dl>
+
+<p>Solo para dejar todo claro, se puede no especificar ni ordenador ni usuario remotos, tanto en el origen como en el destino, y en este caso el comando <code>scp</code> actuará tal como el comando <code>cp</code> y copiará los archivos localmente.</p>
+
+<h3 id="ejemplos">Ejemplos</h3>
+
+<p><em>*Copiar un archivo local a un destino remoto</em></p>
+
+<pre><code>scp /ruta/al/archivo-origen usuario@ordenador:/ruta/al/directorio-destino/
+</code></pre>
+
+<p>Así que si queremos copiar el archivo <code>/home/user/table.csv</code> a un ordenador remoto llamado <code>ordenador.ejemplo.com</code> y archivo a copiar esta en el directorio de jane, debemos usar un comando así.</p>
+
+<pre><code>scp /home/user/table.csv jane@ordenador.ejemplo.com:/home/jane/
+</code></pre>
+
+<p><strong>Copiar un archivo de un ordenador remoto al ordenador local</strong></p>
+
+<pre><code>scp usuario@ordenador:/ruta/al/archivo-origen /ruta/al/directorio-destino
+</code></pre>
+
+<p>Digamos que se quiere copiar el mismo archivo del directorio de jane en ordenador.ejemplo.com a tu directorio en el ordenador local</p>
+
+<pre><code>scp jane@ordenador.ejemplo.com:/home/jane/table.csv /home/usuario/
+</code></pre>
+
+<p><strong>Copiar un archivo de un ordenador remoto a otro ordenador remoto</strong></p>
+
+<p>Con el comando <code>scp</code> se puede copiar archivos entre dos servidores remotos sin necesidad de establecer una conexion permanente con ninguno de ellos, todo el trabajo pesado será realizado por <code>scp</code></p>
+
+<pre><code>scp user1@server1:/path/to/file user2@server2:/path/to/folder/
+</code></pre>
+
+<p>Así, si queremos copiar un archivo del directorio de jane a otro de pete, siendo que ambos archivos están en servidores a los cuales no estamos conectados.</p>
+
+<pre><code>scp jane@host.example.com:/home/jane/table.csv pete@host2.example.com:/home/pete/
+</code></pre>
+
+<p><strong>Copiar un único archivo de un servidor remoto al mismo servidor remoto, pero en otro directorio</strong></p>
+
+<pre><code>scp jane@host.example.com:/home/jane/table.csv pete@host.example.com:/home/pete/
+</code></pre>
+
+<p>En esta ocación se copiará de un ordenador al mismo ordenador sin establecer una conexión permanente con él, es equivalente a establecer una conexión ssh con el servidor, y luego usar el comando <code>cp</code> para copiar el archivo.</p>
+
+<p><strong>Copiar todos los archivos de un tipo específico</strong></p>
+
+<pre><code>scp /ruta/al/folder/*.ext usuario@servidor:/ruta/al/folder/
+</code></pre>
+
+<p>Este comando copiará todos los archivos con la extensión <em>.ext</em>. Así por ejemplo si queremos copiar todos los archivos de texto <em>.txt</em> a un nuevo folder</p>
+
+<pre><code>scp /home/usuario/*.txt jane@host.example.com:/home/jane/
+</code></pre>
+
+<p>Puedes usar comodines en estos comandos tal cual en otros que admiten su uso.</p>
+
+<p><strong>Copiar todos los archivos de un directorio a un servidor remoto</strong></p>
+
+<pre><code>scp /ruta/al/directorio/* usuario@servidor:/ruta/al/directorio/
+</code></pre>
+
+<p>Esto copiará todos los archivos entro del directorio local al directorio en el servidor remoto. Veamos un ejemplo.</p>
+
+<pre><code>scp /home/user/html/* jane@host.example.com:/home/jane/backup/
+</code></pre>
+
+<p>Todos los archivos .html serán copiados al directorio <em>backup</em> en el servidor <em>host.example.com</em></p>
+
+<p><strong>Copiar todos los archivos de un directorio recursivamente al servidor remoto</strong></p>
+
+<pre><code>scp -r /home/user/html/* jane@host.example.com:/home/jane/backup/
+</code></pre>
+
+<p>Tal como en el ejemplo anterior, pero en esta ocación copiará todos los contenidos recursivamente.</p>
+
+<p><strong>Copiar un directorio y todo su contenido a un directorio en el servidor remoto</strong></p>
+
+<pre><code>scp -r /ruta/al/directorio-origen usuario@servidor:/ruta/al/directorio-destino/
+</code></pre>
+
+<p>En esta ocación el directorio en sí es copiado, incluyendo claro está todo su contenido, y no solo el contenido, como en el caso anterior. Veamos un ejemplo.</p>
+
+<pre><code>scp -r /home/user/html jane@host.example.com:/home/jane/backup/
+</code></pre>
+
+<p>Lo que va a suceder es que el directorio local html, será copiado con su contenido recursivamente al servidor remoto en el directorio <code>/home/jane/backup/</code></p>
+
+<h3 id="trucos">Trucos</h3>
+
+<p>Hemos visto hasta ahora las formas básicas de <code>scp</code>, ahora vamos a ver algunos trucos que nos pueden ayudar en alguna oportunidad.</p>
+
+<p><strong>Incrementa la velocidad</strong></p>
+
+<p><code>scp</code> usa AES-128 para encriptar los datos, esto lo hace bastante seguro, pero también algo lento. Si queremos darle un poco más de velocidad y aún tener velocidad, podemos usar Blowfish o RC4.</p>
+
+<p>Para incrementar la velocidad de <code>scp</code> se puede cambiar el algoritmo de cifrado del AES-128 que usa por defecto a Blowfish</p>
+
+<pre><code>scp -c blowfish user@server:/home/user/file .
+</code></pre>
+
+<p>O usar RC4 que parece ser el más rápido.</p>
+
+<pre><code>scp -c arcfour user@server:/home/user/file .
+</code></pre>
+
+<p>Esta última no es muy segura, y no debe ser utilizada si la seguridad realmente es algo que le importe.</p>
+
+<p><strong>Incrementa la seguridad</strong></p>
+
+<p>Si la seguridad es lo más importante, se puede incrementar a costa de algo de velocidad.</p>
+
+<pre><code>scp -c 3des user@server:/home/user/file .
+</code></pre>
+
+<p><strong>Limita el ancho de banda</strong></p>
+
+<p>Se puede limitar el ancho de banda a ser utilizado por el comando <code>scp</code></p>
+
+<pre><code>scp -l limit username@server:/home/uername/* .
+</code></pre>
+
+<p>El límite esta especificado en Kbits/s, por lo que por ejemplo si se desea limitar a 50 Kbps</p>
+
+<pre><code>scp -l50 user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p><strong>Ahorra datos</strong></p>
+
+<p>Igualmente es posible ahorrar en consumo de datos, esto se consigue comprimiendo los archivos a ser enviados.</p>
+
+<pre><code>scp -C user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p><strong>Definir IPv4 o IPv6</strong></p>
+
+<p>Si se desea forzar el uso de IPv4 o de IPv6 también es posible, veamos estos ejemplos</p>
+
+<pre><code>scp -4 user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p>El ejemplo de arriba usa IPv4 y el de abajo IPv6</p>
+
+<pre><code>scp -6 user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p><strong>Especifica el puerto</strong></p>
+
+<p>En caso que el servidor remoto no este escuchando en el puerto que usa ssh por defecto que es el 22, se puede hacer que <code>scp</code> use otro puerto para establecer la conexión con el ordenador remoto.</p>
+
+<pre><code>scp -P [port] [user]@[server]:[path/to/]file [/path/to/]file
+</code></pre>
+
+<p>Usando la P mayúscula se puede especificar el puerto que <code>scp</code> usará para conectarse, en el ejemplo de abajo podemos ver que se esta indicando a <code>scp</code> a usar el puerto <em>2222</em></p>
+
+<pre><code>scp -P 2222 user@server:/home/jane/file /home/jane/
+</code></pre>
+
+<h3 id="windows">Windows</h3>
+
+<p>En caso de estar trabajando en un ordenador que estuviera usando Windows en lugar de Linux o algún otro derivado de Unix como ser algún BSD, aún puedes disfrutar de <code>scp</code> en varias formas, línea de comandos o herramientas gráficas.</p>
+
+<h4>pscp</h4>
+
+<p><code>pscp</code> es un comando de terminal que funciona en Windows, casi de la misma manera que el comando <code>scp</code> de los sitemas operativos tipo Unix. Lo primero que se debe hacer es bajar el software desde <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">aquí</a>, o usando este link <a href="http://the.earth.li/~sgtatham/putty/latest/x86/pscp.exe">directo</a></p>
+
+<p>Una vez descargado puede ser invocado desde la teminal de comandos de Windows, para hacer eso, ir a menú inicio, luego <em>ejecutar</em> y escribir</p>
+
+<pre><code>cmd
+</code></pre>
+
+<p>Luego precionar ENTER, para Windows 8.x, presionar la tecla Windows y hacer click en la lupa, escribir <code>cmd</code> y presionar ENTER.</p>
+
+<p>Una vez en la linea de comandos, asegurarse de estar en el directorio donde <strong>pscp</strong> fuera descargados, o agregar dicho directorio a la variable PATH, supongamos que esta en el folder Downloads, se debe ejecutar este comando.</p>
+
+<pre><code>SET PATH=C:\Users\Guillermo\Downloads;%PATH%
+</code></pre>
+
+<p>Debe cambiarse el usuario de acuerdo a la configuración particular de cada PC.</p>
+
+<p>Este comando deberá ser ejecutado cada vez que se reinicie el ordenador, o configurarlo de manera permanente, el como hacerlo esta fuera del alcance de este artículo.</p>
+
+<p>Abajo, se pueden ver las opciones del comando.</p>
+
+<pre><code>PuTTY Secure Copy client
+Release 0.63
+Usage: pscp [options] [user@]host:source target
+       pscp [options] source [source...] [user@]host:target
+       pscp [options] -ls [user@]host:filespec
+Options:
+  -V        print version information and exit
+  -pgpfp    print PGP key fingerprints and exit
+  -p        preserve file attributes
+  -q        quiet, don't show statistics
+  -r        copy directories recursively
+  -v        show verbose messages
+  -load sessname  Load settings from saved session
+  -P port   connect to specified port
+  -l user   connect with specified username
+  -pw passw login with specified password
+  -1 -2     force use of particular SSH protocol version
+  -4 -6     force use of IPv4 or IPv6
+  -C        enable compression
+  -i key    private key file for authentication
+  -noagent  disable use of Pageant
+  -agent    enable use of Pageant
+  -batch    disable all interactive prompts
+  -unsafe   allow server-side wildcards (DANGEROUS)
+  -sftp     force use of SFTP protocol
+  -scp      force use of SCP protocol
+</code></pre>
+
+<p><strong>Copiar archivos de Windows a Linux</strong></p>
+
+<p>Se puede utilizar <code>scp</code> para copiar archivos de Windows a Linux</p>
+
+<pre><code>pscp c:\path\to\file user@remote-server:/path/to/remote-folder
+</code></pre>
+
+<p><strong>Copiar archivos de Linux a Windows</strong></p>
+
+<p>Igualmente se puede copiar archivos de Linux (FreeBSD o Max OS X) a Windows.</p>
+
+<pre><code>pscp user@remote-server:/path/to/remote-file c:\path\to\local-folder\
+</code></pre>
+
+<p><strong>Especificar un protocolo</strong></p>
+
+<p>Se puede especificar el protocolo que scp va a utilizar en cada conexión.</p>
+
+<dl class="dl-horizontal text-overflow">
+<dt>-scp</dt>
+<dd>Forzará a pscp a utilizar el protocolo scp</dd>
+<dt>-sftp</dt>
+<dd>Esto forzará a pscp a utilizar el protocolo sftp</dd>
+</dl>
+
+<h4>WinSCP</h4>
+
+<p>WinSCP es la versión gráfica de scp, principalmente utilizada en Windows, su desarrollo comenzo en el 2.000 por <strong>Martin Přikryl</strong> y esta licenciado bajo la licencia GNU, por lo tanto es software libre</p>
+
+<p>WinSCP no es solo un cliente SCP, tambien es un cliente SFTP</p>
+
+<p><strong>Capturas de Pantalla</strong></p>
+
+<p>Abajo hay unas capturas de pantalla</p>
+
+<p><img src="/images/2015/01/winscp.png" class="img-responsive" alt="WinSCP scp para Windows" /></p>
+
+<p><strong>Principales Características</strong></p>
+
+<p>Algunas de sus principales características son:</p>
+
+<dl class="dl-horizontal text-overflow">
+<dt>Sincronismo total</dt>
+<dd>Esta característica mantendrá ambos lados de la conexión en sincronia, por lo que cada cambio realizado en cualquiera de los lados será actualizado en el otro lado. La aplicación debe mantenerse activa, y conectada para mantener esta funcionalidad activa</dd>
+<dt>Sincronismo remoto</dt>
+<dd><p>En este caso se mantiene en sincronia el lado remoto con el local, es decir que cualquier cambio en el lado local se reflejará en el lado remoto, pero no al revés</p>
+<p>Se puede decidir si los archivos del lado remoto serán borrados cuando se borren en el lado local al iniciar la conexión. Si ser activa dicha funcionalidad, cualquier archivo borrado en el lado local será borrado en el remoto, pero si no, solo los archivos agregados en el lado local se crearán en el remoto y los cambios en los archivos existentes se reflejarán en el remoto</p></dd>
+<dt>Arrastrar y Soltar</dt>
+<dd><p>Es posible arrastrar y soltar del lado local al remoto y viceversa, para copiar archivos de uno de los lados al otro</p></dd>
+</dl>
+
+<p>Como se puede ver, se obtiene la misma funcionalidad básica para Windows que los usuarios de Linux o Mac OS X ya disfrutan, y puede que esta sea la forma más fácil de copiar archivos de Windows a Linux y de Linux a Windows.</p>
+
+<hr />
+
+<p><em>Editado por última vez el: 30 de enero de 2015</em></p>
+
+<p><em>Por: Guillermo Garron</em></p>
+
+        </div>
+        <div class="col-md-3">
+            <!-- Esta es la columna derecha que debe estar vacía por ahora -->
+        </div>
+    </div>
+</div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/bootstrap/js/magnific-popup.js"></script>
+        <script src="/bootstrap/js/custom.js"></script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

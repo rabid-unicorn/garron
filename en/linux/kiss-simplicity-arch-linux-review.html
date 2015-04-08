@@ -1,0 +1,378 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/kiss-simplicity-arch-linux-review.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Arch Linux in-deep review" />
+
+        <!-- End SEO includes -->
+        <title>KISS simplicity: Arch Linux</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="KISS simplicity: Arch Linux">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">KISS simplicity: Arch Linux</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/kiss-simplicity-arch-linux-review.html">KISS simplicity: Arch Linux</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-05-21 16:11:50 -0400</h6>
+
+<hr>
+<h4 id="introduction">Introduction</h4>
+
+<p><strong>Arch Linux History</strong>
+Arch Linux saw the light with Arch Linux 0.1 on March 11, 2002 from the hand of Judd Vinet. Vinet’s inspiration came from Slackware and CRUX, but he added <em>Pacman</em> the package manager of Arch Linux. Pacman takes care of package installation, removal and upgrades.</p>
+
+<p>In 2007 <a href="https://bbs.archlinux.org/viewtopic.php?id=38024">Judd leaves leadership of Arch Linux</a> and <a href="http://phraktured.net/about.html">Aaron Griffin</a> continue with the labor.</p>
+
+<p>Over these years the popularity of Arch Linux grew up, and it now is between the 10 most used Linux distributions as you see on <a href="http://distrowatch.com/">Distrowatch</a>. It is also considered by many as one of the <a href="http://lifehacker.com/5904069/five-best-linux-distributions/">five best Linux distributions</a>.</p>
+
+<p><strong>The KISS principle</strong></p>
+
+<p>Arch Linux is driven by the <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS principle</a>, and it is elegantly simple. That is one of the reasons I like it, I really like minimalism philosophy if that can be applied to software, and not only to arts.</p>
+
+<h4 id="installation">Installation</h4>
+
+<p><strong>Introduction</strong></p>
+
+<p>I’m not going to provide screenshots of the installation process, it has been years since I do not do this. I’m going to tell that installation of the base system of Arch Linux is easy, but you will end up with bare bones system. Just the console and the base Linux system, more like a server than a Desktop system.</p>
+
+<p>From that point, you can turn that simple system into anything you may wish. You can install a LAMP, a NAMP, a developer platform, or a Desktop PC, or all of them together. It always with the latest available software, so you will enjoy it.</p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>Installing Arch Linux is not a piece of cake, you should have Linux background to do it, you should feel comfortable at the console, and you should be prepared to tweak some configuration files manually. But once that is done, you will have a fairly stable and lightweight system.</p>
+
+<h4 id="stability">Stability</h4>
+
+<p>Arch Linux is a rolling release distribution. That means that the packages are released to the public almost as soon as they are available, and almost in its vanilla flavor, with very little modifications.</p>
+
+<p>What does the above means?</p>
+
+<p>It means that even if the system is very stable, it can break sometimes after an upgrade. It is very advisable to read forums before performing upgrades, unless you have the time to troubleshoot from time to time.</p>
+
+<p>Does that mean you can’t use Arch Linux for productions systems?</p>
+
+<p>You just have to be careful on upgrades. Besides that, I think Arch Linux is the best option for servers. I am running this and other blogs on it for some years with no problems at all.
+And this blog was not based on static pages all the time. I once had Drupal, Wordpress and Movable Type sites running on the same Arch Linux server, with no big issues.</p>
+
+<p>If you ever run into troubles, you will find a lot of support at the forums.</p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>Arch Linux is not the most stable distribution out there. If that is what your are looking for, pick Debian or Slackware instead of Arch Linux. But for me, it is stable enough to run my sites on it. It is just a matter of being careful with upgrading.</p>
+
+<p><em>Advice on upgrades</em></p>
+
+<p>If you are going to run your important app on an Arch Linux server, I can give you a pair of advices.</p>
+
+<ol>
+  <li>Always keep old package versions in your disk, in case you may need to downgrade.</li>
+  <li>Try to create an image of your system before upgrading if that is possible.  That’s an easy task in VPS environments, like Linode or Cloud Server.</li>
+</ol>
+
+<h4 id="main-characteristics">Main characteristics</h4>
+
+<p><strong>Desktop or Server oriented</strong></p>
+
+<p>Arch Linux as almost all Linux distributions, can be a Desktop or Server system, but unlike most of them it is none of them by default. It is like the net-install of Debian, or an Alternate install of Ubuntu, or even just like Gentoo fresh installation.</p>
+
+<p><strong>Version of packages</strong></p>
+
+<p>As a rolling release distribution, Arch Linux almost always have the latests available version of all packages included. So if you need the latest version of PHP or Nginx or Ruby or Python, them Arch Linux is a good choice.</p>
+
+<p><strong>Philosophy of maintainers</strong></p>
+
+<p>Arch Linux aims to simplify the system, not to simplify users’s life. If that is what you want pick Mint or Ubuntu. But, at least in my opinion at the end of the day, that easiness complicates the system itself, and that leads to the contrary. So, keeping the system simple (remember KISS?) leads at the end of the day to easiness.</p>
+
+<p>Let me rephrase my last paragraph, as it seems a little bit tangled. Even if Arch Linux seems complicated at first, you will find it easier compared to those that are supposed to be easy.</p>
+
+<p><strong>One single configuration file</strong></p>
+
+<p>Almost all general configuration of the system is done in <code>/etc/rc.conf</code> file. This is a great and time saving feature, as you do not need to dig all over the file system to configure basic things.</p>
+
+<h4 id="community">Community</h4>
+
+<p>Arch Linux has a big and helpful community, any problem or bug is discussed, and the solution found very quickly at the forums.</p>
+
+<p>You can find support at:</p>
+
+<ul>
+  <li><a href="https://mailman.archlinux.org/mailman/listinfo/">Arch Linux mailing list</a></li>
+  <li><a href="https://wiki.archlinux.org/index.php/IRC_Channels">Arch Linux IRC channel</a></li>
+  <li><a href="https://bbs.archlinux.org/">Arch Linux forums</a></li>
+</ul>
+
+<p>There is also a some other ways to interact with its community.</p>
+
+<ul>
+  <li><a href="https://planet.archlinux.org/">Arch Linux Planet</a></li>
+  <li><a href="http://archlinux.me/">Blogs by ArchLinux users</a></li>
+</ul>
+
+<p>Until now, I have almost never had the need to ask something at the forums or mailing lists, I usually find the answer to my questions using Google. The answer is usually in the forums. Someone have asked the question before I did. This shows how fast they troubleshoot any issue, and how big the community is. Any question or problem you have, someone else have already had it before, and it has been already solved or answered.</p>
+
+<h4 id="arch-linux-as-server">Arch Linux as Server</h4>
+
+<p>As I said before, I’ve been using Arch Linux as server for some years already. Some things you need to know if you are planning to follow my steps are:</p>
+
+<p><strong>Arch Linux uses BSD-style init scripts</strong></p>
+
+<p>Arch Linux, unlike most popular Linux distributions such as Debian or Gentoo and derivatives, does not use Sys V like init scripts. This is part of the KISS principle and the main differences are:</p>
+
+<p>BSD:</p>
+
+<ul>
+  <li>Startup scripts are generally kept in /etc/rc.d/</li>
+  <li>A small number of files (/etc/rc.sysinit, /etc/rc.local, etc.) control the startup process</li>
+</ul>
+
+<p>Sys V:</p>
+
+<ul>
+  <li>Startup scripts are generally kept in /etc/init.d/</li>
+  <li>There are also a number of /etc/rcX.d/ directories — one for every run-level (i.e. X represents 0 through 6 and S, so, 8 altogether)</li>
+  <li>The contents of each /etc/rcX.d/ directory is a collection of soft-links to scripts in /etc/init.d/</li>
+  <li>Each soft-link in a specific /etc/rcX.d/ directory is named so it will execute in the order of it’s alphabetical relationship to the other soft-links</li>
+</ul>
+
+<p><strong>Custom made binaries</strong></p>
+
+<p>If you need to compile some piece of software with specific options, you can count on <a href="https://wiki.archlinux.org/index.php/Arch_Build_System">ABS</a>. Once the source files are on your disk you can turn on or off options easily in the <code>PKGBUILD</code> file, then just run <code>makepkg -s</code> and then install the file with <code>pacman -U file-version.pkg.tar.xz</code>.</p>
+
+<p>To me this is the simplest method available in any Linux distribution.</p>
+
+<p><strong>Daemons does not start by default</strong></p>
+
+<p>Unlike other major distributions, you need to manually specify which daemon is going o start at boot time of Arch Linux. Let’s say you install Nginx, it will not be added to the list of automatically started daemons by pacman. You need to do it by yourself by adding it to <code>/etc/rc.conf</code>, in the DAEMONS line, usually the last one of the file.</p>
+
+<h4 id="arch-linux-as-desktop">Arch Linux as Desktop</h4>
+
+<p>If you are planning to use Arch Linux as your Desktop operating system, you need to have this into account.</p>
+
+<p><strong>No pre-installed GUI</strong></p>
+
+<p>Arch Linux first installation leaves you with a spartan system. You need to install everything by yourself, there is no default window manager. You can opt for Gnome, KDE as your desktop, or Openbox, Fluxbox as window managers, if you prefer a lightweight desktop. As for myself I’m using Gnome 3, and unlike the majority of users I’m liking it a lot.</p>
+
+<p><strong>Some software is not available in the official repositories</strong></p>
+
+<p>There is a lot of software you may need in a Desktop installation, that is not available in the official repositories. No worries, it is surely available at <a href="http://aur.archlinux.org/">AUR</a>.</p>
+
+<p>To install software from there, you may follow almost the same steps as using the ABS, being the only difference that you need to manually download the PKGBUILD, instead of using ABS command.</p>
+
+<p>You can use a tool like <code>yaourt</code>. I’ve done in the past, but now I prefer to do it manually, no specific reasons for doing that.</p>
+
+<h4 id="rolling-release">Rolling release</h4>
+
+<p>As it has been said above, Arch Linux is a rolling release distribution, and just like anything in life that has advantages and disadvantages. Or some people might point these as advantages and disadvantages. Or some people might point these as advantages and disadvantages attributable to rolling release feature in general. I think these are attributable to the “Living on the edge” philosophy of Arch Linux. So:</p>
+
+<p><strong>Advantages living-on-the-edge</strong></p>
+
+<ul>
+  <li>You can always have the latest versions of any package. This is nice, for example, in case of Firefox, or Thunderbird. While other distribution’s users should wait for the next release cycle, you can have it, by just running <code>pacman -Syu</code> some days after the release of any these packages.</li>
+</ul>
+
+<p><strong>Disadvantages of living-on-the-edge</strong></p>
+
+<ul>
+  <li>Some package upgrades may break dependencies, and some tools may stop working for some days until a new release for the affected tool is released.</li>
+  <li>There may be security issues in running software not enough tested.</li>
+</ul>
+
+<p>So, a rolling release itself has one big advantage, upgrades to the system are a lot smoother than on a discrete-style release distribution. <a href="http://cut.debian.net/">Debian CUT</a> or <a href="http://www.linuxmint.com/download_lmde.php">Mint LMDE</a> are intends to have Debian rolling releases.</p>
+
+<h4 id="conclusion">Conclusion</h4>
+
+<p>As this kind of articles usually have a conclusion, I’ll add this section here.</p>
+
+<p>Arch Linux is a great distribution, not for the beginner, one that is not in the most easiest, maybe not know as being user friendly. But, it is one that traps users as soon as the feel like trying it. When you have used Ubuntu, Debian, Fedora or Mint, and then you test Arch, you will find it hard to leave it. Its simplicity makes it the most user friendly Linux Distribution, once you are a user with some Linux experience.</p>
+
+<p>My advice is: As soon as you can, as soon as you feel comfortable with Linux, test Arch Linux, you will never look back.</p>
+
+<p>Hey I’ve just realized that these looks like the same words of my last review of this distribution almost two years ago. At that time I wrote:</p>
+
+<blockquote>
+  <p>If after reading this, you want to try Arch Linux, it is a great idea, but it might not be as good as you think if you are beginning with Linux, if you are a newbie, start with Linux Mint, Ubuntu, or Fedora.</p>
+</blockquote>
+
+<blockquote>
+  <p>Once you know more about Linux, switch to Arch Linux, you will never miss any other distribution. Arch Linux gives you almost the same control you may find in Gentoo, but it is a lot easier to run.</p>
+</blockquote>
+
+<blockquote>
+  <p>The more user friendly distributions, make a lot of things for you, but then, maybe that is not what you need. I mean not always the same configuration is good for everybody, you need to tweak your configuration to fit your needs, and your likes.</p>
+</blockquote>
+
+<blockquote>
+  <p>My advice is, as soon as you can, install Arch Linux in a virtual machine, start playing with it, and sooner than you might think you will be using it as you default Linux distribution.</p>
+</blockquote>
+
+<p>Updated on 05-23-2012</p>
+
+<h4 id="contributions">Contributions</h4>
+
+<p>A friend from <a href="http://forums.scotsnewsletter.com">scotsnewsletter’s forum</a> contributed with this:</p>
+
+<p><a href="http://forums.scotsnewsletter.com/index.php?showtopic=27596&amp;st=0#entry275813">Installing and setting up Archlinux</a></p>
+
+<p>Thanks <a href="http://www.comhack.com/wordpress/">Securybreach</a></p>
+
+<p><a href="https://plus.google.com/115745027821234071812/posts/KnrdZXBuDa5">You can comment this on Google+</a></p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/kiss-simplicity-arch-linux-review.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/kiss-simplicity-arch-linux-review.html&text=KISS simplicity: Arch Linux&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/kiss-simplicity-arch-linux-review.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/kiss-simplicity-arch-linux-review.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/kiss-simplicity-arch-linux-review.html">linkedin</a> | <a href="mailto:?Subject=KISS simplicity: Arch Linux&Body=http://www.garron.me/en/linux/kiss-simplicity-arch-linux-review.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/kiss-simplicity-arch-linux-review.html&title=KISS simplicity: Arch Linux" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

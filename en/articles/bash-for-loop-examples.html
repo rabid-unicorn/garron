@@ -1,0 +1,371 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+
+        <link rel="canonical" href="http://www.garron.me/en/articles/bash-for-loop-examples.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Explaining For Loop command in Bash, with examples, valid for Unix, Linux, Mac OS X and other similar" />
+
+        <!-- End SEO includes -->
+        <title>Bash for loop</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Bash for loop">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/articles/index.html">Articles</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Bash for loop</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h2 id="definitions">Definitions</h2>
+
+<p>Loops are very important when programming, that is the way you can take full advantage of the speed of computers to solve different problems.</p>
+
+<p>Computers are great at doing repetitive task, and they are fast too.</p>
+
+<p>I can still remember when being a child I started coding with Basic (Yes the old Basic), and Do…While, Do…Until and For were some of the most important lessons learned, together with IF statement.</p>
+
+<p>Now, that I use Linux and Mac OSX a lot, I take full advantage of For…Loop. Specially when working with a lot of files at a time.</p>
+
+<p>In computer science we have two main loops: For Loop and While Loop. Just to clarify things, lets look at Wikipedia’s definition for each of them:</p>
+
+<p>For Loop:</p>
+
+<blockquote>
+  <p>In computer science a for loop is a programming language statement which allows code to be repeatedly executed. A for loop is classified as an iteration statement.
+Unlike many other kinds of loops, such as the while loop, the for loop is often distinguished by an explicit loop counter or loop variable. This allows the body of the for loop (the code that is being repeatedly executed) to know about the sequencing of each iteration. For loops are also typically used when the number of iterations is known before entering the loop. For loops are the shorthand way to make loops when the number of iterations is known, as a for loop can be written as a while loop.
+The name for loop comes from the English word for, which is used as the keyword in most programming languages to introduce a for loop. The loop body is executed “for” the given values of the loop variable, though this is more explicit in the ALGOL version of the statement, in which a list of possible values and/or increments can be specified.</p>
+</blockquote>
+
+<p>While Loop:</p>
+
+<blockquote>
+  <p>In most computer programming languages, a while loop is a control flow statement that allows code to be executed repeatedly based on a given boolean condition. The while loop can be thought of as a repeating if statement.</p>
+</blockquote>
+
+<p>With that understood, lets start with <em>Bash for loop</em> article.</p>
+
+<h2 id="how-to-use-bash-for-loop">How to use bash for loop</h2>
+
+<p>When working with <em>Bash</em> we have two ways to implement For loops</p>
+
+<ol>
+  <li>Is instructing For to act and a predefined list of elements, with the <code>for … in</code> statement.</li>
+  <li>Is using C syntax <code>for (( exp1, exp2, exp3 ))</code></li>
+</ol>
+
+<p>Watch these simple examples of each way.</p>
+
+<p><em>Using <code>for ... in</code> statement</em></p>
+
+<pre><code>for i in 1 2 3 4
+	do
+		echo "Number $i"
+	done
+</code></pre>
+
+<p><em>Using <code>for ((exp1, exp2, exp3))</code> statement</em></p>
+
+<pre><code>for (( i=1; i&lt;=4; i++))
+	do
+		echo "Number $i"
+	done
+</code></pre>
+
+<p>The result will be the same in both cases, this is the output.</p>
+
+<pre><code>Number 1
+Number 2
+Number 3
+Number 4
+</code></pre>
+
+<h2 id="examples">Examples</h2>
+
+<p><strong>Counting:</strong></p>
+
+<pre><code>#!/bin/bash
+for i in {1..25}
+do
+    echo $i
+done
+</code></pre>
+
+<p>or:</p>
+
+<pre><code>#!/bin/bash
+for ((i=1;i&lt;=25;i+=1)
+do
+    echo $i
+done
+</code></pre>
+
+<p><strong>Counting on “n” steps</strong></p>
+
+<pre><code>#!/bin/bash
+for i in {0..25..5}
+do
+    echo $i
+done
+</code></pre>
+
+<p>That will count with 5 to 5 steps.</p>
+
+<p><strong>Counting backwards</strong></p>
+
+<pre><code>#!/bin/bash
+for i {25..0..-5}
+do
+    echo $i
+done
+</code></pre>
+
+<p><strong>Acting on files</strong></p>
+
+<p>One of the best uses for loop have in Bash is when you are working on files.</p>
+
+<pre><code>for file in ~/*.md
+do
+	echo $file
+done
+</code></pre>
+
+<p>That example will just list all files with “md” extension. It is the same as <code>ls *.md</code></p>
+
+<p>Now a nice and useful example. Calculate prime numbers</p>
+
+<pre><code>read -p "How many prime numbers ?: " num
+
+c=0
+k=0
+n=2
+
+echo 1
+numero=$[$num-1]
+
+while [ $k -ne $num ]; do
+     for i in `seq 1 $n`;do
+        r=$[$n%$i]
+                if [ $r -eq 0 ]; then
+                        c=$[$c+1]
+                fi
+     done
+
+      if [ $c -eq 2 ]; then
+              echo "$i"
+              k=$[$k+1]
+        fi
+        n=$[$n+1]
+        c=0
+done
+</code></pre>
+
+<p>It will ask you how many prime numbers you want, and then will look for those prime numbers. It is using a For Loop, to divide a number between all numbers and find if it is only divisible between 1 and itself.</p>
+
+<h2 id="break-and-continue-for-loop">Break and continue for loop:</h2>
+
+<p>Sometimes you may want to break the loop before it actually finish executing, for example, you are looking for a condition to be met, you can check the status of a variable for that condition. Once the contidition is met, you can break the loop. Here is how.</p>
+
+<pre><code>for i in [series]
+do
+        command 1
+        command 2
+        command 3
+        if (condition) # Condition to break the loop
+        then
+                command 4 # Command if the loop needs to be broken
+                break
+    fi
+        command 5 # Command to run if the "condition" is never true 
+done
+</code></pre>
+
+<p>With the use of <code>if ... then</code> you can insert a condition, and when it is true, the loop will be broken with the <code>break</code> statement.</p>
+
+<p>Continue the loop:</p>
+
+<pre><code>for i in [series]
+do
+    command 1
+    command 2
+    if (condition) # Condition to jump over command 3
+            continue # skip to the next value in "series"
+    fi
+    command 3
+done
+</code></pre>
+
+<p>As you can see they are similar. But with <code>break</code> you will completely stop the loop, and with <code>continue</code> you will stop the execution of the commands in the loop and jump to the next value in the series.</p>
+
+<h2 id="one-liners-bash-for-loop">One liners bash for loop</h2>
+
+<p>When using bash, the for loops are not always inserted in scripts, so you may find yourself using them directly in the command line. For this situations you need to use one liners.</p>
+
+<p><strong>Using one liners for loop with counters</strong></p>
+
+<p>When you are counting the times a command will be repeated (not very used in command line actually) you have one these syntax options.</p>
+
+<pre><code>for i in {n..m}; do [some command]; done
+</code></pre>
+
+<p>Where n is the lower number and m the higher one, so if you want to say Hello 3 times.</p>
+
+<pre><code>for i in {1..3}; do echo 'hello'; done
+</code></pre>
+
+<p>The other option is:</p>
+
+<pre><code>for ((i=n;i&lt;=m;i++)); do [command]; done
+</code></pre>
+
+<p>Once again n is the lower number and m the higher, i++ is a counter, that is incrementing one by one. To do the same example as above.</p>
+
+<pre><code>for((i=1;i&lt;=3;i++)); do echo "hello"; done
+</code></pre>
+
+<p>In the parenthesis you have three parts, the first one is setting the initial value i=1, the second is comparing a condition, i&lt;=3, and the last one is the counter i++.</p>
+
+<p>You can do some pretty interesting things with this.</p>
+
+<pre><code>for((i=0;i&lt;=30;i+=2)); do echo "$i is even"; done
+</code></pre>
+
+<p>It will count the even numbers up to 30.</p>
+
+<p>But the real reason to work with bash for loop in command line, and using one liners is to work with files.</p>
+
+<p>Let’s say you want to copy backup all pdf files.</p>
+
+<pre><code>for i in *.pdf; do cp $i /backup/; done
+</code></pre>
+
+<p>Add a extension .bak to all .txt files.</p>
+
+<pre><code>for i in *.txt; do mv $i `basename $i sh`.bak; done
+</code></pre>
+
+<p><em>Last updated on: June 18th, 2013</em></p>
+
+<p><em>By: Guillermo Garron</em></p>
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

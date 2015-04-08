@@ -1,0 +1,617 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+
+        <link rel="canonical" href="http://www.garron.me/en/articles/git-101-basics-introduction-basic-use-commands.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Git 101, basic commands for git, working with remote repositories, cloning, working with branches, merging and committing" />
+
+        <!-- End SEO includes -->
+        <title>Git indroduction, the basic commands and workflow</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Git indroduction, the basic commands and workflow">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/articles/index.html">Articles</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Git indroduction, the basic commands and workflow</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <p><strong>Introduction</strong></p>
+
+<p>I am preparing this document as a guide for a group of people I will be working with. We will be developing some web application and we decided to manage our job with Git. Some of the people in the group are new to git. So this article is intended to be a guide for them.</p>
+
+<p><strong>What is git</strong></p>
+
+<p>In short: Git is a version control utility, it keeps track of the changes you made to documents, so you can review those changes, and go back to any stage you want at any time. In other words is like a time machine for your project.</p>
+
+<p>Git is actually a lot more than that, and it is very powerful, but for the sake of simplicity we will leave the definition there for now.</p>
+
+<p><strong>First steps</strong></p>
+
+<p>You can start with git mainly in two possible ways.</p>
+
+<p><em>You are starting the project</em></p>
+
+<p>When you are the one starting the project, the first thing you need to do is initialize the git repository.</p>
+
+<p>Let’s create the folder where we will be working.</p>
+
+<pre><code>mkdir ~/my-project
+cd ~/my-project
+</code></pre>
+
+<p>Now we need to start git.</p>
+
+<pre><code>git init
+</code></pre>
+
+<p>That will create a new folder <em>~/my-project/.git</em> this folder, contains all the info git needs to keep track of your changes. You never have to edit or change anything in this folder by hand, and if you delete it, you will lose your project history.</p>
+
+<p>Now you have your git project started, you need to start your work.</p>
+
+<p>Let’s say you create two documents inside:</p>
+
+<pre><code>emacs main-app.c
+emacs sub-routines.c
+</code></pre>
+
+<p>Once you are done with that, you have add the information to git.</p>
+
+<p>If you now check the status of the project, you will see that there are files not tracked by git. Let’s do it:</p>
+
+<pre><code>git status
+</code></pre>
+
+<p>You will get this:</p>
+
+<pre><code># On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
+#
+main-app.c
+sub-routines.c
+nothing added to commit but untracked files present (use "git add" to track)##
+</code></pre>
+
+<p>What git is saying is that there are two documents which are new in the folder it is monitoring, but none of them have been explicitly added for tracking. So we need to add them.</p>
+
+<pre><code>git add main-app.c
+git add sub-routines.c
+</code></pre>
+
+<p>Now they are added, if there too much files and you want to add all of them with one step.</p>
+
+<pre><code>git add -A
+</code></pre>
+
+<p>Let’s check the status again:</p>
+
+<pre><code>git status
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code># On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached &lt;file&gt;..." to unstage)
+#
+new file:   main-app.c
+new file:   sub-routines.c
+###
+</code></pre>
+
+<p>Now the files are added but not yet committed, you now have the chance to un-track or un-stage a file. If you want to, you can use <code>git rm [somefile]</code>. We do not like, so, let’s go with our first commit.</p>
+
+<pre><code>git commit -m 'My first commit. I am adding here main-app.c which is the main code of the app, and it will call some sub routines from the sub-routin.c file. This last file is still emply'
+</code></pre>
+
+<p>We now have the files committed, if we check the status once again, we will see this:</p>
+
+<pre><code>git status
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code># On branch master
+nothing to commit (working directory clean)
+</code></pre>
+
+<p><em>The project already exists somewhere, you are cloning it</em></p>
+
+<p>What is great about git, is that there is no central authority, you clone a project and you can work with it on your PC, with no need to be connected to the cloned repository, unless you want to share your changes.</p>
+
+<p>Let’s clone a project.</p>
+
+<pre><code>cd ~/
+git clone git://server.com/my-project.git
+</code></pre>
+
+<p>You can also clone from your own disk, or a network disk: <code>git clone /shared/network/project.git</code></p>
+
+<p>Now that you have the project you can work on it, and submit your changes to the “central” repository.</p>
+
+<pre><code>vim README.txt
+</code></pre>
+
+<p>You have added a readme file, let’s check the status:</p>
+
+<pre><code>git status
+</code></pre>
+
+<p>You will see this:</p>
+
+<pre><code># On branch master
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
+#
+README.txt
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre>
+
+<p>We now need to add the file we just created. We will proceed from here as above.</p>
+
+<pre><code>git add README.txt
+git commit -m 'added a README file with description of the app, and instruction for installation'
+</code></pre>
+
+<p>That is it. You have started with git.</p>
+
+<p><strong>Summary</strong></p>
+
+<p>You now know how to:</p>
+
+<ul>
+  <li>Create a git repository</li>
+  <li>Add untracked files to the project</li>
+  <li>Commit changes</li>
+  <li>Clone repositories and work on them</li>
+</ul>
+
+<p><strong>Working with remote repositories</strong></p>
+
+<p>In the section above, I have created a git repository at <em>~/my-project/</em>, and then I have cloned it in this other path <em>~/second-project/</em>, so the second working folder is: <em>~/second-project/my-project</em>.</p>
+
+<p>So, we will call the first one <strong>origin</strong> as that is the way git name the cloned repository by default. Let’s go to first one.</p>
+
+<pre><code>cd ~/my-project/
+</code></pre>
+
+<p>And check the logs:</p>
+
+<pre><code>git log
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code>commit a6787b87ee36050f58014caa916bf85801771d34
+Author: Guillermo Garron - Mac- &lt;ggarron@localhost&gt;
+Date:   Mon May 13 15:28:37 2013 -0400
+
+    My first commit. I am adding here main-app.c which is the main code of the app, and it will call some sub routines from the sub-routine.c file. This last file is still empty
+</code></pre>
+
+<p>If we now go to the second folder.</p>
+
+<pre><code>cd ../second-project/my-project/
+</code></pre>
+
+<p>And check the log:</p>
+
+<pre><code>git log
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code>commit b355a28868f5ac19b6ee949e110d0575dd5ed2dc
+Author: Guillermo Garron - Mac- &lt;ggarron@localhost&gt;
+Date:   Mon May 13 15:45:07 2013 -0400
+
+    added a README file with description of the app, and instruction for installation
+
+commit a6787b87ee36050f58014caa916bf85801771d34
+Author: Guillermo Garron - Mac- &lt;ggarron@localhost&gt;
+Date:   Mon May 13 15:28:37 2013 -0400
+
+    My first commit. I am adding here main-app.c which is the main code of the app, and it will call some sub routines from the sub-routine.c file. This last file is still empty
+</code></pre>
+
+<p>As you can see the second is ahead by one commit. If we want to share the changes introduced in the second one, we can push them. But first take a look at bare repositories:</p>
+
+<p><em>Bare repositories</em></p>
+
+<p>In order to share the work, this two virtual workers, one working on <em>~/my-project/</em> and the other on <em>~/second-project/my-project/</em> need a bare repository. A bare repository one without a working tree, that is it is composed only by the .git folder.</p>
+
+<p>In the two repositories we have, there is a .git folder inside the working folders, the bare repository will only be the .git folder with no working folder. Let’s create that bare repository.</p>
+
+<pre><code>mkdir -p ~/tmp/my-project.git
+cd ~/tmp/my-project.git
+git init --bare
+</code></pre>
+
+<p>We now have a bare repository. Now let’s go to the second project we have.</p>
+
+<pre><code>cd ~/second-project/my-project/
+git remote rm origin
+git remote add origin ~/tmp/my-project.git
+</code></pre>
+
+<p>We had to remove the origin before in order to add a new origin, it had an origin because it was cloned, basically you may have leave that there, and just add a new remote, but I prefer to name the “central” repository origin. Let’s check the remote now:</p>
+
+<pre><code>git remote -v
+</code></pre>
+
+<p>The output will be something like this:</p>
+
+<pre><code>/Users/ggarron/tmp/my-project.git (fetch)
+/Users/ggarron/tmp/my-project.git (push)originorigin
+</code></pre>
+
+<p>We can now push our changes there:</p>
+
+<pre><code>git push origin master
+</code></pre>
+
+<p>Here is the output:</p>
+
+<pre><code>Counting objects: 7, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (7/7), 739 bytes, done.
+Total 7 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (7/7), done.
+To /Users/ggarron/tmp/my-project.git
+ * [new branch]      master -&gt; master
+</code></pre>
+
+<p>Let’s say now our first virtual developer wants to get our changes in his folder.</p>
+
+<pre><code>cd ~/my-project/
+</code></pre>
+
+<p>We need to add the origin here in order to pull the changes.</p>
+
+<pre><code>git remote add origin ~/tmp/my-project.git
+</code></pre>
+
+<p>There was no need to remove anything here, because this was not a cloned repo, it has no origin defined.</p>
+
+<p>Let’s now pull changes.</p>
+
+<pre><code>git pull origin master
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code> From /Users/ggarron/tmp/my-project
+  * branch            master     -&gt; FETCH_HEAD
+  Updating a6787b8..b355a28
+  Fast-forward
+   README.txt |    2 ++
+   1 file changed, 2 insertions(+)
+   create mode 100644 README.txt
+</code></pre>
+
+<p>As you can see, the file README.txt has been created with 2 insertions (was a small file). Now both folders are in sync with the “central” repository.</p>
+
+<p><strong>Summary</strong></p>
+
+<p>We now know how to:</p>
+
+<ul>
+  <li>Create bare repositories</li>
+  <li>Remove and add remotes</li>
+  <li>Push commited changes to the remote repo</li>
+  <li>Pull contents from a remote repo</li>
+</ul>
+
+<p><strong>Working with branches</strong></p>
+
+<p>One of the most powerful features of Git is working with branches. A branch is like a second set of folders to work at, that way you do not mess with the actual project. Is something like when you work with a configuration file, let’s say http.conf. You want to do some changes, but if something goes wrong you want to be able to go back quickly. You usually create a copy of the file <code>cp http.conf http.conf.original</code> and now your are backed up. Git uses branches for that, so to say.</p>
+
+<p>By default you are working on branch <em>master</em>, and you can create as many branches as you want to test locally before messing with the master branch.</p>
+
+<p>In our example, let’s suppose the first developer (Chief) creates a branch named <em>testing</em> and share it with the other developer via the “central” repo.</p>
+
+<pre><code>cd ~/my-project/
+git checkout -b testing
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code>Switched to a new branch 'testing'
+</code></pre>
+
+<p>So git, created the new branch and switched to it. Let’s now test a new sub-routing in our app.</p>
+
+<pre><code>vim sub-routines.c
+</code></pre>
+
+<p>After he made some changes</p>
+
+<pre><code>git status
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code># On branch testing
+# Changes not staged for commit:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+modified:   sub-routines.c
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+
+<p>Now, let’s add and commit those changes.</p>
+
+<pre><code>git add -A
+git commit -m 'changes in main sub-routine, just for testing purposes. Debugging is hardly recommended before send it to production'
+</code></pre>
+
+<p>Now we can see the state of both branches.</p>
+
+<pre><code>git branch -v
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code>  master  b355a28 added a README file with description of the app, and instruction for installation
+  * testing bf211b2 changes in main sub-routine, just for testing purposes. Debugging is hardly recommended before send it to production
+</code></pre>
+
+<p>As you can see, we are working on <em>testing</em> see the asterisk, and you can also see, that testing is ahead. Now the chief, wants to share his change with the other developer for him to debug.</p>
+
+<pre><code>git push origin testing
+</code></pre>
+
+<p>Here we are pushing the branch testing to origin (which is our central repository). The output you will see is:</p>
+
+<pre><code>Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 429 bytes, done.
+Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /Users/ggarron/tmp/my-project.git
+ * [new branch]      testing -&gt; testing
+</code></pre>
+
+<p>Now the second developer will pull those changes and work with them:</p>
+
+<pre><code>cd ~/second-project/my-project/
+git checkout -b testing
+git pull origin testing
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code> From /Users/ggarron/tmp/my-project
+  * branch            testing    -&gt; FETCH_HEAD
+ Updating b355a28..bf211b2
+ Fast-forward
+  sub-routines.c |    8 ++++++++
+  1 file changed, 8 insertions(+)
+</code></pre>
+
+<p>Let’s check the status:</p>
+
+<pre><code>git branch -v
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code>  master  b355a28 added a README file with description of the app, and instruction for installation
+  * testing bf211b2 changes in main sub-routine, just for testing purposes. Debugging is hardly recommended before send it to production
+</code></pre>
+
+<p>The second developer can now work on the changes.</p>
+
+<pre><code>emacs sub-routines.c
+git add sub-routines.c
+git commit -m 'all tested, and corrected, ready for production'
+git push origin testing
+</code></pre>
+
+<p>On the other side, the chief of developers will grab his copy and do the final tests, and then merge it with the master (production) branch.</p>
+
+<pre><code>cd ~/my-project/
+git checkout testing
+bit pull origin testing
+</code></pre>
+
+<p>After all test are done, it is time to merge.</p>
+
+<p><em>Merging branches on Git</em></p>
+
+<p>The chief of developers will now merge the testing branch into the master one.</p>
+
+<p>Let’s see the status of branches:</p>
+
+<pre><code>git branch -v
+</code></pre>
+
+<p>The output shows:</p>
+
+<pre><code>master  b355a28 added a README file with description of the app, and instruction for installation
+* testing 0b38a32 all tested, and corrected, ready for production
+</code></pre>
+
+<p>Master is way behind testing. Switch to master</p>
+
+<pre><code>git checkout master
+</code></pre>
+
+<p>And merge both of them</p>
+
+<pre><code>git merge testing
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code>Updating b355a28..0b38a32
+Fast-forward
+ sub-routines.c |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+</code></pre>
+
+<p><em>Extra notes</em></p>
+
+<p>You can create as many branches as you want on your local PC, and work and test with them, you do not have to share all or any of them.</p>
+
+<p>To delete a branch from origin the command is:</p>
+
+<pre><code>git push origin :testing
+</code></pre>
+
+<p><em>testing</em> is just in our case, you have to use there the name of the branch you intend to delete. Consider that other may be working on it before deleting it.</p>
+
+<p><em>Summary</em></p>
+
+<p>Now you know how to:</p>
+
+<ul>
+  <li>Create branches</li>
+  <li>Switch between branches</li>
+  <li>Push and pull branches</li>
+  <li>Merge branches</li>
+</ul>
+
+<p><strong>Conclusion</strong></p>
+
+<p>Git is a lot more than just this, but this commands should be enough for simple projects, and for projects with few people working on them.</p>
+
+<p>If you have any comment or question, please feel free to <a href="http://www.garron.me/en/contact.html">contact me</a></p>
+
+<ul>
+  <li>Last edited on May 13, 2013</li>
+</ul>
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

@@ -1,0 +1,421 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/optimize-vps-drupal-varnish.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to optimize VPS for Drupal hosting" />
+
+        <!-- End SEO includes -->
+        <title>Optimize VPS server for Drupal Hosting | Using Varnish</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Optimize VPS server for Drupal Hosting | Using Varnish">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Optimize VPS server for Drupal Hosting | Using Varnish</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/optimize-vps-drupal-varnish.html">Optimize VPS server for Drupal Hosting | Using Varnish</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-04-08 14:26:00 -0400</h6>
+
+<hr>
+<h3 id="introduction">Introduction</h3>
+
+<p>In the past, and for some years I’ve run my blog with the help of Drupal, in that time and in the first months, I’ve got Slashdoted, and Dugg three times, all three times my server went down.</p>
+
+<p>Since Then I’ve become obsessed with tweaking my server configuration to support the load of Slashdot, Digg and the like.</p>
+
+<p>I’m not running my blog over Drupal anymore, but I still like Drupal a lot, and this weekend I’ve been playing with Drupal 7 and Varnish, to see how it performs, under heavy load.</p>
+
+<p>I was trying to figure out a way to optimize the Drupal configuration without having to tweak too much into the Drupal or server configuration, and without the need to add too many “performance” modules.</p>
+
+<h3 id="the-environment">The environment</h3>
+
+<p>Here is my configuration details:</p>
+
+<ul>
+  <li>Arch Linux 2011.10</li>
+  <li>RackSpace VPS</li>
+  <li>256 RAM</li>
+  <li>Apache/PHP/MySQL/Varnish</li>
+</ul>
+
+<h3 id="configuration">Configuration</h3>
+
+<p><strong>Drupal</strong></p>
+
+<p>I’m using the basic Drupal 7 installation, with core cache turned ON.</p>
+
+<p><strong>LAMP</strong></p>
+
+<p>LAMP is the standard available in Arch Linux by the time of this writing, and no special configuration to any of the components. Except that Apache is listening to port 8080 instead of port 80. So it can server pages internally to Varnish.</p>
+
+<p><strong>Varnish</strong></p>
+
+<p>From Wikipedia:</p>
+
+<blockquote>
+  <p>Varnish is an HTTP accelerator designed for content-heavy dynamic web sites. In contrast to other HTTP accelerators, such as Squid, which began life as a client-side cache, or Apache and nginx, which are primarily origin servers, Varnish was designed from the ground up as an HTTP accelerator. Varnish is focused exclusively on HTTP, unlike other proxy servers that often support FTP, SMTP and other network protocols</p>
+</blockquote>
+
+<p>Varnish is going to support the load, but once again the configuration is pretty basic:</p>
+
+<p><em>/etc/conf.d/varnish</em> listing:</p>
+
+<pre><code>VARNISHD_OPTS="-a 0.0.0.0:80 \
+           -b localhost:8080 \
+           -T localhost:6082 \
+           -s malloc,64M \
+       	   -s file,/var/cache/$INSTANCE/varnish_storage.bin,1G \
+           -u nobody -g nobody"
+
+VARNISH_CFG="/etc/varnish/default.vcl"
+</code></pre>
+
+<p><em>/etc/varnish/default.vcl</em> listing:</p>
+
+<pre><code>backend default {
+.host = "127.0.0.1";
+.port = "8080";
+}
+
+
+sub vcl_recv {
+  // Remove has_js and Google Analytics __* cookies.
+  set req.http.Cookie = regsuball(req.http.Cookie, "(^|;\s*)(__[a-z]+|	has_js)=[^;]*", "");
+  // Remove a ";" prefix, if present.
+  set req.http.Cookie = regsub(req.http.Cookie, "^;\s*", "");
+  // Remove empty cookies.
+  if (req.http.Cookie ~ "^\s*$") {
+    unset req.http.Cookie;
+  }
+
+  // Cache all requests by default, overriding the
+  // standard Varnish behavior.
+  // if (req.request == "GET" || req.request == "HEAD") {
+  //   return (lookup);
+  // }
+}
+
+sub vcl_hash {
+  if (req.http.Cookie) {
+    set req.hash += req.http.Cookie;
+  }
+}
+</code></pre>
+
+<h3 id="testing">Testing</h3>
+
+<p>I’ve used <code>ab</code> tool to test, as this is a test to prove the Drupal site will be able to manage a spike in traffic from Digg or John Grubber, then <code>ab</code> is OK. If you plan to have thousands of pages and ten thousands pages views per hour, distributed all across the content, this may not be for you, but if only one or a few pages are popular at a time, this is the right place to be.</p>
+
+<p>This is the command:</p>
+
+<pre><code>ab -n 10000 -c 100 http://10.179.138.178/drupal/?q=node/2
+</code></pre>
+
+<p>Where:</p>
+
+<p>-n: Number of requests
+-c: Number of concurrent sessions</p>
+
+<p>The results:</p>
+
+<pre><code>Server Software:        Apache/2.2.22
+Server Hostname:        10.179.138.x
+Server Port:            80
+
+Document Path:          /drupal/?q=node/2
+Document Length:        8866 bytes
+
+Concurrency Level:      100
+Time taken for tests:   39.358 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Total transferred:      95050000 bytes
+HTML transferred:       88660000 bytes
+Requests per second:    254.08 [#/sec] (mean)
+Time per request:       393.577 [ms] (mean)
+Time per request:       3.936 [ms] (mean, across all concurrent requests)
+Transfer rate:          2358.43 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        1  115 205.8    101    4696
+Processing:     3  277 139.6    297    2946	
+Waiting:        1  141 129.8    147    2546
+Total:          6  392 242.9    399    4948
+
+Percentage of the requests served within a certain time (ms)
+  50%    399
+  66%    400
+  75%    400
+  80%    401
+  90%    448
+  95%    450
+  98%    499
+  99%   1399
+ 100%   4948 (longest request)
+</code></pre>
+
+<p>After this, I’ve transfer that same page to an Nginx server running on a mirror Arch Linux powered server.</p>
+
+<p>I’ve done that using <code>curl</code></p>
+
+<pre><code>curl 10.179.138.178/drupal/?q=node/2 &gt; /srv/http/drupal.html
+</code></pre>
+
+<p>And then run <code>ab</code> against Nginx with the static page, the result was:</p>
+
+<pre><code>Server Software:        nginx/1.0.14
+Server Hostname:        10.179.129.x
+Server Port:            8080
+
+Document Path:          /drupal.html
+Document Length:        8866 bytes
+
+Concurrency Level:      100
+Time taken for tests:   38.353 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Total transferred:      91860000 bytes
+HTML transferred:       88660000 bytes
+Requests per second:    260.73 [#/sec] (mean)
+Time per request:       383.533 [ms] (mean)
+Time per request:       3.835 [ms] (mean, across all concurrent requests)
+Transfer rate:          2338.97 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        1  129 332.9    101    9051
+Processing:     1  253  80.0    249     749
+Waiting:        1  130  63.7    141     617
+Total:          4  382 340.4    350    9300
+
+Percentage of the requests served within a certain time (ms)
+  50%    350
+  66%    399
+  75%    400
+  80%    400
+  90%    401
+  95%    450
+  98%    652
+  99%    901
+ 100%   9300 (longest request)
+</code></pre>
+
+<p>As you can see even though Drupal is not using boost, and it is full dynamic content, Varnish is making it equivalent to a static site. The results are almost the same in both tests.</p>
+
+<p>Just to let you see how it performs without Varnish, here is what happens when Varnish is taken aside and Apache/PHP/MySQL support the full load.</p>
+
+<p>Well: with the same load, MySQL hanged up, and all Operating System halted. I had to reboot the server from the Console.</p>
+
+<p>So lowering the load:</p>
+
+<pre><code>ab -n 1000 -c 20 http://10.179.138.178/drupal/?q=node/2
+</code></pre>
+
+<p>The result is:</p>
+
+<pre><code>Server Software:        Apache/2.2.22
+Server Hostname:        10.179.138.178
+Server Port:            80
+
+Document Path:          /drupal/?q=node/2
+Document Length:        8866 bytes
+
+Concurrency Level:      20
+Time taken for tests:   13.022 seconds
+Complete requests:      1000
+Failed requests:        0
+Write errors:           0
+Total transferred:      9445000 bytes
+HTML transferred:       8866000 bytes
+Requests per second:    76.79 [#/sec] (mean)
+Time per request:       260.443 [ms] (mean)
+Time per request:       13.022 [ms] (mean, across all concurrent requests)
+Transfer rate:          708.30 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   0.9      1      23
+Processing:    32  259 757.4    109    6489
+Waiting:       28  243 732.0    101    6305
+Total:         34  260 757.4    110    6490
+
+Percentage of the requests served within a certain time (ms)
+  50%    110
+  66%    120
+  75%    127
+  80%    132
+  90%    162
+  95%   1042
+  98%   3192
+  99%   4713
+ 100%   6490 (longest request)
+</code></pre>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>As you can see, it is just a matter of install varnish with a very simple and basic configuration to improve server performance a lot. Being able to handle 250+ request per second in a 256 MB RAM server with Drupal CMS is not that difficult.</p>
+
+<p>Once again, this is only valid for anonymous users, that is if you have a blog or a news or tutorial site, where your visitors does not need to be logged in to interact with your content. If you need this level of performance for logged users, then you need to look at memcached, APC and the like.</p>
+
+<p><strong>Note:</strong> All tests were run from another dedicated Cloud Server using internal IPs to access the Nginx and Apache servers, so there is no Bandwidth Limitation.</p>
+
+<hr>
+<a href="http://www.garron.me/en/linux/optimize-vps-drupal-varnish.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/optimize-vps-drupal-varnish.html&text=Optimize VPS server for Drupal Hosting | Using Varnish&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/optimize-vps-drupal-varnish.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/optimize-vps-drupal-varnish.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/optimize-vps-drupal-varnish.html">linkedin</a> | <a href="mailto:?Subject=Optimize VPS server for Drupal Hosting | Using Varnish&Body=http://www.garron.me/en/linux/optimize-vps-drupal-varnish.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/optimize-vps-drupal-varnish.html&title=Optimize VPS server for Drupal Hosting | Using Varnish" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

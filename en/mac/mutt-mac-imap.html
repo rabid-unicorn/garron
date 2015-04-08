@@ -1,0 +1,300 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/mac/mutt-mac-imap.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="“Using Mutt to read and write email on Mac with an Office 365 IMAP account”" />
+
+        <!-- End SEO includes -->
+        <title>Mutt, Mac and IMAP</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Mutt, Mac and IMAP">
+        <meta name="twitter:description" content="Using Mutt to read and write email on Mac with an Office 365 IMAP account">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/mac/index.html">Mac</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Mutt, Mac and IMAP</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/mac/mutt-mac-imap.html">Mutt, Mac and IMAP</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2014-09-07 15:15:00 -0400</h6>
+
+<hr>
+<h3 id="using-mutt-with-mac-to-read-office-365-imap-account">Using Mutt with Mac to read Office 365 IMAP account</h3>
+
+<p>I love using lightweight software to do simple tasks, I mean why on earth would you like to use bloated software to perform easy tasks like reading and writing emails?</p>
+
+<p>That is why I decided to use <strong>mutt</strong> when on my Mac to read my personal email account.</p>
+
+<p>Here is my setup.</p>
+
+<ul>
+  <li>Office 365 Exchange account (Just because it is not expensive and supports ActiveSync)</li>
+  <li>Mutt on my Mac to read and write while working on the computer</li>
+  <li>Postfix configured to work with a SmartHost for sending emails</li>
+</ul>
+
+<p><strong>Mutt Setup</strong></p>
+
+<p>I have installed mutt using <a href="http://brew.sh">Homebrew</a>.</p>
+
+<pre><code>brew install mutt
+</code></pre>
+
+<p>If you are on Ubuntu, <code>sudo apt-get install mutt</code> will work.</p>
+
+<p>We know need to configure mutt to work with your IMAP account.</p>
+
+<pre><code>#Authentication
+set imap_user=“user@domain” #your IMAP user name or login
+set imap_pass=“password” #your IMAP password
+
+set smtp_authenticators="login"
+set ssl_use_sslv3=yes
+set timeout=15
+</code></pre>
+
+<p>I know it is not a good idea to put your password in a simple text file, but I am the only one with access to this computer and if I lost it, I have my hard drive encrypted using FileVault. In my Ubuntu machine I have my home folder encrypted too. If you really are paranoid you can of course leave <em>imap_pass</em> unset and mutt will ask for your password.</p>
+
+<pre><code>#IMAP
+set mbox="imap://outlook.office365.com/INBOX"
+set postponed="imap://outlook.office365.com/Drafts"
+set spoolfile="imap://outlook.office365.com/INBOX"
+set folder="imap://outlook.office365.com/"
+set record="imap://outlook.office365.com/Sent Items"   #set trash="imap://outlook.office365.com/Deleted Items"
+mailboxes
+</code></pre>
+
+<p>Pretty self explanatory, but the trash variable can not be used on my Mac, as the version from brew was not compiled with it, so, the emails I delete on mutt are gone forever as soon as I close Mutt. I am OK with that.</p>
+
+<pre><code>#SMTP
+#set smtp_url="smtp://user@domain@smtp.office365.com:587/"
+#set smtp_pass=“password”
+set smtp_url="smtp://localhost/"
+set from="g@garron.co"
+set realname="Guillermo Garron"
+</code></pre>
+
+<p>As you can see, <em>smtp_url</em> and <em>smtp_pass</em> are commented, that is as I said I am relying on local Postfix to deliver my emails, this is because if I loss Internet connectivity while writing my email I do not want Mutt waiting forever for the connection. That is Postfix’s job.</p>
+
+<p><strong>Postfix Setup</strong></p>
+
+<p>Now is the turn for Postfix, I have set it up to work with Office 365 STMP server so my mails are not bounced depending on the IP.</p>
+
+<pre><code>biff = no
+command_directory = /usr/sbin
+config_directory = /etc/postfix
+daemon_directory = /usr/libexec/postfix
+data_directory = /var/lib/postfix
+debug_peer_level = 2	
+debugger_command = PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin xxgdb $daemon_directory/$process_name $process_id &amp;	sleep 5
+dovecot_destination_recipient_limit = 1
+html_directory = /usr/share/doc/postfix/html
+imap_submit_cred_file =
+inet_interfaces = loopback-only
+inet_protocols = ipv4
+mail_owner = _postfix
+mailbox_size_limit = 0
+mailq_path = /usr/bin/mailq
+manpage_directory = /usr/share/man
+message_size_limit = 10485760
+mydomain_fallback = localhost
+mynetworks = 127.0.0.0/8, [::1]/128
+newaliases_path = /usr/bin/newaliases
+queue_directory = /private/var/spool/postfix
+readme_directory = /usr/share/doc/postfix
+recipient_delimiter = +
+relayhost = [smtp.office365.com]:587
+sample_directory = /usr/share/doc/postfix/examples
+sendmail_path = /usr/sbin/sendmail
+setgid_group = _postdrop
+smtp_generic_maps = hash:/etc/postfix/generic
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_password
+smtp_sasl_security_options = noanonymous
+smtp_use_tls = yes
+smtpd_client_restrictions = permit_mynetworks	permit_sasl_authenticated permit
+smtpd_tls_ciphers = medium
+smtpd_tls_exclude_ciphers = SSLv2, aNULL, ADH, eNULL
+tls_random_source = dev:/dev/urandom
+unknown_local_recipient_reject_code = 550
+use_sacl_cache = yes
+</code></pre>
+
+<p>There are two more steps before it is ready.</p>
+
+<p>Put in <code>/etc/postfix/sasl_password</code> file something like this:</p>
+
+<pre><code>smtp.office365.com user@domain:password
+</code></pre>
+
+<p>And run</p>
+
+<pre><code>sudo postmap /etc/postfix/sasl_password
+</code></pre>
+
+<p>Finally add this line to <code>/etc/postfix/generic</code></p>
+
+<pre><code>user@localhost user@domain
+</code></pre>
+
+<p>and run:</p>
+
+<pre><code>sudo postmap /etc/postfix/generic
+</code></pre>
+
+<p>That is it, you now just have to restart Postfix</p>
+
+<pre><code>sudo postfix reload
+</code></pre>
+
+<p>And start using Mutt.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/mac/mutt-mac-imap.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/mac/mutt-mac-imap.html&text=Mutt, Mac and IMAP&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/mac/mutt-mac-imap.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/mac/mutt-mac-imap.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/mac/mutt-mac-imap.html">linkedin</a> | <a href="mailto:?Subject=Mutt, Mac and IMAP&Body=http://www.garron.me/en/mac/mutt-mac-imap.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/mac/mutt-mac-imap.html&title=Mutt, Mac and IMAP" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

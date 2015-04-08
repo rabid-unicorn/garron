@@ -1,0 +1,295 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Ten useful examples of the find command. You can use on bash on Linux, Mac or BSD" />
+
+        <!-- End SEO includes -->
+        <title>Ten useful uses of command find</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Ten useful uses of command find">
+        <meta name="twitter:description" content="Ten useful examples of the find command. You can use on bash on Linux, Mac or BSD">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Ten useful uses of command find</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/how-to-use-find-command-linux-mac-examples.html">Ten useful uses of command find</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2007-11-14 09:36:30 -0500</h6>
+
+<hr>
+<p>These are 10 useful uses of the command find in Linux, they are not the most useful, just some useful for me, I will use $HOME as the path for every example but you may use any other.</p>
+
+<p><strong>Find empty directories or folders</strong></p>
+
+<pre><code>find $HOME -depth -type d -empty
+</code></pre>
+
+<p><strong>Find empty files</strong></p>
+
+<pre><code>find $HOME -depth -type f -empty
+</code></pre>
+
+<p><strong>Find a file with a specific name</strong></p>
+
+<pre><code>find $HOME -name [name_of_file]
+</code></pre>
+
+<p><strong>Find a file with a specific extension</strong></p>
+
+<pre><code>find $HOME -name "*.[given_extension]"
+</code></pre>
+
+<p>This find files wit the given extension all along your home, an example to find jpg files is:</p>
+
+<pre><code>find $HOME -name '*.jpg'
+</code></pre>
+
+<p><strong>Find files with specific permissions</strong></p>
+
+<pre><code>find $HOME -perm [permission bits]
+</code></pre>
+
+<p>This will find files with the given permission bits in your home, as an example we can look for .txt files that can have 644 bits on.</p>
+
+<pre><code>find $HOME -name '*.txt' -perm 644
+</code></pre>
+
+<p><strong>Find files with some given permissions and no matter the rest</strong></p>
+
+<pre><code>find $HOME -perm -[permision_bits]
+</code></pre>
+
+<p>This will find files in your home that have match with the given permissions but that can also have some others, as an example:</p>
+
+<pre><code>find $HOME -name '*.txt' -perm -644
+</code></pre>
+
+<p>This will find the files with 644 but also some with 664 or 777 or anything “greater” than 644. Output comparison Let’s see some output comparison for this to be better understood.</p>
+
+<pre><code>find $HOME -name '*.txt' -perm 644 -exec ls -l {} \;
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>-rw-r--r-- 1 root root 181 2007-10-09 23:27 /home/ggarron/lmsensors.txt
+-rw-r--r-- 1 ggarron ggarron 2757 2007-08-29 23:52 /home/ggarron/mv.txt
+-rw-r--r-- 1 ggarron ggarron 77431 2007-09-05 23:11 /home/ggarron/curl.txt
+
+find $HOME -name '*.txt' -perm -644 -exec ls -l {} \;
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>-rw-r--r-- 1 root root 181 2007-10-09 23:27 /home/ggarron/lmsensors.txt
+-rw-r--r-- 1 ggarron ggarron 2757 2007-08-29 23:52 /home/ggarron/mv.txt
+-rw-r--r-- 1 ggarron ggarron 77431 2007-09-05 23:11 /home/ggarron/curl.txt
+-rw-rw-r-- 1 ggarron ggarron 464 2007-09-06 01:23 /home/ggarron/post.txt
+</code></pre>
+
+<p>As you may see in the first example we do not have the file post as it has 664 permissions, so do not exactly match 644, but on the second output, it is listed as it has “greater” permissions than 644.</p>
+
+<p><strong>Find files of given sizes</strong></p>
+
+<pre><code>find -size n[cwbkMG]
+</code></pre>
+
+<p>This will output the files of a given block size, as an example we can see:</p>
+
+<pre><code>find $HOME -name '*.txt' -size 4k -exec ls -l {} \;
+</code></pre>
+
+<p>And the output is:</p>
+
+<pre><code>-rw-r--r-- 1 ggarron ggarron 3707 2007-07-25 15:48 /home/ggarron/drupal/public_html/sites/all/modules/akismet/README.txt
+-rw-r--r-- 1 ggarron ggarron 4043 2007-01-22 15:44 /home/ggarron/Desktop/front/README.txt
+-rw-r--r-- 1 ggarron ggarron 3112 2007-09-23 15:39 /home/ggarron/Desktop/borrar/upgrading-drupal/public_html/sites/all/modules/adsense/README.txt
+-rw-r--r-- 1 ggarron ggarron 3707 2007-09-23 15:39 /home/ggarron/Desktop/borrar/upgrading-drupal/public_html/sites/all/modules/akismet/README.txt
+-rw-r--r-- 1 ggarron ggarron 3616 2007-09-23 15:39 /home/ggarron/Desktop/borrar/centos-asterisk/how-to-install.txt
+</code></pre>
+
+<p>Now let’s see this other:</p>
+
+<pre><code>find $HOME -name '*.txt' -size 5k -exec ls -l {} \;
+</code></pre>
+
+<p>And the output is:</p>
+
+<pre><code>-rw-r--r-- 1 ggarron ggarron 4496 2007-09-23 15:39 /home/ggarron/Desktop/borrar/upgrading-drupal/public_html/sites/all/modules/captcha/captcha_api.txt
+</code></pre>
+
+<p>Now if you divide each file size by 1024 (1k) you will see that the first output is always lower than 4096 (4k) and upper 3072 (3k), on the second output you have it between 4096 (4k) and 5120 (5k).</p>
+
+<p><strong>Find files with a give name and any extension</strong></p>
+
+<pre><code>find -name '[given_name].*'
+</code></pre>
+
+<p>This will output the files of any given name but with any extension</p>
+
+<p><strong>Find files modified in the latest blocks of 24 hours</strong></p>
+
+<pre><code>find -mtime
+</code></pre>
+
+<p>Where n is: 0 for the last 24 hours 1 for the last 48 hours 2 for the last 72 hours and so on.</p>
+
+<p><strong>Find files that was accessed in the latests blocks of 24 hours</strong></p>
+
+<pre><code>find -atime n
+</code></pre>
+
+<p>Where n is: 0 for the last 24 hours 1 for the last 48 hours 2 for the last 72 hours and so on.</p>
+
+<p>I have been using in the examples the -exec parameter, this is used to execute any action over the find files, I was listing them but you may delete them or move them or copy them anything you want.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html&text=Ten useful uses of command find&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html">linkedin</a> | <a href="mailto:?Subject=Ten useful uses of command find&Body=http://www.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/how-to-use-find-command-linux-mac-examples.html&title=Ten useful uses of command find" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

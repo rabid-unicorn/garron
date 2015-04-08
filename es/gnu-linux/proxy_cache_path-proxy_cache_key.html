@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- SEO includes -->
+        
+
+<link href="/es/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+        <link rel="canonical" href="http://www.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Explicando proxy_cache_path levels y proxy_cache_key" />
+
+        <!-- End SEO includes -->    
+        <title>proxy_cache_key</title>
+        <!-- CSS -->
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Vollkorn|Old+Standard+TT|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.journal.min.css" rel="stylesheet">
+        <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet">
+        <!-- Custom Css -->
+        <!-- <style>body {background-color: #FFFFFF;}
+
+body,
+input,
+small,
+button,
+select,
+textarea,
+.navbar-search .search-query {
+  font-family: "Source Sans Pro", "Vollkorn", Georgia, "Times New Roman", Times, serif; font-weight: 300; font-size: 18px; line-height: 26px; color: #404040;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josefin Slab", Georgia, "Times New Roman", Times, serif; font-weight: 400; color: #101010;
+}
+
+.gallery-image-wrapper {
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+  margin: 1em;
+  position: relative;
+  text-align: left;
+}
+.gallery-image {
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#text-center {
+text-align: center
+}
+</style> -->
+        <!-- End custom css -->
+        <!-- End CSS -->
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="proxy_cache_key">
+        <meta name="twitter:description" content="Explicando proxy_cache_path levels y proxy_cache_key, o al menos en el intento de hacerlo">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+            <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-static-top visible-xs visible-sm">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/es/"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/es/">Inicio</a></li>
+            <li><a href="/es/gnu-linux/">Linux</a></li>
+            <li><a href="/es/mac-os/">Mac</a></li>
+            <li><a href="/es/cortos/">Tips</a></li>
+            <li><a href="/es/articulos/">Artículos</a></li>
+            <li><a href="/es/archivos.html">Archivos</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Personales <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/es/bitacora/">Bitacora</a></li>
+                <li><a href="/es/fotos/">Fotos</a></li>
+                <li><a href="/es/recetas/">Comida</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div class="container">
+    <!-- Nav Bar -->
+    <H1><a href="/es/">Guillermo Garron</a></h1>
+<p>Suscribete: <a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p>
+<ol class="breadcrumb">
+
+	<li><a href="/index.html">Geeking</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/index.html">Tecnología</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/gnu-linux/index.html">GNU Linux</a>
+	<li class="divider">&gt;</li>
+
+	<li class="active">proxy_cache_key</li>
+</ol>
+
+
+    <!-- Nav Bar -->
+    <div id="content" class="row">
+        <div class="col-md-2 visible-lg visible-md">
+            <h4>Categorias</h4>
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li><h4>Tecnicas</h4></li>
+    <li><a href="/es/gnu-linux/">Linux</a></li>
+    <li><a href="/es/mac-os/">Mac</a></li>
+    <li><a href="/es/cortos/">Tips</a></li>
+    <li><a href="/es/articulos/">Artículos</a></li>
+    <hr>
+    <li><h4>Personales</h4></li>
+    <li><a href="/es/bitacora/">Reflexiones</a></li>
+    <li><a href="/es/fotos/">Fotos</a></li>
+    <li><a href="/es/recetas/">Cocinando</a></li>
+    <hr>
+    <li><a href="/es/archivos.html">Archivos</a></li>
+    <hr>
+    <li><p><a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p></li>
+  </ul>
+</div>
+
+        </div>
+        <div class="col-md-7">
+            <h3><a href="/es/gnu-linux/proxy_cache_path-proxy_cache_key.html">proxy_cache_key</a></h3>
+<h6>Escrito por: <a href="/es/acerca-de.html">Guillermo Garron</a> .</h6>
+<h6>Fecha: 2014-12-07 19:56:00 -0500</h6>
+<hr>
+<p>El día de hoy me he quedado nuevamente solo en la ciudad de La Paz, Bolivia, pues mi familia que vino a visitarme por un par de semanas ha regresado a Santa Cruz.</p>
+
+<p>He aprovechado la tarde para estudiar un poco de como trabaja el cache de Nginx. Y me doy cuenta que aún a pesar de lo mucho que me gusta Varnish, me convenzo cada vez más que Nginx es una excelente opción, tal vez un poco menos flexible, pero me atrevo a decir que para el 90% de los casos es más que suficiente.</p>
+
+<p>Bueno, vamos al grano, me he pasado la tarde leyendo sobre:</p>
+
+<ul>
+  <li>proxy_cache_path</li>
+  <li>proxy_cache_key</li>
+</ul>
+
+<p><strong>proxy_cache_path</strong></p>
+
+<p>Hay suficiente información sobre la mayoría de los parámetros, pero no hay mucha sobre como se debe usar <em>levels</em>. Claro, dice por todos lados que configura los niveles de directorios y subdirectorios a usarse en el folder de cache, pero como se debe definir la óptima configuración, eso no se dice.</p>
+
+<p>Habiendo sacado mis propias conclusiones, creo que cuando te toque configurar levels puedes optar por lo que casi todos hacen:</p>
+
+<pre><code>proxy_cache_path /var/www/nginx_cache levels=1:2
+</code></pre>
+
+<p>En este caso, <code>levels=1:2</code> indica que existirán dos niveles de subdirectorios, uno con un solo dígito y el segundo con dos.</p>
+
+<p>Algo así:</p>
+
+<p>/0/00
+/0/01
+/0/02 ….</p>
+
+<p>De todos modos, ¿cuál usar y por qué?</p>
+
+<p>Debes tomar en cuenta algunos factores:</p>
+
+<ul>
+  <li>Cantidad de urls individuales tiene tu sitio</li>
+  <li>Tiempo que van a permanecer en el cache</li>
+</ul>
+
+<p>Las dos variables de arriba van a determinar el número de archivos guardados en el cache, mientras más archivos (páginas) a ser guardados en el cache, mejor no tenerlos en un solo directorio y aumentar el nivel de subdirectorios donde Nginx podrá guardar dichos archivos.</p>
+
+<p>Por favor si alguien tiene una mejor explicación déjeme saber.</p>
+
+<p><strong>proxy_cache_key</strong></p>
+
+<p>Esto está un poco mejor documentado, y queda claro que debes elegir estos parámetros basado en tu aplicación y en un par de factores más.</p>
+
+<p>He podido ver que cuando no especifico nada en este parámetro el valor por defecto usado es:</p>
+
+<pre><code>$scheme://$proxy_host$uri
+</code></pre>
+
+<p>Es decir, si mi variable <code>proxy_pass</code> es: <strong>127.0.0.1:8000</strong> y la página que busco es /index.html, el key será:</p>
+
+<pre><code>http://127.0.0.1:8000/index.html
+</code></pre>
+
+<p>Esto esta bien, si tengo un solo sitio servido por Nginx usando ese backend, o si cada sitio tiene su propia zona, pero que pasaría si dos sitios comparten la zona (directorio) y ademas el backend. Los visitantes al sitio 2, podrían ver la página del sitio 1.</p>
+
+<p>En este caso, una mejor opción sería:</p>
+
+<pre><code>proxy_cache_key "$scheme://$host$request_uri";
+</code></pre>
+
+<p>O también:</p>
+
+<pre><code>proxy_cache_key $host$uri$is_args$args;
+</code></pre>
+
+<p>O incluso:</p>
+
+<pre><code>proxy_cache_key $scheme://$host$uri$is_args$args;
+</code></pre>
+
+<ul>
+  <li>scheme: Nos dará el protocolo, http o https, es útil usarlo si tienes ambos funcionando.</li>
+  <li>$host: Nos dará el nombre del server, www.garron.me en mi caso.</li>
+  <li>$uri: Esta está fácil, en nuestro ejemplo de arriba, index.html</li>
+  <li>args: Los argumentos, es decir, v=1.5 por ejemplo en este caso. <em>http://www.garron.me/css/default.css?v=1.5</em></li>
+</ul>
+
+<p>Debes usar lo necesario para asegurarte que ningún visitante a tu sitio reciba la página de otro visitante.</p>
+
+<hr>
+En Categoria: <strong><a href="/es/gnu-linux/">es|gnu-linux</a></strong> | <a href="http://www.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html">permalink</a>
+<hr>
+<p>Si te gusto el artículo, por favor compartelo</p>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html&text=proxy_cache_key&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html">linkedin</a> | <a href="mailto:?Subject=proxy_cache_key&Body=http://www.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html&title=proxy_cache_key" class="ss-icon ss-social-circle">reddit</a></p>
+<hr>
+<div id="discourse-comments"></div>
+
+<script type="text/javascript">
+  var discourseUrl = "http://discusion.detecnologia.org/",
+      discourseEmbedUrl = 'http://www.garron.me/es/gnu-linux/proxy_cache_path-proxy_cache_key.html';
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+</script>
+
+
+
+<hr>
+
+        </div>
+        <div class="col-md-3">
+            <!-- Esta es la columna derecha que debe estar vacía por ahora -->
+        </div>
+    </div>
+</div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/bootstrap/js/magnific-popup.js"></script>
+        <script src="/bootstrap/js/custom.js"></script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

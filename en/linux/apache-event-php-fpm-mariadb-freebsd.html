@@ -1,0 +1,402 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Apache MPM Event, PHP-FPM and MariaDB on FreeBSD" />
+
+        <!-- End SEO includes -->
+        <title>Apache, PHP-FPM, MariaDB and FreeBSD</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Apache, PHP-FPM, MariaDB and FreeBSD">
+        <meta name="twitter:description" content="Apache MPM Event, PHP-FPM and MariaDB on FreeBSD">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Apache, PHP-FPM, MariaDB and FreeBSD</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/apache-event-php-fpm-mariadb-freebsd.html">Apache, PHP-FPM, MariaDB and FreeBSD</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2015-01-31 23:00:00 -0500</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/freebsd.html">freebsd</a>,<a href="/en/tag/tutorial.html">tutorial</a>,</small></p>
+
+<hr>
+<h3 id="introduction">Introduction</h3>
+
+<p>I always liked the bsd-like ports that Slackware Linux uses and now that <a href="https://www.digitalocean.com/?refcode=e00a30198abe">Digital Ocean</a> offers FreeBSD I am having a great time working with it.</p>
+
+<p>Today I want to show you how to setup an FAMP (Apache 2.4, MySQL and PHP on FreeBSD 10), we will be installing Apache using Event MPM, and PHP-FPM.</p>
+
+<p>We will also be using both methods of installation in FreeBSD, first the <em>ports way</em> then, the <em>pkg binary way</em>.</p>
+
+<h3 id="apache-mysql-and-php-on-freebsd-from-ports">Apache, MySQL and PHP on FreeBSD from ports</h3>
+
+<h4 id="apache-24-event-mpm">Apache 2.4 Event MPM</h4>
+
+<p>Let’s first start with Apache, as I said we will be installing the Event MPM which is a threaded MPM and will serve files a lot faster, actually normal files as fast as Nginx</p>
+
+<pre><code>cd /usr/ports/www/apache24/
+make install clean
+</code></pre>
+
+<p>Select these options.</p>
+
+<pre><code>| [x] ACCESS_COMPAT      mod_access compatibility
+| [x] ACTIONS            Action triggering on requests 
+| [x] ALIAS              Mapping of requests to different filesystem parts
+| [x] AUTHZ_CORE         Core authorization provider vector module
+| [x] AUTHZ_HOST         Host-based authorization control
+| [x] DIR                Directory request handling
+|+[x] EXPIRES            Expires header control
+|+[x] HEADERS            HTTP header control
+|+[x] REWRITE            Rule based URL manipulation
+|+[x] VERSION            Determining httpd version in config files
+|+[x] VHOST_ALIAS        Mass virtual hosting
+|+(*) MPM_EVENT          MPM worker variant with the goal of consuming
+| [x] MIME               Mapp file-ext. to MIME (recommended)
+| [x] PROXY              Build enabled PROXY modules
+| [x] PROXY_FCGI         FastCGI support module for mod_proxy
+</code></pre>
+
+<p>I like to have Virtual sites as separate files and not as part of the monolitic httpd.conf file, so let’s configure Apache that way.</p>
+
+<pre><code>mkdir /usr/local/etc/apache24/conf.d
+</code></pre>
+
+<p>Add this line at the end of the file <code>/usr/local/etc/apache24/httpd.conf</code></p>
+
+<pre><code>Include etc/apache24/conf.d/*.conf
+</code></pre>
+
+<h4 id="php-56">PHP 5.6</h4>
+
+<p>Now it is the turn of PHP, we will build it with PHP-FPM option turned on.</p>
+
+<pre><code>cd /usr/ports/lang/php56
+
+make install
+</code></pre>
+
+<p>Configure this way.</p>
+
+<pre><code>|+[x] CLI       Build CLI version
+|+[x] CGI       Build CGI version
+|+[x] FPM       Build FPM version
+|+[ ] EMBED     Build embedded library
+|+[ ] PHPDBG
+|+[ ] DEBUG     Enable debug
+|+[ ] DTRACE    Enable DTrace support
+|+[x] IPV6      Enable ipv6 support
+|+[ ] MAILHEAD  Enable mail header patch
+|+[x] LINKTHR   Link thread lib (for threaded extensions)
+|+[ ] ZTS       Force Zend Thread Safety (ZTS) build
+</code></pre>
+
+<p>Finally clean the installation.</p>
+
+<pre><code>make clean
+</code></pre>
+
+<p>We now have PHP 5.6 installed, but we need the modules, so:</p>
+
+<pre><code>cd ../php56-extensions/
+
+make install clean
+</code></pre>
+
+<p>Be sure to mark, GD, CURL and MySQL as well as MySQLi</p>
+
+<pre><code>|+[x] CURL          CURL support
+|+[x] GD            GD library support
+|+[x] MYSQL         MySQL database support
+|+[x] MYSQLI        MySQLi database support
+</code></pre>
+
+<p>Those among the default ones.</p>
+
+<h4 id="mariadb-100">MariaDB 10.0</h4>
+
+<p>We are going to install MariaDB instead of MySQL, if you do not know already, MariaDB is a fork of MySQL, where new developments are taking place, but complete compatibility is being manteined</p>
+
+<p>We are going to install MariaDB 10.0 which according to the oficial <a href="http://mariadb.com">site</a> is:</p>
+
+<blockquote>
+  <p>MariaDB 10.0 is the current stable version of MariaDB. It is built on the MariaDB 5.5 series with backported features from MySQL 5.6 and entirely new features not found anywhere else.</p>
+</blockquote>
+
+<p>To install it, run:</p>
+
+<pre><code>cd /usr/ports/databases/mariadb100-server
+
+make install clean
+</code></pre>
+
+<p>And keep all defaults. To secure your intallation run:</p>
+
+<pre><code>mysql_secure_installation
+</code></pre>
+
+<p>Set a password, and then accept all defaults.</p>
+
+<h4 id="finishing-up-installation">Finishing up installation</h4>
+
+<p><strong>Preparing services to run</strong></p>
+
+<p>We need to configure all servers to autostart when the computer starts, to do that you need to edit the <code>vim /etc/rc.conf</code>and add this lines.</p>
+
+<pre><code>apache24_enable="YES"
+php_fpm_enable="YES"
+mysql_enable="YES"
+</code></pre>
+
+<p>We need to take one more step for Apache. Edit the file <code>/usr/local/etc/httpd.conf</code> and add this line just before the <em>Include….</em> line.</p>
+
+<pre><code>ServerName localhost
+</code></pre>
+
+<p>We can now start all services:</p>
+
+<pre><code>service apache24 start
+service mysql-server start
+service php-fpm start
+</code></pre>
+
+<p>Make sure you have these modules enabled</p>
+
+<pre><code>LoadModule authn_core_module libexec/apache24/mod_authn_core.so
+LoadModule authz_core_module libexec/apache24/mod_authz_core.so
+LoadModule log_config_module libexec/apache24/mod_log_config.so
+LoadModule expires_module libexec/apache24/mod_expires.so
+LoadModule headers_module libexec/apache24/mod_headers.so
+LoadModule version_module libexec/apache24/mod_version.so
+LoadModule unixd_module libexec/apache24/mod_unixd.so
+LoadModule vhost_alias_module libexec/apache24/mod_vhost_alias.so
+LoadModule dir_module libexec/apache24/mod_dir.so
+LoadModule rewrite_module libexec/apache24/mod_rewrite.so
+LoadModule mime_module  libexec/apache24/mod_mime.so
+LoadModule actions_module libexec/apache24/mod_actions.so
+LoadModule alias_module libexec/apache24/mod_alias.so
+LoadModule authz_host_module libexec/apache24/mod_authz_host.so
+LoadModule access_compat_module libexec/apache24/mod_access_compat.so
+LoadModule proxy_module libexec/apache24/mod_proxy.so
+LoadModule proxy_fcgi_module libexec/apache24/mod_proxy_fcgi.so
+</code></pre>
+
+<p>Restart Apache</p>
+
+<pre><code>service apache24 restart
+</code></pre>
+
+<h4 id="test-installation">Test installation</h4>
+
+<p>We will create a testing site in order to test everything, and be sure it is all setup and ready to work.</p>
+
+<p><strong>Create a folder for your site</strong></p>
+
+<pre><code>mkdir -p /usr/local/www/site1/{public_html,logs}
+chown -R www:www /usr/local/www/site1/
+</code></pre>
+
+<p><strong>Configure a virtual host</strong></p>
+
+<p>Create a file in <code>/usr/local/etc/apache24/conf.d/site1.conf</code>, you can name it any other way you want, and add this content inside:</p>
+
+<pre><code>    &lt;VirtualHost *:80&gt;
+        ServerAdmin webmaster@example.com
+        DocumentRoot "/usr/local/www/site1/public_html"
+        ServerName freebsd.garron.me
+        ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/usr/local/www/site1/public_html/$1
+        ErrorLog "/usr/local/www/site1/logs/error.log"
+        CustomLog "/usr/local/www/site1/logs/access.log" common
+        ScriptAlias /cgi-bin/ "/usr/local/www/site1/cgi-bin/"
+
+    &lt;Directory "/usr/local/www/site1/public_html"&gt;
+        Options +Indexes +FollowSymLinks +ExecCGI
+        AllowOverride AuthConfig FileInfo
+        Require all granted
+        Allow from all
+    &lt;/Directory&gt;
+
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p><strong>Test the configuration</strong></p>
+
+<p>I will need to create a file named <code>phpinfo.php</code> with this contents:</p>
+
+<pre><code>&lt;?php
+    phpinfo();
+?&gt;
+</code></pre>
+
+<p>Once saved, I can go to http://freebsd.garron.me/phpinfo.php, and the info of PHP should appear. This is the important line:</p>
+
+<pre><code>Server API 	FPM/FastCGI 
+</code></pre>
+
+<p>That means, you are running PHP-FPM, and this is also a command you want to run to verify the MPM</p>
+
+<pre><code>httpd -V | grep MPM
+</code></pre>
+
+<p>The reply should be:</p>
+
+<pre><code>Server MPM:     event
+</code></pre>
+
+<hr>
+<a href="http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html&text=Apache, PHP-FPM, MariaDB and FreeBSD&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html">linkedin</a> | <a href="mailto:?Subject=Apache, PHP-FPM, MariaDB and FreeBSD&Body=http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html&title=Apache, PHP-FPM, MariaDB and FreeBSD" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

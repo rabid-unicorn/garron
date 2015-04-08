@@ -1,0 +1,374 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to rename lots of files in Linux at once from the command line" />
+
+        <!-- End SEO includes -->
+        <title>Rename Multiple Files with Linux</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Rename Multiple Files with Linux">
+        <meta name="twitter:description" content="Using rename and mv to rename a lot of files at the same time from the command line on Linux">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Rename Multiple Files with Linux</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/rename-bulk-files-with-linux-console-command.html">Rename Multiple Files with Linux</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2007-12-30 09:36:30 -0500</h6>
+
+<hr>
+<p>We are going to explore different ways to change names of multiple files using command line of Linux Operating System.</p>
+
+<p>We are going to use rename which is a perl script, and also the known mv, together with for, in “one-line” shell script.</p>
+
+<p><strong>rename</strong></p>
+
+<p><em>Syntax</em></p>
+
+<pre><code>rename [ -v ] [ -n ] [ -f ] perlexpr [ files ]
+</code></pre>
+
+<ul>
+  <li>v: Verbose: print names of files successfully renamed.</li>
+  <li>n: No Action: show what files would have been renamed.</li>
+  <li>f: Force: overwrite existing files</li>
+  <li>perlexpr: Perl Expression</li>
+</ul>
+
+<p><em>Regular expressions</em></p>
+
+<dl>
+<dt>^</dt>
+<dd>matches the beginning of the line </dd>
+<dt>$ </dt>
+
+<dd>matches the end of the line </dd>
+<dt>.</dt>
+<dd>Matches any single character</dd>
+<dt>(character)*</dt>
+<dd>match arbitrarily many occurences of (character)</dd>
+<dt>(character)?</dt>
+<dd>Match 0 or 1 instance of (character)</dd>
+
+<dt>[abcdef]</dt>
+<dd>Match any character enclosed in [] (in this instance, a b c d e or f)
+ranges of characters such as <code>[a-z]</code> are permitted. The behaviour
+of this deserves more description.
+</dd>
+<dt>[^abcdef]</dt>
+<dd>Match any character <em>NOT</em> enclosed in [] (in this instance, any character other than a b c d e or f)</dd>
+
+<dt>(character)\{m,n\}</dt>
+<dd>Match m-n repetitions of (character)</dd>
+<dt>(character)\{m,\}</dt>
+<dd>Match m or more repetitions of (character)</dd>
+<dt>(character)\{,n\}</dt>
+<dd>Match n or less (possibly 0) repetitions of (character)</dd>
+<dt>(character)\{n\}</dt>
+
+<dd>Match exactly n repetitions of (character)</dd>
+<dt>\(expression\)</dt>
+<dd>Group operator.</dd>
+<dt>\n</dt>
+<dd>Backreference - matches nth group</dd>
+<dt>expression1\|expression2</dt>
+<dd>Matches expression1 or expression 2. Works with GNU sed, but this feature might not work with other forms of sed.
+</dd>
+<dt>\w</dt>
+<dd>matches any single character classified as a “word” character (alphanumeric or “_”)</dd>
+<dt>\W</dt>
+<dd>matches any non-“word” character</dd>
+<dt>\s</dt>
+<dd>matches any whitespace character (space, tab, newline)</dd>
+<dt>\S</dt>
+<dd>matches any non-whitespace character</dd>
+<dt>\d</dt>
+<dd>matches any digit character, equiv. to [0-9]</dd>
+<dt>\D</dt>
+<dd>matches any non-digit character</dd>
+</dl>
+
+<p>As rename is a perl script you will need perl to run it, and here are some examples about how to use it.</p>
+
+<pre><code>rename -v 's/\.htm$/\.html/' *.htm
+</code></pre>
+
+<p>This is going to change htm to html in every file ending with .htm in its name.</p>
+
+<p>If you want to change the name of something like this:</p>
+
+<pre><code>-rw-r--r-- 1 ggarron ggarron 0 2007-12-30 19:33 1.txt
+-rw-r--r-- 1 ggarron ggarron 0 2007-12-30 19:33 2.txt
+-rw-r--r-- 1 ggarron ggarron 0 2007-12-30 19:34 3.txt
+-rw-r--r-- 1 ggarron ggarron 0 2007-12-28 20:35 b.txt
+-rw-r--r-- 1 ggarron ggarron 0 2007-12-28 20:35 c.txt
+-rw-r--r-- 1 ggarron ggarron 0 2007-12-28 20:35 d.txt
+-rw-r--r-- 1 ggarron ggarron 0 2007-12-28 20:35 e.txt
+</code></pre>
+
+<p>That is the output of ls -l, and are files created with touch by me for this examples.</p>
+
+<p>Now lets say I want to add a more descriptive string to the name of these files like Thesis, so here we go.</p>
+
+<pre><code>rename -n 's/(\w{1})\.txt$/$1_thesis\.txt/' *.txt
+</code></pre>
+
+<p><em>Note: I am using -n to make only a test and see if the result is what I want</em></p>
+
+<pre><code>1.txt renamed as 1_thesis.txt
+2.txt renamed as 2_thesis.txt
+3.txt renamed as 3_thesis.txt
+b.txt renamed as b_thesis.txt
+c.txt renamed as c_thesis.txt
+d.txt renamed as d_thesis.txt
+e.txt renamed as e_thesis.txt
+</code></pre>
+
+<p>As you see that is what I wanted, now lets suppose I only want to change the name to files with a number in the name and with a letter in it.</p>
+
+<pre><code>rename -n 's/(\d{1})\.txt$/$1_thesis\.txt/' *.txt
+
+1.txt renamed as 1_thesis.txt
+2.txt renamed as 2_thesis.txt
+3.txt renamed as 3_thesis.txt
+</code></pre>
+
+<p>You can also match only the ones with non-digit names</p>
+
+<pre><code>rename -n 's/(\D{1})\.txt$/$1_thesis\.txt/' *.txt
+</code></pre>
+
+<p>And the output will be:</p>
+
+<pre><code>b.txt renamed as b_thesis.txt
+c.txt renamed as c_thesis.txt
+d.txt renamed as d_thesis.txt
+e.txt renamed as e_thesis.txt
+</code></pre>
+
+<p>As you may see, it is just a “using the right regexp” thing.</p>
+
+<p>In case you do not have rename on your system (I think non-Debian Linux distributions does not have it) you can use <code>mv</code></p>
+
+<p><strong>Using mv</strong></p>
+
+<p><strong>Introduction</strong></p>
+
+<p>Here we will first need to learn something about bash string operators</p>
+
+<p>Match and substitute, there are two basic forms for this, substitute from the right of the match and from the left of the match.</p>
+
+<p>substitution from the right</p>
+
+<pre><code>${var%t*string}
+</code></pre>
+
+<p>Now if we want to erase the word thesis from the previous example just enter:</p>
+
+<pre><code>for i in *.txt; do mv "$i" "${i%t*.txt}.txt"; done
+</code></pre>
+
+<p>Before:</p>
+
+<pre><code>-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 1_thesis.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 2_thesis.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 3_thesis.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 b_thesis.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 c_thesis.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 d_thesis.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 e_thesis.txt
+</code></pre>
+
+<p>After:</p>
+
+<pre><code>-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 1_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 2_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 3_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 b_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 c_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 d_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:24 e_.txt
+</code></pre>
+
+<p>substitution from the left</p>
+
+<p>And if we want to replace .txt for .txt.bak just enter:</p>
+
+<p>Now lets suppose we have this:</p>
+
+<pre><code>-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 thesis-1_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 thesis-2_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 thesis-3_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 thesis-b_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 thesis-c_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 thesis-e_.txt
+</code></pre>
+
+<p>And we want to erase the word thesis</p>
+
+<p>Just enter this:</p>
+
+<pre><code>for f in thesis*; do mv "$f" "${f#thesis-}"; done
+</code></pre>
+
+<p>And the output of ls -l will now be:</p>
+
+<pre><code>-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 1_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 2_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 3_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 b_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 c_.txt
+-rw-r--r-- 1 ggarron ggarron    0 2007-12-30 20:28 e_.txt
+</code></pre>
+
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html&text=Rename Multiple Files with Linux&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html">linkedin</a> | <a href="mailto:?Subject=Rename Multiple Files with Linux&Body=http://www.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/rename-bulk-files-with-linux-console-command.html&title=Rename Multiple Files with Linux" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

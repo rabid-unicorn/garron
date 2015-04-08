@@ -1,0 +1,285 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/sendmail-exim-smarthost.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to configure Sendmail and Exim to sendmail through a SmartHost for Linux Debian or Ubuntu" />
+
+        <!-- End SEO includes -->
+        <title>Configure Sendmail and Exim to Send Email with Smarthost</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Configure Sendmail and Exim to Send Email with Smarthost">
+        <meta name="twitter:description" content="How to configure Sendmail and Exim to sendmail through a SmartHost for Linux Debian or Ubuntu">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Configure Sendmail and Exim to Send Email with Smarthost</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/sendmail-exim-smarthost.html">Configure Sendmail and Exim to Send Email with Smarthost</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2007-03-09 09:36:30 -0500</h6>
+
+<hr>
+<h3 id="smarthost-for-sendmail-andor-exim">Smarthost for sendmail and/or exim</h3>
+
+<p>This will describe you how to set up a smarthost using either sendmail or exim, for the exim, i will only consider Debian.</p>
+
+<p>This is to send emails using your linux server as your smtp server, and it will use your ISP email server to send all your emails through it, to the final users.</p>
+
+<p>The sendmail configuration I have tested on CentOS, and Fedora, but should work on Debian and Ubuntu as well</p>
+
+<p><strong>Sendmail</strong></p>
+
+<p>You need sendmail 8.11 or a later one to do this. Edit with your favorite text editor the file /etc/mail/sendmail.mc and add this line dnl define(<code>SMART_HOST',</code>smtpserver.domain.xxx’) [change smtpserver.domain.xxx for your ISP server or any server that is open for you. Now generate the sendmai.cf file, for that use this command</p>
+
+<pre><code>make -C /etc/mail
+</code></pre>
+
+<p>Here you can check my sendmail.mc file, just change the lines in bold, to fit your needs</p>
+
+<pre><code>divert(-1)dnl
+include(`/usr/share/sendmail-cf/m4/cf.m4')dnl
+VERSIONID(`setup for Red Hat Linux')dnl
+OSTYPE(`linux')dnl
+define(`confDEF_USER_ID',``8:12'')dnl
+define(`confTO_CONNECT', `1m')dnl
+define(`confTRY_NULL_MX_LIST',true)dnl
+define(`confDONT_PROBE_INTERFACES',true)dnl
+define(`PROCMAIL_MAILER_PATH',`/usr/bin/procmail')dnl
+define(`ALIAS_FILE', `/etc/aliases')dnl
+define(`STATUS_FILE', `/var/log/mail/statistics')dnl
+define(`UUCP_MAILER_MAX', `2000000')dnl
+define(`confUSERDB_SPEC', `/etc/mail/userdb.db')dnl
+define(`confPRIVACY_FLAGS', `authwarnings,novrfy,noexpn,restrictqrun')dnl
+define(`confAUTH_OPTIONS', `A')dnl
+define(`confTO_IDENT', `0')dnl
+FEATURE(`no_default_msa',`dnl')dnl
+FEATURE(`smrsh',`/usr/sbin/smrsh')dnl
+FEATURE(`mailertable',`hash -o /etc/mail/mailertable.db')dnl
+FEATURE(`virtusertable',`hash -o /etc/mail/virtusertable.db')dnl
+FEATURE(redirect)dnl
+FEATURE(always_add_domain)dnl
+FEATURE(use_cw_file)dnl
+FEATURE(use_ct_file)dnl
+FEATURE(local_procmail,`',`procmail -t -Y -a $h -d $u')dnl
+FEATURE(`access_db',`hash -T -o /etc/mail/access.db')dnl
+FEATURE(`blacklist_recipients')dnl
+DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')dnl
+FEATURE(`accept_unresolvable_domains')dnl
+LOCAL_DOMAIN(`localhost.localdomain')dnl
+dnl MASQUERADE_AS('your.domain')dnl
+FEATURE(`access_db')dnl
+FEATURE(`authinfo', `hash /etc/mail/authinfo')
+define(`SMART_HOST',`your.smtp.server')dnl
+MASQUERADE_AS(your.domain)dnl
+FEATURE(`allmasquerade')dnl
+FEATURE(`masquerade_envelope')dnl
+FEATURE(genericstable, `hash -o /etc/mail/genericstable')dnl
+GENERICS_DOMAIN_FILE(`/etc/mail/genericsdomain')dnl
+MAILER(smtp)dnl
+MAILER(procmail)dnl
+</code></pre>
+
+<p>Create a file named /etc/mail/genericstable with this inside it</p>
+
+<pre><code>root    user@domain.com
+</code></pre>
+
+<p>and the execute this,</p>
+
+<pre><code>makemap hash /etc/mail/genericstable &lt; /etc/mail/genericstable
+</code></pre>
+
+<p>In this example we are supposing you need to authenticate to the email server of your ISP so be sure to have this line in your
+/etc/mail/sendmail.mc</p>
+
+<pre><code>FEATURE(`authinfo', `hash /etc/mail/authinfo')
+</code></pre>
+
+<p>and also create this file:</p>
+
+<pre><code>vi /etc/mail/authinfo
+</code></pre>
+
+<p>with this inside</p>
+
+<pre><code>AuthInfo:your.smtp.server "U:user@your.smtp.server" "I:user" "P:passwd" "M:LOGIN PLAIN"
+</code></pre>
+
+<p>and run</p>
+
+<pre><code>makemap hash /etc/mail/authinfo &lt; /etc/mail/authinfo
+</code></pre>
+
+<p>and make authinfo readable only by root</p>
+
+<pre><code>chmod 600 /etc/mail/authinfo
+</code></pre>
+
+<p>Now you are done, you can start sending emails using your ISP account with your linux server.</p>
+
+<p><strong>Exim</strong></p>
+
+<p>This have only tested with Debian by me, and it is really easy. run</p>
+
+<pre><code>dpkg-reconfigure exim4
+</code></pre>
+
+<p>and choose smarthost, and provide with the name and port of your ISP server, after that, edit the file
+/etc/exim4/passwd.client</p>
+
+<p>and insert your user and password info, to authenticate on your ISP server in this format</p>
+
+<pre><code>target.mail.server.example:login:password
+</code></pre>
+
+<p>You are done!</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/sendmail-exim-smarthost.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/sendmail-exim-smarthost.html&text=Configure Sendmail and Exim to Send Email with Smarthost&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/sendmail-exim-smarthost.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/sendmail-exim-smarthost.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/sendmail-exim-smarthost.html">linkedin</a> | <a href="mailto:?Subject=Configure Sendmail and Exim to Send Email with Smarthost&Body=http://www.garron.me/en/go2linux/sendmail-exim-smarthost.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/sendmail-exim-smarthost.html&title=Configure Sendmail and Exim to Send Email with Smarthost" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

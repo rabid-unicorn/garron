@@ -1,0 +1,232 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Ubuntu fail in selecting the fastest or closest mirror when not in U.S." />
+
+        <!-- End SEO includes -->
+        <title>Ubuntu fails to select the closest mirror</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Ubuntu fails to select the closest mirror">
+        <meta name="twitter:description" content="Why I think Ubuntu does not make the best usage of Internet as it fails selecting the "closest" mirror.">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Ubuntu fails to select the closest mirror</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/ubuntu-fails-to-find-closest-mirror.html">Ubuntu fails to select the closest mirror</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-11-22 12:18:33 -0500</h6>
+
+<hr>
+<p>I have installed Ubuntu 12.10 Quantal Quetzal (server edition).</p>
+
+<p>While installing it, it asked me about my location I’m in Bolivia, so the mirror chosen for me was <em>bo.archive.ubuntu.com</em> which is actually an alias of a server in Brasil.</p>
+
+<pre><code>nslookup bo.archive.ubuntu.com
+</code></pre>
+
+<p>The output was:</p>
+
+<pre><code>Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+bo.archive.ubuntu.com	canonical name = ubuntu.c3sl.ufpr.br.
+Name:	ubuntu.c3sl.ufpr.br
+Address: 200.236.31.4
+</code></pre>
+
+<p>And if we do a <code>traceroute</code></p>
+
+<pre><code>traceroute bo.archive.ubuntu.com
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code>traceroute to ubuntu.c3sl.ufpr.br (200.236.31.4), 64 hops max, 52 byte packets
+ 1  10.1.1.1 (10.1.1.1)  110.143 ms  2.726 ms  3.475 ms
+ 2  200.87.61.81 (200.87.61.81)  4.135 ms  3.888 ms  2.981 ms
+ 3  172.17.161.129 (172.17.161.129)  66.871 ms  59.763 ms  63.922 ms
+ 4  scz-asr-02.entelnet.bo (200.87.251.161)  80.988 ms  66.989 ms  84.650 ms
+ 5  scz-crs1-02.entelnet.bo (200.87.251.113)  70.946 ms  59.432 ms  64.540 ms
+ 6  scz-peer-01.entelnet.bo (190.129.252.105)  70.327 ms  58.361 ms  99.851 ms
+ 7  mia-peer-01.entelnet.bo (200.87.252.246)  192.025 ms  199.756 ms  221.262 ms
+ 8  xe-0-6-0-7-56.r05.miamfl02.us.bb.gin.ntt.net (157.238.179.45)  197.386 ms  196.573 ms  235.639 ms
+ 9  te4-5.ccr02.mia03.atlas.cogentco.com (154.54.11.245)  393.865 ms  252.780 ms  243.769 ms
+10  38.104.94.74 (38.104.94.74)  225.058 ms  196.940 ms  215.749 ms
+11  ampath-sp-10g-gblx.bkb.rnp.br (200.143.254.233)  303.538 ms  323.038 ms  300.004 ms
+12  sp-pr-10g-oi.bkb.rnp.br (200.143.252.62)  311.280 ms  326.603 ms  310.093 ms
+13  lanpr-mxpr-10g-int.bkb.rnp.br (200.143.255.154)  309.725 ms  311.120 ms  332.263 ms
+14  c3sl-ge-1-5-r2.pop-pr.rnp.br (200.19.74.158)  309.735 ms  331.000 ms  324.565 ms
+15  ubuntu.c3sl.ufpr.br (200.236.31.4)  321.038 ms  335.952 ms  323.321 ms
+</code></pre>
+
+<p>We can see, that the request had to travel from Bolivia, to US (Florida) and then go back to Brasil, and then the traffic from Brasil to US and to Bolivia.</p>
+
+<p>Brasil is maybe the closest server to Bolivia, geographically talking, but not from the network point of view.</p>
+
+<p>It would have been better to choose a US server, one in Florida would be great. I always change this by hand when I finish installing Ubuntu.</p>
+
+<p>But it should works automatically, this way we are only adding traffic to networks. And someone is paying for that traffic.</p>
+
+<p>Also the reply has more delay, and more possibilities to be saturated in any of the ways.</p>
+
+<p>I think Ubuntu should try to solve this, and I’m sure is the same thing if you are in Africa, lots of Africa’s countries, connect directly to Europe, while not interconnecting between them. The same is true in South America. All of us go to U.S. not too much interconnection between us.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html&text=Ubuntu fails to select the closest mirror&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html">linkedin</a> | <a href="mailto:?Subject=Ubuntu fails to select the closest mirror&Body=http://www.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/ubuntu-fails-to-find-closest-mirror.html&title=Ubuntu fails to select the closest mirror" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

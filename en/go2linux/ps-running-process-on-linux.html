@@ -1,0 +1,245 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/ps-running-process-on-linux.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Using ps command to show running processes under bash for Linux or Mac OS X" />
+
+        <!-- End SEO includes -->
+        <title>ps - How to check the running processes on Linux</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="ps - How to check the running processes on Linux">
+        <meta name="twitter:description" content="Using ps command to show running processes under bash for Linux or Mac OS X">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">ps - How to check the running processes on Linux</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/ps-running-process-on-linux.html">ps - How to check the running processes on Linux</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2008-12-30 07:36:30 -0500</h6>
+
+<hr>
+<p>ps, is a Linux command tool, that lets you view the current running processes, it is very useful when you are trying to kill a process or to view which applications other users are running (if you are the admin).</p>
+
+<p>You may use it to check your own applications, some other user’s application or a full list of the applications running on the operating system, you may also combine it with grep.</p>
+
+<p>running it alone with no atributes</p>
+
+<pre><code>ps
+</code></pre>
+
+<p>Will give your actual running applications.</p>
+
+<pre><code> 6999 pts/1    00:00:00 bash
+ 7099 pts/1    00:00:00 ps
+</code></pre>
+
+<p>notice, that those are the running applications in that given console, so if you have a lot of running virtual terminals, it will only list those running (started from) that give one.</p>
+
+<p>If you want to check all the processes you are running, enter:</p>
+
+<pre><code>ps -u username
+</code></pre>
+
+<p>Where username is your username.</p>
+
+<p>The output for me now is:</p>
+
+<pre><code> PID TTY          TIME CMD
+ 3270 ?        00:00:00 gnome-session
+ 3316 ?        00:00:00 ssh-agent
+ 3319 ?        00:00:00 dbus-launch
+ 3320 ?        00:00:00 dbus-daemon
+ 3325 ?        00:00:00 gconfd-2
+ 3328 ?        00:00:00 gnome-keyring-d
+ 3330 ?        00:00:05 gnome-settings-
+ 3345 ?        00:00:16 gnome-screensav
+ 3346 ?        00:00:05 openbox
+ 3347 ?        00:00:31 gnome-panel
+ 3349 ?        00:00:03 nautilus
+ 3352 ?        00:00:00 bonobo-activati
+ 3358 ?        00:00:00 bluetooth-apple
+ 3361 ?        00:00:00 update-notifier
+ 3369 ?        00:00:00 gnome-vfs-daemo
+ 3372 ?        00:00:00 gnome-volume-ma
+ 3381 ?        00:00:00 gnome-power-man
+ 3409 ?        00:00:00 mapping-daemon
+ 3418 ?        00:00:00 mixer_applet2
+ 3457 ?        00:15:43 firefox-bin
+ 3530 ?        00:00:04 notification-da
+ 3544 ?        00:00:00 icedove
+ 3556 ?        00:00:00 run-mozilla.sh
+ 3561 ?        00:01:00 icedove-bin
+ 3579 ?        00:00:06 gnome-terminal
+ 3582 ?        00:00:00 gnome-pty-helpe
+ 3583 pts/0    00:00:00 bash
+ 3617 pts/0    00:00:00 ssh
+ 3707 ?        00:00:09 gftp-gtk
+ 6999 pts/1    00:00:00 bash
+ 7100 pts/1    00:00:00 ps
+</code></pre>
+
+<p>The first column shows the PID the second the terminal where the process is running, the third, the time it is running and the last one the name of the application.</p>
+
+<p>To check all running applications, enter</p>
+
+<pre><code>ps -e
+</code></pre>
+
+<p>another good option is:</p>
+
+<pre><code>ps aux
+</code></pre>
+
+<p>Which will be like the above one, but will also shows you the CPU and Memory load that every process is charging on the PC.</p>
+
+<p>check man ps, to view more options and examples.</p>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/ps-running-process-on-linux.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/ps-running-process-on-linux.html&text=ps - How to check the running processes on Linux&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/ps-running-process-on-linux.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/ps-running-process-on-linux.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/ps-running-process-on-linux.html">linkedin</a> | <a href="mailto:?Subject=ps - How to check the running processes on Linux&Body=http://www.garron.me/en/go2linux/ps-running-process-on-linux.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/ps-running-process-on-linux.html&title=ps - How to check the running processes on Linux" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

@@ -1,0 +1,284 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/centos-vs-debian.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Your best option to power your web server. Comparing CentOS and Debian as your options for web server operating systems. Considering stability, easy of use, fresh package availability" />
+
+        <!-- End SEO includes -->
+        <title>Debian vs CentOS</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Debian vs CentOS">
+        <meta name="twitter:description" content="Comparing CentOS and Debian as your options for web server operating systems. Considering stability, easy of use, fresh package availability">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Debian vs CentOS</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/centos-vs-debian.html">Debian vs CentOS</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-06-04 15:41:11 -0400</h6>
+
+<hr>
+<h2 id="introduction">Introduction</h2>
+
+<p>When it comes to setup web servers, or Internet servers (web, email and ftp) there is usually two GNU/Linux distributions that comes to mind, Debian and CentOS. Some people are starting to use Ubuntu server, but let’s focus on CentOS and Debian, as Ubuntu is a Debian derivative.</p>
+
+<p>I think you should consider two main points when choosing a web server.</p>
+
+<ul>
+  <li>Stability</li>
+  <li>Software versions</li>
+  <li>Easy of upgrades</li>
+</ul>
+
+<h2 id="centos">CentOS</h2>
+
+<blockquote>
+  <p>CentOS (Community Enterprise Operating System) is a Linux distribution which attempts to provide a free enterprise class computing platform which has 100% binary compatibility with its upstream source, Red Hat Enterprise Linux (RHEL). As of version 6.4, it officially supports x86 and x86-64 architecture with Physical Address Extension, while a beta is expected to be available for PowerPC
+– Wikipedia</p>
+</blockquote>
+
+<p>So CentOS is a community driven clone of Red Had Enterprise Linux. This should make it very, very stable and suitable to be used as web server. In fact by the time of this writing CentOS is the second most used distribution for web servers, according to Wikipedia.</p>
+
+<h3 id="main-software-versions">Main Software versions</h3>
+
+<p>By the time of this writing, the main software version needed for web server applications in “vanilla” CentOS are:</p>
+
+<ul>
+  <li>Apache -&gt; 2.2.15</li>
+  <li>PHP -&gt; 5.3.3</li>
+  <li>MySQL -&gt; 5.1.66</li>
+  <li>PostgreSQL -&gt; 8.4.13</li>
+</ul>
+
+<h3 id="upgrading">Upgrading</h3>
+
+<p>When you are choosing a software, any kind of software that is going to be used in a production environment. You should always consider how easy or hard it to upgrade it.</p>
+
+<p>Consider that this server is almost for sure going to be located far from you, and you will only have ssh access to it.</p>
+
+<p>CentOS is not an easy GNU/Linux distribution to upgrade, actually in the <a href="http://wiki.centos.org/HowTos/MigrationGuide">official Wiki</a> it recommends:</p>
+
+<blockquote>
+  <p>A fresh install is generally strongly preferred over an upgrade.</p>
+</blockquote>
+
+<p>And at the end of the page, it says.</p>
+
+<blockquote>
+  <p>Good Luck. Enjoy!</p>
+</blockquote>
+
+<h3 id="stability">Stability</h3>
+
+<p>CentOS is one of the most tested and stable GNU/Linux distributions, and that is why it is also one of the most used ones.</p>
+
+<p>I have personally run a CentOS server for seven years, actually it is still the same machine for all those years. I still run CentOS 4 on it. It is my office firewall and DHCP server, it was once my mail and web server too.</p>
+
+<p>I have never had a problem with it. I am sure that if something is going to fail, it will be the hardware.</p>
+
+<h2 id="debian">Debian</h2>
+
+<blockquote>
+  <p>Debian is an operating system—developed by the Debian project mostly composed of free and open source software carrying the GNU General Public License. However, it also includes non-GPL software outside its official repositories to comply with its guidelines of providing free software.</p>
+</blockquote>
+
+<h3 id="main-software-versions-1">Main Software versions</h3>
+
+<p>By the time of this writing, Debian Stable Wheezy has these software versions.</p>
+
+<ul>
+  <li>Apache -&gt; 2.2.22</li>
+  <li>PHP -&gt; 5.4.4</li>
+  <li>MySQL -&gt; 5.5.30</li>
+  <li>PostgreSQL -&gt; 9.1.9</li>
+</ul>
+
+<h3 id="upgrading-1">Upgrading</h3>
+
+<p>Upgrading Debian from one stable version to the next stable version is easy and not painful. I have written in the past about <a href="/en/linux/upgrade-debian-squeeze-wheezy-6.0-7.0.html">upgrade Debian Squeeze to Wheezy</a>. And I have done it in the past as I still have a Desktop I started running Debian Sarge, and now it is running Debian Jessie.</p>
+
+<h3 id="stability-1">Stability</h3>
+
+<p>The Debian’s release philosophy “Release when ready” makes it stable to the most, only when all bugs have been addressed, only when everything has been fully tested and only when everybody is sure that there are no issues, a new stable version is released. This make Debian one of the most stable distributions available.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Finally, which one should you choose?</p>
+
+<p>I would pick Debian, because it usually have more up to date packages, and because it is easier to upgrade. I have started my GNU/Linux journey with Red Hat Linux, and then I have always used CentOS and Fedora in my Desktop. Some years ago I tested Debian, and switched to it for me servers (except the one I have talked about above).</p>
+
+<p>But, if you are more used to CentOS and are more accustomed to work with it, then there is no real reason to switch to Debian. CentOS and Debian are both the best options you have when choosing a GNU/Linux distribution to install in your web server. They both:</p>
+
+<ul>
+  <li>Have The most possible updated version of packages <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></li>
+  <li>Are a very solid and stable GNU/Linux distribution</li>
+</ul>
+
+<p>They are not equally easy to upgrade, but you only have to do so once every two to three years, so you should even be able to afford a fresh installation.</p>
+
+<p>Update: June 5, 2013: One more thing you have to consider when installing a Web Server. If you are going to use this server as a reseller tool. You may want to install CPanel, and in such a case you have to go with CentOS, as it is officially supported.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The most possible updated version, without sacrifice stability. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+<hr>
+<a href="http://www.garron.me/en/linux/centos-vs-debian.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/centos-vs-debian.html&text=Debian vs CentOS&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/centos-vs-debian.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/centos-vs-debian.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/centos-vs-debian.html">linkedin</a> | <a href="mailto:?Subject=Debian vs CentOS&Body=http://www.garron.me/en/linux/centos-vs-debian.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/centos-vs-debian.html&title=Debian vs CentOS" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

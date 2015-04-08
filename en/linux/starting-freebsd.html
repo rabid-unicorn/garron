@@ -1,0 +1,251 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/starting-freebsd.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="First steps with FreeBSD on Digital Ocean, installing some useful tools to work with the server" />
+
+        <!-- End SEO includes -->
+        <title>Starting with FreeBSD</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Starting with FreeBSD">
+        <meta name="twitter:description" content="First steps with FreeBSD on Digital Ocean, installing some useful tools to work with the server">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Starting with FreeBSD</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/starting-freebsd.html">Starting with FreeBSD</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2015-01-14 21:00:00 -0500</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/freebsd.html">freebsd</a>,</small></p>
+
+<hr>
+<h3 id="starting-with-freebsd-on-digital-ocean">Starting with FreeBSD on Digital Ocean</h3>
+
+<p>I have received an email today telling me that I am now able to install FreeBSD on DigitalOcean, of course I have inmediately headed to D.O. and created a new droplet and have chosen FreeBSD.</p>
+
+<p>I have read a lot of good things about FreeBSD, and now that it is available on Digital Ocean I will start experimenting with it a little bit more than before.</p>
+
+<p>I will be posting on this section of the site some of my discoveries, and on <a href="/en/bits/">tips</a> section small but useful tips I surely will be discovering about FreeBSD operating system. Let’s now see what were the first steps preparing the server to work with it.</p>
+
+<p>After login in, with the <code>freebsd</code> account as required, I discovered that I have <a href="/en/linux/visudo-command-sudoers-file-sudo-default-editor.html">sudo powers</a> on that account.</p>
+
+<p>The first steps for me in every new system I install is to put all the tools I normally use:</p>
+
+<ul>
+  <li>vim</li>
+  <li>htop</li>
+  <li>iftop</li>
+</ul>
+
+<h3 id="htop-on-freebsd">Htop on freeBSD</h3>
+
+<p>To install htop I had to go over these steps</p>
+
+<pre><code>sudo pkg install htop
+</code></pre>
+
+<p>Then I needed to modify the <code>/etc/fstab</code> file and add this line. <code>linproc /compat/linux/proc linprocfs rw,late 0 0</code> so,</p>
+
+<pre><code>sudo echo "linproc /compat/linux/proc linprocfs rw,late 0 0" &gt;&gt; /etc/fstab
+</code></pre>
+
+<p>Finally run this command.</p>
+
+<pre><code>sudo mkdir -p /usr/compat/linux/proc; ln -s /usr/compat /compat; mount linproc
+</code></pre>
+
+<p>Well, I now have <code>htop</code> installed.</p>
+
+<h3 id="install-vim-on-freebsd">Install vim on FreeBSD</h3>
+
+<p>Another must have of my tool belt is <code>vim</code>, this was a simple one.</p>
+
+<pre><code>sudo pkg install vim
+</code></pre>
+
+<h3 id="install-iftop-on-freebsd">Install iftop on FreeBSD</h3>
+
+<p>It is now turn of <code>iftop</code>, this is a tool I use a lot to monitor who is connecting to my system and on which ports, and how much bandwidth it is using.</p>
+
+<pre><code>sudo pkg install iftop
+</code></pre>
+
+<p>I can now monitor the traffic on my server with:</p>
+
+<pre><code>sudo iftop -i vtnet0 -pP
+</code></pre>
+
+<p>And I will on realtime the information about who is connecting to my server, on which port, and at what speed.</p>
+
+<h3 id="install-vnstat-on-freebsd">Install vnstat on FreeBSD</h3>
+
+<p>I use <code>vnstat</code> to monitor the bandwidth consumed on my VPS server over a month, so I can be sure not to exceep my quota.</p>
+
+<pre><code>sudo pkg install vnstat
+</code></pre>
+
+<p><code>vnstat</code> cannot be used right away, it needs some configuration, so, let’s do it.</p>
+
+<pre><code>sudo mkdir -p /var/lib/vnstat
+
+sudo vnstat -i vtnet0 --create
+</code></pre>
+
+<hr>
+<a href="http://www.garron.me/en/linux/starting-freebsd.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/starting-freebsd.html&text=Starting with FreeBSD&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/starting-freebsd.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/starting-freebsd.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/starting-freebsd.html">linkedin</a> | <a href="mailto:?Subject=Starting with FreeBSD&Body=http://www.garron.me/en/linux/starting-freebsd.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/starting-freebsd.html&title=Starting with FreeBSD" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

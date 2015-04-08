@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- SEO includes -->
+        
+
+        <link rel="canonical" href="http://www.garron.me/es/articulos/guia-de-vi-vim.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Guía de uso y ayuda para vi o vim" />
+
+        <!-- End SEO includes -->    
+        <title>Guía de uso de vi or vim</title>
+        <!-- CSS -->
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Vollkorn|Old+Standard+TT|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.journal.min.css" rel="stylesheet">
+        <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet">
+        <!-- Custom Css -->
+        <!-- <style>body {background-color: #FFFFFF;}
+
+body,
+input,
+small,
+button,
+select,
+textarea,
+.navbar-search .search-query {
+  font-family: "Source Sans Pro", "Vollkorn", Georgia, "Times New Roman", Times, serif; font-weight: 300; font-size: 18px; line-height: 26px; color: #404040;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josefin Slab", Georgia, "Times New Roman", Times, serif; font-weight: 400; color: #101010;
+}
+
+.gallery-image-wrapper {
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+  margin: 1em;
+  position: relative;
+  text-align: left;
+}
+.gallery-image {
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#text-center {
+text-align: center
+}
+</style> -->
+        <!-- End custom css -->
+        <!-- End CSS -->
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Guía de uso de vi or vim">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+            <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-static-top visible-xs visible-sm">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/es/"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/es/">Inicio</a></li>
+            <li><a href="/es/gnu-linux/">Linux</a></li>
+            <li><a href="/es/mac-os/">Mac</a></li>
+            <li><a href="/es/cortos/">Tips</a></li>
+            <li><a href="/es/articulos/">Artículos</a></li>
+            <li><a href="/es/archivos.html">Archivos</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Personales <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/es/bitacora/">Bitacora</a></li>
+                <li><a href="/es/fotos/">Fotos</a></li>
+                <li><a href="/es/recetas/">Comida</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div class="container">
+    <!-- Nav Bar -->
+    <H1><a href="/es/">Guillermo Garron</a></h1>
+<p>Suscribete: <a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p>
+<ol class="breadcrumb">
+
+	<li><a href="/index.html">Geeking</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/index.html">Tecnología</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/articulos/index.html">Artículos</a>
+	<li class="divider">&gt;</li>
+
+	<li class="active">Guía de uso de vi or vim</li>
+</ol>
+
+
+    <!-- Nav Bar -->
+    <div id="content" class="row">
+        <div class="col-md-2 visible-lg visible-md">
+            <h4>Categorias</h4>
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li><h4>Tecnicas</h4></li>
+    <li><a href="/es/gnu-linux/">Linux</a></li>
+    <li><a href="/es/mac-os/">Mac</a></li>
+    <li><a href="/es/cortos/">Tips</a></li>
+    <li><a href="/es/articulos/">Artículos</a></li>
+    <hr>
+    <li><h4>Personales</h4></li>
+    <li><a href="/es/bitacora/">Reflexiones</a></li>
+    <li><a href="/es/fotos/">Fotos</a></li>
+    <li><a href="/es/recetas/">Cocinando</a></li>
+    <hr>
+    <li><a href="/es/archivos.html">Archivos</a></li>
+    <hr>
+    <li><p><a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p></li>
+  </ul>
+</div>
+
+        </div>
+        <div class="col-md-7">
+            <h2>Introdución</h2>
+<p>Yo uso bastante vi/vim, en realidad vim es lo que uso, aunque desde hace un par de semanas que tambien estoy haciendo uso intensivo de emacs, aún es vim lo que más uso.</p>
+<p>Escribo esto como una referencia propia de los comandos que requiero en vim, y que constantemente olvido, pues no uso todos diariamente.</p>
+<p>Esta claro que este documento será una recopilación de muchos otros encontrados en la Web, pues ya se escribió bastante al respecto. Tratare de ir actualizando y completando este documento con el tiempo.</p>
+<p>Si tienes sugerencias, puedes contactarme mediante <a href="http://twitter.com/ggarron">twitter</a></p>
+<p>Entremos en materia:</p>
+<h2>Qué es vim</h2>
+<p>Bueno vi, es un editor de texto creado en 1976 por Bill Joy originalmente, fue creado para los sistemas basados en Unix. Es actualmente uno de los editores de texto más utilizados en el mundo Linux, <span class="caps">DSD</span> y también hay muchos usuarios de Mac, que lo usan. Aunque creo que se usa más el emacs entre los usuarios de Mac.</p>
+<h2>Comandos de vim</h2>
+<p><strong>Modos</strong></p>
+<p>El editor <em>vim</em> posee dos modos de operación, el modo de comandos y el modo de inserción de texto. Cuando lo inicias, entra por defecto en el modo de comandos. Para pasar al modo de editor, debes iniciarlo de alguna manera. La forma más común de pasar al modo de edición es presionando la tecla <em>i</em>. Para salir del modo de edición y volver al modo de comandos, basta con presionar la tecla <em><span class="caps">ESC</span></em></p>
+<p><strong>Salir del editor</strong></p>
+<dl>
+	<dt>:x</dt>
+	<dd>Sale del editor, salvando los cambios. Es decir, cualquier cambio que se haya efectuado en el documento, sera guardado en el disco antes de salir.</dd>
+</dl>
+<dl>
+	<dt>:q</dt>
+	<dd>Sale del editor, solo si no hubieron cambios en el mismo. En caso de haber cambios, se negará a salir, dando la oportunidad de guardar los cambios realizados. Esta es la forma más segura de salir, y debe ser la que nos acostumbremos a usar.</dd>
+</dl>
+<dl>
+	<dt>ZZ</dt>
+	<dd>Doble Z mayúscula, basta presionar Shift y dos veces la letra z, esto proboca que el el editor finalize y guarde los cambios que se hubieran realizado.</dd>
+</dl>
+<dl>
+	<dt>:q!</dt>
+	<dd>Igual que <strong>:q</strong> pero, en este caso, no guarda los cambios, ni alerta de los mismos. Util cuando hemos realizado cambios a un documento que no queremos conservar, peligroso acostumbrarse a usarlo siempre para salir, pues podemos perder los cambios realizados <b>no habrá ningún tipo de alerta</b></dd>
+</dl>
+<dl>
+	<dt>:wq</dt>
+	<dd>Graba el archivo y sale del editor, a diferencia de :x, :wq, graba el archivo aún cuando no se hubieran realizado cambios al mismo</dd>
+</dl>
+<p><strong>Moviendose en el archivo</strong></p>
+<p>Moverse en el arhivo con vim, es muy fácil gracias a los atajos del teclado, usar el teclado más que el ratón ayuda a evitar lesiones de la muñeca. Al menos eso creo yo.</p>
+<p>Estos son comandos para utilizarse en el modo de comando.</p>
+<dl>
+	<dt>k o flecha arriba</dt>
+	<dd>Mueve el cursor para arriba</dd>
+</dl>
+<dl>
+	<dt>j o flecha abajo</dt>
+	<dd>Mueve el cursor para abajo</dd>
+</dl>
+<dl>
+	<dt>h o flecha a la izquierda</dt>
+	<dd>Mueve el cursor a la izquierda</dd>
+</dl>
+<dl>
+	<dt>l o flecha a la derecha</dt>
+	<dd>Mueve el cursor a la derecha</dd>
+</dl>
+<dl>
+	<dt>e</dt>
+	<dd>Lleva el cursor al final de la palabra actual</dd>
+</dl>
+<dl>
+	<dt>E</dt>
+	<dd>Al final de una palabra delimitada por espacios</dd>
+</dl>
+<dl>
+	<dt>b</dt>
+	<dd>Al inicio de una palabra</dd>
+</dl>
+<dl>
+	<dt>B</dt>
+	<dd>Al inicio de una palabra delimitada por espacios</dd>
+</dl>
+<dl>
+	<dt>O</dt>
+	<dd>Al inicio de la línea</dd>
+</dl>
+<dl>
+	<dt>^</dt>
+	<dd>Al primero caracter de una línea que no sea un espacio</dd>
+</dl>
+<dl>
+	<dt>$</dt>
+	<dd>Al final de la línea</dd>
+</dl>
+<dl>
+	<dt>H</dt>
+	<dd>A la primer línea de la pantalla</dd>
+</dl>
+<dl>
+	<dt>M</dt>
+	<dd>A la línea al medio de la pantalla</dd>
+</dl>
+<dl>
+	<dt>L</dt>
+	<dd>A la última línea de la pantalla</dd>
+</dl>
+<dl>
+	<dt>:n</dt>
+	<dd>Salta a la línea n, donde n, es un número entero</dd>
+</dl>
+        </div>
+        <div class="col-md-3">
+            <!-- Esta es la columna derecha que debe estar vacía por ahora -->
+        </div>
+    </div>
+</div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/bootstrap/js/magnific-popup.js"></script>
+        <script src="/bootstrap/js/custom.js"></script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Control VirtualBox virtual machines from the command line terminal" />
+
+        <!-- End SEO includes -->
+        <title>VBoxManage control and manage Virtualbox from command line</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="VBoxManage control and manage Virtualbox from command line">
+        <meta name="twitter:description" content="Control VirtualBox virtual machines from the command line terminal">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">VBoxManage control and manage Virtualbox from command line</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html">VBoxManage control and manage Virtualbox from command line</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-01-17 09:36:30 -0500</h6>
+
+<hr>
+<p><a href="/es/gnu-linux/controla-maquinas-virtuales-virtualbox.html">Spanish version</a></p>
+
+<p><strong>Introduction</strong></p>
+
+<p>VirtualBox is according to developers:</p>
+
+<blockquote>
+  <p>VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product for enterprise as well as home use. Not only is VirtualBox an extremely feature rich, high performance product for enterprise customers, it is also the only professional solution that is freely available as Open Source Software under the terms of the GNU General Public License (GPL). See “About VirtualBox” for an introduction.</p>
+</blockquote>
+
+<p>And according to Wikipedia:</p>
+
+<blockquote>
+  <p>Oracle VM VirtualBox is an x86 virtualization software package, originally created by software company innotek GmbH, purchased by Sun Microsystems, and now developed by Oracle Corporation as part of its family of virtualization products. It is installed on an existing host operating system; within this application, additional guest operating systems, each known as a Guest OS, can be loaded and run, each with its own virtual environment.</p>
+</blockquote>
+
+<blockquote>
+  <p>Supported host operating systems include Linux, Mac OS X, Windows XP, Windows Vista, Windows 7, Solaris, and OpenSolaris; there is also a port to FreeBSD (only OSE version). Supported guest operating systems include a small number NetBSD versions and various versions of Windows, Linux, DragonFlyBSD, FreeBSD, OpenBSD, OS/2 Warp, Solaris, OpenSolaris, Haiku, Syllable, ReactOS, and SkyOS.</p>
+</blockquote>
+
+<p>From this, we may know that it is a powerful and useful tool, for those trying to test new Operating Systems, or try new configurations on Known Operating Systems. I use it a lot to test new Linux distribution, without the need to install them on my Hard Disk.</p>
+
+<p>Another great use for it, is to have separated servers on the same hardware just to improve security, I mean: Why to have DNS server, FTP server, Web server and all others on the same environment, where an attack to one of these server may compromise all the others, you can install Linux on a good Hardware, and VirtualBox on it, and three or four different virtual machines running Linux to have all those functions mentioned before on different Virtual Machines, thus increasing the security of your configuration.</p>
+
+<p>But, enough talking about this, this will be material of another article, let’s focus on how to manage VirtualBox from the command line, as you usually will do it from the GUI.</p>
+
+<p><strong>List virtual machines from command line</strong></p>
+
+<p>The command we will use for this is VBoxManage and different sub-commands it has, to list the virtual machines installed run:</p>
+
+<pre><code> VBoxManage list vms
+
+Oracle VM VirtualBox Command Line Management Interface Version 3.2.12
+(C) 2005-2010 Oracle Corporation
+All rights reserved.
+
+"win7" {3f157880-c642-4be2-b641-85d7aedb5090}
+"msn" {acc458d0-435b-44c7-806d-41c4948bb490}
+"itunes" {41238c30-5f05-4fda-b008-5169d69505f6}
+"Linux-Mint" {c25e1257-dfed-4789-a22b-8489c4d4df05}
+"ubuntu" {fee70808-ab0e-473a-8991-d9b711773672}
+"xp" {c75ec9b7-90b2-4f97-9e07-1267a3a03cb1}
+"ubuntu-netop" {3d216ab8-3b44-46fd-8738-8c631801176e}
+"slackware" {f65d5b26-6491-4523-8c06-970cbe6844d5}
+"peppermint" {32b1845f-dd72-4c8a-bfe7-8cc3e83d0109}
+</code></pre>
+
+<p>If you specify -l then, you will get a detailed information about each one of those.</p>
+
+<pre><code>VBoxManage list vms -l
+</code></pre>
+
+<p><strong>How to start virtual machines from command line</strong></p>
+
+<p>Now that you know which virtual machines are already installed, let’s see how to start them.</p>
+
+<pre><code>VBoxManage startvm "slackware"
+</code></pre>
+
+<p>or</p>
+
+<pre><code>VBoxManage startvm f65d5b26-6491-4523-8c06-970cbe6844d5
+</code></pre>
+
+<p>You can add those commands to your startup scripts, so virtual machines are started when you to boot your primary Linux server.</p>
+
+<p><strong>How to stop a virtual machine from command line</strong></p>
+
+<p>Now we know how to start virtual machines, we need to know how to stop them, there are some options.</p>
+
+<p><em>Pause the virtual machine</em></p>
+
+<p>This will just put the virtual machine on hold, until un-paused.</p>
+
+<pre><code>VBoxManage controlvm "slackware" pause
+</code></pre>
+
+<p><em>Resume the paused virtual machine</em></p>
+
+<pre><code>VBoxManage controlvm "slackware" resume
+</code></pre>
+
+<p><em>Reset -restart- the virtual machine</em></p>
+
+<pre><code>VBoxManage controlvm "slackware" reset
+</code></pre>
+
+<p>This will close the virtual machine, and restart immediately, you unsaved data on the virtual machine will not be saved, and will be lost! you have been warned.</p>
+
+<p><em>Poweroff or shut down the virtual machine</em></p>
+
+<pre><code>VBoxManage controlvm "slackware" poweroff
+</code></pre>
+
+<p>This will poweroff the virtual machine, and once again any unsaved data will be lost.</p>
+
+<p><em>Stop virtual machine, and save data</em></p>
+
+<pre><code>VBoxManage controlvm "slackware" savestate
+</code></pre>
+
+<p>This will save current state of the virtual machine and stop it, I think of this more or less, like hibernate the virtual machine.</p>
+
+<p><strong>Create a new virtual machine</strong></p>
+
+<p>You can also create new virtual machines from command line:</p>
+
+<pre><code>VBoxManage createvm -name "LinuxMint" -register
+</code></pre>
+
+<p>This create a new virtual machine, with default options.</p>
+
+<p><strong>Change Settings on the virtual machine from command line</strong></p>
+
+<p>Now we have a new virtual machine created, let’s change some of its default settings, like the allocated RAM:</p>
+
+<pre><code>VBoxManage modifyvm "LinuxMint -memory "1024MB"
+</code></pre>
+
+<p>Check the <a href="http://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm">complete set of parameters</a></p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>As you can see, VirtualBox is very flexible and fully managed from the command line, so it can be used on a Dedicated server, in a remote data center, and you may have all your virtual machines under control.</p>
+
+<p>I’m not saying this is the best option to go for professional virtualization, but it is certainly a good one, and an easy one too.</p>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html&text=VBoxManage control and manage Virtualbox from command line&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html">linkedin</a> | <a href="mailto:?Subject=VBoxManage control and manage Virtualbox from command line&Body=http://www.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/vboxmanage-control-and-manage-virtualbox-command-line.html&title=VBoxManage control and manage Virtualbox from command line" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

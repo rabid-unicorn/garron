@@ -1,0 +1,519 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+
+        <link rel="canonical" href="http://www.garron.me/en/articles/latex-tutorial.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="LaTeX tutorial, covering: Uses, Introduction, margins, images / figures, tables and a cross platform editor: TexMaker" />
+
+        <!-- End SEO includes -->
+        <title>LaTeX Tutorial</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="LaTeX Tutorial">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/articles/index.html">Articles</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">LaTeX Tutorial</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h2 id="latex-tutorial">LaTeX Tutorial</h2>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This is just a small and simple tutorial, maybe just an introduction to LaTeX. I will try to keep improving it.</p>
+
+<p><strong>Definition</strong></p>
+
+<blockquote>
+  <p>LaTeX is a document markup language and document preparation system for the TeX typesetting program. The term LaTeX refers only to the language in which documents are written, not to the editor used to write those documents. In order to create a document in LaTeX, a .tex file must be created using some form of text editor. While most text editors can be used to create a LaTeX document, a number of editors have been created specifically for working with LaTeX
+–Source <a href="http://en.wikipedia.org/wiki/LaTeX">Wikipedia</a>
+Latex is essentially a markup language. Content is written in plain text and can be annotated with various ‘commands’ that describe how certain elements should be displayed. The Latex interpreter reads in a Latex marked-up file, renders the content into a document and dumps it a new file. Therefore, it’s not an interactive system that is the de-facto method for document creation nowadays.
+–Source <a href="http://www.osnews.com/story/10766">Osnews</a></p>
+</blockquote>
+
+<p><strong>Uses</strong></p>
+
+<p>LaTeX us used mainly to create books, and university documents, so is mostly used by professors and PhD students. But it might help you too.</p>
+
+<p>It is great when you are creating memos, letter, CVs, and reports.</p>
+
+<p><strong>Total Control</strong></p>
+
+<p>LaTeX lets you have the total control of how your documents are going to look like. You just define sections, and write the text in plain text editors. When finished, you can define how each section is going to be formatted, and you compile the document to have a final version.</p>
+
+<p>To change the style of the entire document or just a section, is really easy, and you do not have to navigate the whole document to pick up sections you want to change its format.</p>
+
+<p><strong>Portable</strong></p>
+
+<p>LaTeX is great at its portability, you can edit the source document under Windows, Linux or Mac, now a days you can even use your tablet or phone to edit plain text documents, therefore you can edit LaTeX documents on your iPad, or Android phone too.</p>
+
+<p><strong>Profesional Look</strong></p>
+
+<p>The quality of the finished documents of LaTeX is not comparable with the output of any Word Processor by the time of this writing. Specially if you are writing Math books, with lots of formulas, you better bet on LaTeX.</p>
+
+<p>LaTeX will make your documents look, like if they were printed in a professional editorial.</p>
+
+<p>It has pre-sets for the type of document you are writing, and will keep the best possible typography on your document, for it to be easily read. This is maybe not too important for small letters, but for larger documents like a report, it is a lot better to respect some rules, and LaTeX will do that for you.</p>
+
+<p><strong>Document Weight</strong></p>
+
+<p>This is another side effect I like about LaTeX documents, being them just plain text, transport them is really easy, even send them as email attachments is not a problem, no matter how many pages you may have.</p>
+
+<p><strong>Collaboration</strong></p>
+
+<p>When you are using plain text documents, you can easily start a collaboration group. Lots of people can work on the same document a the same time. Just put it on git and start your collaboration group.</p>
+
+<h3 id="learning-latex">Learning LaTeX</h3>
+
+<p>Are you already convinced that LaTeX is for you? Well, we are going to start learning it. This tutorial is just an introduction to LaTeX, and will leave you at a point where you will be able to create simple documents. From there you will continue learning while using it and facing different issues. Remember that the Internet is full of resources, and all you need is to know how to find the information.</p>
+
+<p><strong>Control Sequences</strong></p>
+
+<p>Control sequences are the commands in LaTeX language, they start with the back slash \, and tell TeX how to format the text in the document.</p>
+
+<p><strong>Special Characters</strong></p>
+
+<p><code>\ {} $ ^ _ % ~ # &amp;</code> have special meaning in the document and helps formatting and creating a well look document.</p>
+
+<p><code>\</code>: Usually start control sequences, they are followed by “commands” so to say.</p>
+
+<p><code>{}</code>: Delimit the characters where the control sequences are going to act</p>
+
+<p><code>$</code>: Is used to start and finish mathematical formulas</p>
+
+<p><code>^</code>: Produces superscripts, used widely in mathematical formulas</p>
+
+<p><code>_</code>: Produces subscripts, also used specially for mathematical formulas</p>
+
+<p><code>%</code>: Is used to introduce comments in the document, nothing at the right of this symbol is read when processing the .tex file</p>
+
+<p><code>&amp;</code>: Is used in tables</p>
+
+<p><code>#</code>: Is used to specify arguments for the control sequences</p>
+
+<p><strong>Creating my first document</strong></p>
+
+<p>The first thing we will do is to install LaTeX:</p>
+
+<ul>
+  <li>Working on Mac? Download <a href="http://www.tug.org/mactex/">MacTeX</a></li>
+  <li>Working on Linux, Ubuntu maybe? <code>sudo apt-get install texlive-latex-base</code></li>
+</ul>
+
+<p>Now, to create a simple document we will first declare the type of document:</p>
+
+<pre><code>\documentclass[10pt]{article}
+</code></pre>
+
+<p>That line will tell LaTeX that we are creating an Article type of document and that the font will 10 points height.</p>
+
+<pre><code>\documentclass[10pt,letterpaper,titlepage]{article}
+</code></pre>
+
+<p>In this other case, we are also saying LaTeX to use letter size paper.</p>
+
+<pre><code>\documentclass[10pt,letterpaper,twocolumn,titlepage]{article}
+</code></pre>
+
+<p>Now, we are also adding an order for it to create a two-column document.</p>
+
+<pre><code>\author{Guillermo Garr\'{o}n}
+</code></pre>
+
+<p>Lets specify the author of the document (Change to your name)</p>
+
+<pre><code>\title{Hello World}
+</code></pre>
+
+<p>Title of the document, the very well know “Hello World” title.</p>
+
+<pre><code>\date{November, 2012}
+</code></pre>
+
+<p>The date of document creation.</p>
+
+<pre><code>\begin{document}
+</code></pre>
+
+<p>That line specify the beginning of the real document, where you will start typing the content of your first page.</p>
+
+<pre><code>\maketitle{}
+</code></pre>
+
+<p>That will insert the title, which was defined above.</p>
+
+<pre><code>\newpage
+</code></pre>
+
+<p>In case you want to start a new page.</p>
+
+<p><strong>Formatting</strong></p>
+
+<p>We can use sections, subsections, bullets and numbered lists.</p>
+
+<pre><code>\section{Part 1}
+
+\subsection{Part 1.1}
+
+\subsubsection{Part 1.1.1}
+</code></pre>
+
+<p>That is for sections and subsections.</p>
+
+<pre><code>\begin{itemize} \item First item \item Second item \end{itemize}
+</code></pre>
+
+<p>Un-ordered lists</p>
+
+<pre><code>\begin{enumerate} \item First item \item Second item \end{eenumerate}
+</code></pre>
+
+<p>Ordered lists.</p>
+
+<p>To add comments you need to insert % and the rest of the line will be taken as comment.</p>
+
+<p>This is a sample document and its result in PDF</p>
+
+<p>To make this file a pdf file create your document as a plain text file with .tex extension, then enter these commands</p>
+
+<pre><code>latex my_first_latex.tex
+</code></pre>
+
+<p>The output will be my_first_latex.dvi</p>
+
+<pre><code>dvipdf my_first_latex.dvi
+</code></pre>
+
+<p>The output will be <a href="/uploaded-files/2012/11/my_first_latex.pdf">my_first_latex.pdf</a></p>
+
+<p><strong>LaTeX margins</strong></p>
+
+<p>Page Margins and page size are really important parameters if you want to have a neat and nice print of you work.</p>
+
+<p>First lets see how to declare the paper size, that is declared with \documentclass control sequence.</p>
+
+<pre><code>\documentclass[10pt,letterpaper,titlepage]{article}
+</code></pre>
+
+<p>Now, this picture is going to help us know what variables to use to set the margins.</p>
+
+<p><img src="/images/2012/11/margins.jpg" class="img-responsive" alt="margins in LaTeX" /></p>
+
+<p>As you can see you need to declare the topmargin, and to declare the bottom margin, you will have to add topmargin + textheight +footheight, and subtract that from the paper size, that is going to be your bottom margin.</p>
+
+<p>It is the same with right and left margins. Just define the right margin with <code>oddsidemargin</code>, you have to consider that there is already one inch (2.54 cm) of margin so, if you want something less than that you may use a negative value for <code>oddsidemargin</code>. For the left margin you have to add (1 inch + oddsidemarging + textwidth - paper width).</p>
+
+<p><code>evensidemargin</code> control sequence, is used to set the right margin on even pages, in case you are going to print both sides of the paper.</p>
+
+<p><strong>Figures</strong></p>
+
+<p>Any good book or manual, will need some illustration, and LaTex has a way to address that too.</p>
+
+<p>When there is the need to insert images, this is the way to do it.</p>
+
+<p>The first thing you need to do is to add this line below the <code>documentclass</code> control sequence.</p>
+
+<pre><code>\usepackage{graphicx}
+</code></pre>
+
+<p>Then go to the place of the document where you need to insert the image and use this code:</p>
+
+<pre><code>\begin{figure}
+\includegraphics[scale=0.20]{ptop.eps}
+\end{figure}
+</code></pre>
+
+<p>where ptop.eps, is the encapsulated post script graphic you may want to add. To scale the picture to the right size use the option <code>scale</code>. In the example above, we are scaling the image to 20% of its original size.</p>
+
+<p>You can use jpg images too, but it is preferable to use eps (encapsulated post script) files.</p>
+
+<p>To insert png or jpg files you need to specify its size lets say in mm, and not a scale.</p>
+
+<pre><code>\begin{figure}
+\includegraphics[width=80mm]{ptop.png}
+\end{figure}
+\begin{figure}
+\includegraphics[height=40mm]{ptop.jpg}
+\end{figure}
+</code></pre>
+
+<p>To use eps instead of jpg or png, you can use <a href="http://www.gimp.org/">gimp</a> or <a href="http://www.gnome.org/projects/dia/">dia</a>. Gimp is available for both Linux and Mac.</p>
+
+<p>To create <em>eps</em> files with Gimp, just save as <em>eps</em> file.</p>
+
+<p>If you are on Linux, and you like the command line interface as much as I do, you can go with this:</p>
+
+<pre><code>dia -e ptop.eps -t eps-builtin ptop.dia
+</code></pre>
+
+<p>That is after creating you diagram.</p>
+
+<p>To compile documents with images inserted, you need to run the following commands:</p>
+
+<pre><code>latex document.tex
+
+dvips document.dvi
+
+ps2pdf document.ps
+</code></pre>
+
+<p><strong>Tables</strong></p>
+
+<p>Now we’ll work with tables, this is not as easy as in Word, but a lot more flexible. Lets work:</p>
+
+<pre><code>\begin{tabular}[pos]{table spec}
+</code></pre>
+
+<p>Where:</p>
+
+<p><em>pos</em> can be:</p>
+
+<ul>
+  <li>b = bottom</li>
+  <li>c = center</li>
+  <li>t = top</li>
+</ul>
+
+<p><em>table spec</em> can be:</p>
+
+<ul>
+  <li>l = left-justified column</li>
+  <li>c = centered column</li>
+  <li>r = right-justified column</li>
+  <li>p{width} = paragraph column with text vertically aligned at the top</li>
+  <li>m{width} = paragraph column with text vertically aligned in the middle (requires array package)</li>
+  <li>b{width} = paragraph column with text vertically aligned at the bottom (requires array package)</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>= vertical line</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td>= double vertical line</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<p>We now have the tools, put them to work, here is the code for our first table:</p>
+
+<pre><code>\begin{center}
+\begin{tabular}{||p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}||}
+\hline
+\textbf{Column 1} &amp; \textbf{Column 2} &amp; \textbf{Column 3} &amp; \textbf{Column 4} &amp; \textbf{Column 5} &amp; \textbf{Column 6} \\ \hline
+Linux &amp; is  &amp; a  &amp; great &amp; operating &amp; system \\ \hline
+xx &amp; xx &amp; xx &amp; xx &amp; xx &amp; xx \\ \hline
+\end{tabular}
+\end{center}
+</code></pre>
+
+<p><img src="/images/2012/11/tables_latex1.png" class="img-responsive" alt="tables with latex" /></p>
+
+<p>The table is created, but it will be better if we explain a little bit what we have done here:</p>
+
+<ul>
+  <li><code>\begin{center}</code>: Is centering the table in the document</li>
+  <li><code>\begin{tabular}</code>: Start with table itself</li>
+  <li><code>p{2.5cm}</code>: Specify each column of 2.5 cm width</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td>and</td>
+          <td>will create the borders of our table.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li><code>\hline</code>: Draws the horizontal lines</li>
+</ul>
+
+<p>If you do not assign a specific width with <code>p{width}</code> you will have some bad results like this one:</p>
+
+<p><img src="/images/2012/11/tables_latex2.png" class="img-responsive" alt="tables with latex" /></p>
+
+<p>The text is not wrapped, and it exceeds even the width of the paper.</p>
+
+<p><strong>Cross Platform LaTeX editor</strong></p>
+
+<p><a href="http://www.xm1math.net/texmaker/">TexMaker</a></p>
+
+<blockquote>
+  <p>Texmaker is a free, modern and cross-platform LaTeX editor for linux, macosx and windows systems that integrates many tools needed to develop documents with LaTeX, in just one application.
+Texmaker includes unicode support, spell checking, auto-completion, code folding and a built-in pdf viewer with synctex support and continuous view mode.
+Texmaker is easy to use and to configure.
+Texmaker is released under the GPL license
+–Source: <a href="http://www.xm1math.net/texmaker/">Texmaker Site</a></p>
+</blockquote>
+
+<p>According to Wikipedia, some of their features are:</p>
+
+<ul>
+  <li>Document and section templates</li>
+  <li>LaTeX-related programs can be launched</li>
+  <li>BibTeX database management</li>
+  <li>An outline or “structure view”</li>
+  <li>Logfiles during LaTeX compilation and the ability to “step through” source errors that are discovered by the compiler</li>
+  <li>An integrated LaTeX to HTML conversion tool</li>
+  <li>Integrated PDF viewer</li>
+</ul>
+
+<p><em>Screen Shots</em></p>
+
+<p>Texmaker on Linux</p>
+
+<p><img src="/images/2012/11/texmaker.png" class="img-responsive" alt="tables with latex" /></p>
+
+<p>Texmaker on Mac</p>
+
+<p><img src="/images/2012/11/texmakermacos.jpg" class="img-responsive" alt="tables with latex" /></p>
+
+<p><a href="http://www.xm1math.net/texmaker/download.html">Download</a> it for your platform, and start creating LaTeX documents with easy.</p>
+
+<p><strong>Using Markdown</strong></p>
+
+<p>There is also another method to create LaTeX documents, and it is maybe simpler.</p>
+
+<p>Using <a href="http://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a>. You can then convert those documents to TeX or directly to PDF.</p>
+
+<pre><code>pandoc -s input.md -o output.tex
+</code></pre>
+
+<p>Learn more about how I use <a href="/en/blog/switching-to-markdown-no-word-processors-anymore.html">Pandoc</a></p>
+
+<p><em>Last edit on: December 03, 2012</em></p>
+
+<p><em>By: Guillermo Garron</em></p>
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

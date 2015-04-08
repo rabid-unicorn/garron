@@ -1,0 +1,325 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/your-own-cdn.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Create your own CDN using VPS on strategically located Data Centers and AWS Route 53 DNS service" />
+
+        <!-- End SEO includes -->
+        <title>Your own CDN</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Your own CDN">
+        <meta name="twitter:description" content="How to use Nginx as reverse proxy to serve multiple applications from the same domain on the same host or different one">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Your own CDN</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/your-own-cdn.html">Your own CDN</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2015-04-03 17:40:00 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/tutorial.html">tutorial</a>,</small></p>
+
+<hr>
+<h2 id="how-to-speed-up-your-site-and-it-load-faster">How to speed up your site and it load faster</h2>
+
+<p>Loading speed is something really important for your site, because it gives your readers the best possible experience, there are a lot of different things you need to do in order to improve your site’s speed, one of them is to put the content as close as possible to the readers. If you write about Spanish news, then chances are that most of your readers will be on Spain, and thus, your server should be located in Spain, that was easy. Now, what happens if your readers are spread all over the world, you have a pair of solutions.</p>
+
+<ol>
+  <li>Put your server in U.S. or Europe as almost the whole world get there at reasonable speeds, this is the cheapest but not the best.</li>
+  <li>Set your server in U.S. or U.K. and then use a CDN company like <a href="http://www.fastly.com/">Fastly</a>, <a href="https://www.maxcdn.com/">MaxCDN</a> or <a href="https://aws.amazon.com/cloudfront/">Cloudfront</a>, prices are not as high as they used to be, MaxCDN is $ 10 per 100 GB, Fastly minimum order is $ 50 and Amazon is pay as you grow.</li>
+  <li>Get your own Virtual servers located at well distributed Datacenters around world and create your own CDN</li>
+</ol>
+
+<p>Taking out the first option, to decide between the other two is more a thing of taste, but one consideration should be taken into account.</p>
+
+<p><strong>Traffic of your site</strong></p>
+
+<p>If your site has a lot of traffic then the CDN may be a better solution, more points of presence and your content nearer to your readers, but if your site does not have too much traffic, then chances are that your content is not going to be present at the edge servers when the reader request it, then your own servers is a better solution, as you control how much time the assets are going to be in each one of your servers.</p>
+
+<h2 id="set-up-your-own-cdn-with-amazon-and-digitalocean-or-linode">Set up your own CDN with Amazon and DigitalOcean or Linode</h2>
+
+<p>I am going to show here, how to set up your own network of servers to serve your site as near to your readers as possible. We are going to use Amazon Route 53, and <a href="https://www.digitalocean.com/?refcode=e00a30198abe">Digital Ocean</a>’s VPS.</p>
+
+<h3 id="amazon-route-53">Amazon Route 53</h3>
+
+<p>I will assume you already have an AWS account, if not, you must create one, then go to: <a href="https://console.aws.amazon.com/route53/">Amazon Route 53</a> and create a new zone:</p>
+
+<figure>
+    <img src="/images/2015/04/aws-route-53-create-zone.png" class="img-responsive" alt="How to create a zone in aws route 53" />
+</figure>
+
+<p>We have two options to route traffic to the specific servers, one is <em>Latency routing</em> and the other is <em>Geo location routing</em>, there is a comparison of <a href="http://blog.takipi.com/aws-route-53-benchmarking-the-new-amazon-geolocation-policy/">Latency vs Geo location</a> you might want to read.</p>
+
+<p>Let’s see both ways</p>
+
+<p><strong>Route 53 Latency configuration</strong></p>
+
+<p>Once you have your zone created, and resolving for your domain, create the records for your site, in this example, we will be working with www.garron.me</p>
+
+<p>Go to <em>Create Record Set</em> and configure it as in the picture.</p>
+
+<figure>
+    <img src="/images/2015/04/aws-route-53-latency.png" class="img-responsive" alt="Configure Latency record in Amazon aws Route 53" /></figure>
+
+<p>You need to, of course, change the IP to fit your needs, also, be sure to select the Region that is nearer to your Datacenter, if you choose DigitalOcean or <a href="https://www.linode.com/?r=74775de9c0e7b94b692de902874cacf3aa5777bf">Linode</a> and select East Coast data center, then select <em>use-east-1</em> region.</p>
+
+<p>Create one record per each server you deploy, I recommend you deploying one on U.S. one on Europe and one in Asia, that way you should be serving all customers in the world</p>
+
+<p><strong>Route 53 Geo location configuration</strong></p>
+
+<p>In case you choose Geo location, once you have your zone created, create the records for your site. Once again go to <em>Create Record Set</em> and configure it as in the picture below.</p>
+
+<figure>
+    <img src="/images/2015/04/aws-route-53-geolocation.png" class="img-responsive" alt="Configure geolocation record in Amazon aws Route 53" />
+</figure>
+
+<p>You need now to create as many records as fine tuned you want to distribute your traffic, you can go crazy and create one record per country, and define which data center is going to serve that country, but I recommend to create these records, considering you have one server in U.S., one in Europe and one in Asia.</p>
+
+<ul>
+  <li>Record for Asia pointing to Asia’s server</li>
+  <li>Record for Oceania pointing to Asia’s server</li>
+  <li>Record for Europe pointing to Europe’s server</li>
+  <li>Record for Africa pointing to Europe’s server</li>
+  <li>Record for Israel pointing to Europe’s server (I am sure it is better connected to Europe than to Asia)</li>
+  <li>Record for Turkey pointing to Europe’s server (Same as with Israel)</li>
+  <li>Default record pointing to United States’ server (<strong>You must have a default record, this is important</strong>)</li>
+</ul>
+
+<h3 id="configuring-vps-servers-to-work-as-your-private-cdn">Configuring VPS servers to work as your private CDN</h3>
+
+<p>This is the way I have configured my network, you may choose a different way.</p>
+
+<ul>
+  <li>One server in New York</li>
+  <li>One server in Amsterdam</li>
+  <li>One server in Singapore</li>
+</ul>
+
+<p>The real application or website should be running in one of those servers, let’s assume it is Amsterdam’s one, and let’s assume you have <a href="/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">Nginx serving Wordpress</a>. On the other two servers varnish will be installed. You can read how to configure Varnish for Wordpress <a href="https://www.varnish-cache.org/trac/wiki/VarnishAndWordpress">here</a></p>
+
+<p>Just be sure to have varnish listening on port 80, this is done by editing <code>/etc/default/varnish</code> on Ubuntu server and find this lines to make them look like this:</p>
+
+<pre><code>DAEMON_OPTS="-a :80 \
+             -T localhost:6082 \
+             -f /etc/varnish/default.vcl \
+             -S /etc/varnish/secret \
+             -s malloc,256m"
+</code></pre>
+
+<p>Also edit the file <code>/etc/varnish/default.vcl</code> and be sure to have this lines:</p>
+
+<pre><code>backend default {
+    .host = "10.10.10.2";
+    .port = "80";
+}
+</code></pre>
+
+<p>Change to IP to point to the server where your Nginx and Wordpress are, the port should be 80, as that server is also serving directly to visitors from Europe and Africa, if you are serving static content and not Wordpress, that should be enough, for Wordpress, read the instructions on Varnish site.</p>
+
+<p>On the Nginx server add these lines in http or server block to make Varnish cache your files.</p>
+
+<pre><code>location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
+   expires 365d;
+}
+</code></pre>
+
+<p>If you are using Apache use these lines on .htaccess file</p>
+
+<pre><code>&lt;filesMatch ".(ico|pdf|jpg|jpeg|png|gif|js|css)$"&gt;
+Header set Cache-Control "max-age=31536000, public"
+&lt;/filesMatch&gt;
+</code></pre>
+
+<p>Restart all servers, and check that everything is working, the best way is to enter each IP of your server in a browser, you should see a webpage, which may or may not be the one you want, but the default of your origin server, that is OK.</p>
+
+<h2 id="conclusion-and-further-optimizations">Conclusion and further optimizations</h2>
+
+<p>With the prices of CDNs like MaxCDN or Cloudfront you may not need to do this, but if you are like me and just like to have control on your servers, and like to tweak everything by you, then you can go this way, if you want even more performance add PageSpeed module to your Nginx server, you will not need any cache plugin on Wordpress if you go this way, just add this lines to your Nginx server configuration in the server block.</p>
+
+<pre><code>location ~ \.php$ {
+	try_files $uri =404;
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	fastcgi_cache  detecnologia;
+	fastcgi_cache_key $scheme$host$request_uri$request_method;
+	fastcgi_cache_valid 200 301 302 5s;
+	fastcgi_cache_use_stale updating error timeout invalid_header http_500;
+	fastcgi_pass_header Set-Cookie;
+	fastcgi_pass_header Cookie;
+	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+	fastcgi_pass unix:/var/run/php5-fpm.sock;
+	fastcgi_index index.php;
+	include fastcgi_params;
+}
+</code></pre>
+
+<p>And this one to <code>/etc/nginx/nginx.conf</code> in the  http block</p>
+
+<pre><code>fastcgi_cache_path /var/cache/nginx/blog.detecnologia.org levels=1:2 keys_zone=detecnologia:10m max_size=1024m inactive=1h;
+</code></pre>
+
+<p>With that configuration, you will be caching all responses from PHP for 5 seconds, then it is almost imposible to take the server down.</p>
+
+<p>Hope this gives you a guide to start your own CDN network for any service you have. Take this important considerations into account.</p>
+
+<ul>
+  <li>Your origin server should set Cache-Control headers to make Varnish cache the results for static content</li>
+  <li>Try to use PageSpeed module for Nginx or Apache depending on what you have on your origin server, and use <a href="https://developers.google.com/speed/pagespeed/module/filter-cache-extend">Extend Cache</a> with it.</li>
+</ul>
+
+<hr>
+<a href="http://www.garron.me/en/linux/your-own-cdn.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/your-own-cdn.html&text=Your own CDN&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/your-own-cdn.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/your-own-cdn.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/your-own-cdn.html">linkedin</a> | <a href="mailto:?Subject=Your own CDN&Body=http://www.garron.me/en/linux/your-own-cdn.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/your-own-cdn.html&title=Your own CDN" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

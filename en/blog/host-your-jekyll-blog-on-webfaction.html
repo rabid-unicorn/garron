@@ -1,0 +1,272 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to use post-update hook on git to deploy a Jekyll blog automatically and host it on Webfaction" />
+
+        <!-- End SEO includes -->
+        <title>Deploy Jekyll blog to Webfaction via git</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Deploy Jekyll blog to Webfaction via git">
+        <meta name="twitter:description" content="How to use post-update hook on git to deploy a Jekyll blog automatically and host it on Webfaction">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Deploy Jekyll blog to Webfaction via git</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/host-your-jekyll-blog-on-webfaction.html">Deploy Jekyll blog to Webfaction via git</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-05-24 17:31:35 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/jekyll.html">jekyll</a>,</small></p>
+
+<hr>
+<h2 id="how-to-install-jekyll-on-webfaction">How to install Jekyll on Webfaction</h2>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>If you want to host Jekyll on Webfaction, you have do it in various ways. The easiest one, might be to generate your site locally and then rsync to a static-only site created on Webfaction.</p>
+
+<p>However, this tutorial considers this assumptions.</p>
+
+<ul>
+  <li>You are version controlling your site with git</li>
+  <li>You will use git push to deploy your site</li>
+  <li>The site will be generated in Webfaction servers</li>
+  <li>You are using gem 2.0, you can change that.</li>
+</ul>
+
+<h3 id="install-needed-software">Install needed software</h3>
+
+<p><strong>Prepare your system</strong></p>
+
+<p>You need to install it on your home folder, as you do not have root privileges, add this to your bashrc file</p>
+
+<pre><code>export GEM_HOME=$HOME/gems
+</code></pre>
+
+<p>Then reload it.</p>
+
+<pre><code>source ./bashrc
+</code></pre>
+
+<p><strong>Install gems</strong></p>
+
+<pre><code>gem2.0 install jekyll
+
+gem2.0 install RedCloth
+</code></pre>
+
+<p><strong>Update path</strong></p>
+
+<p>Add this line at the bottom of .bashrc file.</p>
+
+<pre><code>export PATH=$HOME/gems/bin:$PATH
+</code></pre>
+
+<p>Reload .bashrc file.</p>
+
+<pre><code>source .bashrc
+</code></pre>
+
+<p>This is everything you need to run Jekyll with markdown documents or textile</p>
+
+<h3 id="configure-git">Configure git</h3>
+
+<p>The idea is to have webfaction’s server deploying the site automatically as soon as the committed changes are pushed to it.</p>
+
+<p>Create a bare git repository</p>
+
+<pre><code>mkdir ~/git-repos/my-jekyll-blog.git
+cd ~/git-repos/my-jekyll-blog.git
+git init –bare
+</code></pre>
+
+<p><strong>Prepare the post-update hook</strong></p>
+
+<pre><code>vim ~/git-repos/my-jekyll-blog.git/hooks/post-update
+</code></pre>
+
+<p>It should have these lines</p>
+
+<pre><code>#!/bin/bash
+echo “Deploying Jekyll Site”
+# Here are the variables
+REPOSITORY_DIR=”/home/user/git-repos/my-jekyll-blog.git”
+DEPLOY_DIR=”/home/user/tmp/jekyll-temp/”
+# dont edit below here
+DEPLOY_TMP_DIR=$(mktemp /home/user/tmp/jekyll.deploy.XXXXX)
+rm -f $DEPLOY_TMP_DIR
+git clone $REPOSITORY_DIR $DEPLOY_TMP_DIR
+cd $DEPLOY_TMP_DIR
+jekyll build -d $DEPLOY_DIR
+rm -rf $DEPLOY_TMP_DIR
+cd /
+# Modify this line to fit your folders
+rsync -vrz –checksum -e ssh –delete $DEPLOY_DIR /home/user/webapps/your-site/
+</code></pre>
+
+<p>The reason to deploy to a temp folder and the rsync to the webapp folder, is to have the creating dates old, that improves caching.</p>
+
+<h3 id="deploy">Deploy</h3>
+
+<p>In your local computer:</p>
+
+<pre><code>git remote add webfaction user@webfaction.server:/home/user/git-repos/my-jekyll-blog.git
+</code></pre>
+
+<p>Push to it, to publish your site:</p>
+
+<pre><code>git push webfaction master
+</code></pre>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html&text=Deploy Jekyll blog to Webfaction via git&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html">linkedin</a> | <a href="mailto:?Subject=Deploy Jekyll blog to Webfaction via git&Body=http://www.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/host-your-jekyll-blog-on-webfaction.html&title=Deploy Jekyll blog to Webfaction via git" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

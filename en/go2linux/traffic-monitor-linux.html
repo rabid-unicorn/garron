@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/traffic-monitor-linux.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="vnstat, a tool that helps you monitor the Internet traffic you use on your Linux" />
+
+        <!-- End SEO includes -->
+        <title>vnstat - Command Line Tool to check how much bandwidth you use</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="vnstat - Command Line Tool to check how much bandwidth you use">
+        <meta name="twitter:description" content="vnstat, a tool that helps you monitor the Internet traffic you use on your Linux">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">vnstat - Command Line Tool to check how much bandwidth you use</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/traffic-monitor-linux.html">vnstat - Command Line Tool to check how much bandwidth you use</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2008-05-13 10:36:30 -0400</h6>
+
+<hr>
+<p>It is always useful to know how much bandwidth you are using, also to check if your provider is honoring the contract you signed with them.</p>
+
+<p>At my office I have installed <a href="http://www.cacti.net">Cacti</a> and as I have a layer 3 SNMP capable switch, I can graph the bandwidth that all my office’s PCs uses, and also the main pipe to the Internet (My ADSL connection), but at home, I do not have such an expensive switch (and I do not need it), and my ADSL modem is not SNMP capable, so Cacti is not a solution, but with Linux Operating System there is always a solution, and the one for this kind of problem is <strong>vnstat</strong>.</p>
+
+<p>To install it run:</p>
+
+<pre><code>sudo aptitude install vnstat
+</code></pre>
+
+<p>Then you need to initialize the database, and add a cronjob task, but it is easy and automatic.  First determine the name of your NIC or NICs for that run:</p>
+
+<pre><code>sudo ifconfig
+</code></pre>
+
+<p>My output is:</p>
+
+<pre>
+eth2      Link encap:Ethernet  HWaddr 00:19:d1:ea:e6:3f  
+          inet addr:10.87.58.2  Bcast:10.87.58.7  Mask:255.255.255.248
+          inet6 addr: fe80::219:d1ff:feea:e63f/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:55660 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:47538 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:100 
+          RX bytes:66480203 (63.4 MiB)  TX bytes:5316732 (5.0 MiB)
+          Base address:0x20c0 Memory:92200000-92220000 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:66740 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:66740 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:64959780 (61.9 MiB)  TX bytes:64959780 (61.9 MiB)
+
+</pre>
+
+<p>As you can see, my unique interface is called eth2 so I need to run:</p>
+
+<pre><code>vnstat -u -i eth2
+</code></pre>
+
+<p>This will initiate the database, and add one script called <code>/etc/cron.d/vnstat</code>, containing this line:</p>
+
+<pre>
+# /etc/cron.d/vnstat: crontab entries for the vnstat package
+
+0-55/5 *        * * *   root    if [ -x /usr/bin/vnstat ] &amp;&amp; [ `ls /var/lib/vnstat/ | wc -l` -ge 1 ]; then /usr/bin/vnstat -u; fi
+</pre>
+
+<p>So, now you just need to wait until the database populate with data, after a while you can run some of these commands:</p>
+
+<pre><code>vnstat -h
+</code></pre>
+
+<p>And will show an hourly graph like this:</p>
+
+<pre>
+ eth2                                                                     10:10 
+  ^                                                                    r        
+  |                                                                    r        
+  |                                                                    r        
+  |                                                                    r        
+  |                                                                    r        
+  |                                                                    r  r     
+  |                                                                    r  r     
+  |                                                                    r  r     
+  |                                                                    r  r     
+  |                                                                    r  r     
+ -+---------------------------------------------------------------------------&gt; 
+  |  11 12 13 14 15 16 17 18 19 20 21 22 23 00 01 02 03 04 05 06 07 08 09 10    
+                                                                                
+ h   rx (kB)    tx (kB)      h   rx (kB)    tx (kB)      h   rx (kB)    tx (kB) 
+11          0          0    19          0          0    03          0          0
+12          0          0    20          0          0    04          0          0
+13          0          0    21          0          0    05          0          0
+14          0          0    22          0          0    06          0          0
+15          0          0    23          0          0    07          0          0
+16          0          0    00          0          0    08          0          0
+17          0          0    01          0          0    09      31947       1798
+18          0          0    02          0          0    10      16201        772
+
+</pre>
+
+<p>or:</p>
+
+<pre><code>vnstat -d
+</code></pre>
+
+<p>And you will get a daily graph like this:</p>
+
+<pre>
+ eth2  /  daily
+
+    day         rx      |     tx      |  total
+------------------------+-------------+----------------------------------------
+   13.05.     47.02 MB  |    2.51 MB  |   49.53 MB   %%%%%%%%%%%%%%%%%%%%%%%%:
+------------------------+-------------+----------------------------------------
+ estimated      110 MB  |       4 MB  |     114 MB
+
+</pre>
+
+<p>As I do not have enough data, my graphs are a little bit boring.  You can read the man page to explore other options.</p>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/traffic-monitor-linux.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/traffic-monitor-linux.html&text=vnstat - Command Line Tool to check how much bandwidth you use&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/traffic-monitor-linux.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/traffic-monitor-linux.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/traffic-monitor-linux.html">linkedin</a> | <a href="mailto:?Subject=vnstat - Command Line Tool to check how much bandwidth you use&Body=http://www.garron.me/en/go2linux/traffic-monitor-linux.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/traffic-monitor-linux.html&title=vnstat - Command Line Tool to check how much bandwidth you use" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

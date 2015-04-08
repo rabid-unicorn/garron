@@ -1,0 +1,498 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Comparing how is the performance of Nginx+Varnish vs Nginx alone" />
+
+        <!-- End SEO includes -->
+        <title>Nginx+Varnish compared to Nginx</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Nginx+Varnish compared to Nginx">
+        <meta name="twitter:description" content="Comparing how is the performance of Nginx+Varnish vs Nginx alone">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Nginx+Varnish compared to Nginx</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html">Nginx+Varnish compared to Nginx</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-04-22 10:36:30 -0400</h6>
+
+<hr>
+<p><a href="/es/gnu-linux/varnish-vs-nginx.html">Spanish version</a></p>
+
+<p><strong>Introduction</strong></p>
+
+<p>While checking the referrals to my page, I have found that one visitor came through google with the “why use varnish with nginx”; keyword, these days I’ve been experimenting with both Nginx and Varnish, in front of my Apache server with a Drupal application.</p>
+
+<p>So, I decided to write a little about what I’ve found.</p>
+
+<p>If you do not know about Nginx or Varnish, here is a small introduction:</p>
+
+<p>From Wikipedia:</p>
+
+<blockquote>
+  <p>Varnish is an HTTP accelerator designed for content-heavy dynamic web sites. In contrast to other HTTP accelerators, such as Squid, which began life as a client-side cache, or Apache, which is primarily an origin server, Varnish was designed from the ground up as an HTTP accelerator.</p>
+</blockquote>
+
+<p>And this is really important about Varnish, and makes it really efficient working together with the Linux Kernel:</p>
+
+<blockquote>
+  <p>Varnish stores data in virtual memory and leaves the task of deciding what is stored in memory and what gets paged out to disk to the operating system. This helps avoid the situation where the operating system starts caching data while they are moved to disk by the application.</p>
+</blockquote>
+
+<p>And this, makes it efficient in CPU use:</p>
+
+<blockquote>
+  <p>Furthermore, Varnish is heavily threaded, with each client connection being handled by a separate worker thread. When the configured limit on the number of active worker threads is reached, incoming connections are placed in an overflow queue; only when this queue reaches its configured limit will incoming connections be rejected.</p>
+</blockquote>
+
+<p>Now about Nginx:</p>
+
+<blockquote>
+  <p>nginx (pronounced ?engine-x?) is a lightweight, high-performance Web server/reverse proxy and e-mail (IMAP/POP3) proxy, licensed under a BSD-like license. It runs on Unix, Linux, BSD variants, Mac OS X, Solaris, and Microsoft Windows.</p>
+</blockquote>
+
+<blockquote>
+  <p>Nginx uses an asynchronous event-driven approach to handling requests which provides more predictable performance under load, in contrast to the Apache HTTP server model that uses a threaded or process-oriented approach to handling requests.</p>
+</blockquote>
+
+<p>Here is one of its features:</p>
+
+<ul>
+  <li>Reverse proxy with caching.</li>
+</ul>
+
+<p>Hence, Varnish and Nginx (working as a reverse proxy) can be somehow compared.</p>
+
+<p><strong>Using Nginx as an HTTP accelerator</strong></p>
+
+<p>A lot of users are now using Nginx as proxy in front of Apache, and Nginx will cache the pages as it got from Apache and serve them to future users while the resource is still valid.</p>
+
+<blockquote>
+  <p>The cache honors backend’s “Expires”, “Cache-Control: no-cache”, and “Cache-Control: max-age=XXX” headers since version 0.7.48. Since version 7.66, “private” and “no-store” are also honored. nginx does not handle “Vary” headers when caching. In order to ensure private items are not served to all users unintentionally by the cache, the back-end can set “no-cache” or “max-age=0”, or the proxy <em>cache</em> key must include user-specific data such as $cookie_ xxx. However, using cookie values as part of proxy <em>cache</em> key can defeat the benefits of caching for public items, so separate locations with different proxy <em>cache</em> key values might be necessary to separate private and public items.</p>
+</blockquote>
+
+<p>And here is a small configuration example from: <a href="http://serverfault.com/questions/30705/how-to-set-up-nginx-as-a-caching-reverse-proxy">serverfault</a></p>
+
+<pre><code>http {
+	proxy_cache_path  /var/www/cache levels=1:2 keys_zone=my-cache:8m max_size=1000m inactive=600m;
+	proxy_temp_path /var/www/cache/tmp; 
+
+
+server {
+location / {
+	proxy_pass http://example.net;
+	proxy_cache my-cache;
+	proxy_cache_valid  200 302  60m;
+	proxy_cache_valid  404      1m;
+	}
+	}
+}
+</code></pre>
+
+<p>Nginx is not purely a HTTP proxy/accelerator, but a Web server that can be used as a reverse proxy with cache capabilities.</p>
+
+<p><strong>Using Varnish</strong></p>
+
+<p>Another option you may have is to use varnish. Varnish was designed from the beginning as a HTTP accelerator, and as far as I know is the only task it can perform, and it does it really well.</p>
+
+<p>Configuration is really easy and usually works out of the box, anyway it is also very, very customizable, and you can change its behaviour a lot, it uses some kind of perl/C language, so if you are a programmer, you can do wonders with it.</p>
+
+<p>You can delete cookies, set cookies, change the Headers that the backend assigned to the files served, a lot more, here you will find a lot of <a href="http://www.varnish-cache.org/trac/wiki/VCLExamples">examples of Varnish configuration</a>, and read also this <a href="http://www.varnish-cache.org/trac/wiki/VCL">varnish introduction to configuration</a></p>
+
+<p><strong>Some testing</strong></p>
+
+<p><em>The scenario</em></p>
+
+<p>I’ve this scenario Apache+MySQL+PHP+Drupal+boost, for those not familiar with boost, it is like SuperCache from Wordpress, it basically create static (.html) files out of the pages that drupal generates.</p>
+
+<p>As you may see in this test both Nginx and Varnish will be serving static files, those created by boost, so in the same conditions, with this test I’m trying to answer the question “When to use Varnish with Nginx?”.</p>
+
+<p>In case this is not yet clear (I can bet it is not), I’ll explain it better</p>
+
+<p>Test 1</p>
+
+<pre><code>Static Files ---&gt; Nginx ---&gt; Varnish ---&gt; Final user
+</code></pre>
+
+<p>Test 2</p>
+
+<pre><code>Static Files ---&gt; Nginx ---&gt; Final user
+</code></pre>
+
+<p><em>Test method</em></p>
+
+<p>I’ve use Apache’s <code>ab</code> tool and <code>httperf</code> to perform these tests.</p>
+
+<p>These were the commands:</p>
+
+<pre><code>	ab -kc 500 -n 10000 http://10.1.1.1/
+</code></pre>
+
+<p>And</p>
+
+<pre><code>	httperf --hog --server=10.1.1.1 --wsess=2000,10,2 --rate 300 --timeout 5
+</code></pre>
+
+<p>Both issued from 10.1.1.2 on the same LAN.</p>
+
+<p>I know this is not a real life test, and at most it can test how both systems would react under a digg or slashdot front page.</p>
+
+<p><em>The results</em></p>
+
+<p>With <code>ab</code> using varnish in front of Nginx</p>
+
+<pre><code>	This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
+	Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+	Licensed to The Apache Software Foundation, http://www.apache.org/
+	
+	Benchmarking www.go2linux.org (be patient)
+	Completed 1000 requests
+	Completed 2000 requests
+	Completed 3000 requests
+	Completed 4000 requests
+	Completed 5000 requests
+	Completed 6000 requests
+	Completed 7000 requests
+	Completed 8000 requests
+	Completed 9000 requests
+	Completed 10000 requests
+	Finished 10000 requests
+	
+	
+	Server Software:        nginx/1.0.0
+	Server Hostname:        10.1.1.1
+	Server Port:            80
+	
+	Document Path:          /
+	Document Length:        26362 bytes
+	
+	Concurrency Level:      500
+	Time taken for tests:   44.919 seconds
+	Complete requests:      10000
+	Failed requests:        40
+	(Connect: 0, Receive: 0, Length: 39, Exceptions: 1)
+	Write errors:           0
+	Keep-Alive requests:    9961
+	Total transferred:      267744926 bytes
+	HTML transferred:       263938086 bytes
+	Requests per second:    222.62 [#/sec] (mean)
+	Time per request:       2245.958 [ms] (mean)
+	Time per request:       4.492 [ms] (mean, across all concurrent requests)
+	Transfer rate:          5820.89 [Kbytes/sec] received
+	
+	Connection Times (ms)
+	min  mean[+/-sd] median   max
+	Connect:        0    5  70.1      0    3849
+	Processing:     0 2183 1213.6   1850   18296
+	Waiting:        0 1214 561.9   1300    4248
+	Total:          0 2187 1224.2   1850   18312
+	
+	Percentage of the requests served within a certain time (ms)
+	50%   1850
+	66%   2200
+	75%   2650
+	80%   2850
+	90%   3348
+	95%   3799
+	98%   5904
+	99%   6214	
+	100%  18312 (longest request)
+</code></pre>
+
+<p>The CPU load server during the tests went from 0.00 to 0.12 and Varnish was using 7% of the 768M of RAM</p>
+
+<p>Here is a sample of the <code>varnishhist</code> during the test</p>
+
+<p><img src="/images/2012/11/varnishhist.png" class="img-responsive" alt="varnishhist report" /></p>
+
+<p>With <code>ab</code> directly to NGINX</p>
+
+<pre><code>	This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
+	Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+	Licensed to The Apache Software Foundation, http://www.apache.org/
+	
+	Benchmarking www.go2linux.org (be patient)
+	Completed 1000 requests
+	Completed 2000 requests
+	Completed 3000 requests
+	Completed 4000 requests
+	Completed 5000 requests
+	Completed 6000 requests
+	Completed 7000 requests
+	Completed 8000 requests
+	Completed 9000 requests
+	Completed 10000 requests
+	Finished 10000 requests
+	
+	
+	Server Software:        nginx/1.0.0
+	Server Hostname:        10.1.1.1
+	Server Port:            80
+	
+	Document Path:          /
+	Document Length:        26362 bytes
+			
+	Concurrency Level:      500
+	Time taken for tests:   44.219 seconds
+	Complete requests:      10000
+	Failed requests:        130
+	(Connect: 0, Receive: 0, Length: 130, Exceptions: 0)
+	Write errors:           0
+	Non-2xx responses:      130
+	Keep-Alive requests:    9870
+	Total transferred:      268179303 bytes
+	HTML transferred:       264475966 bytes
+	Requests per second:    226.15 [#/sec] (mean)
+	Time per request:       2210.965 [ms] (mean)
+	Time per request:       4.422 [ms] (mean, across all concurrent requests)
+	Transfer rate:          5922.61 [Kbytes/sec] received
+	
+	Connection Times (ms)
+	min  mean[+/-sd] median   max
+	Connect:        0   27 280.7      0    3649
+	Processing:    53 2066 2231.4   1348   20751
+	Waiting:       11  722 524.5    651    8697
+	Total:         71 2094 2277.4   1348   20768
+	
+	Percentage of the requests served within a certain time (ms)
+	50%   1348
+	66%   1351
+	75%   1950
+	80%   2000
+	90%   3801
+	95%   7249
+	98%  10998
+	99%  13001
+	100%  20768 (longest request)
+</code></pre>
+
+<p>The CPU load went from 0.00 to 0.04, so less CPU than varnish.</p>
+
+<p>Testing <code>httperf</code></p>
+
+<p><em>Varnish in front of Nginx</em></p>
+
+<pre><code>	Maximum connect burst length: 11
+
+	Total: connections 1439 requests 10081 replies 9581 test-duration 46.890 s
+
+	Connection rate: 30.7 conn/s (32.6 ms/conn, &lt;=1022 concurrent connections)
+	Connection time [ms]: min 5250.8 avg 26105.0 max 41659.1 median 30597.5 stddev 11292.6
+	Connection time [ms]: connect 621.9
+	Connection length [replies/conn]: 6.790
+
+	Request rate: 215.0 req/s (4.7 ms/req)
+	Request size [B]: 71.0
+	
+	Reply rate [replies/s]: min 124.4 avg 212.8 max 252.6 stddev 42.2 (9 samples)
+	Reply time [ms]: response 568.8 transfer 1343.6
+	Reply size [B]: header 363.0 content 26274.0 footer 0.0 (total 26637.0)
+	Reply status: 1xx=0 2xx=9581 3xx=0 4xx=0 5xx=0
+	
+	CPU time [s]: user 2.47 system 44.41 (user 5.3% system 94.7% total 100.0%)
+	Net I/O: 5330.5 KB/s (43.7*10^6 bps)
+	
+	Errors: total 1480 client-timo 81 socket-timo 0 connrefused 0 connreset 419
+	Errors: fd-unavail 980 addrunavail 0 ftab-full 0 other 0
+	
+	Session rate [sess/s]: min 0.00 avg 20.03 max 94.01 stddev 39.55 (939/2000)
+	Session: avg 1.41 connections/session
+	Session lifetime [s]: 38.1
+	Session failtime [s]: 1.2
+	Session length histogram: 979 10 52 11 3 4 2 0 0 0 939
+</code></pre>
+
+<p><em>Nginx alone, serving static files</em></p>
+
+<pre><code>	Maximum connect burst length: 25
+	
+	Total: connections 1529 requests 10167 replies 9570 test-duration 46.361 s
+	
+	Connection rate: 33.0 conn/s (30.3 ms/conn, &lt;=1022 concurrent connections)
+	Connection time [ms]: min 2007.5 avg 24596.6 max 43647.4 median 33599.5 stddev 15689.1
+	Connection time [ms]: connect 512.1
+	Connection length [replies/conn]: 6.309
+	
+	Request rate: 219.3 req/s (4.6 ms/req)
+	Request size [B]: 72.0
+	
+	Reply rate [replies/s]: min 150.6 avg 212.5 max 238.4 stddev 29.2 (9 samples)
+	Reply time [ms]: response 464.2 transfer 1495.6
+	Reply size [B]: header 369.0 content 26274.0 footer 0.0 (total 26643.0)
+	Reply status: 1xx=0 2xx=9570 3xx=0 4xx=0 5xx=0
+	
+	CPU time [s]: user 2.16 system 44.19 (user 4.7% system 95.3% total 100.0%)
+	Net I/O: 5386.3 KB/s (44.1*10^6 bps)
+	
+	Errors: total 1580 client-timo 90 socket-timo 0 connrefused 0 connreset 510
+	Errors: fd-unavail 980 addrunavail 0 ftab-full 0 other 0
+	
+	Session rate [sess/s]: min 0.00 avg 20.04 max 108.61 stddev 40.80 (929/2000)
+	Session: avg 1.48 connections/session
+	Session lifetime [s]: 38.5
+	Session failtime [s]: 1.5
+	Session length histogram: 958 37 31 19 14 6 4 2 0 0 929
+</code></pre>
+
+<p><strong>Conclusions</strong></p>
+
+<p>As you can see from these test, if you are working with Nginx serving static files, it gives you no advantage to put Varnish in front of it, of course you might want to consider that if you are working on a VPS server and you are a little concerned about latency because of a busy disk, and your whole application / web pages, fit into your RAM (You can add it to your VPS), it my improve the response time, having Varnish with <code>-s malloc</code> option in front of NGINX, as almost everything will be served from RAM and no, or very little access to a shared disk will be needed.</p>
+
+<p>Another option where you want to have Varnish in front of NGINX, is if it is doing FastCGI, it does not matter if by itself or sending requests to Apache, but once again, you can turn Cache option in NGINX if sending PHP requirements to Apache.</p>
+
+<p>The best option you have is to test all possible configuration “live” with your application, and see which of them make the most of your hardware, also consider than if you need a lot of tweaking about what is cached and what is not Varnish is a lot more flexible than NGINX.</p>
+
+<p>To finish this, the conclusion should be your own, only running your own tests, as no test scenario will fulfil your needs, but your own “live” lab.</p>
+
+<p>Be careful, and backup everything before starting to work with your “live” application.</p>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html&text=Nginx+Varnish compared to Nginx&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html">linkedin</a> | <a href="mailto:?Subject=Nginx+Varnish compared to Nginx&Body=http://www.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html&title=Nginx+Varnish compared to Nginx" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

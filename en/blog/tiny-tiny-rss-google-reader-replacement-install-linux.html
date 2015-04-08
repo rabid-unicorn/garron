@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Find the best Google reader replacement, Self hosted rss reader, and install Tiny Tiny RSS on your Linux or Mac OS X PC or server" />
+
+        <!-- End SEO includes -->
+        <title>Moving from Google Reader to Tiny Tiny RSS</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Moving from Google Reader to Tiny Tiny RSS">
+        <meta name="twitter:description" content="Find the best Google reader replacement, Self hosted rss reader, and install Tiny Tiny RSS on your Linux or Mac OS X PC or server">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Moving from Google Reader to Tiny Tiny RSS</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html">Moving from Google Reader to Tiny Tiny RSS</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-05-27 10:22:35 -0400</h6>
+
+<hr>
+<h2 id="google-reader-replacement">Google reader replacement</h2>
+
+<p>Google reader is going to shut down its service in a little bit more than a month from now. They are doing that because there are very few people using their service.</p>
+
+<p>Well RSS is something most of the people do not even know about, I know the readers of this blog know about it, so, I am not going to explain about it.</p>
+
+<p>But “normal” people are using twitter, G+ or even Facebook, to get their daily dose of news, and they are following their favorite writers on those networks.</p>
+
+<p>I still use rss to follow the sites I am interested in, rss, has a lot of advantages over the other methods that were not designed for that in the first place.</p>
+
+<p>Just as one example, in all those social networks, if you miss an article, because you were too busy that day, chances are you will never be able to read it again, it will be lost below a pile of new posts, including those showing you the new cat of your friend, or that message telling you someone got eggs and bacon for his breakfast (not useful info, unless you get the recipe).</p>
+
+<p>Well, as a rss user, and mostly as a Google Reader user, I have decided I need to switch to another service. My first option was to <a href="/en/blog/switched-to-feedly.html">move to feedly</a>, but then I have decided, I do not want to depend on the so called “cloud” for services I use everyday.</p>
+
+<p>I have now decided to host my own service, and I have installed Tiny Tiny RSS.</p>
+
+<p>Tiny Tiny RSS is an Open Source option to Google Reader, it can be hosted on your local machine (You are running Linux or Mac OS X right?), or you can host it online in any web hosting provider or your VPS provider.</p>
+
+<p>Either way, you will have the data with you, and you will never have to suffer again from someone shutting down a service you rely on.</p>
+
+<p>Well, enough blah blah. Let’s now see how to install it.</p>
+
+<p>There are a lot of ways, specially if you are using a shared hosting solution, I will show here how to install it on your own Unix like operating system.</p>
+
+<p><strong>Assumptions</strong></p>
+
+<ul>
+  <li>You have access to root account</li>
+  <li>You have Apache, MySQL and PHP Installed</li>
+</ul>
+
+<p>Let’s first create the database that will hold your data, You can use either PostgreSQL or MySQL/MariaDB. I will use MySQL for this example.</p>
+
+<pre><code>mysql -u root -p
+</code></pre>
+
+<p>This will get you the prompt of MySQL. At that prompt enter these commands.</p>
+
+<pre><code>create database reader;
+grant all privileges on reader.* to "mysql_user"@"localhost" identified by "strongpassword";
+flush privileges;
+exit
+</code></pre>
+
+<p>You now have the database ready. Just be sure to use some real strong password, and it will be better if you also use another user instead of mysql_user. The localhost part should also be changed in case your MySQL server in not in the same physical server as your Apache and PHP.</p>
+
+<p>Let’s now create the virtual Apache server to host Tiny Tiny RSS.</p>
+
+<p>First the folder:</p>
+
+<pre><code> mkdir -p /var/www/tt-rss/
+</code></pre>
+
+<p>And be sure the permissions are OK.</p>
+
+<pre><code>chown -R www-data:www-data /var/www/tt-rss
+chmod 755 /var/www
+</code></pre>
+
+<p><em>www-data</em> might be some other thing if you are not on Debian derivatives, in RedHat servers like CentOS it is <em>www</em></p>
+
+<p>Now the turn for the virtual server in Apache. As I am using Ubuntu this may very if you are using another distribution, unless Debian.</p>
+
+<pre><code> vim /etc/apache2/sites-available/tt-rss.conf
+</code></pre>
+
+<p>Inside that file add these lines:</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+     ServerAdmin webmaster@example.com
+     DocumentRoot /var/www/tt-rss
+     ServerName rss.example.com
+     ErrorLog /etc/var/www/tt-rss/error.log
+     CustomLog /var/www/tt-rss/access.log
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>This is a very basic example, you can check <a href="/en/blog/ubuntu-lamp-apache2-mpm-worker-and-php-fpm.html">here</a> If you would like for example to use PHP-FPM.</p>
+
+<h3 id="install-tiny-tiny-rss">Install Tiny Tiny RSS</h3>
+
+<p>You have now set the environment, it is time to install the software itself.</p>
+
+<p>First, download the latest version from its <a href="http://tt-rss.org">home page</a>, then upload it to your server root folder. Unpack it:</p>
+
+<pre><code>tar xvzf Tiny-Tiny-RSS-1.x.x.tar.gz
+</code></pre>
+
+<p>Move it to your document root again.</p>
+
+<pre><code>cd Tiny-Tiny-RSS-1.x.x
+mv * .[^.]* ..
+</code></pre>
+
+<p>You can now delete the folder.</p>
+
+<pre><code>cd ..
+rmdir Tiny-Tiny-RSS-1.x.x
+</code></pre>
+
+<h3 id="configure-tiny-tiny-rss-server">Configure Tiny Tiny RSS server.</h3>
+
+<p>Let’s now go to http://rss.example.com and you will be asked some questions, like the database name, username and password for the database. Once that is done, you can log in, with the default user and password. (admin and password), be sure to change the password as soon as you can.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html&text=Moving from Google Reader to Tiny Tiny RSS&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html">linkedin</a> | <a href="mailto:?Subject=Moving from Google Reader to Tiny Tiny RSS&Body=http://www.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/tiny-tiny-rss-google-reader-replacement-install-linux.html&title=Moving from Google Reader to Tiny Tiny RSS" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

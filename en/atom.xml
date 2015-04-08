@@ -1,0 +1,1366 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>Guillermo Garron</title>
+  <link href="http://www.garron.me/"/>
+  <link type="application/atom+xml" rel="self" href="http://www.garron.me/en/atom.xml"/>
+  <updated>2015-04-08T02:13:48-04:00</updated>
+  <id>http://www.garron.me/</id>
+  <author>
+    <name>Guillermo Garron</name>
+    <email>contact@garron.me</email>
+  </author>
+
+  
+  <entry>
+    <id>http://www.garron.me/en/pictures/isla-del-sol</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/pictures/isla-del-sol.html"/>
+    <title>Island of Sun</title>
+    <published>2015-04-05T21:20:32-04:00</published>
+    <updated>2015-04-05T21:20:32-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/isla-del-sol.jpg&quot; class=&quot;img-responsive&quot; alt=&quot;Foto tomada en el interior de la isla del sol en Bolivia&quot; /&gt;&lt;figcaption&gt;Taken in the interior of the Island of Sun in December 2014&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/pictures/isla-del-sol.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/your-own-cdn</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/your-own-cdn.html"/>
+    <title>Your own CDN</title>
+    <published>2015-04-03T17:40:00-04:00</published>
+    <updated>2015-04-03T17:40:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;how-to-speed-up-your-site-and-it-load-faster&quot;&gt;How to speed up your site and it load faster&lt;/h2&gt;
+
+&lt;p&gt;Loading speed is something really important for your site, because it gives your readers the best possible experience, there are a lot of different things you need to do in order to improve your site’s speed, one of them is to put the content as close as possible to the readers. If you write about Spanish news, then chances are that most of your readers will be on Spain, and thus, your server should be located in Spain, that was easy. Now, what happens if your readers are spread all over the world, you have a pair of solutions.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Put your server in U.S. or Europe as almost the whole world get there at reasonable speeds, this is the cheapest but not the best.&lt;/li&gt;
+  &lt;li&gt;Set your server in U.S. or U.K. and then use a CDN company like &lt;a href=&quot;http://www.fastly.com/&quot;&gt;Fastly&lt;/a&gt;, &lt;a href=&quot;https://www.maxcdn.com/&quot;&gt;MaxCDN&lt;/a&gt; or &lt;a href=&quot;https://aws.amazon.com/cloudfront/&quot;&gt;Cloudfront&lt;/a&gt;, prices are not as high as they used to be, MaxCDN is $ 10 per 100 GB, Fastly minimum order is $ 50 and Amazon is pay as you grow.&lt;/li&gt;
+  &lt;li&gt;Get your own Virtual servers located at well distributed Datacenters around world and create your own CDN&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Taking out the first option, to decide between the other two is more a thing of taste, but one consideration should be taken into account.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Traffic of your site&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If your site has a lot of traffic then the CDN may be a better solution, more points of presence and your content nearer to your readers, but if your site does not have too much traffic, then chances are that your content is not going to be present at the edge servers when the reader request it, then your own servers is a better solution, as you control how much time the assets are going to be in each one of your servers.&lt;/p&gt;
+
+&lt;h2 id=&quot;set-up-your-own-cdn-with-amazon-and-digitalocean-or-linode&quot;&gt;Set up your own CDN with Amazon and DigitalOcean or Linode&lt;/h2&gt;
+
+&lt;p&gt;I am going to show here, how to set up your own network of servers to serve your site as near to your readers as possible. We are going to use Amazon Route 53, and &lt;a href=&quot;https://www.digitalocean.com/?refcode=e00a30198abe&quot;&gt;Digital Ocean&lt;/a&gt;’s VPS.&lt;/p&gt;
+
+&lt;h3 id=&quot;amazon-route-53&quot;&gt;Amazon Route 53&lt;/h3&gt;
+
+&lt;p&gt;I will assume you already have an AWS account, if not, you must create one, then go to: &lt;a href=&quot;https://console.aws.amazon.com/route53/&quot;&gt;Amazon Route 53&lt;/a&gt; and create a new zone:&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/aws-route-53-create-zone.png&quot; class=&quot;img-responsive&quot; alt=&quot;How to create a zone in aws route 53&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;We have two options to route traffic to the specific servers, one is &lt;em&gt;Latency routing&lt;/em&gt; and the other is &lt;em&gt;Geo location routing&lt;/em&gt;, there is a comparison of &lt;a href=&quot;http://blog.takipi.com/aws-route-53-benchmarking-the-new-amazon-geolocation-policy/&quot;&gt;Latency vs Geo location&lt;/a&gt; you might want to read.&lt;/p&gt;
+
+&lt;p&gt;Let’s see both ways&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Route 53 Latency configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you have your zone created, and resolving for your domain, create the records for your site, in this example, we will be working with www.garron.me&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;em&gt;Create Record Set&lt;/em&gt; and configure it as in the picture.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/aws-route-53-latency.png&quot; class=&quot;img-responsive&quot; alt=&quot;Configure Latency record in Amazon aws Route 53&quot; /&gt;&lt;/figure&gt;
+
+&lt;p&gt;You need to, of course, change the IP to fit your needs, also, be sure to select the Region that is nearer to your Datacenter, if you choose DigitalOcean or &lt;a href=&quot;https://www.linode.com/?r=74775de9c0e7b94b692de902874cacf3aa5777bf&quot;&gt;Linode&lt;/a&gt; and select East Coast data center, then select &lt;em&gt;use-east-1&lt;/em&gt; region.&lt;/p&gt;
+
+&lt;p&gt;Create one record per each server you deploy, I recommend you deploying one on U.S. one on Europe and one in Asia, that way you should be serving all customers in the world&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Route 53 Geo location configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In case you choose Geo location, once you have your zone created, create the records for your site. Once again go to &lt;em&gt;Create Record Set&lt;/em&gt; and configure it as in the picture below.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/aws-route-53-geolocation.png&quot; class=&quot;img-responsive&quot; alt=&quot;Configure geolocation record in Amazon aws Route 53&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;You need now to create as many records as fine tuned you want to distribute your traffic, you can go crazy and create one record per country, and define which data center is going to serve that country, but I recommend to create these records, considering you have one server in U.S., one in Europe and one in Asia.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Record for Asia pointing to Asia’s server&lt;/li&gt;
+  &lt;li&gt;Record for Oceania pointing to Asia’s server&lt;/li&gt;
+  &lt;li&gt;Record for Europe pointing to Europe’s server&lt;/li&gt;
+  &lt;li&gt;Record for Africa pointing to Europe’s server&lt;/li&gt;
+  &lt;li&gt;Record for Israel pointing to Europe’s server (I am sure it is better connected to Europe than to Asia)&lt;/li&gt;
+  &lt;li&gt;Record for Turkey pointing to Europe’s server (Same as with Israel)&lt;/li&gt;
+  &lt;li&gt;Default record pointing to United States’ server (&lt;strong&gt;You must have a default record, this is important&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;configuring-vps-servers-to-work-as-your-private-cdn&quot;&gt;Configuring VPS servers to work as your private CDN&lt;/h3&gt;
+
+&lt;p&gt;This is the way I have configured my network, you may choose a different way.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;One server in New York&lt;/li&gt;
+  &lt;li&gt;One server in Amsterdam&lt;/li&gt;
+  &lt;li&gt;One server in Singapore&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The real application or website should be running in one of those servers, let’s assume it is Amsterdam’s one, and let’s assume you have &lt;a href=&quot;/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html&quot;&gt;Nginx serving Wordpress&lt;/a&gt;. On the other two servers varnish will be installed. You can read how to configure Varnish for Wordpress &lt;a href=&quot;https://www.varnish-cache.org/trac/wiki/VarnishAndWordpress&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Just be sure to have varnish listening on port 80, this is done by editing &lt;code&gt;/etc/default/varnish&lt;/code&gt; on Ubuntu server and find this lines to make them look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DAEMON_OPTS=&quot;-a :80 \
+             -T localhost:6082 \
+             -f /etc/varnish/default.vcl \
+             -S /etc/varnish/secret \
+             -s malloc,256m&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also edit the file &lt;code&gt;/etc/varnish/default.vcl&lt;/code&gt; and be sure to have this lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;backend default {
+    .host = &quot;10.10.10.2&quot;;
+    .port = &quot;80&quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Change to IP to point to the server where your Nginx and Wordpress are, the port should be 80, as that server is also serving directly to visitors from Europe and Africa, if you are serving static content and not Wordpress, that should be enough, for Wordpress, read the instructions on Varnish site.&lt;/p&gt;
+
+&lt;p&gt;On the Nginx server add these lines in http or server block to make Varnish cache your files.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
+   expires 365d;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are using Apache use these lines on .htaccess file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;filesMatch &quot;.(ico|pdf|jpg|jpeg|png|gif|js|css)$&quot;&amp;gt;
+Header set Cache-Control &quot;max-age=31536000, public&quot;
+&amp;lt;/filesMatch&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart all servers, and check that everything is working, the best way is to enter each IP of your server in a browser, you should see a webpage, which may or may not be the one you want, but the default of your origin server, that is OK.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion-and-further-optimizations&quot;&gt;Conclusion and further optimizations&lt;/h2&gt;
+
+&lt;p&gt;With the prices of CDNs like MaxCDN or Cloudfront you may not need to do this, but if you are like me and just like to have control on your servers, and like to tweak everything by you, then you can go this way, if you want even more performance add PageSpeed module to your Nginx server, you will not need any cache plugin on Wordpress if you go this way, just add this lines to your Nginx server configuration in the server block.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;location ~ \.php$ {
+	try_files $uri =404;
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	fastcgi_cache  detecnologia;
+	fastcgi_cache_key $scheme$host$request_uri$request_method;
+	fastcgi_cache_valid 200 301 302 5s;
+	fastcgi_cache_use_stale updating error timeout invalid_header http_500;
+	fastcgi_pass_header Set-Cookie;
+	fastcgi_pass_header Cookie;
+	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+	fastcgi_pass unix:/var/run/php5-fpm.sock;
+	fastcgi_index index.php;
+	include fastcgi_params;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And this one to &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt; in the  http block&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fastcgi_cache_path /var/cache/nginx/blog.detecnologia.org levels=1:2 keys_zone=detecnologia:10m max_size=1024m inactive=1h;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With that configuration, you will be caching all responses from PHP for 5 seconds, then it is almost imposible to take the server down.&lt;/p&gt;
+
+&lt;p&gt;Hope this gives you a guide to start your own CDN network for any service you have. Take this important considerations into account.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Your origin server should set Cache-Control headers to make Varnish cache the results for static content&lt;/li&gt;
+  &lt;li&gt;Try to use PageSpeed module for Nginx or Apache depending on what you have on your origin server, and use &lt;a href=&quot;https://developers.google.com/speed/pagespeed/module/filter-cache-extend&quot;&gt;Extend Cache&lt;/a&gt; with it.&lt;/li&gt;
+&lt;/ul&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/your-own-cdn.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/nginx-reverse-proxy</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/nginx-reverse-proxy.html"/>
+    <title>Nginx Reverse Proxy. Multiple Applications on One Domain</title>
+    <published>2015-03-29T16:00:00-04:00</published>
+    <updated>2015-03-29T16:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Usually when you install a Web Application you assign its own domain for it, but there are a handful times when you want to install two or even more applications under the same domain. For example, let’s say you have a Wordpress blog, and you want to use &lt;a href=&quot;http://www.zenphoto.org/&quot;&gt;ZenPhoto&lt;/a&gt; for your photo album, and just to complicate it a little more you want to have a forum managed by &lt;a href=&quot;http://www.discourse.org/&quot;&gt;Discourse&lt;/a&gt;. Sure you can just use Wordpress plugins to make Wordpress manage all of these, or use Drupal or any other thing, but for this example let’s suppose you want to do it this way.&lt;/p&gt;
+
+&lt;p&gt;Let’s suppose the structure will have this form:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;/wordpress/ -&amp;gt; Wordpress&lt;/em&gt;
+&lt;em&gt;/photoblog/ -&amp;gt; ZenPhoto&lt;/em&gt;
+&lt;em&gt;/forum/ -&amp;gt; Discourse&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This post will not cover how to install ZenPhoto, Wordpress or Discourse.&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-applications&quot;&gt;Installing applications&lt;/h2&gt;
+
+&lt;p&gt;I have seen two ways the web applications are installed, PHP/MySQL applications that usually are powered by Apache or Nginx, and you can just install them in different folders and run as virtual servers, and those that are build with Ruby on rails or Node.js, like Discourse or the blogging platform Ghost, that have their own web server and usually run on a non-standart port.&lt;/p&gt;
+
+&lt;p&gt;In our example we are going to install Wordpress and ZenPhoto in their own folders or you can even install them on their own servers, just make sure they “know” they are running on a sub-folder. Discourse will be installed as adviced using Docker and responding on an specific port. This is going to be our scenario.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Wordpress, running on 192.168.1.2 port 8080&lt;/em&gt;
+&lt;em&gt;ZenPhoto, running on 192.168.1.3 port 8080&lt;/em&gt;
+&lt;em&gt;Discourse, running on 192.168.1.4 port 8080&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-and-configuring-nginx&quot;&gt;Installing and configuring Nginx&lt;/h2&gt;
+
+&lt;p&gt;Our Nginx and front server will be running on 192.168.1.1 and responding to port 80, it will act as a reverse proxy, it can have micro-cache enabled, which configuration is different for each application of the example, here will not be used, in future posts I will be showing different specific combinations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once installed we will configure the default virtual server to serve as our reverse proxy.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+
+    server_name www.example.com;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /wordpress/ {
+       proxy_set_header X-Real-IP  $remote_addr;
+       proxy_set_header X-Forwarded-For $remote_addr;
+       proxy_set_header Host $host;
+       proxy_pass http://192.168.1.2:8080;
+       }
+
+    location /photoblog/ {
+       proxy_set_header X-Real-IP  $remote_addr;
+       proxy_set_header X-Forwarded-For $remote_addr;
+       proxy_set_header Host $host;
+       proxy_pass http://192.168.1.3:8080;
+    }
+
+       location /forum/ {
+       proxy_set_header X-Real-IP  $remote_addr;
+       proxy_set_header X-Forwarded-For $remote_addr;
+       proxy_set_header Host $host;
+       proxy_pass http://192.168.1.4:8080;
+       }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As it can be seen, Nginx is forwarding the everything back to the appropriate application depending on the folder, behind the scenes each application working to serve the users, the frontpage might be any other application or just a static web page with links to the applications behind.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/nginx-reverse-proxy.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/package-search-apt</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/package-search-apt.html"/>
+    <title>Using apt-cache to search for packages</title>
+    <published>2015-03-22T07:24:32-04:00</published>
+    <updated>2015-03-22T07:24:32-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-search-for-package-on-debian-or-ubuntu-using-command-line-apt&quot;&gt;How to search for package on Debian or Ubuntu using command line apt?&lt;/h3&gt;
+
+&lt;p&gt;When you want to install packages on your Debian or Ubuntu box, but you do not know the complete name of the packages you want to install, then you can get help from &lt;code&gt;apt-cache&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;apt-cache performs a variety of operations on APT’s package cache. apt-cache does not manipulate the state of the system but does provide operations to search and generate interesting output from the package metadata.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This packages is installed by default on your Debian and Ubuntu servers, so you just need to use it:&lt;/p&gt;
+
+&lt;p&gt;Let’s say you need to install php modules, you can find them using.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-cache search php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will list all packages related to php, to refine the search a little bit, use &lt;code&gt;grep&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-cache search php | grep php-
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now it will only list the packages with &lt;em&gt;php-&lt;/em&gt; on the name.&lt;/p&gt;
+
+&lt;p&gt;In my Ubuntu 14.04 it was something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;php-pear - PEAR - PHP Extension and Application Repository
+pkg-php-tools - various packaging tools and scripts for PHP packages
+cakephp-instaweb - Development webserver for CakePHP applications
+cakephp-scripts - MVC rapid application development framework for PHP (scripts)
+doctrine - transitional dummy package for php-doctrine-orm
+kdevelop-php-dbg - debugging symbols for the KDevelop PHP plugin
+kdevelop-php-docs - PHP documentation plugin for KDevelop
+kdevelop-php-docs-l10n - localization files for KDevelop PHP documentation plugin
+kdevelop-php-l10n - localization files for KDevelop PHP plugin
+libphp-adodb - ADOdb database abstraction layer for PHP
+libphp-cloudfusion - A php toolkit for popular cloud computing services
+libphp-jabber - Object-oriented PHP interface for the Jabber/XMPP protocol
+libphp-jpgraph - Object oriented graph library for php5
+libphp-jpgraph-examples - Object oriented graph library for php5 (examples)
+libphp-magpierss - provides an XML-based RSS parser in PHP
+libphp-pclzip - zip archive manager class for PHP
+libphp-phpmailer - full featured email transfer class for PHP
+libphp-predis - Flexible and feature-complete PHP client library for the Redis key-value store
+libphp-serialization-perl - Perl module to manipulate serialized PHP data structures
+libphp-simplepie - RSS and Atom feed parsing in PHP
+libphp-snoopy - Snoopy is a PHP class that simulates a web browser
+libphp-swiftmailer - component-based library for sending e-mails
+mlmmj-php-web - web interface for mlmmj, written in php
+mlmmj-php-web-admin - administrative web interface for mlmmj, written in php
+php-apc - APC User Cache for PHP 5 (transitional package)
+.....
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/package-search-apt.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/optimize-compress-jpg-png</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/optimize-compress-jpg-png.html"/>
+    <title>Optimize jpg and png for your website</title>
+    <published>2015-03-21T18:00:32-04:00</published>
+    <updated>2015-03-21T18:00:32-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-optimize-and-compress-images-for-your-webpage&quot;&gt;How to optimize and compress images for your webpage?&lt;/h3&gt;
+
+&lt;p&gt;Having a fast site in important, your readers want your to load very fast, and it is also important for Google, if you have a lot of images in your site optimizing and compressing them is a must to have a fast loading site. You will also have the benefit of consuming less bandwidth.&lt;/p&gt;
+
+&lt;p&gt;There are mainly two types of images in a website, png and jpg or jpeg, we are going to see how to optimize both of them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Optimizing jpeg or jpg files for fast loading&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We will use two programs for this &lt;code&gt;jpegtran&lt;/code&gt; and &lt;code&gt;jpegoptim&lt;/code&gt;, so first let’s install them (I am using Ubuntu)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install jpegoptim libjpeg-progs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now using &lt;code&gt;jpegoptim&lt;/code&gt; we will apply a lossy method of compressing images, we will compress them and reduce quality to 80% which is still great for webpages.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;find . -name &quot;*.jpg&quot; | xargs jpegoptim -m 80 -t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can use this command and compress them withouth losing quality&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;find . -name &quot;*.jpg&quot; | xargs jpegoptim -t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With &lt;code&gt;jpegtran&lt;/code&gt; we will convert those files into progressive images, this is going to load them layer by layer making it appear they load faster than a baseline image which loads byte by byte.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for img in `ls *.jpg`; do jpegtran -copy none -optimise -outfile $img $img; done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This line does not work with subfolders, but I was not able to make it work that way with &lt;code&gt;find&lt;/code&gt; and &lt;code&gt;xargs&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Optimizing png files for fast loading&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Now is the turn of png files, we will use &lt;code&gt;optipng&lt;/code&gt;, so first install it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install optipng
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command is going to take some time, specially if you have lots of images.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;find . -name &quot;*.png&quot; | xargs optipng -o5 -quiet -keep -preserve -log optipng.log
+&lt;/code&gt;&lt;/pre&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/optimize-compress-jpg-png.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/wrap-pre-firefox</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/wrap-pre-firefox.html"/>
+    <title>Make Firefox wrap html pre tags</title>
+    <published>2015-03-15T19:00:32-04:00</published>
+    <updated>2015-03-15T19:00:32-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-make-firefox-properly-wrap-html-pre-tags&quot;&gt;How to make Firefox properly wrap html &lt;strong&gt;pre&lt;/strong&gt; tags?&lt;/h3&gt;
+
+&lt;p&gt;For some reason I still do not know Firefox does not wrap html pre tags properly as Safari, Chrome and IE does.&lt;/p&gt;
+
+&lt;p&gt;To make it work as the above mentioned browsers, add this lines to your css file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That should be it.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/wrap-pre-firefox.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/increase-upload-size-limit-nginx</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/increase-upload-size-limit-nginx.html"/>
+    <title>Wordpress on Nginx upload size limit</title>
+    <published>2015-03-08T19:00:00-04:00</published>
+    <updated>2015-03-08T19:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;how-to-increase-upload-file-size-limit-for-wordpress-running-on-php-fpm-and-nginx&quot;&gt;How to increase upload file size limit for Wordpress running on PHP-FPM and Nginx&lt;/h2&gt;
+
+&lt;p&gt;I am running some Wordpress blogs on Ubuntu LTS server, with Nginx and PHP-FPM, it is really fast and using Nginx caching capabilities incredible scalable.&lt;/p&gt;
+
+&lt;p&gt;I had some problems uploading big theme files, so I had to adjust the configurations a little bit, here are some tips for future references in case I may need to check it out again later, or if anyone need to do the same I did.&lt;/p&gt;
+
+&lt;p&gt;There are two places where you need make some changes in order to increase the upload size limit.&lt;/p&gt;
+
+&lt;h3 id=&quot;nginx&quot;&gt;Nginx&lt;/h3&gt;
+
+&lt;p&gt;Let’s check Nginx first, there was my problem, so adding this line to the &lt;strong&gt;http&lt;/strong&gt; block of your Nginx configuration, will solve the problem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;client_max_body_size 20m;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That line inside the &lt;strong&gt;http&lt;/strong&gt; block will make Nginx to accept files up to 20 Megabytes, that is enough for me, you may want to adjust to your own needs.&lt;/p&gt;
+
+&lt;h3 id=&quot;php-fpm&quot;&gt;PHP-FPM&lt;/h3&gt;
+
+&lt;p&gt;If the problem is not on Nginx side, PHP may be the culprit, so edit the file &lt;code&gt;/etc/php5/fpm/php.ini&lt;/code&gt; and be sure to have these lines.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;upload_max_filesize = 20M
+post_max_size = 20M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is almost sure you will find them, so just edit them to meet your needs.&lt;/p&gt;
+
+&lt;p&gt;Now you have a &lt;strong&gt;Wordpress&lt;/strong&gt; installation running on &lt;strong&gt;PHP-FPM&lt;/strong&gt; and &lt;strong&gt;Nginx&lt;/strong&gt; with an appropriate upload file size limit&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/increase-upload-size-limit-nginx.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/list-installed-packages-ubuntu</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/list-installed-packages-ubuntu.html"/>
+    <title>Installed packages on Ubuntu</title>
+    <published>2015-02-22T19:20:32-05:00</published>
+    <updated>2015-02-22T19:20:32-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-list-all-installed-packages-in-ubuntu&quot;&gt;How to list all installed packages in Ubuntu?&lt;/h3&gt;
+
+&lt;p&gt;If you want to know which packages are installed in your Ubuntu box &lt;code&gt;dpkg&lt;/code&gt; is a handy tool&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dpkg --get-selections
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will list all installed packages in the computer, if you want to narrow your search combine it with &lt;code&gt;grep&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dpkg --get-selections | grep php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Provided that you have installed some php packages your output might look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;php-apc						install
+php-auth-sasl					install
+php-mail					install
+php-net-smtp					install
+php-net-socket					install
+php-pear					install
+php-xml-parser					install
+php5						install
+php5-apcu					install
+php5-cli					install
+php5-common					install
+php5-curl					install
+php5-dev					install
+php5-fpm					install
+php5-gd						install
+php5-geoip					install
+php5-imagick					install
+php5-imap					install
+php5-json					install
+php5-mysql					install
+php5-readline					install
+pkg-php-tools					install
+&lt;/code&gt;&lt;/pre&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/list-installed-packages-ubuntu.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/mysql-cleaning</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/mysql-cleaning.html"/>
+    <title>How to clean up MySQL</title>
+    <published>2015-02-22T14:04:32-05:00</published>
+    <updated>2015-02-22T14:04:32-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-clean-mysql-from-not-used-databases-and-users&quot;&gt;How to clean MySQL from not used databases and users?&lt;/h3&gt;
+
+&lt;p&gt;When you are a tester, and keep proving one application after other, then you end up with a lot of garbage on your MySQL server, that is unused databases and users. There is an easy way to clean it.&lt;/p&gt;
+
+&lt;p&gt;Let’s connect to the server&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql -u root -p
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once logged in, list all databases.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW DATABASES;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let’s suppose you want to delete a database named wordpress.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; DROP DATABASE wordpress;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And so on with all unused databases, but now it is time for the users, once again first list them all&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SELECT host, user, password from mysql.user;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let’s now delete a users named &lt;em&gt;wordpress_user&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; DROP USER wordpress_user;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You are all done, you can now continue to install and uninstall software on your server, just clean MySQL when you finish testing.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/mysql-cleaning.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/freebsd-recompile-new-options</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/freebsd-recompile-new-options.html"/>
+    <title>Add options to an installed package in FreeBSD</title>
+    <published>2015-02-01T21:25:20-05:00</published>
+    <updated>2015-02-01T21:25:20-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-recompile-software-in-freebsd-with-new-options&quot;&gt;How to recompile software in FreeBSD with new options&lt;/h3&gt;
+
+&lt;p&gt;There are times when you need to compile again a software, but you want to add a new module o compile it with a new option.&lt;/p&gt;
+
+&lt;p&gt;Here are the steps to do it.&lt;/p&gt;
+
+&lt;p&gt;Go to the port folder.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/port/folder
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;De-install the old software&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make deinstall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clean the old data in case it is not cleaned yet&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Invoke the config menu&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make config
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Compile with the new options&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install the newly compiled software&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make install
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/freebsd-recompile-new-options.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html"/>
+    <title>Apache, PHP-FPM, MariaDB and FreeBSD</title>
+    <published>2015-01-31T23:00:00-05:00</published>
+    <updated>2015-01-31T23:00:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;I always liked the bsd-like ports that Slackware Linux uses and now that &lt;a href=&quot;https://www.digitalocean.com/?refcode=e00a30198abe&quot;&gt;Digital Ocean&lt;/a&gt; offers FreeBSD I am having a great time working with it.&lt;/p&gt;
+
+&lt;p&gt;Today I want to show you how to setup an FAMP (Apache 2.4, MySQL and PHP on FreeBSD 10), we will be installing Apache using Event MPM, and PHP-FPM.&lt;/p&gt;
+
+&lt;p&gt;We will also be using both methods of installation in FreeBSD, first the &lt;em&gt;ports way&lt;/em&gt; then, the &lt;em&gt;pkg binary way&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;apache-mysql-and-php-on-freebsd-from-ports&quot;&gt;Apache, MySQL and PHP on FreeBSD from ports&lt;/h3&gt;
+
+&lt;h4 id=&quot;apache-24-event-mpm&quot;&gt;Apache 2.4 Event MPM&lt;/h4&gt;
+
+&lt;p&gt;Let’s first start with Apache, as I said we will be installing the Event MPM which is a threaded MPM and will serve files a lot faster, actually normal files as fast as Nginx&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/www/apache24/
+make install clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Select these options.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;| [x] ACCESS_COMPAT      mod_access compatibility
+| [x] ACTIONS            Action triggering on requests 
+| [x] ALIAS              Mapping of requests to different filesystem parts
+| [x] AUTHZ_CORE         Core authorization provider vector module
+| [x] AUTHZ_HOST         Host-based authorization control
+| [x] DIR                Directory request handling
+|+[x] EXPIRES            Expires header control
+|+[x] HEADERS            HTTP header control
+|+[x] REWRITE            Rule based URL manipulation
+|+[x] VERSION            Determining httpd version in config files
+|+[x] VHOST_ALIAS        Mass virtual hosting
+|+(*) MPM_EVENT          MPM worker variant with the goal of consuming
+| [x] MIME               Mapp file-ext. to MIME (recommended)
+| [x] PROXY              Build enabled PROXY modules
+| [x] PROXY_FCGI         FastCGI support module for mod_proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I like to have Virtual sites as separate files and not as part of the monolitic httpd.conf file, so let’s configure Apache that way.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir /usr/local/etc/apache24/conf.d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add this line at the end of the file &lt;code&gt;/usr/local/etc/apache24/httpd.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Include etc/apache24/conf.d/*.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;php-56&quot;&gt;PHP 5.6&lt;/h4&gt;
+
+&lt;p&gt;Now it is the turn of PHP, we will build it with PHP-FPM option turned on.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/lang/php56
+
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Configure this way.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;|+[x] CLI       Build CLI version
+|+[x] CGI       Build CGI version
+|+[x] FPM       Build FPM version
+|+[ ] EMBED     Build embedded library
+|+[ ] PHPDBG
+|+[ ] DEBUG     Enable debug
+|+[ ] DTRACE    Enable DTrace support
+|+[x] IPV6      Enable ipv6 support
+|+[ ] MAILHEAD  Enable mail header patch
+|+[x] LINKTHR   Link thread lib (for threaded extensions)
+|+[ ] ZTS       Force Zend Thread Safety (ZTS) build
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally clean the installation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We now have PHP 5.6 installed, but we need the modules, so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ../php56-extensions/
+
+make install clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be sure to mark, GD, CURL and MySQL as well as MySQLi&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;|+[x] CURL          CURL support
+|+[x] GD            GD library support
+|+[x] MYSQL         MySQL database support
+|+[x] MYSQLI        MySQLi database support
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Those among the default ones.&lt;/p&gt;
+
+&lt;h4 id=&quot;mariadb-100&quot;&gt;MariaDB 10.0&lt;/h4&gt;
+
+&lt;p&gt;We are going to install MariaDB instead of MySQL, if you do not know already, MariaDB is a fork of MySQL, where new developments are taking place, but complete compatibility is being manteined&lt;/p&gt;
+
+&lt;p&gt;We are going to install MariaDB 10.0 which according to the oficial &lt;a href=&quot;http://mariadb.com&quot;&gt;site&lt;/a&gt; is:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;MariaDB 10.0 is the current stable version of MariaDB. It is built on the MariaDB 5.5 series with backported features from MySQL 5.6 and entirely new features not found anywhere else.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To install it, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/databases/mariadb100-server
+
+make install clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And keep all defaults. To secure your intallation run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Set a password, and then accept all defaults.&lt;/p&gt;
+
+&lt;h4 id=&quot;finishing-up-installation&quot;&gt;Finishing up installation&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Preparing services to run&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We need to configure all servers to autostart when the computer starts, to do that you need to edit the &lt;code&gt;vim /etc/rc.conf&lt;/code&gt;and add this lines.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apache24_enable=&quot;YES&quot;
+php_fpm_enable=&quot;YES&quot;
+mysql_enable=&quot;YES&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We need to take one more step for Apache. Edit the file &lt;code&gt;/usr/local/etc/httpd.conf&lt;/code&gt; and add this line just before the &lt;em&gt;Include….&lt;/em&gt; line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ServerName localhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now start all services:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service apache24 start
+service mysql-server start
+service php-fpm start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure you have these modules enabled&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LoadModule authn_core_module libexec/apache24/mod_authn_core.so
+LoadModule authz_core_module libexec/apache24/mod_authz_core.so
+LoadModule log_config_module libexec/apache24/mod_log_config.so
+LoadModule expires_module libexec/apache24/mod_expires.so
+LoadModule headers_module libexec/apache24/mod_headers.so
+LoadModule version_module libexec/apache24/mod_version.so
+LoadModule unixd_module libexec/apache24/mod_unixd.so
+LoadModule vhost_alias_module libexec/apache24/mod_vhost_alias.so
+LoadModule dir_module libexec/apache24/mod_dir.so
+LoadModule rewrite_module libexec/apache24/mod_rewrite.so
+LoadModule mime_module  libexec/apache24/mod_mime.so
+LoadModule actions_module libexec/apache24/mod_actions.so
+LoadModule alias_module libexec/apache24/mod_alias.so
+LoadModule authz_host_module libexec/apache24/mod_authz_host.so
+LoadModule access_compat_module libexec/apache24/mod_access_compat.so
+LoadModule proxy_module libexec/apache24/mod_proxy.so
+LoadModule proxy_fcgi_module libexec/apache24/mod_proxy_fcgi.so
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart Apache&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service apache24 restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;test-installation&quot;&gt;Test installation&lt;/h4&gt;
+
+&lt;p&gt;We will create a testing site in order to test everything, and be sure it is all setup and ready to work.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Create a folder for your site&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p /usr/local/www/site1/{public_html,logs}
+chown -R www:www /usr/local/www/site1/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Configure a virtual host&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Create a file in &lt;code&gt;/usr/local/etc/apache24/conf.d/site1.conf&lt;/code&gt;, you can name it any other way you want, and add this content inside:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    &amp;lt;VirtualHost *:80&amp;gt;
+        ServerAdmin webmaster@example.com
+        DocumentRoot &quot;/usr/local/www/site1/public_html&quot;
+        ServerName freebsd.garron.me
+        ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/usr/local/www/site1/public_html/$1
+        ErrorLog &quot;/usr/local/www/site1/logs/error.log&quot;
+        CustomLog &quot;/usr/local/www/site1/logs/access.log&quot; common
+        ScriptAlias /cgi-bin/ &quot;/usr/local/www/site1/cgi-bin/&quot;
+
+    &amp;lt;Directory &quot;/usr/local/www/site1/public_html&quot;&amp;gt;
+        Options +Indexes +FollowSymLinks +ExecCGI
+        AllowOverride AuthConfig FileInfo
+        Require all granted
+        Allow from all
+    &amp;lt;/Directory&amp;gt;
+
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Test the configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I will need to create a file named &lt;code&gt;phpinfo.php&lt;/code&gt; with this contents:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+    phpinfo();
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once saved, I can go to http://freebsd.garron.me/phpinfo.php, and the info of PHP should appear. This is the important line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Server API 	FPM/FastCGI 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That means, you are running PHP-FPM, and this is also a command you want to run to verify the MPM&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;httpd -V | grep MPM
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The reply should be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Server MPM:     event
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/apache-event-php-fpm-mariadb-freebsd.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/web-whatsapp</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/web-whatsapp.html"/>
+    <title>WhatsApp Web</title>
+    <published>2015-01-22T08:55:00-05:00</published>
+    <updated>2015-01-22T08:55:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;With some 700 million users around the world, WhatsApp is the most popular instant messaging app in Europe and Latin America. And recently has announced a long waited feature. You can now use WhatsApp from the PC using an official web-app.&lt;/p&gt;
+
+&lt;p&gt;There are some downsides but it works, here are some of those downsides.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Does not work for iOS, only for Android, Windows and Blackberry&lt;/li&gt;
+  &lt;li&gt;Only works for Google Chrome, but they promise solutions for other browsers “soon”&lt;/li&gt;
+  &lt;li&gt;Your phone needs to be connected to the Internet for this solution to work&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-use-whatsapp-from-the-web-on-your-pc&quot;&gt;How to use WhatsApp from the Web on your PC&lt;/h3&gt;
+
+&lt;p&gt;What you need:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Your phone connected to the Internet&lt;/li&gt;
+  &lt;li&gt;A PC connected to the Internet (Linux, Windows, Mac or Chromebook)&lt;/li&gt;
+  &lt;li&gt;Google Chrome browser installed&lt;/li&gt;
+  &lt;li&gt;Latest version of WhatsApp on an Android, Windows Phone or Blackberry&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Go to &lt;a href=&quot;https://web.whatsapp.com&quot;&gt;web.whatsapp.com&lt;/a&gt; and you will a screen like this one.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/01/web-whatsapp/web-whatsapp-1.png&quot; class=&quot;img-responsive&quot; alt=&quot;Use WhatsApp from the Web&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Open WhatsApp app in your phone and go to menu-&amp;gt;WhatsApp web, and scan the barcode you’ve got on the sceen like the above one.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/01/web-whatsapp/web-whatsapp.png&quot; class=&quot;img-responsive&quot; alt=&quot;WhatsApp on the web&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When you are finally connected you will see something like this will all your contacts.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/01/web-whatsapp/web-whatsapp-2.png&quot; class=&quot;img-responsive&quot; alt=&quot;WhatsApp on your PC&quot; /&gt;&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/tech/web-whatsapp.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/nginx-freebsd</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/nginx-freebsd.html"/>
+    <title>Install Nginx on FreeBSD</title>
+    <published>2015-01-14T21:33:00-05:00</published>
+    <updated>2015-01-14T21:33:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-install-nginx-web-server-on-freebsd&quot;&gt;How to install Nginx web server on FreeBSD&lt;/h3&gt;
+
+&lt;p&gt;You can install it will the default options with just a command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pkg install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But as I prefer to have gzip_static module enable to gzip files on the fly, I would rather install by compiling it from ports, I love this possibility that I mainly enjoy on Arch Linux and Gentoo.&lt;/p&gt;
+
+&lt;p&gt;Firts thing is to be sure the ports files are up to date, so run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;portsnap fetch update
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can install Nginx web server on our FreeBSD system&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/www/nginx
+make install clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Look for this line in the screen that will be presented to you.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ ] HTTP_GZIP_STATIC_MODULE   Enable http_gzip_static module
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And be sure to check it, it should now look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[X] HTTP_GZIP_STATIC_MODULE   Enable http_gzip_static module
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Accept the rest of default options or change them according to your needs, and you are done, Nginx is installed.&lt;/p&gt;
+
+&lt;p&gt;You are now free to start configuring it, the configuration file is at:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/local/etc/nginx/nginx.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To make it run at start time run this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &#39;php_fpm_enable=&quot;YES&quot;&#39; &amp;gt;&amp;gt; vi /etc/rc.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/nginx-freebsd.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/starting-freebsd</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/starting-freebsd.html"/>
+    <title>Starting with FreeBSD</title>
+    <published>2015-01-14T21:00:00-05:00</published>
+    <updated>2015-01-14T21:00:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;starting-with-freebsd-on-digital-ocean&quot;&gt;Starting with FreeBSD on Digital Ocean&lt;/h3&gt;
+
+&lt;p&gt;I have received an email today telling me that I am now able to install FreeBSD on DigitalOcean, of course I have inmediately headed to D.O. and created a new droplet and have chosen FreeBSD.&lt;/p&gt;
+
+&lt;p&gt;I have read a lot of good things about FreeBSD, and now that it is available on Digital Ocean I will start experimenting with it a little bit more than before.&lt;/p&gt;
+
+&lt;p&gt;I will be posting on this section of the site some of my discoveries, and on &lt;a href=&quot;/en/bits/&quot;&gt;tips&lt;/a&gt; section small but useful tips I surely will be discovering about FreeBSD operating system. Let’s now see what were the first steps preparing the server to work with it.&lt;/p&gt;
+
+&lt;p&gt;After login in, with the &lt;code&gt;freebsd&lt;/code&gt; account as required, I discovered that I have &lt;a href=&quot;/en/linux/visudo-command-sudoers-file-sudo-default-editor.html&quot;&gt;sudo powers&lt;/a&gt; on that account.&lt;/p&gt;
+
+&lt;p&gt;The first steps for me in every new system I install is to put all the tools I normally use:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;vim&lt;/li&gt;
+  &lt;li&gt;htop&lt;/li&gt;
+  &lt;li&gt;iftop&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;htop-on-freebsd&quot;&gt;Htop on freeBSD&lt;/h3&gt;
+
+&lt;p&gt;To install htop I had to go over these steps&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install htop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then I needed to modify the &lt;code&gt;/etc/fstab&lt;/code&gt; file and add this line. &lt;code&gt;linproc /compat/linux/proc linprocfs rw,late 0 0&lt;/code&gt; so,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo echo &quot;linproc /compat/linux/proc linprocfs rw,late 0 0&quot; &amp;gt;&amp;gt; /etc/fstab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally run this command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mkdir -p /usr/compat/linux/proc; ln -s /usr/compat /compat; mount linproc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Well, I now have &lt;code&gt;htop&lt;/code&gt; installed.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-vim-on-freebsd&quot;&gt;Install vim on FreeBSD&lt;/h3&gt;
+
+&lt;p&gt;Another must have of my tool belt is &lt;code&gt;vim&lt;/code&gt;, this was a simple one.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install vim
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;install-iftop-on-freebsd&quot;&gt;Install iftop on FreeBSD&lt;/h3&gt;
+
+&lt;p&gt;It is now turn of &lt;code&gt;iftop&lt;/code&gt;, this is a tool I use a lot to monitor who is connecting to my system and on which ports, and how much bandwidth it is using.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install iftop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I can now monitor the traffic on my server with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo iftop -i vtnet0 -pP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And I will on realtime the information about who is connecting to my server, on which port, and at what speed.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-vnstat-on-freebsd&quot;&gt;Install vnstat on FreeBSD&lt;/h3&gt;
+
+&lt;p&gt;I use &lt;code&gt;vnstat&lt;/code&gt; to monitor the bandwidth consumed on my VPS server over a month, so I can be sure not to exceep my quota.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install vnstat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;vnstat&lt;/code&gt; cannot be used right away, it needs some configuration, so, let’s do it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mkdir -p /var/lib/vnstat
+
+sudo vnstat -i vtnet0 --create
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/starting-freebsd.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/brackets</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/brackets.html"/>
+    <title>Brackets Text Editor</title>
+    <published>2015-01-11T20:41:00-05:00</published>
+    <updated>2015-01-11T20:41:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;As most of you alreay know, this blog is powered by Jekyll, and therefore it is a bunch of plain text files, with Markdown syntax. In all this years I have used different text editor to write this blog.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Vim&lt;/li&gt;
+  &lt;li&gt;Emacs&lt;/li&gt;
+  &lt;li&gt;iA Writer&lt;/li&gt;
+  &lt;li&gt;Uber Writer&lt;/li&gt;
+  &lt;li&gt;ByWord&lt;/li&gt;
+  &lt;li&gt;MultiMarkdown Composer&lt;/li&gt;
+  &lt;li&gt;Erato&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Most of the time it is just Vim, and Emacs is great because it highlights Markdown syntax, but lately I am using more and more &lt;a href=&quot;http://brackets.io&quot;&gt;brackets&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Brackets is a text editor with a really light code that works great with html, css, js files and of course it works with Markdown files too, I started using it because I am learning Wordpress themes development.&lt;/p&gt;
+
+&lt;p&gt;It is available on Windows, Mac OS X and Linux and it is Open Source which is great for me, because that way I can use the same tool to work on my Ubuntu 14.04 or my Mac OS X laptops.&lt;/p&gt;
+
+&lt;p&gt;A nice feature is the possibility to add functions via extensions, you can write your own, or install one of the community ones. &lt;a href=&quot;https://github.com/zaggino/brackets-git&quot;&gt;Brackets Git&lt;/a&gt; is a good one, you will find a lot of other ones &lt;a href=&quot;https://ingorichter.github.io/BracketsExtensionTweetBot/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Take a look at it, it’s free so you have nothing to lose and a lot to win.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/blog/brackets.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/mysql-select-from-range-dates</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/mysql-select-from-range-dates.html"/>
+    <title>MySQL SELECT FROM range of dates</title>
+    <published>2015-01-11T15:05:20-05:00</published>
+    <updated>2015-01-11T15:05:20-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-select-rows-from-a-range-of-dates-with-mysql-query-command&quot;&gt;How to Select rows from a range of dates with MySQL query command&lt;/h3&gt;
+
+&lt;p&gt;If you need to select rows from a MySQL database’ table in a date range, you need to use a command like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table WHERE date_column &amp;gt;= &#39;2014-01-01&#39; AND date_column &amp;lt;= &#39;2015-01-01&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course you need to change:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;table&lt;/li&gt;
+  &lt;li&gt;date_column&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To meet your needs.&lt;/p&gt;
+
+&lt;p&gt;Another way is to use this command&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table WHERE date_column BETWEEN &amp;gt;= &#39;2014-01-10&#39; AND &#39;2015-01-01&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once again, change the table and date_column to meet your data.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/mysql-select-from-range-dates.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/mysql-select-multiple-conditions</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/mysql-select-multiple-conditions.html"/>
+    <title>MySQL select from where multiple conditions</title>
+    <published>2015-01-11T09:25:20-05:00</published>
+    <updated>2015-01-11T09:25:20-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;select-from-where-multiple-conditions&quot;&gt;SELECT FROM WHERE multiple conditions&lt;/h3&gt;
+
+&lt;p&gt;Maybe one of the most used MySQL commands is SELECT, that is the way to stract the information from the database, but of course one does not need all the info inside a database, therefore one should limit the info coming out from the table, there is WHERE statement comes into play, with it one can limit the data to only the one that complies with certain condition. What if that is still too wide?. Then it can be used multiple conditions. Here some options:&lt;/p&gt;
+
+&lt;h4 id=&quot;working-with-two-conditions&quot;&gt;Working with two conditions&lt;/h4&gt;
+
+&lt;p&gt;Using AND with two or more conditions the query can be narrowed to meet your needs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table WHERE column1 = &#39;var1&#39; AND column2 = &#39;var2&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Only when the two conditions are met the row is stracted from the database’s table. What if any of them should be met to get the data?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table WHERE column1 = &#39;var1&#39; OR column2 = &#39;var2&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using OR will tell MySQL to return data if one or both conditions are met.&lt;/p&gt;
+
+&lt;h4 id=&quot;working-with-more-than-two-conditions&quot;&gt;Working with more than two conditions&lt;/h4&gt;
+
+&lt;p&gt;If more than two conditions need to be met in order to show a result, you need to use parenthesis and nest the conditions according to your needs. This time it will be easier with examples.&lt;/p&gt;
+
+&lt;p&gt;Consider this table:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+------------+-----------+--------+-----+
+| fname      | lname     | gender | age |
++------------+-----------+--------+-----+
+| John       | Smith     | M      | 30  |
++------------+-----------+--------+-----+
+| Jane       | Doe       | F      | 20  |
++------------+-----------+--------+-----+
+| Richard    | Stallman  | M      | 70  |
++------------+-----------+--------+-----+
+| John       | Doe       | M      | 20  |
++------------+-----------+--------+-----+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want to get all young male’s names use this query.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table WHERE gender = M AND age &amp;gt;=  &#39;18&#39; AND age &amp;lt;= &#39;50&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want to get all young people with last name Doe or Smith, use this query.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * FROM table WHERE age &amp;gt;= &#39;18&#39; AND age &amp;lt;= &#39;50&#39; AND (lname = &#39;Doe&#39; OR lname = &#39;Smith&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see we are using parenthesis to get a result from last names, because you want one or the other, then you use AND to get the age range and finally an AND to join the results from age range and the results from names.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/mysql-select-multiple-conditions.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/latest-jekyll-ubuntu</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/latest-jekyll-ubuntu.html"/>
+    <title>Latest version of Jekyll on Ubuntu</title>
+    <published>2015-01-11T09:25:20-05:00</published>
+    <updated>2015-01-11T09:25:20-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-install-the-latest-version-of-jekyll-on-ubuntu&quot;&gt;How to install the latest version of Jekyll on Ubuntu&lt;/h3&gt;
+
+&lt;p&gt;Ubuntu has Jekyll available on its repositories, but it is an older version, if you want to have the latest follow this easy steps.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Install dependencies&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install curl nodejs build-essentials git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Install RVM&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;With rvm you will have the latest version of ruby as well.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;\curl -L https://get.rvm.io | bash -s stable
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Exit terminal and start a new session or run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source ~/.rvm/scripts/rvm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be sure to install all requirements&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rvm requirements
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Install Ruby&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We will now install ruby and make that latest version the default, we also need rubygems.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rvm install ruby
+rvm use ruby --default
+rvm rubygems current
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Install Jekyll&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo gem install jekyll --no-rdoc --no-ri
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You are now ready to blog with Jekyll&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/latest-jekyll-ubuntu.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/virtualbox-guest-additions-ubuntu</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/virtualbox-guest-additions-ubuntu.html"/>
+    <title>VirtualBox Guest Additions for Ubuntu</title>
+    <published>2015-01-10T22:25:20-05:00</published>
+    <updated>2015-01-10T22:25:20-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-install-virtualbox-guest-additions-on-linux&quot;&gt;How to install VirtualBox Guest Additions on Linux&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Q. How can I install VirtualBox Guest Additions on Linux&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A. If you have VirtualBox installed, and you have a Linux Guest OS, Ubuntu for this example, you can install VirtualBox Guest additions really easy, that will help you in may ways, but maybe the most important one is that you will be able to run your Guest OS, Ubuntu in this case in full screen having it using your complete screen space.&lt;/p&gt;
+
+&lt;p&gt;The first thing you need to do, is to insert the CD with the Guest Additions, it is a virtual CD, and all you have to do is to the VirtualBox menu &lt;strong&gt;Devices -&amp;gt; Insert Guest Additions CD Image&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Then you need to mount the CD into Ubuntu, to do that run this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mount /dev/cdrom /mnt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will be asked to enter your password, do it, and hit ENTER, after that, install the requiered software to compile the needed software.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install build-essential dkms linux-headers-$(uname -r)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, install the Guest Additions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /mnt
+
+sudo ./VBoxLinuxAdditions.run
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It will take some time, and when it finishes, just restart your guest OS, and you will have all installed, now you can go full screen and enjoy your Ubuntu guest OS in all the screen.&lt;/p&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/virtualbox-guest-additions-ubuntu.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/bits/mysql-import-csv</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/bits/mysql-import-csv.html"/>
+    <title>Import csv file into MySQL table</title>
+    <published>2015-01-10T20:08:20-05:00</published>
+    <updated>2015-01-10T20:08:20-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;how-to-import-a-csv-file-into-mysql-database&quot;&gt;How to import a CSV file into MySQL database?&lt;/h3&gt;
+
+&lt;p&gt;**Q. How can I import CSV files into MySQL tables?&lt;/p&gt;
+
+&lt;p&gt;A. First thing, is to have a clean CSV file, one that does not have ^M chars, usually inserted by Windows editors. Then be sure to have the same structure on the CSV file than the one you have in the MySQL table.&lt;/p&gt;
+
+&lt;p&gt;Let’s say you have a file called adress.csv with this structure&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Name,Last Name,Address
+John,Wayne,Fifth Avenue
+Marlon,Brando,Hollywood
+Marilyn,Monroe,Brentwood
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that you have a table with the same structure (you can use PHPMyAdmin to create one in a MySQL database), you can import the data from the csv file into the table.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u [user] -p [database] /path/to/address.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;--ignore-lines&lt;/code&gt; will ignore the number of specified lines, in this case we are omiting the first one as it is the header of the table&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--fields-terminated-by&lt;/code&gt; Will tell the command what character is the delimiter one, a comma in this case.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--verbose&lt;/code&gt; Makes the command to be talkie, I always prefer this mode with commands when using them for first time.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--local&lt;/code&gt; Tells the command that the CSV file should be read in the local file system of the server.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--u [user]&lt;/code&gt; Is the user with rights to write on the database&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--p&lt;/code&gt; Tells the command to prompt for [user]’s password&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;[database]&lt;/code&gt; The name of the database where the table was created and where the data is going to be inserted&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;/path/to/address.csv&lt;/code&gt; Is the complete path to the csv file, be sure to match the name of the file &lt;em&gt;address&lt;/em&gt; in this case, with the name of the table, otherwish it will not work, the extension might be anything or none at all.&lt;/li&gt;
+&lt;/ul&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/bits/mysql-import-csv.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+ 
+</feed>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/analytics-web-stats-without-google-cookies.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to get site analytics and stats without cookies." />
+
+        <!-- End SEO includes -->
+        <title>Site analytics and stats without Google and cookies</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Site analytics and stats without Google and cookies">
+        <meta name="twitter:description" content="How to use Piwik to replace Google Analytics, and get Analytics and stats for your site without the use of cookies">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Site analytics and stats without Google and cookies</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/analytics-web-stats-without-google-cookies.html">Site analytics and stats without Google and cookies</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-01-12 10:24:00 -0500</h6>
+
+<hr>
+<p>With companies like Google, Facebook and Twitter getting more and more info about us while browsing the web. And with them even being able to identify us directly and record our browsing history. There are more and more people that do not like this, so, if you are hosting your own site, and you think you need analytics stats (who doesn’t) but, at the same time you do not want to expose your visitors to those companies there are still options to get the stats info you need to improve your site, while not exposing or <em>“selling”</em> your visitor’s privacy.</p>
+
+<h2 id="get-info-from-web-server-logs">Get info from web server logs</h2>
+
+<p>The most common and oldest way to get statistical information about your visits is to parse the web server logs, trough some tool that will give you the statistical info you need. Some of the best options are:</p>
+
+<p>Awstats:</p>
+
+<blockquote>
+  <p>AWStats is an open source Web analytics reporting tool, suitable for analyzing data from Internet services such as web, streaming media, mail and FTP servers. AWStats parses and analyzes server log files, producing HTML reports. Data is visually presented within reports by tables and bar graphs. Static reports can be created through a command line interface, and on-demand reporting is supported through a web browser CGI program.
+– Wikipedia</p>
+</blockquote>
+
+<p>Webalizer:</p>
+
+<blockquote>
+  <p>The Webalizer is a GPL application that generates web pages of analysis, from access and usage logs, i.e. it is web log analysis software. It is one of the most commonly used web server administration tools. It was initiated by Bradford L. Barrett in 1997. Statistics commonly reported by Webalizer include: hits; visits; referrers; the visitors’ countries; and the amount of data downloaded. These statistics can be viewed graphically and presented by different time frames, such as per day, hour, or month.
+– Wikipedia</p>
+</blockquote>
+
+<p>Most web hosting providers will offer you access to one or both awstats and webalizer through CPanel. If you are hosting your site, on your own server or VPS you will need to install one of them on the same server, or on your personal computer, and transfer the logs to your PC to analize the info.</p>
+
+<p>As you see, you need access to the logs of the server, that is only possible if you are hosting your site on own server.</p>
+
+<h2 id="run-your-own-analytics-solution">Run your own analytics solution</h2>
+
+<p>Another option you have, is to run your own analytics solution, there are a lot of options, but the only one I have tested so far is, <em>Piwik</em>. <em>Piwik</em> offers you reports as good as the ones you could see on Google Analytics, with the plus that you own the data.</p>
+
+<p>Piwik offers you basically two ways to track your visitors, you can add a java script code to all your pages (just like with Google Analytics) or you can use a picture tracking system. The last method will use PHP instead of JavaScript. You can combine both of them too, for those visitors who have JavaScript disabled, or those who are visiting your site with a browser not able to run Java scripts.</p>
+
+<p><strong>Cookies</strong></p>
+
+<p>If you want to stop setting cookies on the browser of your visitors, you will be happy to know that Piwik lets you track the traffic of your site without the need of cookies. You will not have the info about returning visitors, but maybe that is not a really important metric for you.</p>
+
+<p>The basic JS code to insert in all your pages is:</p>
+
+<pre><code>&lt;!-- Piwik --&gt; &lt;script type="text/javascript"&gt; 
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://{$PIWIK_URL}/" : "http://{$PIWIK_URL}/"); 
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E")); 
+&lt;/script&gt;&lt;script type="text/javascript"&gt; 
+try { 
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", {$IDSITE}); 
+piwikTracker.trackPageView(); 
+piwikTracker.enableLinkTracking(); 
+} catch( err ) {} 
+&lt;/script&gt; 
+&lt;!-- End Piwik Code --&gt;
+</code></pre>
+
+<p>This code will set cookies, they are first party cookies, and the tracked info, will remain in your control, so your visitors shouldn’t have a problem with this, you have the server logs anyway right?</p>
+
+<p>But if you do not want to set any cookies, you can use this code:</p>
+
+<pre><code>    &lt;!-- Piwik --&gt; &lt;script type="text/javascript"&gt; 
+    var pkBaseURL = (("https:" == document.location.protocol) ? "https://{$PIWIK_URL}/" : "http://{$PIWIK_URL}/"); 
+    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E")); 
+    &lt;/script&gt;&lt;script type="text/javascript"&gt; 
+    try { 
+    var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", {$IDSITE}); 
+piwikTracker.disableCookies();
+    piwikTracker.trackPageView(); 
+    piwikTracker.enableLinkTracking(); 
+    } catch( err ) {} 
+    &lt;/script&gt; 
+    &lt;!-- End Piwik Code --&gt;
+</code></pre>
+
+<p>Note the line <code>piwikTracker.disableCookies();</code>. That line will disable cookies in Piwik. To respect even more your visitors’ privacy, you may want to enable the IP anonymization. To do that go to: <em>Settings &gt; Privacy to enable IP anonymization</em> and enable it with at least 2 bytes masked.</p>
+
+<h2 id="final-words">Final words</h2>
+
+<p>Analytics info about visitors to your site, is extremely important. Knowing from where the come for example, helps you set your server nearer to the visitors thus giving them a better service. Also, knowing the OS and browser and screen resolution they are using helps you improve the layout of your site for a user’s better experience.</p>
+
+<p>Knowing this, it is also important to know that the visitors’ privacy is also very important, and should try to help them keep that private. In my case I have disabled all sharing buttons, that way facebook, twitter and the rest are not able to track the visitors to my site, just because they are using the browser they use to log into those services accounts.</p>
+
+<p>You now know, how to protect people’s privacy and still get the important statistics information you need to better run your site.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/analytics-web-stats-without-google-cookies.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/analytics-web-stats-without-google-cookies.html&text=Site analytics and stats without Google and cookies&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/analytics-web-stats-without-google-cookies.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/analytics-web-stats-without-google-cookies.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/analytics-web-stats-without-google-cookies.html">linkedin</a> | <a href="mailto:?Subject=Site analytics and stats without Google and cookies&Body=http://www.garron.me/en/blog/analytics-web-stats-without-google-cookies.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/analytics-web-stats-without-google-cookies.html&title=Site analytics and stats without Google and cookies" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

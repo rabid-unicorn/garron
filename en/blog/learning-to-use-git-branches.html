@@ -1,0 +1,287 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/learning-to-use-git-branches.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Working with Git branches and Jekyll, learing how to create, merge, rebase, delete branch. On the local and remote Git repository" />
+
+        <!-- End SEO includes -->
+        <title>Learning Git branches</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Learning Git branches">
+        <meta name="twitter:description" content="Working with Git branches and Jekyll, learing how to create, merge, rebase, delete branch. On the local and remote Git repository">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Learning Git branches</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/learning-to-use-git-branches.html">Learning Git branches</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-01-28 19:44:00 -0500</h6>
+
+<hr>
+<h2 id="working-with-git-branches">Working with Git branches</h2>
+
+<p>I am using Git to version control this blog. As I am the only one contributor to the blog, I really do not need branches at all. But because I want to learn a little bit more about Git, I have decided to use branches for writing draft posts.</p>
+
+<p>Of course Git branches are great if I were making big changes to my site, like for example, changing the whole template.</p>
+
+<p>I work on three computers, my PC at work, my PC at home, and sometimes my laptop, so I have a central bare repository where my blog is hosted. When I decide to work on a new post, I just go to my working directory do a <code>git pull</code> create the post, and then <code>git push</code>. So I am basically using git as Dropbox, but I trust Git more than Dropbox.</p>
+
+<p>I decided to change my work flow a little, and now what I will do is:</p>
+
+<p><strong>Create a new branch for drafts</strong></p>
+
+<p>This is done just once (I think).</p>
+
+<pre><code>git checkout -b drafts
+</code></pre>
+
+<p>I can start a draft, or more in this branch, If I am not planning to publish all drafts together is easier to have a branch per draft. I can use <em>git cherry-pick</em> to merge only some commits to the master branch. But using one branch per draft seems easier.</p>
+
+<p>When I think I am ready I issue a:</p>
+
+<pre><code>jekyll --server
+</code></pre>
+
+<p>And see how it goes. Then, after leaving my PC I may need to do a:</p>
+
+<pre><code>git push origin drafts
+</code></pre>
+
+<p>To update my drafts branch with the central repository, this just once too. Next time a simple <code>git push</code> will update all branches that exists in local and remote. Because git push normal uploads all branches that exist with the same names in your local repo as well as in the master repo.</p>
+
+<p>Once the draft is finished I can move to master and merge or rebase the draft branch into it.</p>
+
+<p><strong>Merging the drafts branch into master</strong></p>
+
+<pre><code>git checkout master
+
+git merge drafts
+</code></pre>
+
+<p>And I am ready to publish to the server.</p>
+
+<p><strong>Rebasing the drafts branch into master</strong></p>
+
+<pre><code>git checkput master
+
+git rebase drafts
+</code></pre>
+
+<p>I am not going to use rebase, as it seems to be safe. But only because I am the only one working on this project. As a rule of thumb “You should not use rebase if you shared your branch with some others”.</p>
+
+<p><strong>Delete the drafts branch</strong></p>
+
+<p>Now that all my work is published and integrated in the master branch, I can safely delete the drafts branch.</p>
+
+<p><em>Delete the branch on the central repository</em></p>
+
+<p>Maybe this is not needed, as I can re-use the same branch for future drafts, but in case I do not need a branch anymore, I can delete it from the central bare repository with:</p>
+
+<pre><code>git push origin :drafts
+</code></pre>
+
+<p><em>Delete the branch locally</em></p>
+
+<p>Once the branch is deleted from the master repo, I can safely delete it from my local repository too, with:</p>
+
+<pre><code>git branch -d drafts
+</code></pre>
+
+<h2 id="summary">Summary</h2>
+
+<p>As I still do not master git (maybe I never will) I am going to write down here a summary of the commands needed to work with branches.</p>
+
+<ul>
+  <li>
+    <p>Create a local branch</p>
+
+    <p><code>git checkout -b newbranch</code></p>
+  </li>
+  <li>
+    <p>Create the same branch on the master repo, or upload it to master</p>
+
+    <p><code>git push origin newbranch</code></p>
+  </li>
+  <li>
+    <p>Download/pull the new branch from master to another local repository</p>
+
+    <p><code>git pull newbranch origin/newbranch</code></p>
+  </li>
+  <li>
+    <p>Merge changes on branch to master</p>
+
+    <p><code>git checkout master</code></p>
+
+    <p><code>git merge newbranch</code></p>
+  </li>
+  <li>
+    <p>Rebase change on branch to master</p>
+
+    <p><code>git checkout master</code></p>
+
+    <p><code>git rebase newbranch</code></p>
+  </li>
+  <li>
+    <p>Delete branch on master or remote repository</p>
+
+    <p><code>git push origin :newbranch</code></p>
+  </li>
+  <li>
+    <p>Delete branch in local repository</p>
+
+    <p><code>git branch -d newbranch</code></p>
+  </li>
+</ul>
+
+<p>I think that is all I may need to work with git branch, I hope it may help someone else too.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/learning-to-use-git-branches.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/learning-to-use-git-branches.html&text=Learning Git branches&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/learning-to-use-git-branches.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/learning-to-use-git-branches.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/learning-to-use-git-branches.html">linkedin</a> | <a href="mailto:?Subject=Learning Git branches&Body=http://www.garron.me/en/blog/learning-to-use-git-branches.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/learning-to-use-git-branches.html&title=Learning Git branches" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

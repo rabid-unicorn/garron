@@ -1,0 +1,549 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to install and configure a DNS server master, slave with BIND" />
+
+        <!-- End SEO includes -->
+        <title>How to setup a DNS server master - slave with BIND</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="How to setup a DNS server master - slave with BIND">
+        <meta name="twitter:description" content="Instructions to install and configure DNS server in master / slave configuration using BIND. For Ubuntu, Debian, Arch Linux and Slackware">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">How to setup a DNS server master - slave with BIND</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/how-setup-dns-server-master-slave-bind.html">How to setup a DNS server master - slave with BIND</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2010-12-29 09:36:30 -0500</h6>
+
+<hr>
+<h5 id="how-to-setup-a-dns-server-master--slave-bind">How to setup a DNS server master / slave BIND</h5>
+
+<p>Domain Name System (a.k.a. DNS) is maybe one of the least known services in the Internet, by the common user, but also one, of the most used by everybody.</p>
+
+<blockquote>
+  <p>The Domain Name System (DNS) is a hierarchical naming system built on a distributed database for computers, services, or any resource connected to the Internet or a private network. It associates various information with domain names assigned to each of the participating entities. Most importantly, it translates domain names meaningful to humans into the numerical identifiers associated with networking equipment for the purpose of locating and addressing these devices worldwide.</p>
+</blockquote>
+
+<blockquote>
+  <p>The Domain Name System makes it possible to assign domain names to groups of Internet resources and users in a meaningful way, independent of each entity’s physical location. Because of this, World Wide Web (WWW) hyperlinks and Internet contact information can remain consistent and constant even if the current Internet routing arrangements change or the participant uses a mobile device. Internet domain names are easier to remember than IP addresses such as 208.77.188.166 (IPv4) or 2001:db8:1f70::999:de8:7648:6e8 (IPv6). Users take advantage of this when they recite meaningful Uniform Resource Locators (URLs) and e-mail addresses without having to know how the computer actually locates them.</p>
+</blockquote>
+
+<blockquote>
+  <p>-Wikipedia</p>
+</blockquote>
+
+<p>DNS servers there are a lot, but BIND may be the most used on the web, I will not start a discussion about if it is the best or there are better, just that it is one of the most used.</p>
+
+<blockquote>
+  <p>BIND (pronounced /ˈbaɪnd/), or named (/ˈneɪmdiː/), was as of 2004 the most commonly used Domain Name System (DNS) server on the Internet, and still proclaims itself to be so. On Unix-like operating systems it is the de facto standard.</p>
+</blockquote>
+
+<blockquote>
+  <p>Originally written by four graduate students at the Computer Systems Research Group at the University of California, Berkeley (UCB), the name originates as an acronym from Berkeley Internet Name Domain.</p>
+</blockquote>
+
+<blockquote>
+  <p>A new version of BIND (BIND 9) was written by the ISC from scratch in part to address the architectural difficulties with auditing the earlier BIND code bases, and also to support DNSSEC (DNS Security Extensions). Other important features of BIND 9 include: TSIG, DNS notify, nsupdate, IPv6, rndc flush (remote name daemon control), views, multiprocessor support, and an improved portability architecture. rndc uses a shared secret to provide encryption for local and remote terminals during each session.</p>
+</blockquote>
+
+<blockquote>
+  <p>–Wikipedia</p>
+</blockquote>
+
+<p><strong>Installation</strong></p>
+
+<p>The installation will vary depending on your Linux distribution, some calls it BIND, others named. But for sure it is in your software repository, I will focus this tutorial on Debian, Arch Linux and Slackware, of course Ubuntu and other Debian derivatives are also covered.</p>
+
+<p>Let’s keep an alphabetical order for the distributions covered here:</p>
+
+<p><em>Arch Linux</em></p>
+
+<pre><code>pacman -Sy bind dnsutils
+</code></pre>
+
+<p><em>Debian and Ubuntu</em></p>
+
+<pre><code>apt-get update &amp;&amp; apt-get install install bind9 dnsutils
+</code></pre>
+
+<p><em>Slackware</em></p>
+
+<pre><code>slackpkg update &amp;&amp; slackpkg install bind
+</code></pre>
+
+<p><strong>Configure a master zone on BIND</strong></p>
+
+<p>The file we need to edit to configure master and slave zones is: <code>named.conf</code> it is not located on the same place for every distribution, so I will give your the locations:</p>
+
+<ul>
+  <li><strong>Arch Linux:</strong> <code>/etc/named.conf</code></li>
+  <li><strong>Debian:</strong> <code>/etc/bind/named.conf</code></li>
+  <li><strong>Slackware:</strong> <code>/etc/named.conf</code></li>
+</ul>
+
+<p>Note: You may want to save a copy of every file you will edit before doing so, in case you screw things up.</p>
+
+<p>The first thing you may want to check is where your zone files are stored, and that is not the same for each distribution, but you can change that if you want.</p>
+
+<p>Where your zone files are, is defined in the options section of the <code>named.conf</code> file, for Arch Linux and Slackware for Debian, you will find it in the file <code>/etc/bind/named.conf.options</code> which is included with an include clause in the <code>/etc/bind/named.conf</code> file.</p>
+
+<p>Below the default named.conf files for each distribution covered in this tutorial:</p>
+
+<p><strong>Arch Linux</strong></p>
+
+<pre><code>// 
+// /etc/named.conf
+//
+
+options {
+    directory "/var/named";
+    pid-file "/var/run/named/named.pid";
+    auth-nxdomain yes;
+    datasize default;
+// Uncomment these to enable IPv6 connections support
+// IPv4 will still work:
+//  listen-on-v6 { any; };
+// Add this for no IPv4:
+//  listen-on { none; };
+
+    // Default security settings.
+    allow-recursion { 127.0.0.1; };
+    allow-transfer { none; };
+    allow-update { none; };
+    version none;
+    hostname none;
+    server-id none;
+};
+
+zone "localhost" IN {
+    type master;
+    file "localhost.zone";
+    allow-transfer { any; };
+};
+
+zone "0.0.127.in-addr.arpa" IN {
+    type master;
+    file "127.0.0.zone";
+    allow-transfer { any; };
+};
+
+zone "." IN {
+    type hint;
+    file "root.hint";
+};
+
+//zone "example.org" IN {
+//  type slave;
+//  file "example.zone";
+//  masters {
+//      192.168.1.100; 
+//  };
+//  allow-query { any; };
+//  allow-transfer { any; };
+//};
+
+logging {
+        channel xfer-log {
+                file "/var/log/named.log";
+                print-category yes;
+                print-severity yes;
+                print-time yes;
+                severity info;
+        };
+        category xfer-in { xfer-log; };
+        category xfer-out { xfer-log; };
+        category notify { xfer-log; };
+};
+</code></pre>
+
+<p><strong>Debian</strong></p>
+
+<pre><code>// This is the primary configuration file for the BIND DNS 	server named.
+//
+// Please read /usr/share/doc/bind9/README.Debian.gz for information on the 
+// structure of BIND configuration files in Debian, *BEFORE* you customize 
+// this configuration file.
+//
+// If you are just adding zones, please do that in /etc/bind/named.conf.local
+
+include "/etc/bind/named.conf.options";
+
+// prime the server with knowledge of the root servers
+zone "." {
+  	      type hint;
+        file "/etc/bind/db.root";
+};
+
+// be authoritative for the localhost forward and reverse zones, and for
+// broadcast zones as per RFC 1912
+
+zone "localhost" {
+        type master;
+        file "/etc/bind/db.local";
+};
+	
+zone "127.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.127";
+};
+
+zone "0.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.0";
+};
+
+zone "255.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.255";
+};
+
+include "/etc/bind/named.conf.local";	
+</code></pre>
+
+<p>And the <code>/etc/bind/named.conf.options</code></p>
+
+<pre><code>options {
+        directory "/var/cache/bind";
+
+        // If there is a firewall between you and nameservers 	you want
+        // to talk to, you may need to fix the firewall to allow multiple
+        // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+        // If your ISP provided one or more IP addresses for stable 
+        // nameservers, you probably want to use them as forwarders.  
+        // Uncomment the following block, and insert the addresses replacing 
+        // the all-0's placeholder.
+
+        // forwarders {
+        //      0.0.0.0;
+        // };
+
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+</code></pre>
+
+<p><strong>Slackware</strong></p>
+
+<pre><code>options {
+   directory "/var/named";
+   /*
+    * If there is a firewall between you and nameservers you want
+    * to talk to, you might need to uncomment the query-source
+    * directive below.  Previous versions of BIND always asked
+    * questions using port 53, but BIND 8.1 uses an unprivileged
+    * port by default.
+    */
+   // query-source address * port 53;
+};
+
+//
+// a caching only nameserver config
+//
+zone "." IN {
+   type hint;
+   file "caching-example/named.root";
+};
+
+zone "localhost" IN {
+   type master;
+   file "caching-example/localhost.zone";
+   allow-update { none; };
+};
+
+zone "0.0.127.in-addr.arpa" IN {
+   type master;
+   file "caching-example/named.local";
+   allow-update { none; };
+};
+</code></pre>
+
+<p>As it can be seen, there is not too much difference, but the place where to store zone files:</p>
+
+<ul>
+  <li><em>Arch Linux and Slackware:</em> /var/named</li>
+  <li><em>Debian and Ubuntu</em> /var/cache/bind</li>
+</ul>
+
+<p>From here we could use the same for all of these Linux distributions.</p>
+
+<p><strong>Create a Master Zone</strong></p>
+
+<p>To create a master zone, edit the file <code>named.conf</code> and add the following, in this example, I will create a zone for the domain linux10.com</p>
+
+<pre><code>zone "linux10.com" IN {
+    type master;
+    file "linux10.com.zone";
+    allow-update { none; };
+    allow-transfer { none; };
+};
+</code></pre>
+
+<p>Then create the file <code>linux10.com.zone</code> in the folder stated in your options section of named.conf file.</p>
+
+<p>The file should look at least like this:</p>
+
+<pre><code>$ORIGIN .
+$TTL 86400      ; 1 day
+linux10.com            IN SOA  primary.server.com. your.email.address. (
+                            2010122801 ; serial
+                            7200       ; refresh (2 hous)
+                            7200       ; retry (2 hours)
+                            2419200    ; expire (5 weeks 6 days 16 hours)
+                            86400      ; minimum (1 day)
+                            )
+$TTL 14400      ; 4 hours
+                    NS      scz.alketech.com.
+                    NS      ns1.alketech.com.
+                    A       10.1.1.1 ; If you want to assign a server to your domain 
+                   MX      10      mx1 ; Your email server if you have any
+                   MX      20      mx2 ; Your secondary email server if you have one
+
+$ORIGIN linux10.com.
+www                     A       1.2.3.4 ; The IP of your web server if you want to have one.
+mx1         A   1.2.3.5 ; The IP of your mx1 server
+mx2         A   1.2.3.6 ; The IP of your mx2 server
+</code></pre>
+
+<p>Of course yours may have more or less lines and servers according to your needs.</p>
+
+<p><strong>Configure a DNS slave server with BIND</strong></p>
+
+<p>It is a good idea, to have slave server in case your master server is not reachable at any time.</p>
+
+<p>Both master and slave need to defined as your DNS servers in your domain registrar, you may define more than just two server, and that is a good idea, it is also a good idea, to have your DNS server on different networks, I mean, if you have them on the same office/Data center, and that place loose Internet connectivity all your server will be out of reach, and you will loose traffic or emails or both.</p>
+
+<p>For the visitors of your servers, any DNS server is the same and there is no difference between masters or slaves, so you should define one master and as many slaves as you want (anything between 2 to 4 slaves is OK).</p>
+
+<p><em>Enable AXFR transfers</em></p>
+
+<p>Your master DNS server should allow AXFR transfers to the slave servers for this to work, so the first step is to configure your master server to do so.</p>
+
+<pre><code>zone "linux10.com" IN {
+    type master;
+    file "linux10.com.zone";
+    allow-update { none; };
+    allow-transfer { ip.of.slave.server; ip.of.slave.server2; ip.of.slave.server3;};
+};
+</code></pre>
+
+<p>Now create the slave zone in your slave servers.</p>
+
+<p>On the slave server named.conf file you need to configure the slave zone, like this:</p>
+
+<pre><code>zone "linux10.com" {
+    type slave;
+    file "linux10.com.zon";
+    masters { 1.2.3.4; };
+    allow-transfer { none; };
+};
+</code></pre>
+
+<p><strong>Testing the configuration</strong></p>
+
+<pre><code>dig @your.master.server your.domain.com ns
+</code></pre>
+
+<p>Example:</p>
+
+<pre><code>dig @scz.alketech.com linux10.com ns
+</code></pre>
+
+<p>You should get something like this:</p>
+
+<pre><code>; &lt;&lt;&gt;&gt; DiG 9.2.4 &lt;&lt;&gt;&gt; @scz.alketech.com linux10.com ns
+; (1 server found)
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 23659
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 2
+
+;; QUESTION SECTION:
+;linux10.com.                   IN      NS
+
+;; ANSWER SECTION:
+linux10.com.            14400   IN      NS      scz.alketech.com.
+linux10.com.            14400   IN      NS      ns1.alketech.com.
+
+;; ADDITIONAL SECTION:
+ns1.alketech.com.       14400   IN      A       200.87.59.3
+scz.alketech.com.       14400   IN      A       200.87.61.83
+
+;; Query time: 2 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Wed Dec 29 15:35:20 2010
+;; MSG SIZE  rcvd: 106
+</code></pre>
+
+<p><strong>Final tunings</strong></p>
+
+<p>It is a good idea to disable recursion in your authoritative servers, either master or slave.</p>
+
+<p>To do this, in your options section insert these lines</p>
+
+<pre><code>acl recurseallow { 1.2.3.4; 127.0.0.1; };
+allow-recursion { recurseallow; };recursion yes;
+</code></pre>
+
+<p>Be sure to include this in the options section of the file <code>/etc/named.conf</code> for Arch Linux and Slackware and <code>/etc/bind/named.conf.options</code> for Debian.</p>
+
+<p><strong>Only for Slackware and Arch Linux</strong></p>
+
+<p>For Arch Linux and Slackware you need to enable the named daemon to start on each boot, to do this</p>
+
+<p>On Arch Linux, edit the <code>/etc/rc.conf</code> file, and add it, to the daemons list</p>
+
+<p>On Slackware, make the file <code>/etc/rc.bind</code> executable</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html&text=How to setup a DNS server master - slave with BIND&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html">linkedin</a> | <a href="mailto:?Subject=How to setup a DNS server master - slave with BIND&Body=http://www.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/how-setup-dns-server-master-slave-bind.html&title=How to setup a DNS server master - slave with BIND" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

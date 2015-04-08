@@ -1,0 +1,1341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title type="text" xml:lang="en">Bitacora de Guillermo Garron</title>
+    <link type="application/atom+xml" href="http://www.garron.me/es/atom.xml" rel="self"/>
+    <link type="text" href="http://www.garron.me/es" rel="alternate"/>
+    <updated>2015-04-08T02:13:48-04:00</updated>
+    <id>http://www.garron.me/es</id>
+    <author>
+        <name>Guillermo Garron</name>
+    </author>
+    <rights>Derechos reservados Guillermo Garron</rights>
+
+
+
+
+    <entry>
+        <title>Isla del Sol</title>
+        <link href="http://www.garron.me/es/fotos/isla-del-sol.html"/>
+        <updated>2015-04-05T21:05:32-04:00</updated>
+        <id>http://www.garron.me/es/fotos/isla-del-sol.html</id>
+        <summary type="html">&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/isla-del-sol.jpg&quot; class=&quot;img-responsive&quot; alt=&quot;Foto tomada en el interior de la isla del sol en Bolivia&quot; /&gt;&lt;figcaption&gt;En el interior de La Isla del Sol en el lago Titicaca, Bolivia&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/fotos/isla-del-sol.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Optimiza imágenes o fotos png o jpg</title>
+        <link href="http://www.garron.me/es/cortos/optimizar-jpg-png-para-tu-sitio.html"/>
+        <updated>2015-03-27T22:10:13-04:00</updated>
+        <id>http://www.garron.me/es/cortos/optimizar-jpg-png-para-tu-sitio.html</id>
+        <summary type="html">&lt;h3 id=&quot;cmo-optimizar-las-imgenes-png-y-jpg-para-tener-un-sitio-ms-rpido&quot;&gt;¿Cómo optimizar las imágenes PNG y JPG para tener un sitio más rápido?&lt;/h3&gt;
+
+&lt;p&gt;Tener un sitio o página web rápida y liviana es muy importante, no porque Google lo pida, sino por que tus lectores lo agradeceran, y es para ellos que escribes verdad?&lt;/p&gt;
+
+&lt;p&gt;Si tienes un sitio con muchas imágenes, pues es posible que las páginas sean algo pesadas, y por lo tanto carguen lentamente, lo mejor que puedes hacer es optimizar las imágenes para optimizar un poco el tiempo de carga de la página web.&lt;/p&gt;
+
+&lt;p&gt;Veamos ahora como realizar esa tarea para los archivos jpg y png&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Optimizar archivos jpg o jpeg&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Vamos a utilizar las siguiente herramientas para lograr este objetivo: &lt;code&gt;jpegtran&lt;/code&gt; y &lt;code&gt;jpegoptim&lt;/code&gt;, así que lo primero es instalarlas (En mi caso en Ubuntu eso sería)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install jpegoptim libjpeg-progs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ahora utilizando &lt;code&gt;jpegoptim&lt;/code&gt; vamos a comprimir y además reducir la calidad de los archivos hasta el 80%, una imágen con calidad de 80% aún se ve muy bien en la web, y la verdad no se requiere más.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;find . -name &quot;*.jpg&quot; | xargs jpegoptim -m 80 -t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Si no quieres bajar la calidad de las imágenes, puedes usar este otro comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;find . -name &quot;*.jpg&quot; | xargs jpegoptim -t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Utilizando &lt;code&gt;jpegtran&lt;/code&gt; vamos a convertir esos archivos en imágenes de formato progresivo, la gran diferencia con las imágenes regulares, es que cargan capa por capa, es decir en lugar de ver como la imagen se va “dibujando” línea por línea, vemos que aparece toda una capa, y luego otra encima, hasta que alcanza la calidad final, esto da una mejor experiencia al usuario, pues da la impresión que la imágen carga más rápido.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for img in `ls *.jpg`; do jpegtran -copy none -optimise -outfile $img $img; done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Optimizar archivos png&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Otro formato muy popular en páginas web, es el formato png, veamos como optimizar este tipo de archivos.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install optipng
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Con eso hemos instalado &lt;code&gt;optipng&lt;/code&gt;, que es la herramienta que nos va a ayudar en nuestra tarea.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;find . -name &quot;*.png&quot; | xargs optipng -o5 -quiet -preserve -log optipng.log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lo que hace ese comando es buscar todos los archivos con extensión &lt;strong&gt;png&lt;/strong&gt; en el directorio actual y todos los subdirectorios, luego a cada uno le aplica el comando &lt;code&gt;optipng&lt;/code&gt; indicando con un nivel de optimización 5, el cual es algo lento pero efectivo, preservando los atributos del archivo, y generando un archivo log en este caso en &lt;em&gt;optipng.log&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Eso es todo, espero y le ayude a alguien a hacer el Interent más rápido.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/cortos/optimizar-jpg-png-para-tu-sitio.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Grunt</title>
+        <link href="http://www.garron.me/es/bitacora/gruntjs.html"/>
+        <updated>2015-03-15T22:40:35-04:00</updated>
+        <id>http://www.garron.me/es/bitacora/gruntjs.html</id>
+        <summary type="html">&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Hace un par de días que gracias a estar leyendo en el Internet sobre formas de optimizar los sitios web, y sus tiempos de respuesta y carga he descubierto &lt;a href=&quot;http://gruntjs.com/&quot;&gt;Grunt&lt;/a&gt;, pero bueno, ¿Qué es &lt;strong&gt;Grunt&lt;/strong&gt;?.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Grunt&lt;/strong&gt; es un controlador de tareas para JavaScript, es decir es un software que te permite ejecutar con un solo comando varias tareas a la vez que normalmente son repetitivas, algo así como un &lt;em&gt;Shell Script&lt;/em&gt; para JavaScript.&lt;/p&gt;
+
+&lt;p&gt;Es bastante útil para ejecutar tareas que ejecutas de manera repetitiva, y que además puede que sean muchas tareas ejecutadas una tras otra todos los días, el poder automatizar estas tareas es muy importante al momento de buscar eficiencia.&lt;/p&gt;
+
+&lt;h2 id=&quot;instalando-grunt&quot;&gt;Instalando Grunt&lt;/h2&gt;
+
+&lt;p&gt;Vamos con algún ejemplo práctico para tener más clara su utilidad, primero vamos a instalar &lt;strong&gt;Grunt&lt;/strong&gt; en nuestro sistema, lo primero es instalar &lt;strong&gt;nodejs&lt;/strong&gt; y &lt;strong&gt;npm&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Instala Nodejs en Mac OS X&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Instala Nodejs en Ubuntu&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ahora que lo tenemos instalado vamos con el ejemplo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Instala Grunt&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Para instalar &lt;strong&gt;Grunt&lt;/strong&gt; ahora que tenemos instalado Nodejs, solo ejecuta este comando.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g grunt-cli
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Esto en realidad instala el cli de Grunt, lo que te permitirá correr los scripts&lt;/p&gt;
+
+&lt;h2 id=&quot;grunt-para-minificar-imgenes-de-tu-sitio-web&quot;&gt;Grunt para minificar imágenes de tu sitio Web&lt;/h2&gt;
+
+&lt;p&gt;El ejemplo que vamos a ver para entender como funciona, es útil para minificar las imágenes de un sitio Web, este sitio para ser exactos, como algunos de los lectores deben saber, este sitio es generado por Jekyll, es un puñado de archivos estáticos en un servidor Web que cambia todo el tiempo, en el momento de escribir esto esta alojado en Amazon S3 y Cloudfront, tiene unas cuantas imágenes que me gustaría minificar para ahorrar espacio, ancho de banda y hacer que les llege a los usarios de manera más eficiente y rápida, así que manos a la obra.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Grunt&lt;/strong&gt; viene con una serie de aditivos (plugins) que permiten hacer todo tipo de cosas, vamos a usar ahora un plugin que nos va a ayudar a minificar las imágenes de este sitio.&lt;/p&gt;
+
+&lt;p&gt;Lo primero es crear un directorio para nuestro proyecto, y luego en él, crear un archivo &lt;code&gt;package.json&lt;/code&gt;, puedes leer más de como hacerlo en el sitio oficial de &lt;a href=&quot;http://gruntjs.com/getting-started&quot;&gt;Grunt&lt;/a&gt;. Mi archivo se ve así:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &quot;name&quot;: &quot;www.garron.me&quot;,
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;grunt&quot;: &quot;^0.4.5&quot;,
+    &quot;grunt-contrib-imagemin&quot;: &quot;^0.9.3&quot;,
+    &quot;grunt-newer&quot;: &quot;^1.1.0&quot;,
+    &quot;imagemin-pngquant&quot;: &quot;^4.0.0&quot;,
+    &quot;coffee-script&quot;: &quot;~1.6.3&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;imagemin-gifsicle&quot;: &quot;^4.1.0&quot;,
+    &quot;imagemin-jpegtran&quot;: &quot;^4.1.0&quot;,
+    &quot;imagemin-mozjpeg&quot;: &quot;^4.0.0&quot;,
+    &quot;imagemin-optipng&quot;: &quot;^4.2.0&quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Luego con ese archivo, ejecutamos el siguiente comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lo que hará es bajar de Internet e instalar los paquetes indicados en el archivo &lt;code&gt;package.json&lt;/code&gt;, vamos luego a crear el &lt;em&gt;script&lt;/em&gt; que va a ejecutar algunos de esos programas, para minificar las imágenes, el mío se ve así:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim Gruntfile.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y colocamos este contenido en él.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module.exports = function(grunt) {
+
+var mozjpeg = require(&#39;imagemin-mozjpeg&#39;);
+var optipng = require(&#39;imagemin-optipng&#39;); 
+
+grunt.initConfig({
+  imagemin: {
+    png: {
+      options: {
+        // optimizationLevel: 7
+    use: [optipng({optimizationLevel: 3})]
+      },
+      files: [
+        {
+          expand: true,
+          cwd: &#39;../www.garron.me/_site/&#39;,
+          src: [&#39;**/*.png&#39;],
+          dest: &#39;/tmp/jekyll/&#39;,
+          ext: &#39;.png&#39;
+        }
+      ]
+    },
+    jpg: {
+      options: {
+        progressive: true,
+    optimizationLevel: 4,
+    use: [mozjpeg()]
+      },
+      files: [
+        {
+          expand: true,
+          cwd: &#39;../www.garron.me/_site/&#39;,
+          src: [&#39;**/*.jpg&#39;],
+          dest: &#39;/tmp/jekyll/&#39;,
+          ext: &#39;.jpg&#39;
+        }
+      ]
+    }
+  }
+});
+grunt.loadNpmTasks(&#39;grunt-contrib-imagemin&#39;);
+grunt.loadNpmTasks(&#39;grunt-newer&#39;);
+grunt.registerTask(&#39;default&#39;, [&#39;newer:imagemin&#39;]);
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lo que hace este archivo es definir las funciones, y estas optimizan los archivos &lt;em&gt;.png&lt;/em&gt; y &lt;em&gt;.jpg&lt;/em&gt; en el directorio &lt;code&gt;www.garron.me/_site&lt;/code&gt; y copia su salída en el directorio &lt;code&gt;/tmp/jekyll&lt;/code&gt;, luego solo tengo que copiar todas las imágenes optimizadas de vuelta en el directorio de Jekyll&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cp -r /tmp/jekyll/* ~/www.garron.me/_site/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ahora si subo el contenido de &lt;code&gt;_site/&lt;/code&gt; a Amazon, el sitio será servido al público con imagenes optmizadas, en todo el proceso se ahorraron 20 megas.&lt;/p&gt;
+
+&lt;p&gt;Se que esta no es en realidad una guía, y no pretende serlo, existe suficiente información en el sito de &lt;strong&gt;Grunt&lt;/strong&gt;, solo es una introducción para quienes no conocen esta herramienta.&lt;/p&gt;
+
+&lt;p&gt;Espero y les sirva.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/gruntjs.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Node.js en Mac OS X</title>
+        <link href="http://www.garron.me/es/mac-os/como-instalar-nodejs-mac.html"/>
+        <updated>2015-03-15T21:50:00-04:00</updated>
+        <id>http://www.garron.me/es/mac-os/como-instalar-nodejs-mac.html</id>
+        <summary type="html">&lt;p&gt;Es casi seguro que si llegaste a esta página es porque quieres instalar &lt;strong&gt;Nodejs&lt;/strong&gt; y si lo quieres hacer, es porque sabes que es &lt;strong&gt;Nodejs&lt;/strong&gt;, pero si aún no sabes lo que es, veamos que dice en su página:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Node.js es una plataforma creada encima de JavaScript de Chrome, para fácilmente y de manera escalable crear aplicaciones. **Node.js usa el modelo de entrada y salida sin-bloqueo y controlado por eventos, lo que le hace liviano y eficiente, perfecto para aplicaciones de tiempo real e intesivas en datos que funcionan a través de distintos dispositivos.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Veamos ahora &lt;strong&gt;Como instalar Node.js en Mac OS X&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Usando Brew&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Debe ser porque vengo del mundo Linux, que me gusta mucho tener un manejador de paquetes, &lt;strong&gt;apt-get&lt;/strong&gt; es mi favorito, en Mac uso &lt;a href=&quot;http://brew.sh/&quot;&gt;brew&lt;/a&gt;, por lo que para instalar Node.js solo tienes que usar este comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install npm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;De ese modo vamos a instalar nodejs y npm (que es el manejador de paquetes de node.js)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Usando el instalador oficial&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Lo malo de usar &lt;strong&gt;brew&lt;/strong&gt; es que puede que termines que una versión un poco más antigua que si usas el instalador oficial de su página, por lo que si quieres la última versión entra en la página de &lt;a href=&quot;https://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; y baja el instalador, ejecutalo en tu Mac, de seguro te pedirá el password de administrador, y voilá.&lt;/p&gt;
+
+&lt;p&gt;Ahora puedes comenzar a utilizar Node.js en tus proyectos o las herramientas ya creadas para fines específicos.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/mac-os/como-instalar-nodejs-mac.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Ajustar código PRE a los márgenes en Firefox</title>
+        <link href="http://www.garron.me/es/cortos/ajuste-pre-html-firefox.html"/>
+        <updated>2015-03-15T17:05:13-04:00</updated>
+        <id>http://www.garron.me/es/cortos/ajuste-pre-html-firefox.html</id>
+        <summary type="html">&lt;h2 id=&quot;hacer-que-el-cdigo-entre-marcadores-pre-de-html-ajusten-en-firefox&quot;&gt;Hacer que el código entre marcadores PRE de html ajusten en Firefox&lt;/h2&gt;
+
+&lt;p&gt;Si tu escribes código en tu página web o blog y este no ajusta adecuadamente cuando lo visualizas en Firefox, simplemente agrega a tu CSS las lineas de abajo&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Eso será suficiente para que ajuste de la manera adecuada.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/cortos/ajuste-pre-html-firefox.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Tamaño máximo de archivo en Wordpress con Nginx y PHP-FPM</title>
+        <link href="http://www.garron.me/es/gnu-linux/limite-tamano-archivo-nginx-php.html"/>
+        <updated>2015-03-08T19:05:00-04:00</updated>
+        <id>http://www.garron.me/es/gnu-linux/limite-tamano-archivo-nginx-php.html</id>
+        <summary type="html">&lt;h2 id=&quot;como-incrementar-el-tamao-mximo-permitido-para-subir-subir-archivo-a-wordpress-con-nginx-y-php-fpm&quot;&gt;Como incrementar el tamaño máximo permitido para subir subir archivo a Wordpress con Nginx y PHP-FPM&lt;/h2&gt;
+
+&lt;p&gt;Estoy usando Wordpress en un servidor Ubuntu LTS y funciona sobre Nginx y PHP-FPM, es realmente escalable y soporta mucha carga muy fácilmente debido a las capacidades de cache de Nginx.&lt;/p&gt;
+
+&lt;p&gt;De todos modos he tenido algunos problemas para subir unos temas debido a que sobrepasan el límite máximo de carga de archivos, para arreglar esto debemos verificar en dos lugares, &lt;strong&gt;Nginx&lt;/strong&gt; y &lt;strong&gt;PHP&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;nginx&quot;&gt;Nginx&lt;/h3&gt;
+
+&lt;p&gt;Vamos primero por Nginx, y vamos a asegurarnos de tener esta línea en el bloque &lt;strong&gt;http&lt;/strong&gt; del archivo de configuración de Nginx.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;client_max_body_size 20m;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ajusta los valores de acuerdo a tus necesidades, el ejemplo de arriba permite subir archivos de hasta 20 Mbytes&lt;/p&gt;
+
+&lt;h3 id=&quot;php-fpm&quot;&gt;PHP-FPM&lt;/h3&gt;
+
+&lt;p&gt;Para arreglar el problema desde PHP, debes editar el archivo &lt;code&gt;/etc/php5/fpm/php.ini&lt;/code&gt; y asegurarte de que estas dos líneas esten presentes y tengan valores similares al que hayas puesto en Nginx.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;upload_max_filesize = 20M
+post_max_size = 20M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ahora estas listo para subir archivos más grandes de Wordpress, sean estos videos, fotografías o temas y plugins.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/gnu-linux/limite-tamano-archivo-nginx-php.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Comentarios en el blog</title>
+        <link href="http://www.garron.me/es/bitacora/comentarios.html"/>
+        <updated>2015-03-08T09:58:35-04:00</updated>
+        <id>http://www.garron.me/es/bitacora/comentarios.html</id>
+        <summary type="html">&lt;h3 id=&quot;comentarios-en-el-blog&quot;&gt;Comentarios en el blog&lt;/h3&gt;
+
+&lt;p&gt;Durante el tiempo que he manejado este blog, y el anterior que tenía &lt;sup&gt;&lt;a href=&quot;#fn1&quot; id=&quot;ref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; he cambiado muchas veces la política de comentarios en el sitio. Han estado disponibles y no disponibles varias veces.&lt;/p&gt;
+
+&lt;p&gt;Si debe o no haber comentarios en un blog, es algo sobre que se ha escrito bastante, y en realidad pues depende que lo que el dueño del blog decida, y por supuesto que puede cambiar de opinión en el tiempo. En general en muchos blogs los comentarios pueden agregar valor, sobre todo en los técnicos, en otro tipo de blogs, solo genera discuciones sin sentido, sobre todo en blogs de chismes, o de opinion, pues cada quien tiene la suya.&lt;/p&gt;
+
+&lt;p&gt;El principal motivo para apagarlos casi siempre fue el spam, y los usuarios con malos modales, esto último por suerte ha sido mínimo en este sitio.&lt;/p&gt;
+
+&lt;p&gt;Las distintas soluciones que han manejado los comentarios en este sitio son muchas, tantas como las veces que he activado y desactivado los comentarios en el mismo.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Drupal (Cuando el CMS era este)&lt;/li&gt;
+  &lt;li&gt;Wordpress&lt;/li&gt;
+  &lt;li&gt;Disqus&lt;/li&gt;
+  &lt;li&gt;Livefyre&lt;/li&gt;
+  &lt;li&gt;Instalación propia y embebida de &lt;a href=&quot;http://vanillaforums.org/&quot;&gt;Vanilla Forums&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Y ahora estoy probando con &lt;a href=&quot;http://www.discourse.org/&quot;&gt;Discourse&lt;/a&gt;, con Discourse estoy intentando algo similar a lo que hace algún tiempo probé con VanillaForums, tener una plataforma propia para alojar los comentarios del sitio, y al mismo tiempo tratar de crear una comunidad de usuarios.&lt;/p&gt;
+
+&lt;p&gt;El problema que tuve con VanillaForums ha sido el Spam, espero que con Discourse me vaya mejor, en teoría al ser un software nuevo y no basado en PHP, los spammers aún no han dirigido sus esfuerzos hacia esta plataforma.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;La dificultad de comentar en un blog&lt;/strong&gt;, es decir cuan complicado es escribir un comentario en un blog tiene tanto un lado bueno como uno malo. El lado malo, es que definitivamente los comentarios van a bajar mientras más complicado sea comentar en un blog, pero casi de seguro que quienes se tomen la molestia de ir por las barreras impuestas serán aquellos de definitivamente tengan algo importante que decir.&lt;/p&gt;
+
+&lt;p&gt;En el caso de este blog, ahora el lector que quiera comentar, debe crearse una cuenta (puede usuar su cuenta de Twitter, Facebook o Google), y luego recien podrá escribir su comentario.&lt;/p&gt;
+
+&lt;p&gt;Estoy es algo que obviamente nadie hará para comentar simplemente &lt;em&gt;Buen artículo, felicidades y sigue adelante&lt;/em&gt; y no es que estos comentarios sean malos, pero realmente no agregan valor.&lt;/p&gt;
+
+&lt;p&gt;Espero realmente que la calidad de comentarios sea buena, y obviamente tendremos solicitudes de ayuda sobre los artículos aquí escritos, algo que definitivamente agrega valor, pues muchas veces al escribir no se ven todas las posibilidades y dichas preguntas enriquecen el resultado final al aparecer las respuestas adecuadas.&lt;/p&gt;
+
+&lt;p&gt;Espero les agrade estos a los pocos lectores de este blog, y que sea algo que podamos usar con provecho para todos.&lt;/p&gt;
+
+&lt;p&gt;&lt;small id=&quot;fn1&quot;&gt;1. www.go2linux.org fue el primer sitio que mantuve, ahora sus artículos archivados estan disponibles en &lt;a href=&quot;http://go2linux.garron.me&quot;&gt;go2linux.garron.me&lt;/a&gt; y otros en &lt;a href=&quot;/en/go2linux/&quot;&gt;este&lt;/a&gt; sitio.&lt;a href=&quot;#ref1&quot; title=&quot;Vuelve al artículo&quot;&gt;↩&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/comentarios.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Control parental para Android</title>
+        <link href="http://www.garron.me/es/bitacora/control-parental-android.html"/>
+        <updated>2015-02-21T11:08:35-05:00</updated>
+        <id>http://www.garron.me/es/bitacora/control-parental-android.html</id>
+        <summary type="html">&lt;h2 id=&quot;control-parental-en-android&quot;&gt;Control Parental en Android&lt;/h2&gt;
+
+&lt;p&gt;La proliferación de los celulares con los niños alcanzó niveles que no eran sospechados hace unos años, su bajo precio hace que no sea dificil que los tengan, y esto es bueno, pues al igual que con cualquier herramienta no es intrincicamente malo o bueno, el uso que se le da es bueno o malo.&lt;/p&gt;
+
+&lt;p&gt;Para estar seguros que sus niños utilicen la herramienta de manera adecuada, existen muchas herramientas, una que me parece interesante es: &lt;strong&gt;Screen Time Parental Control&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Veamos algunas de sus características:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bloqueo de aplicaciones por completo&lt;/li&gt;
+  &lt;li&gt;Alertas cuando se instalan nuevas aplicaciones&lt;/li&gt;
+  &lt;li&gt;Horas de uso del telefono por día, tando en días de semana como en fines de semana.&lt;/li&gt;
+  &lt;li&gt;Hora de ir a la cama (con bloqueo de aplicaciones)&lt;/li&gt;
+  &lt;li&gt;Hora de apagar las luces (todas las aplicaciones se bloquean)&lt;/li&gt;
+  &lt;li&gt;Supervicion remota del uso del terminal&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Veamos ahora como funciona.&lt;/p&gt;
+
+&lt;p&gt;Una vez instalada la aplicación solicitará el correo del padre o tutor, debes poner allí tu correo electrónico de cuenta Google, esto para que recibas las alertas y puedas hacer el seguimiento remoto. Para configurar tendras las siguientes opciones. La primer pantalla de configuracion (protegida por contraseña que el niño no debe conocer)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/control-parental-01.png&quot; alt=&quot;control parental para Android&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Luego puedes especificar las aplicaciones que estarán bloquedas por defecto&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/control-parental-03.png&quot; alt=&quot;bloquea aplicaciones con control parental&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tambien puedes definir las horas de dormir y las aplicaciones que se pueden y las que no durante dichas horas, puedes dejar activas algunas de lectura pero no los juegos o redes sociales.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/control-parental-04.png&quot; alt=&quot;Android control parental, hora de domir&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Luego de la hora de dormir, configuras la hora de apagar luces, a esta hora todas las aplicaciones quedarán bloqueadas, realmente es hora de dormir.&lt;/p&gt;
+
+&lt;p&gt;Al igual que con las horas de domir, puedes fijar horas de escuela, queremos que los niños tengan el celular en las escuelas para llamarnos por si nos necesitan con urgencia, pero no para que vean videos o jueguen, entonces bloqueas todas las aplicaciones de entreteniento y solo dejas alguna de mensajería y teléfono para que pueda llamarte y comunicarse contigo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/control-parental-05.png&quot; alt=&quot;Android: bloqueo de aplicaciones en la escuela, control parental&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recuerda que además se han fijado horas de uso diario, cuando dicho tiempo pase (se va sumando durante el día) el telefono se bloqueará, salvo aquellas aplicaciones que fueran puestas en una lista blanca, yo dejaría alguna de mensajería y el teléfono.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/control-parental-android.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Conexiones WiFi de uso medido en Android</title>
+        <link href="http://www.garron.me/es/bitacora/android-wifi-uso-medido.html"/>
+        <updated>2015-02-20T20:49:35-05:00</updated>
+        <id>http://www.garron.me/es/bitacora/android-wifi-uso-medido.html</id>
+        <summary type="html">&lt;h2 id=&quot;como-marcar-una-conexin-wifi-como-de-uso-medido-en-android&quot;&gt;Como marcar una conexión WiFi como de uso medido en Android&lt;/h2&gt;
+
+&lt;p&gt;Windows 8 tiene una interesante funcionalidad, que es la de marcar una conexión WiFi como conexión de uso medido, quiere decir que dicha conexión WiFi accede al Internet por medio de un enlace 3G, LTE o cualquier otra tecnología donde cargan al usuario por cada mega que consume.&lt;/p&gt;
+
+&lt;p&gt;Si tienes un teléfono con Android pues puedes hacer lo mismo que con Windows 8 e indicar a Android que algunas de las redes WiFi a las que se conecta son de uso medido, esto hará que el sistema operativo no utilice dichas redes para actualizar las aplicaciones, o bajar adjuntos de correo electrónico. Y de ese modo tu cuenta no se irá a las nubes.&lt;/p&gt;
+
+&lt;p&gt;Esta opción está un poco escondida en Android, pero vamos ver como se hace.&lt;/p&gt;
+
+&lt;p&gt;Ve a &lt;em&gt;Ajustes -&amp;gt; Uso de Datos&lt;/em&gt;, verás una pantalla como esta:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/uso-de-datos-medido-android-1.png&quot; class=&quot;img-responsive&quot; alt=&quot;Como activar el uso de datos medido para Wifi en Android&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Luego tocas los tres puntos arriba a la derecha, o la tecla menú si estas en un Samsung, y seleccionas &lt;em&gt;HotSpots Móviles&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/uso-de-datos-medido-android-3.png&quot; class=&quot;img-responsive&quot; alt=&quot;Como activar el uso de datos medido para Wifi en Android Samsung&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Y veras esta pantalla, donde podrás definir que red será considerada de uso medido.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/uso-de-datos-medido-android-2.png&quot; class=&quot;img-responsive&quot; alt=&quot;Selecciona redes Wifi de uso medido en Android&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Eso es todo, espero les sirva.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/android-wifi-uso-medido.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Servidor de correo en Ubuntu, la alternativa a Gmail</title>
+        <link href="http://www.garron.me/es/gnu-linux/ubuntu-push-email.html"/>
+        <updated>2015-02-17T14:05:00-05:00</updated>
+        <id>http://www.garron.me/es/gnu-linux/ubuntu-push-email.html</id>
+        <summary type="html">&lt;h2 id=&quot;alojando-mi-correo-personal-en-mi-propio-servidor&quot;&gt;Alojando mi correo personal en mi propio servidor&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduccin&quot;&gt;Introducción&lt;/h3&gt;
+
+&lt;p&gt;Es normal o al menos más común mantener tu blog o página web en tu propio servidor que hacer lo mismo con tu servidor de correos, principalmente por el spam, y por que es más dificil mantener un servidor de correos que un servidor web. Esto porque debido al spam es posible que algunos de tus correos no lleguen a destino debido a el IP de tu servidor no sea conocida o hubiera sido utilizada en algún momento para enviar spam.&lt;/p&gt;
+
+&lt;p&gt;Igualmente muchos hackers tratarán de hacerse de tu servidor para enviar campañas de spam a travéz de él.&lt;/p&gt;
+
+&lt;p&gt;Pero la satisfacción de tener tu información contigo y no dependiendo de otros, especialmente Google, es grande y el trabajo extra a veces vale la pena.&lt;/p&gt;
+
+&lt;p&gt;Algunas cosas han cambiado desde los días en que la única forma de acceder tu correo era a travéz de Eudora, POP3 y desde tu computador, hoy en día llevamos el correo a todas partes en nuestro teléfono, y normalmente quienes te envían correos esperan una respuesta pronta.&lt;/p&gt;
+
+&lt;p&gt;Yo había dejado de alojar mi propio correo sobre todo debido a activesync, que es por el momento la mejor tecnología para sincronizar tu correo con el móvil, pero ahora esta disponible una versión opensource, ya veremos como se usa.&lt;/p&gt;
+
+&lt;h3 id=&quot;configurando-tu-propio-servidor-de-correos&quot;&gt;Configurando tu propio servidor de correos&lt;/h3&gt;
+
+&lt;p&gt;Los requerimientos para mi correo son, pues la verdad solo una, correo electrónico confiable, calendario ya lo tengo disponible en el servidor Exchange de la oficina, y el directorio de contactos aún no estoy seguro de donde lo alojare, pero puede que lo haga con CardDav o con mi cuenta de Gmail, despues de todo tengo una para mis aplicaciones Android, solo que no la uso para correo. Por lo tanto, considerando que lo único que requiero es correo, y que lo acceso principalmente del celular y de Microsoft Outlook cuando estoy en la máquina de la oficina (Windows 8) o Mail.app en Mac, por lo tanto no requiero una interfaz gráfica.&lt;/p&gt;
+
+&lt;p&gt;El software que voy a utilizar para cubrir mis necesidades es:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu (El sistema operativo)&lt;/li&gt;
+  &lt;li&gt;Postfix (Para recibir el correo y enviarlo via SMTP)&lt;/li&gt;
+  &lt;li&gt;Dovecot (Para recuperar el correo vía IMAP para los clientes de escritorio)&lt;/li&gt;
+  &lt;li&gt;Procmail (Para clasificar correo)&lt;/li&gt;
+  &lt;li&gt;D-push (Para recuperar el correo vía ActiveSync para el cliente de mi Android)&lt;/li&gt;
+  &lt;li&gt;Amazon SES&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Vamos a explicar un poco como se configura cada uno de estos componentes para lograr lo deseado, no vamos a mostrar como instalar Ubuntu, normalmente es solo arrancarlo en algún proveedor de VPS&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Postfix&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Vamos a comenzar con &lt;strong&gt;postfix&lt;/strong&gt;, que es un servidor que nos permite recibir y enviar correos mediante el protocolo SMTP, existen otras opciones como &lt;strong&gt;sendmail&lt;/strong&gt; o &lt;strong&gt;exim&lt;/strong&gt;, que son tan buenas como esta, pero vamos a utilizar &lt;strong&gt;postfix&lt;/strong&gt;, comencemos instalandolo.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install postfix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y vamos a configurarlo para recibir nuestros correos, colocarlos en nuestro buzón (vamos a usar Maildir), igualmente vamos a configurarlo para que podamos autenticar contra él y que reciba de esta manera nuestros correos para enviarlos al mundo, para esto último vamos a optar por un relay-host, es decir un servidor que hará las verdaderas entregas, al cual le entregaremos toda la correspondencia que tenemos. Hacemos esto porque de este modo evitamos que nuestro correo sea considerado spam, por que el IP no estuviera limpio, o por que algo en la configuración no es correcta.&lt;/p&gt;
+
+&lt;p&gt;Vamos a utilizar Amazon SES para que entregue nuestros correos, el precio es totalmente acequible, solo 10 centavos de dólar por cada 1.000 correos.&lt;/p&gt;
+
+&lt;p&gt;El principal archivo de configuracion es &lt;strong&gt;main.cf&lt;/strong&gt;, vamos a colocar este contenido dentro de él.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+biff = no
+append_dot_mydomain = no
+delay_warning_time = 4h
+mydomain = dominio.com
+myhostname = mail.dominio.com
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+myorigin = /etc/mailname
+mydestination = mail.dominio.com, localhost.example.com, localhost, dominio.com
+relayhost = email-smtp.us-east-1.amazonaws.com
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = static:tu-login-ses:tu-password-ses
+smtp_sasl_security_options = noanonymous
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+smtpd_sasl_local_domain =
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+broken_sasl_auth_clients = yes
+smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination
+smtpd_tls_auth_only = no
+smtp_tls_security_level = may
+smtpd_tls_security_level = may
+smtp_tls_note_starttls_offer = yes
+smtpd_tls_loglevel = 1
+smtpd_tls_received_header = yes
+smtpd_tls_session_cache_timeout = 3600s
+tls_random_source = dev:/dev/urandom
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_use_tls=yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+home_mailbox = Maildir/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Eso es todo, vamos con el siguiente.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dovecot&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Dovecot, es la interfaz que vamos a utilizar para exponer nuestros buzones de correo al mundo mediante IMAP o POP3, en este caso vamos a configurar IMAP, pues hoy en día casi todos verificamos el correo de varios lugares a la vez.&lt;/p&gt;
+
+&lt;p&gt;También vamos a utilizar dovecot para darnos la autenticación requerida para que postfix nos permita enviar correos solo a los usuarios con cuenta en el servidor. La configuración de Dovecot en Ubuntu no es monolítica, es decir no esta en un solo archivo, por lo que veamos a ver solo los que se requieren cambiar, es decir que no tengan los valores por defecto.&lt;/p&gt;
+
+&lt;p&gt;Este es contenido de &lt;code&gt;/etc/dovecot/dovecot.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;!include_try /usr/share/dovecot/protocols.d/*.protocol
+listen = *, ::
+!include conf.d/*.conf
+!include_try local.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Este el de &lt;code&gt;/etc/dovecot/conf.d/10-auth.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;auth_mechanisms = plain login
+!include auth-system.conf.ext
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Este el de &lt;code&gt;/etc/dovecot/conf.d/10-mail.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mail_location = maildir:~/Maildir
+namespace inbox {
+  inbox = yes
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Vamos con &lt;code&gt;/etc/dovecot/conf.d/10-master.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service imap-login {
+  inet_listener imap {
+    #port = 143
+  }
+  inet_listener imaps {
+    #port = 993
+    #ssl = yes
+  }
+}
+service pop3-login {
+  inet_listener pop3 {
+    #port = 110
+  }
+  inet_listener pop3s {
+    #port = 995
+    #ssl = yes
+  }
+}
+service lmtp {
+  unix_listener lmtp {
+    #mode = 0666
+  }
+}
+service imap {
+}
+service pop3 {
+}
+service auth {
+  # Postfix smtp-auth
+  unix_listener /var/spool/postfix/private/auth {
+    mode = 0666
+    user = postfix
+    group = postfix
+  }
+}
+service auth-worker {
+}
+service dict {
+  unix_listener dict {
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y finalmente &lt;code&gt;/etc/dovecot/conf.d/10-ssl.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssl = yes
+ssl_cert = &amp;lt;/etc/dovecot/dovecot.pem
+ssl_key = &amp;lt;/etc/dovecot/private/dovecot.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Con esto tenemos &lt;strong&gt;Dovecot&lt;/strong&gt; configurado y listo para entregarnos las correspondencia via IMAP, esto es más que suficiente para la PC de escritorio o para nuestra laptop, pero para la tablet y en especial para nuestro celular tenemos que tener una mejor opción. IMAP puede funcionar en el celular pero no es muy eficiente desde el punto de vista de consumo de batería, algo que siempre debemos cuidar con los celulares hoy en día, pero para ello existe ActiveSync.&lt;/p&gt;
+
+&lt;p&gt;Para implementar ActiveSync en Ubuntu vamos a utilizar el paquete z-push, que en Debian se llama d-push, debe tener alguna diferencia pero no lo investigue.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;d-push&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Para funcionar correctamente &lt;strong&gt;d-push&lt;/strong&gt; requiere de Apache o algún otro servidor web, y de PHP, en general si instalas el paquete este instalará todo lo necesario, pero lo que hace es instalar mod-php de Apache y no es la manera más eficiente de interactuar con PHP, si solo usarás el servidor para tu correo y solo tendras pocos clientes, entonces adelante. Si por el contrario, tendras uno o más blogs de Wordpress o Drupal y además varios clientes usando ActiveSync, entonces lo que haremos es instalar &lt;a href=&quot;/es/gnu-linux/apache-php-fpm-mpm-worker-mariadb-ubuntu.html&quot;&gt;Apache + PHP-FPM&lt;/a&gt; y luego asegurarnos que Ubuntu &lt;a href=&quot;/es/cortos/apt-get-dependencias.html&quot;&gt;no instale mod-php&lt;/a&gt; luego de ello podemos instalar &lt;strong&gt;d-push&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install d-push
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Asegurate de marcar la autoconfiguración de Apache cuando se te pregunte si deseas hacerlo, yo lo hice para Apache &lt;sup&gt;&lt;a href=&quot;#fn1&quot; id=&quot;ref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; ya que es automático. En general no tienes que hacer ningun cambio a la configuracion de &lt;strong&gt;d-push&lt;/strong&gt;, solo debes crear un sitio al que apuntaras tus dispositivos móviles. E aquí un ejemplo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;VirtualHost localhost:8080&amp;gt;
+        ServerName mail.dominio.com
+        DocumentRoot /var/www/mail.dominio.com
+   DirectoryIndex index.php
+   &amp;lt;Directory /var/www/mail.dominio.com/&amp;gt;
+      AllowOverride All
+      Require all granted
+      #Order Deny,Allow
+      #Allow from all
+   &amp;lt;/Directory&amp;gt;
+
+&amp;lt;Directory /usr/lib/cgi-bin/&amp;gt;
+        Require all granted
+&amp;lt;/Directory&amp;gt;
+
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Dado que tengo Nginx delante, es Nginx con el que manejo https requerido para &lt;strong&gt;d-push&lt;/strong&gt;, en realidad no es requerido y se puede trabajar con el puerto 80 u 8080, pero es buena idea tener una conexión segura, asi que vamos con Nginx.&lt;/p&gt;
+
+&lt;p&gt;Lo primero es preparar &lt;a href=&quot;/es/cortos/ssl-https-nginx.html&quot;&gt;Nginx para manejar una conexión encriptada&lt;/a&gt;, luego configuras el sitio como en el ejemplo de abajo.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server {
+    listen 80;
+    listen 443 ssl;
+
+    root /var/www/mail.dominio.com/;
+    index index.html index.htm;
+
+    server_name mail.dominio.com;
+        ssl_certificate /etc/nginx/ssl/nginx.crt;
+        ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Como puede verse, Nginx se encarga de la conexión segura, y luego pasa el requerimiento a Apache que opera tras bambalinas.&lt;/p&gt;
+
+&lt;p&gt;Con eso hemos terminado, ya tenemos un servidor de correos que envía correos de forma segura mediante Amazon SES, y que recibe el correo dirigido a nosotros y nos lo entrega de manera eficiente en nuestras aplicaciones de escritorio y móviles utilizadon conexiones seguras y encriptadas.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Procmail&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;En mi caso re-envío correo de otras cuentas a esta cuenta para tener todo el correo en un solo lugar, utilizo una cuenta para facebook, Twitter, LinkedIn y demás subscripciones que no es mi cuenta principal, por lo que todo el correo enviado a esa cuenta y luego re-enviado aquí lo filtro y archivo en un directorio específico, la forma en que lo hago es mediante &lt;strong&gt;procmail&lt;/strong&gt; al momento de recibir el correo.&lt;/p&gt;
+
+&lt;p&gt;Vamos a ver como se puede configurar.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install procmail
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;El primer archivo que vamos crear es &lt;code&gt;/etc/procmailrc&lt;/code&gt; y tendrá este contenido.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DROPPRIVS=yes
+ORGMAIL=${HOME}/Maildir/
+DEFAULT=${ORGMAIL}
+:0
+* ? /usr/bin/test -d $DEFAULT || /bin/mkdir $DEFAULT
+{ }
+:0 E
+{
+        EXITCODE=127
+        HOST=bail.out
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Luego en directorio del usuario que va a clasificar su correo mediante &lt;strong&gt;procmail&lt;/strong&gt; son necesarios otros archivos. Vamos crearlos. Asegurate de estar conectado al servidor usando el usuario del que quieres clasificar su correo. Creamos el archivo &lt;code&gt;.forward&lt;/code&gt; y ponemos este contenido adentro:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&quot;|IFS=&#39; &#39; &amp;amp;&amp;amp; exec /usr/bin/procmail || exit 75 g&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Luego creamos el archivo &lt;code&gt;.procmailrc&lt;/code&gt; e insertamos este contenido:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;VERBOSE=no
+PMDIR=$HOME/Procmail 
+LOGFILE=$PMDIR/log
+INCLUDERC=$PMDIR/filtros.rc
+SHELL=/bin/sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finalmente creamos el archivo &lt;code&gt;~/Procmail/filtros.rc&lt;/code&gt; y colocamos allí los filtros, veamos solo un ejemplo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:0
+* ^TO_cuenta-social@gmail.com
+.social/
+
+:0
+$HOME/Maildir/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Puedes buscar más ejemplos en Google, o &lt;a href=&quot;https://duckduckgo.com/&quot;&gt;DuckDuckGo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Amazon SES&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Finalmente, tenemos que configurar Amazon SES, eso lo vamos a dejar fuera del alcance de este sitio, pues esta suficientemente bien explicado en el sitio de &lt;a href=&quot;http://aws.amazon.com/es/ses/faqs/&quot;&gt;Amazon&lt;/a&gt;. Puedes utilizar MailGuy o Mandrill o cualquier otro servicio, solo asegurate de cambiar estas lineas en &lt;code&gt;/etc/postfix/main.cf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;relayhost = email-smtp.us-east-1.amazonaws.com
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = static:tu-login-ses:tu-password-ses
+smtp_sasl_security_options = noanonymous
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Las mismas deben ser cambiadas de acuerdo al servicio que utilices.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h3&gt;
+
+&lt;p&gt;Como puedes ver, es posible instalar y configurar un servidor de correos eficiente y que tenga lo requerido las comunicaciones de hoy en día. Quedó por ver como instalar Spamassassin, y actualizaré el artículo para hacerlo, de momento no lo instalé debido a que gracias a Dios no tengo mucho spam en la cuenta de correos que manejo con este servidor.&lt;/p&gt;
+
+&lt;p&gt;&lt;small id=&quot;fn1&quot;&gt;1. En mi caso incluso tengo Nginx como proxy delante de Apache, de este modo puedo correr blogs de Wordpress directo con Nginx y sitios estáticos con Nginx, o cachear el contenido que sirve Apache, si te preguntas para que tengo Apache, pues porque algún software es más sencillo de configurar con Apache y a veces quiero evitar la molestia.&lt;a href=&quot;#ref1&quot; title=&quot;Vuelve al artículo&quot;&gt;↩&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/gnu-linux/ubuntu-push-email.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>https con Nginx</title>
+        <link href="http://www.garron.me/es/cortos/ssl-https-nginx.html"/>
+        <updated>2015-02-17T13:24:13-05:00</updated>
+        <id>http://www.garron.me/es/cortos/ssl-https-nginx.html</id>
+        <summary type="html">&lt;h3 id=&quot;cmo-crear-un-certificado-para-sitio-seguro-con-nginx&quot;&gt;¿Cómo crear un certificado para sitio seguro con Nginx?&lt;/h3&gt;
+
+&lt;p&gt;Lo primero es instalar Nginx.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Creamos el directorio para nuestro certificado&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mkdir /etc/nginx/ssl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y creamos el certificado que Nginx utilizará.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finalmente le decimos a Nginx que debe utilizar ese certificado y además escuchar en el puerto 443.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server {
+    	listen 443 ssl;
+	
+    	root /usr/share/nginx/html;
+    	index index.html index.htm;
+	
+    	server_name tu-dominio.com;
+    	ssl_certificate /etc/nginx/ssl/nginx.crt;
+    	ssl_certificate_key /etc/nginx/ssl/nginx.key;
+	
+    	location / {
+    	        try_files $uri $uri/ =404;
+    	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Eso es todo amigos.&lt;/p&gt;
+
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/cortos/ssl-https-nginx.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Lista los paquetes instalados en Ubuntu</title>
+        <link href="http://www.garron.me/es/cortos/paquetes-instalados-ubuntu-debian.html"/>
+        <updated>2015-02-16T21:44:13-05:00</updated>
+        <id>http://www.garron.me/es/cortos/paquetes-instalados-ubuntu-debian.html</id>
+        <summary type="html">&lt;h3 id=&quot;cmo-listar-los-paquetes-que-tenemos-instalados-en-ubuntu-o-debian&quot;&gt;¿Cómo listar los paquetes que tenemos instalados en Ubuntu o Debian?&lt;/h3&gt;
+
+&lt;p&gt;Hay ocaciones en que queremos ver que paquetes tenemos instalados en Ubuntu o Debian, el comando &lt;code&gt;dpkg&lt;/code&gt; es el que nos ayudara en esto.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dpkg --get-selections
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Mostrará todos los paquetes que estan instalados en ese momento. Si queremos ver que paquetes tenemos de PHP o Apache debemos usar también &lt;code&gt;grep&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dpkg --get-selections | grep php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;La salida es algo así, puede variar dependiendo de lo que tengas instalado en ese momento.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;php-apc						install
+php-auth-sasl					install
+php-mail					install
+php-net-smtp					install
+php-net-socket					install
+php-pear					install
+php-xml-parser					install
+php5						install
+php5-apcu					install
+php5-cli					install
+php5-common					install
+php5-curl					install
+php5-dev					install
+php5-fpm					install
+php5-gd						install
+php5-geoip					install
+php5-imagick					install
+php5-imap					install
+php5-json					install
+php5-mysql					install
+php5-readline					install
+pkg-php-tools					install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Eso es todo, espero les sirva&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/cortos/paquetes-instalados-ubuntu-debian.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>apt-get solo dependencias</title>
+        <link href="http://www.garron.me/es/cortos/apt-get-dependencias.html"/>
+        <updated>2015-02-15T10:44:13-05:00</updated>
+        <id>http://www.garron.me/es/cortos/apt-get-dependencias.html</id>
+        <summary type="html">&lt;h3 id=&quot;cmo-evitar-que-ubuntu-instale-paquete-sugeridos-y-solo-instale-aquellos-realmente-necesarios&quot;&gt;¿Cómo evitar que Ubuntu instale paquete sugeridos y solo instale aquellos realmente necesarios?&lt;/h3&gt;
+
+&lt;p&gt;Tanto Ubuntu como Debian, por defecto cuando instalas un paquete, instala todos los paquetes extra requeridos para que el sistema funcione, lo cual es genial, sobre todo para aquellas personas que recien comienzan a trabajar con Linux, pues no deben preocuparse de las dependencias como en los viejos tiempo.&lt;/p&gt;
+
+&lt;p&gt;El problema es que a veces uno sabe lo que esta haciendo y quieres configurar tu sistema de otro modo, y no deseas que Ubuntu o Debian instalen paquetes que sabes que no requieres.&lt;/p&gt;
+
+&lt;p&gt;Tomemos como ejemplo &lt;a href=&quot;http://packages.ubuntu.com/utopic/web/d-push&quot;&gt;D-Push&lt;/a&gt;, como vemos este paquete en Ubuntu 14.04 tiene las siguientes dependencias:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;debconf&lt;/li&gt;
+  &lt;li&gt;php-mail&lt;/li&gt;
+  &lt;li&gt;php-pear&lt;/li&gt;
+  &lt;li&gt;php5&lt;/li&gt;
+  &lt;li&gt;php5-cli&lt;/li&gt;
+  &lt;li&gt;php5-imap&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Y recomienda:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apache2&lt;/li&gt;
+  &lt;li&gt;libapache2-mod-php5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Por defecto si instalas &lt;em&gt;d-push&lt;/em&gt; mediante el comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install d-push
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ubuntu intenta instalar todos los paquetes arriba indicados, pero que pasa si deseas usar Nginx y PHP-FPM o Apache y PHP-FPM, en ese caso no requieres todo lo arriba indicado, en ese caso y para evitar que &lt;code&gt;apt-get&lt;/code&gt; haga todo de manera automática y te deje más libertad, despues de todo a veces sabemos lo que hacemos, ¿verdad?. Bueno esto es lo que debes hacer.&lt;/p&gt;
+
+&lt;p&gt;Crea un archivo &lt;code&gt;/etc/apt/apt.conf.d/01dependencies&lt;/code&gt; y coloca en su interior lo siguiente:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;APT::Install-Recommends &quot;0&quot;;
+APT::Install-Suggests &quot;0&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y ahora ejecuta:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get install d-push
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Y, eso es todo amigos&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/cortos/apt-get-dependencias.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Limpieza de MySQL</title>
+        <link href="http://www.garron.me/es/cortos/limpieza-mysql.html"/>
+        <updated>2015-02-14T10:44:13-05:00</updated>
+        <id>http://www.garron.me/es/cortos/limpieza-mysql.html</id>
+        <summary type="html">&lt;h3 id=&quot;cmo-limpiar-mysql-de-bases-de-datos-y-usuarios-que-no-uso&quot;&gt;¿Cómo limpiar MySQL de bases de datos y usuarios que no uso?&lt;/h3&gt;
+
+&lt;p&gt;Luego de trabajar varios proyectos, y sobre todo cuando algunos de ellos son dejados de lado, tu servidor MySQL puede estar conteniendo bases de datos y usuarios que ya necesitas y no usas.&lt;/p&gt;
+
+&lt;p&gt;Veamos como hacer una limpieza de tu servidor MySQL&lt;/p&gt;
+
+&lt;p&gt;Lo primero es ver que bases de datos tienes y cuales ya no sirven.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql -u root -p
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Con este comando y luego de introducir la contraseña de &lt;em&gt;root&lt;/em&gt; podrás comenzar el trabajo de limpieza, una vez en el prompt de MySQL vamos con estos comandos.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Listar y borrar bases de datos&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW DATABASES;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Con el listado en pantalla, elige las bases de datos que no requieres, ten cuidado, esta acción no tiene retorno. Suponiendo que quieres borrar la base de datos wordpress, vamos con este comando.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; DROP DATABASE wordpress;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Listar y borrar usuarios&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Vamos ahora a limpiar los usuarios que ya no requerimos.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SELECT host, user, password from mysql.user;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ese comando listará todos los usuarios que creaste, puede borrar el usuario que tenía acceso a la base de datos wordpress que acabamos de quitar. Suponiendo fuera el usuario wordpress_user&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; DROP USER wordpress_user;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Listo, ya sabes como mantener tu servidor MySQL libre de datos que no necesitas.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/cortos/limpieza-mysql.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Luz de teclado Mac</title>
+        <link href="http://www.garron.me/es/mac-os/arreglar-luz-teclado-mac.html"/>
+        <updated>2015-02-14T10:05:00-05:00</updated>
+        <id>http://www.garron.me/es/mac-os/arreglar-luz-teclado-mac.html</id>
+        <summary type="html">&lt;h3 id=&quot;cmo-solucionar-el-problema-de-la-luz-del-teclado-en-macbook&quot;&gt;¿Cómo solucionar el problema de la luz del teclado en Macbook?&lt;/h3&gt;
+
+&lt;p&gt;Si la luz del teclado de tu Macbook Pro o Air dejó de funcionar o solo funciona por momentos asegúrate de que no tienes configurada la opción para que solo funcione cuando no hay luz en la sala.&lt;/p&gt;
+
+&lt;p&gt;Ve a Ajustes y teclado y tal como muestra la figura de abajo, quita el tick que puedes ver en la figura. Esto hará que funcione todo el tiempo sin importar la luz de ambiente, te recomiendo lo dejes tickeado, así ahorras energía cuando realmente no requieres la luz del teclado.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/macbook-backlight.png&quot; alt=&quot;Configurar la luz de teclado de Mac&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/mac-os/arreglar-luz-teclado-mac.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Outlook y Gmail App</title>
+        <link href="http://www.garron.me/es/bitacora/outlook-gmail-app.html"/>
+        <updated>2015-02-14T09:47:35-05:00</updated>
+        <id>http://www.garron.me/es/bitacora/outlook-gmail-app.html</id>
+        <summary type="html">&lt;h3 id=&quot;introduccin&quot;&gt;Introducción&lt;/h3&gt;
+
+&lt;p&gt;He estado siguiendo el desarrollo de la altermativa de alguna app de Microsoft para sincronizar mi cuenta exchange desde la aparicion de OWA for iOS. En Android no había tenido el soporte esperando y he utilizado muchas opciones de terceros, K-9, MailWise, la app nativa de Android, Nine y Gmail. De todas ellas la más completa ha sido nine, pues tiene soporte para notas y tareas, algo que las otras no ofrecen.&lt;/p&gt;
+
+&lt;p&gt;Hace un par de meses Gmail saco su nueva versión de cliente para dispositivos móviles y ahora ofrece soporte para cuentas Exchange, IMAP y POP3, por lo que ya lo podemos usar para revisar cualquier cuenta de correo y no solo nuestro correo de Gmail o Google Apps.&lt;/p&gt;
+
+&lt;p&gt;Me gusta el poder tener todas las cuentas integradas en una sola aplicación, sobre todo por que a veces reenvio correos de una cuenta usando otra.&lt;/p&gt;
+
+&lt;h3 id=&quot;outlook-app&quot;&gt;Outlook App&lt;/h3&gt;
+
+&lt;p&gt;Hace un par de semanas Microsoft relanzó Acompli con el nombre de Outlook, ha estado introduciendo mejoras y la versión disponible al momento de escribir este artículo presenta una interfaz ligera, con funcionalidades interesantes para completar las tareas diarias, algo que acompli ya tenia, y que Microsoft promete mejorar cada vez más. Veamos algunas de las principales funciones:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;No solo Outlook o Office365&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Mi cuenta principal esta alojada en Office365, por lo que OWA for iOS me brindaba casi todo lo que necesitaba, pero no integraba todas las cuentas en una sola aplicación. Ahora con Outlook si puedo tener todas las cuentas en una sola aplicación y algo que otras cuentas no ofrecen (Gmail, hablo de tí) es un buzon unificado.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Soporte para adjuntos en la nube&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Esta es tal vez una de las características que más pueda gustar a los usuarios, adjuntar archivos en iOS no es cosa sencilla, en Android nos va mejor, pero de todos modos con esta aplicación se mejora aún más la experiencia general.&lt;/p&gt;
+
+&lt;p&gt;Cuando precionamos el boton de adjuntar vemos tres opciones:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Archivos recientes: Que nos permite agregar archivos de las cuentas que tenemos configuradas, como ser: Otras cuentas de correo, cuentas de Dropbox, Google Drive y más, muy útil realmente, puedes agregar archivos directamente de la nube, y no solo de servicios de archivos estilo Dropbox, sino que también archivos enviados como adjuntos a cualquiera de las cuentas que tuvieras configuradas.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Librería de fotos: La opción que casi todos los clientes de correo poseen, puedes adjuntar fotos del carrete de fotos de tu teléfono&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Tomar una foto: Puedes tomar fotos con la cámara del teléfono y adjuntarlas al correo directamente.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/outlook-app-attach.png&quot; alt=&quot;Adjunta archivos de la aplicación Outlook para Android&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enfocados&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Siguiendo el concepto de correos &lt;em&gt;prioritarios&lt;/em&gt; de Gmail, Microsoft viene con correos &lt;em&gt;enfocados&lt;/em&gt;, hacen algo parecido de diferente manera. En el caso de Google, son los servidores de Google quienes clasifican y &lt;em&gt;aprenden&lt;/em&gt; que correo es prioritario y cual no lo es, en el caso de Outlook, es la aplicación móvil al parecere la que &lt;em&gt;decide&lt;/em&gt; cual es el correo enfocado y cual es del &lt;em&gt;otro&lt;/em&gt;, en todo caso igual se puede &lt;em&gt;entrenar&lt;/em&gt; para que haga una mejor clasificación.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Deslizar para programar&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Mantener organizado todo el correo que hoy en día llega a nuestro buzón no es tarea fácil, y varias aplicaciones han intendado solucionar esto. Una de ellas es precisamente Outlook, ya hablamos del correo enfocado que nos permite enfocarnos en el correo realmente importante, pero tiene otro truco en el sombrero, deslizando el correo puedes programar el mismo para que vuelva en la noche, mañana, o en la fecha y hora que elijas. De este modo no olvidaras responder ese correo importante, pero tampoco deberás responder de inmediato por temor a olvidarlo luego.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Calendario y Contactos&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;La aplicación igualmente nos permite tener acceso a nuestro calendario y contactos de las diferentes cuentas que configuremos y puedes definir que calendario será el que utilizes o se muestre por defecto.&lt;/p&gt;
+
+&lt;p&gt;Hablando de calendario, se puede igualmente configurar diferentes tonos de alertas para correos y para avisos del calendario.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h3&gt;
+
+&lt;p&gt;En cuanto a la aplicación que Microsoft nos trae, podemos ver que serå de gran utilidad para aquellas personas que tienen que manejar mucho correo y sobre todo en muchas cuentas al mismo tiempo. Permite mantenerte al tanto de los correos, responder los urgentes de inmediato, re-programar los importantes pero no urgentes y dejar para fin de semana aquellos no importantes. Le falta tal vez integrar el calendario con la aplicación por defecto del equipo, pero seguro ya lo veremos en futuras versiones.&lt;/p&gt;
+
+&lt;p&gt;Por otro lado podemos ver que tanto Google como Microsoft han cambiado de idea respecto a mantener sus aplicaciones estrella enfocadas solo para sus propias plataformas, pues Gmail y Outlook ya no son únicamente útiles si tenemos cuenta Gmail o Hotmail/Outlook, ahora las podemos utilizar con cualquier proveedor. Con todos los recursos que estos gigantes poseen, se ve complicada la competencia para otros productos como &lt;strong&gt;Nine&lt;/strong&gt;, pero por el momento, justo ese es mi favorito aún.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/outlook-gmail-app.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>Las mejores aplicaciones Linux del año 2014</title>
+        <link href="http://www.garron.me/es/bitacora/mejores-aplicaciones-linux-2014.html"/>
+        <updated>2015-02-08T20:24:35-05:00</updated>
+        <id>http://www.garron.me/es/bitacora/mejores-aplicaciones-linux-2014.html</id>
+        <summary type="html">&lt;h3 id=&quot;las-mejores-aplicaciones-linux-del-ao-2014&quot;&gt;Las mejores aplicaciones Linux del año 2014&lt;/h3&gt;
+
+&lt;p&gt;Los amigos de Linux Questions &lt;a href=&quot;http://www.linuxquestions.org&quot;&gt;LQ&lt;/a&gt; publicaron hace unos días los resultados de unas encuestas que realizaron en ese foro entre todos los miembros.&lt;/p&gt;
+
+&lt;p&gt;Los resultados la verdad no son sorprendentes pues tratandose de una comunidad Linux y sobre todo una comunidad de los fans de Slackware se ve que sus resultados son algo sesgados, las probabilidades indican que se debe tomar muestras de todo un universo en para tener respuestas representativas.&lt;/p&gt;
+
+&lt;p&gt;En este caso estos resultados solo representan a los usuarios de LQ y nada más. De todos modos es interesante ver algunos de sus resultados.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Distribución para escritorio del año&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/desktop.png&quot; alt=&quot;Linux Desktop del año&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Se ve un empate en el primer lugar entre Linux Mint, Ubuntu y Slackware, lo que sale de lo esperado es que Slackware este aquí compartiendo el primer lugar, sale de lo esperado si uno no supiera que LQ, es el foro oficial de los usuarios de Slackware. Ahora es cierto que Slackware es un excelente entorno para escritorio, al menos a mi, me gusta mucho y lo he usado por bastante tiempo como mi entorno de escritorio en la Lenovo T60 que tenía hace tiempo.&lt;/p&gt;
+
+&lt;p&gt;Ubuntu y Mint no sorprenden para nada, pues realmente son de los favoritos de todos los usuarios de GNU/Linux alrededor del mundo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Distribución del año para servidores&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/server.png&quot; alt=&quot;Mejor distribución Linux para servidores 2014&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En este punto los resultados no son tan sorprendentes, en el primer lugar esta CentOS, que realmente es una de las mejores distribuciones para servidores, en segundo lugar y muy cerca esta Slackware, que durante mucho tiempo también fue mi elección para servidores, cuando tenía mis aplicaciones en Linode, ahora que me he pasado a Digital Ocean y no hay Slackware disponible uso Ubuntu LTS o Debian, por cierto me sorprende que Debian este tan lejos en un tercer lugar y no estuviera más cerca de los primero lugares, en otro foro tal vez ocuparía el segundo lugar o el primero. El lugar de Ubuntu LTS es normal para una comunidad que no sea de Ubuntu, en general la gente o ama o odia a Ubuntu, son pocos quienes tienen una opinión imparcial y sin influencias del corazon.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Distribución movil del año&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/mobile.png&quot; alt=&quot;Mejor distribución movil 2014&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ningua sorpresa aquí, Android ha demostrado que ha triunfado en el mundo entero, en Estados Unidos creen que iOS tiene más mercado, pero es por que en general ellos no salen de sus fronteras y creen que lo que allí sucede es lo que sucede en el mundo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ofimática del año 2014&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/office.png&quot; alt=&quot;Mejor aplicación ofimática del 2014&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;LibreOffice es lo que esta de moda desde que OpenOffice fuera adquirida junto con Sun por Oracle, ahora pertenece a la fundación Apache, pero ya no recuperó su liderazgo, pues las más grandes distribuciones vienen con LibreOffice pre-cargado.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Navegador del año&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/browser.png&quot; alt=&quot;Mejor navegador del 2014&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;El navegador Chrome es el numero uno en el mundo, pero esta claro que esta comunidad prefiere Firefox y de léjos, así como los lectores de sitios especializados en Apple prefieren Safari, no cabe duda que sitios como New York Times debe recibir más visitas de Chrome que de ningún otro navegador.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Entorno de escritorio del 2014&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/de.png&quot; alt=&quot;Mejor entorno de escritorio para Linux del 2014&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En este apartado ganó como era de esperarse KDE, que es el que viene por defecto con Slackware el cual es el favorito de la comunidad LQ.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Editor de código del 2014&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/de.png&quot; alt=&quot;Mejor entorno de escritorio para Linux del 2014&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Esta categoría es como que bastante personal, en mi caso uso brackets, pero veo que no es tan popular como hubiera creído, creo que voy a probar las que terminaron en primer lugar.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;El editor de texto para Linux del 2014&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/02/text-editor.png&quot; alt=&quot;Mejor editor de texto para Linux del 2014&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La ya clásica lucha entre Emacs y Vim no se ve muy pareja entre los usuarios de LQ, si sumamos vi con vim son claramente los ganadores, emacs está incluso emparejado con nano, lo cual es realmente sorprendente por que en años nunca he visto a nadie defendiendo nano como se defiente emacs o vim.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h3&gt;
+
+&lt;p&gt;Creo que queda claro que si bien son datos interesantes, no representan el universo de usuarios de GNU/Linux y solo representan las preferencias de un grupo de usuarios bastante homogeneo en general.&lt;/p&gt;
+
+&lt;p&gt;¿Qué opinión tienen ustedes?&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/mejores-aplicaciones-linux-2014.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>DeTecnologia.org</title>
+        <link href="http://www.garron.me/es/bitacora/detecnologia-org.html"/>
+        <updated>2015-02-07T22:00:35-05:00</updated>
+        <id>http://www.garron.me/es/bitacora/detecnologia-org.html</id>
+        <summary type="html">&lt;h2 id=&quot;comunidad-en-lnea-sobre-tecnloga&quot;&gt;Comunidad en Línea sobre Tecnlogía&lt;/h2&gt;
+
+&lt;p&gt;Desde hace mucho tiempo que he estado pensando en iniciar una comunidad en línea, y le he estado dando vueltas sobre cuál es la mejor forma de hacerlo, para mi esta claro que aún no tengo la respuesta, y solo he decidido iniciar un experimento, bueno uno más.&lt;/p&gt;
+
+&lt;p&gt;Veamos un poco de las cosas que se me ocurrieron antes, y de alguna que incluso intenté.&lt;/p&gt;
+
+&lt;h3 id=&quot;los-anteriores-intentos&quot;&gt;Los anteriores intentos&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Linuxblogday&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Mi primer intento fue en noviembre de 2007, invité a algunos amigos a unirse a un portal que agruparía varios blogs, los participantes seríamos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bert De Branbandere &lt;a href=&quot;http://www.ubuntuhq.com/&quot;&gt;UbuntuHQ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Artem Nosulchik &lt;a href=&quot;http://www.linuxscrew.com/&quot;&gt;Linux Screw&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Borys Musielak &lt;a href=&quot;http://polishlinux.org/&quot;&gt;Polish Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Philip Newborough &lt;a href=&quot;https://corenominal.org/&quot;&gt;Corenominal&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Guillermo Garron &lt;a href=&quot;http://www.go2linux.org/&quot;&gt;Go2Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Estuvimos cruzando algunos correos por algún tiempo, creamos un foro para discutir como sería la comunidad, pero no llegamos a nada, y por si se lo preguntan, si el Philip que menciono, es el que luego fuera creador de Crunchbang Linux.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;FossAdvocates&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;El segundo intento ya no fue iniciativa mía, lo fue de Kev Quirk, esto ya fue en 2013, y aquí llegamos un poco más lejos, creamos el sitio comunitario, en este caso los participantes fueron.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kevquirk.com/&quot;&gt;Kev Quirk&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.brandonholtsclaw.com/&quot;&gt;Brandon Holtsclaw&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.com/+YopSpanjers&quot;&gt;Yop Spanjers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;En esta ocación se trató de un sitio comunitario, que debía generar contenido propio, ademas de republicar (rss mediante) contenido de otros blogs, algo como un planeta, usamos Drupal en un comienzo y luego se intentó con Wordpress. Creo que falto tiempo de los miembros.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Otros Intentos&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;También he creado un par de foros dentro del dominio go2linux.org que era mi pricipal presencia en la red hace unos años, pero atrajeron más spam que contenido real. Por lo que tuve que apagarlos luego de un corto tiempo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Otras ideas&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Durante este tiempo también he tenido algunas otras ideas, como crear sitios Wordpress multisitio, o sitios comunitarios usando Drupal, finalmente Oxwall también fue algo que pensé en usar, para crear un verdadero sitio comunitario, con blogs para cada usuario y foros, algo que se puede hacer fácil con Drupal igualmente, pero fueron solo ideas.&lt;/p&gt;
+
+&lt;h3 id=&quot;detecnologiaorg&quot;&gt;DeTecnologia.org&lt;/h3&gt;
+
+&lt;p&gt;Lo que ahora tengo en mente es crear un sitio comunitario enfocado no solo en software libre o GNU/Linux, si no que algo más amplio y enfocado a todo lo que tenga que ver con tecnología.&lt;/p&gt;
+
+&lt;p&gt;Le estoy dando inicio con un foro, pero no basado en el software tradicional de foros, como ser PHPBB o Vanilla Forums (Vanilla es muy bueno). Este esta funcionando gracias a &lt;a href=&quot;http://www.discourse.org/&quot;&gt;Discourse&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Otra cosa que cambia, es que por ahora estoy solo en esto y lo he configurado he iniciado sin pedir ayuda antes de iniciar el proyecto, ahora con esta publicación estoy pidiendo esa ayuda y voluntarios que quieran ayudar en la tarea de ser moderadores y ayudar en el proyecto en general.&lt;/p&gt;
+
+&lt;p&gt;Hay también algo radicalmente diferente, esta vez es en español, los intentos anteriores siempre fueron en Ingles, que no es mi lengua nativa, vamos que ahora tiene que salir mejor, además que es la tercera y la tercera es la vencida.&lt;/p&gt;
+
+&lt;p&gt;Se que tengo pocos lectores y seguidores en español, mucho menos que en inglés, el 83% de las visitas a este sitio, son para su sección en inglés y solo el 13% para la de español, pero igual creo que esta vez va bien. Ahora a pesar de los pocos lectores que hay, espero algunos que lean este post, se adhieran al proyecto y abran su cuenta en el foro y comenzemos a discutir el futuro del foro y de otras cosas que se puedan hacer para convertir esta idea en una verdadera comunidad.&lt;/p&gt;
+
+&lt;p&gt;Así que vamos, click &lt;a href=&quot;http://discusion.detecnologia.org/&quot;&gt;aqui&lt;/a&gt;, crea una cuenta y comenzemos una amena tertulia sobre temas varios, o comenta en este post. Que viene a ser lo mismo :)&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/detecnologia-org.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>GNU/Linux y no Linux</title>
+        <link href="http://www.garron.me/es/bitacora/gnu-linux.html"/>
+        <updated>2015-02-06T21:12:35-05:00</updated>
+        <id>http://www.garron.me/es/bitacora/gnu-linux.html</id>
+        <summary type="html">&lt;p&gt;Hace ya casi dos años que asistí a una conferencia dictada por el Dr. Richard Stallman, habló claro está de muchos temas, pero el que más resonó en mi cabeza es aquel sobre GNU/Linux o simplmente Linux.&lt;/p&gt;
+
+&lt;p&gt;El Dr. Stallman considera que se le hace mucho daño a sus esfuerzos por expandir la filosofîa del software libre, cuando las personas denominan simplemente &lt;em&gt;Linux&lt;/em&gt; al sitema operativo conformado por el kernel Linux y todo el resto de software proveniente del proyecto GNU.&lt;/p&gt;
+
+&lt;p&gt;La forma correcta de llamarlo sería GNU/Linux y se debe pronunciar “ñu/linux”, si, como aquel animal que todos los años corre entre el Serengeti y el Maasai Mara.&lt;/p&gt;
+
+&lt;p&gt;El Dr. Stallman es muy rígido a la hora de defender el software de código fuente abierto, donde cualquiera puede ver que es lo que hace y como lo hace el software que esta usando en su ordenador. Esta totalmente en contra del uso de software privativo, y sostiene que la libertad no es elegir a tu amo, es no tener uno.&lt;/p&gt;
+
+&lt;p&gt;Todo su esfuerzo pierde fuerza cada vez que la gente no le da el crédito a todo el trabajo realizado por el proyecto GNU. Ya que todas las distribuciones de GNU/Linux constan del Kernel de Linus Torvalds (Linux) y el software de GNU, es correcto mencionar ambos en el nombre pues ninguno es nada sin el otro. El sistema operativo lo hacen la suma de todas sus partes.&lt;/p&gt;
+
+&lt;p&gt;Por lo que desde entonces yo trato de llamar GNU/Linux al software que corre en mis máquinas, usualmente Ubuntu o Arch&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/04/richard-stallman.jpg&quot; alt=&quot;Richard Stallman en Bolivia&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/bitacora/gnu-linux.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+
+
+    <entry>
+        <title>FreeBSD ports, recompila con nuevas opciones</title>
+        <link href="http://www.garron.me/es/cortos/freebsd-agregar-modulos-port-instalado.html"/>
+        <updated>2015-02-01T19:55:13-05:00</updated>
+        <id>http://www.garron.me/es/cortos/freebsd-agregar-modulos-port-instalado.html</id>
+        <summary type="html">&lt;h3 id=&quot;cmo-se-puede-agregar-un-mdulo-a-un-paquete-instalado-desde-ports-en-freebsd&quot;&gt;¿Cómo se puede agregar un módulo a un paquete instalado desde ports en FreeBSD?&lt;/h3&gt;
+
+&lt;p&gt;Cuando ya se tiene un paquete instalado desde ports, que ha sido previamente compilado en nuestro ordenador, tenemos que recompilarlo para poder volver a instalarlo, esta vez agregando o quitando módulos u opciones.&lt;/p&gt;
+
+&lt;p&gt;Estos son los pasos para lograrlo.&lt;/p&gt;
+
+&lt;p&gt;Ve a directorio del paquete&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/port/folder
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Desinstala el software previamente instalado&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make deinstall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Limpia el directorio de los rastros de una anterior compilación.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Agrega o quita las opciones de compilación de acuerdo a tus necesidades&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make config
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Compila con las nuevas opciones&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Instala el paquete recientemente compilado con las nuevas opciones&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Listo, ya modificaste el paquete con las nuevas opciones requeridas.&lt;/p&gt;
+
+        &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/es/cortos/freebsd-agregar-modulos-port-instalado.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </summary>
+    </entry>
+
+
+
+</feed>

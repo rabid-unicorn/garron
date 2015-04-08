@@ -1,0 +1,283 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to create an alternate site for mobile only with CSS and @media queries" />
+
+        <!-- End SEO includes -->
+        <title>Create an Alternate css File for your Mobile Visitors</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Create an Alternate css File for your Mobile Visitors">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/blog/index.html">Personal</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Create an Alternate css File for your Mobile Visitors</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/blog/creating-an-alternate-css-for-mobiles.html">Create an Alternate css File for your Mobile Visitors</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-02-25 10:47:00 -0500</h6>
+
+<hr>
+<p>I’m no css or web developer expert, in fact I’m not even a newbie. So it was really hard for me to be able to create a mobile version of my site. And it is not finished yet, but at least it now renders in only one column with an acceptable font size, and it is somehow easy to read in the mobile device.</p>
+
+<p>I’ve tested with an iPod Touch, a Samsung Galaxy Ace, and a Blackberry 9700 Bold, if you have some other device and it is not displaying correctly, please do let me know.</p>
+
+<p>I want to share how I did it here, so it may help other css non-expert.</p>
+
+<h3 id="media-queries">Media Queries</h3>
+
+<p>The first thing you need to do when creating an alternate site for your mobile visitors, is to “ask” the device if it is a mobile device. I did this in the past using the web server, and redirecting visitors to an alternate site (That was using WordPress), but that is not a good idea, as you will have the SEO spreaded, and you will also have your content copied in two sites/urls. That is not a good SEO practice, and yes, you can use robots.txt to disallow crawlers to visit your mobile site, I did not like that approach.</p>
+
+<p>I then “discovered” the CSS way, but as I said I’m not a CSS guy so it took me a lot of time to go this way.</p>
+
+<p>What you need first, is to use <em>@media</em> queries, you can do it either in the CSS file itself, or in the html file.</p>
+
+<p><strong>Inside the CSS file</strong></p>
+
+<p>What you have to do, is add some extra rules only for smartphones, below your normal css rules.</p>
+
+<p>Using the example below, you add inside the curly brackets the lines you need to change your normal CSS to one that mobile devices can use.</p>
+
+<pre><code>@media only screen and (max-device-width: 480px) {
+
+}
+</code></pre>
+
+<p><strong>Load an extra CSS file for mobile devices only</strong></p>
+
+<p>If you want to write too much code, and want to keep regular css file small, you can write a special CSS file that only mobile devices will load. To do that, you need to add the following line in the head section of your HTML file, just like any other CSS file.</p>
+
+<pre><code>&lt;link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" href="mobiel-device.css" /&gt;
+</code></pre>
+
+<p>Now, only devices with screen equal or less than 480px will load the <code>mobile-device.css</code>, keep in mind that iPads will not do it, as its screen is bigger than 480 px.</p>
+
+<p>Use this line to address the iPad both, portrait and landscape:</p>
+
+<pre><code>&lt;link rel="stylesheet" type="text/css" media="only screen and (min-device-width: 768px) and (max-device-width: 1024px)" href="ipad.css" /&gt;
+</code></pre>
+
+<p>Now you know how to load specific CSS files for your mobile devices.</p>
+
+<h3 id="modify-the-normal-layout-to-fit-in-mobile-devices">Modify the Normal Layout to Fit in Mobile Devices</h3>
+
+<p>This will vary for everyone of you reading this, as we do not have the same layout structure, but just to illustrate, I’ll use my case as an example:</p>
+
+<p>In my case my structure is as follows:</p>
+
+<pre><code>#wrapper {
+	width: 910px;
+}
+#header {
+	width: 910px;
+}
+#page {
+	width: 910px;
+}
+#content {
+	width: 640px;
+	float: left;
+}
+#sidebar {
+	width: 220px;
+	float: right;
+}
+#footer {
+	width: 910px;
+}
+</code></pre>
+
+<p>This is a simplified version of my layout (I changed it to percentages resently).</p>
+
+<p>In order to adjust it for mobile devices like the iphone, androide and blackberry phones, my <code>mobile-device.css</code> file has these contents:</p>
+
+<pre><code>#wrapper {
+	width: auto;
+}
+#header {
+	width: auto;
+}
+#page {
+	width: auto;
+}
+#content {
+	width: auto;
+	float: none;
+	clear: both;
+}
+#sidebar {
+	width: auto;
+	float: none;
+	clear: both;
+}
+#footer {
+	width: auto;
+	display: none;
+}
+</code></pre>
+
+<p>Of course I also changed the size of the fonts, and you can also change the background and some other things.</p>
+
+<p>One thing I did was to hide the footer using <code>display: none;</code> because it is not useful in small screens.</p>
+
+<h3 id="final-steps">Final steps</h3>
+
+<p>For all this to work, you also need to add this line the header of the document:</p>
+
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/&gt;
+</code></pre>
+
+<p>Now you are ready to test.</p>
+
+<p>Feel free to read my css files, and use the ideas, if you find somethig that could be done better, let me know please.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html&text=Create an Alternate css File for your Mobile Visitors&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html">linkedin</a> | <a href="mailto:?Subject=Create an Alternate css File for your Mobile Visitors&Body=http://www.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/blog/creating-an-alternate-css-for-mobiles.html&title=Create an Alternate css File for your Mobile Visitors" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

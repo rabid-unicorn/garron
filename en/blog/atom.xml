@@ -1,0 +1,971 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>Linux posts</title>
+  <link href="http://www.garron.me/en/blog/"/>
+  <link type="application/atom+xml" rel="self" href="http://www.garron.me/en/blog/atom.xml"/>
+  <updated>2015-04-08T02:13:48-04:00</updated>
+  <id>http://www.garron.me/</id>
+  <author>
+    <name>Guillermo Garron</name>
+    <email>contact@garron.me</email>
+  </author>
+
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/brackets</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/brackets.html"/>
+    <title>Brackets Text Editor</title>
+    <published>2015-01-11T20:41:00-05:00</published>
+    <updated>2015-01-11T20:41:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;As most of you alreay know, this blog is powered by Jekyll, and therefore it is a bunch of plain text files, with Markdown syntax. In all this years I have used different text editor to write this blog.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Vim&lt;/li&gt;
+  &lt;li&gt;Emacs&lt;/li&gt;
+  &lt;li&gt;iA Writer&lt;/li&gt;
+  &lt;li&gt;Uber Writer&lt;/li&gt;
+  &lt;li&gt;ByWord&lt;/li&gt;
+  &lt;li&gt;MultiMarkdown Composer&lt;/li&gt;
+  &lt;li&gt;Erato&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Most of the time it is just Vim, and Emacs is great because it highlights Markdown syntax, but lately I am using more and more &lt;a href=&quot;http://brackets.io&quot;&gt;brackets&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Brackets is a text editor with a really light code that works great with html, css, js files and of course it works with Markdown files too, I started using it because I am learning Wordpress themes development.&lt;/p&gt;
+
+&lt;p&gt;It is available on Windows, Mac OS X and Linux and it is Open Source which is great for me, because that way I can use the same tool to work on my Ubuntu 14.04 or my Mac OS X laptops.&lt;/p&gt;
+
+&lt;p&gt;A nice feature is the possibility to add functions via extensions, you can write your own, or install one of the community ones. &lt;a href=&quot;https://github.com/zaggino/brackets-git&quot;&gt;Brackets Git&lt;/a&gt; is a good one, you will find a lot of other ones &lt;a href=&quot;https://ingorichter.github.io/BracketsExtensionTweetBot/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Take a look at it, it’s free so you have nothing to lose and a lot to win.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/evolve-os</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/evolve-os.html"/>
+    <title>Evolve OS</title>
+    <published>2015-01-03T00:00:00-05:00</published>
+    <updated>2015-01-03T00:00:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;evolve-os&quot;&gt;Evolve OS&lt;/h3&gt;
+
+&lt;p&gt;There is a new kid in town, &lt;a href=&quot;https://evolve-os.com/about/&quot;&gt;Evolve OS&lt;/a&gt; is a new Linux distribution built from scratch.&lt;/p&gt;
+
+&lt;p&gt;It is good to know that there still is people working in developing Linux distribution and not just forking Ubuntu, but I have to admit that &lt;a href=&quot;http://elementaryos.org&quot;&gt;Elementary&lt;/a&gt; did a great job on that direction.&lt;/p&gt;
+
+&lt;p&gt;Evolve OS is still in early Alpha but it is available for public download and testing, it is not meant for production yet but seems promising.&lt;/p&gt;
+
+&lt;p&gt;Evolve is aimed at usability and being user friendly, it is designed to be used as Desktop OS.&lt;/p&gt;
+
+&lt;p&gt;The only option at this time is amd64, but that should not be a problem now a days.&lt;/p&gt;
+
+&lt;p&gt;Evolve OS is using &lt;a href=&quot;https://evolve-os.com/budgie/&quot;&gt;Budgie&lt;/a&gt; as its Desktop, which is once again built from scratch and not a fork of other project, Gnome fans will be happy to know that it can emulate the look and feel of Gnome 2, which is missed since Gnome 3 had appeared.&lt;/p&gt;
+
+&lt;p&gt;You can test Budgie on Ubuntu or Arch Linux via PPA or AUR.&lt;/p&gt;
+
+&lt;p&gt;I really wish the team behind Evolve OS success with this endeavor, hope to hear more from them in the future months.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/season-greetings</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/season-greetings.html"/>
+    <title>2015 resolutions</title>
+    <published>2014-12-25T00:00:00-05:00</published>
+    <updated>2014-12-25T00:00:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;2014 is almost done, it has been a good year for me, I have had a lot of fun at my job. But because of it I had little time to write to the blog.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/en/blog/writing.html&quot;&gt;Writing just because I like&lt;/a&gt; is not that difficult, also writing some &lt;a href=&quot;/en/bits/&quot;&gt;small tips&lt;/a&gt; is not difficult either, but writing some articles of better quality like these &lt;a href=&quot;/en/tag/tutorial.html&quot;&gt;tutorials&lt;/a&gt; is not that easy, they demand more hours of research, hours of testing and some more hours of writing and setting up everything together.&lt;/p&gt;
+
+&lt;p&gt;I have made a commitment to write at least one good quality article per month this new year, and I will be sharing those articles via email to the subscribers of the email list of this site.&lt;/p&gt;
+
+&lt;p&gt;This last week I have spend a lot of time -mostly at nights- upgrading the site to Jekyll Bootstrap 3 from version 2. I have used the opportunity to remove the main top menu, and instead of it, add a breadcrumb menu to improve the user experience of the site, and make it easier to find the content you want to read.&lt;/p&gt;
+
+&lt;p&gt;I hope I will have a little more time in 2015 to put some good quality articles on the site for you. Hope you enjoy reading them.&lt;/p&gt;
+
+&lt;p&gt;Merry Christmas and a great 2015 to all of you.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/diet-exercise</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/diet-exercise.html"/>
+    <title>Low carb and High protein diet</title>
+    <published>2014-11-17T10:46:22-05:00</published>
+    <updated>2014-11-17T10:46:22-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Because of my job I’ve been forced to live alone in another city for some months, actually since August 11th, I’ve been in a Hotel for some time but since October the first I am in an apartment living alone, and then able to follow the diet I prefer.&lt;/p&gt;
+
+&lt;p&gt;During this more than thirty days being here I have been eating mostly protein and vegetables, where:&lt;/p&gt;
+
+&lt;p&gt;Protein come from:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Canned tuna&lt;/li&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+  &lt;li&gt;Chicken breast&lt;/li&gt;
+  &lt;li&gt;Turkey breast&lt;/li&gt;
+  &lt;li&gt;Smoked pork&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Vegetables are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lettuce&lt;/li&gt;
+  &lt;li&gt;Tomato&lt;/li&gt;
+  &lt;li&gt;Onion&lt;/li&gt;
+  &lt;li&gt;Little amounts of corn&lt;/li&gt;
+  &lt;li&gt;Little amounts of whole grain bread&lt;/li&gt;
+  &lt;li&gt;Alfalfa Sprouts&lt;/li&gt;
+  &lt;li&gt;Olives&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;My other source of energy comes of course from fat which is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Olive oil&lt;/li&gt;
+  &lt;li&gt;Cheese&lt;/li&gt;
+  &lt;li&gt;Milk heavy cream (little with the morning coffee)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As it can be seen, it is high in protein, low in carbohydrates and supplemented with fats, I am also following the &lt;a href=&quot;http://hundredpushups.com&quot;&gt;One hundred push ups program&lt;/a&gt;, actually I have already finished it and I am able to perform one hundred push ups in a row.&lt;/p&gt;
+
+&lt;p&gt;With this little exercise every other day, and following a good diet with low carbohydrates I have seen great improvements in my shape and overall health.&lt;/p&gt;
+
+&lt;p&gt;Health benefits&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Better digestion&lt;/li&gt;
+  &lt;li&gt;No bloating at all&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Shape benefits&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The total amount of body fat has decreased visibly&lt;/li&gt;
+  &lt;li&gt;I can see my abs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Because of the little exercise I have not lost too much muscle on the upper body, specially pectorals and shoulders, it would surely be better if combined with squads and pull ups, but overall the results are real good, I will try to stick to this diet once at home, of course I think I should add more variety of vegetables to the diet in order to have enough vitamins and minerals.&lt;/p&gt;
+
+&lt;p&gt;I am writing this in case someone is still doubting about low carb high protein diets, they do work, and very well.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/commonmark</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/commonmark.html"/>
+    <title>CommonMark</title>
+    <published>2014-09-05T22:21:22-04:00</published>
+    <updated>2014-09-05T22:21:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;commonmark&quot;&gt;CommonMark&lt;/h3&gt;
+
+&lt;p&gt;Two years ago Jeff Atwood started to talk about &lt;a href=&quot;http://blog.codinghorror.com/the-future-of-markdown/&quot;&gt;The future of Markdown&lt;/a&gt;, and they he thought it should be. Jeff wants a &lt;em&gt;standard&lt;/em&gt; Markdown, and he wanted that some of the biggest sites in the Internet to join together as a committee to create that &lt;em&gt;standard&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now, two years later, and two years working on a new implementation of Markdown, it is ready to go public. The problem, the name Markdown can not be used.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Neither the name “Markdown” nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. &lt;a href=&quot;http://daringfireball.net/projects/markdown/license&quot;&gt;From licence&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And John does not want to give Jeff any written permission to use the name. Jeff first named it &lt;strong&gt;Standard Markdown&lt;/strong&gt;, and John said in an email that it was &lt;em&gt;infuriating&lt;/em&gt;, according to this &lt;a href=&quot;http://blog.codinghorror.com/standard-markdown-is-now-common-markdown/&quot;&gt;post&lt;/a&gt;. Now, it was renamed &lt;strong&gt;CommonMark&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;I think is great to get something good and try to make it even better, that is the way Linux and GNU software improved over the years, in fact all Open Source software improve that way. But I do not understand why people get mad at John Grubber because he does not want it to be called Markdown, maybe he is wrong, maybe he is too &lt;em&gt;pedantic&lt;/em&gt; but is his right.&lt;/p&gt;
+
+&lt;p&gt;Jeff did a good thing by changing the name and avoiding discussions, he may have done that in the very beginning.&lt;/p&gt;
+
+&lt;p&gt;Let’s see who is going to adopt this new &lt;em&gt;standard&lt;/em&gt; version of Markdown, is GitHub going to do it? Are we going to be able to use it with Jekyll?&lt;/p&gt;
+
+&lt;p&gt;There is an awful lot to be done yet.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/writing</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/writing.html"/>
+    <title>On Writting</title>
+    <published>2014-08-11T23:58:22-04:00</published>
+    <updated>2014-08-11T23:58:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h4 id=&quot;on-writing&quot;&gt;On Writing&lt;/h4&gt;
+
+&lt;p&gt;For some reason I can’t really explain I love writing, I know I am not good at it, specially when I do it in English, anyway I keep doing and doing it.&lt;/p&gt;
+
+&lt;p&gt;I also know not too many people read what I write, maybe with the exemption of my Linux tutorials, where they arrive mostly after a Google search, but articles like this one is not read by too many.&lt;/p&gt;
+
+&lt;p&gt;I could say that it does not matter to me, but that would be a lie, I really care, when people write is to be read. But it is true and even though almost nobody is interested in what I write about, I still like doing it. And today someone told me that the more I write the more I will improve my writing. That is off course true, when you want to be good at anything, you should practice, and practice, until you become really good at it.&lt;/p&gt;
+
+&lt;p&gt;Writing gives me peace, keeps my mind away from the daily issues, it is only comparable to jogging. It is my therapy, so, no matter if someone read what I write or not, I will keep doing maybe only for me.&lt;/p&gt;
+
+&lt;p&gt;Maybe someday, someday I could be a real good writer, maybe someday a few thousand people will start coming to this blog to read what I have to say, what I have to write about. Until that day, this will continue to be my therapy.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/boxer-app</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/boxer-app.html"/>
+    <title>Boxer App for Android</title>
+    <published>2014-08-10T11:28:22-04:00</published>
+    <updated>2014-08-10T11:28:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;boxer-for-android&quot;&gt;Boxer for Android&lt;/h3&gt;
+
+&lt;p&gt;Three days ago I have received an invitation to join another users to beta test the Boxer app for Android.&lt;/p&gt;
+
+&lt;p&gt;What is Boxer? Boxer created one of the best email applications for iOS, it comes with features like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SWIPE TO DELETE - Swipe to archive, trash, spam&lt;/li&gt;
+  &lt;li&gt;CLOUD ATTACHMENTS - Dropbox support&lt;/li&gt;
+  &lt;li&gt;PUSH NOTIFICATIONS - Notifications for all your email&lt;/li&gt;
+  &lt;li&gt;EVERNOTE INTEGRATION - Send emails to evernote with just a tap&lt;/li&gt;
+  &lt;li&gt;CALENDAR INTEGRATION – Swipe to accept/decline meeting invites&lt;/li&gt;
+  &lt;li&gt;GMAIL LABELS - Full Gmail label support&lt;/li&gt;
+  &lt;li&gt;SMART FOLDERS - Boxer remembers where you like to file things&lt;/li&gt;
+  &lt;li&gt;CONFIGURABLE INTERFACE - Don’t like our swipe actions? You can change them in the settings.&lt;/li&gt;
+  &lt;li&gt;PROFILE PICTURES - See who your email is from with profile pictures right in your inbox&lt;/li&gt;
+  &lt;li&gt;CANNED RESPONSES - Use “Quick” replies to send common responses while on the go&lt;/li&gt;
+  &lt;li&gt;CONTACTS INTEGRATION - including links to social profiles, phone numbers &amp;amp; even recent messages&lt;/li&gt;
+  &lt;li&gt;TODO LIST - Swipe to your To-Do list and never forget an important message&lt;/li&gt;
+  &lt;li&gt;EMAIL “LIKES” - Use Like to quickly acknowledge a friend’s message&lt;/li&gt;
+  &lt;li&gt;DASHBOARD - shows you all of your important and time sensitive items at a glance&lt;/li&gt;
+  &lt;li&gt;SECURITY - Secure your email with a passcode or PIN to encrypt your data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That is for the iOS version, the Android version which is not available for public yet is not that complete but going there.&lt;/p&gt;
+
+&lt;p&gt;Let’s review the Beta version for Android.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/boxer-android.png&quot; alt=&quot;Boxer for Android&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;supported-accounts&quot;&gt;Supported Accounts&lt;/h4&gt;
+
+&lt;p&gt;Boxer for Android supports:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Exchange&lt;/li&gt;
+  &lt;li&gt;Gmail&lt;/li&gt;
+  &lt;li&gt;iCloud&lt;/li&gt;
+  &lt;li&gt;Yahoo&lt;/li&gt;
+  &lt;li&gt;Outlook&lt;/li&gt;
+  &lt;li&gt;Aol&lt;/li&gt;
+  &lt;li&gt;Generic IMAP&lt;/li&gt;
+  &lt;li&gt;Generic POP3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I am using it with Gmail and an Exchange account, with latter it support contact and calendar syncing, it of course has support for labels with Gmail.&lt;/p&gt;
+
+&lt;p&gt;Boxer uses OAuth to sign into Gmail and supports push, it uses IMAP with Outlook Accounts end there is no support for push, so you have to poll the servers, this may drain your battery. I would have expected to see support for ActiveSync with Outlook accounts.&lt;/p&gt;
+
+&lt;p&gt;With Yahoo it is IMAP but no support for push emails either, finally with Gmail it uses IMAP too but there is push support, which has to be IMAP idle.&lt;/p&gt;
+
+&lt;p&gt;Of course you can manually add any IMAP or POP server, so Boxer has you covered no matter which type of account you may have.&lt;/p&gt;
+
+&lt;h4 id=&quot;most-important-features&quot;&gt;Most Important Features&lt;/h4&gt;
+
+&lt;p&gt;One of the most interesting features of Boxer are the swipe actions which can be configured by the user. There are four swipe actions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Right short swipe&lt;/li&gt;
+  &lt;li&gt;Right long swipe&lt;/li&gt;
+  &lt;li&gt;Left short swipe&lt;/li&gt;
+  &lt;li&gt;Left long swipe&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Each of the can be configured to perform any of these actions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Archive: Sends the email to the archive folder&lt;/li&gt;
+  &lt;li&gt;Delete: Send the email to the trash&lt;/li&gt;
+  &lt;li&gt;Evernote: If you have an Evernote account synced it will send the email to Evernote&lt;/li&gt;
+  &lt;li&gt;Like: Sends a quick reply to the sender saying you liked his email&lt;/li&gt;
+  &lt;li&gt;Move/Label: Move or label the email depending on what is supported by the server&lt;/li&gt;
+  &lt;li&gt;Quick: Open the menu of quick responses&lt;/li&gt;
+  &lt;li&gt;Read/Unread: Change the status to read or unread&lt;/li&gt;
+  &lt;li&gt;Spam: Report the email as Spam&lt;/li&gt;
+  &lt;li&gt;Star/Flag: Star or flag the email depending on what is supported by the server&lt;/li&gt;
+  &lt;li&gt;To-Do: Sends the email to a folder created by Boxer called To-Do, and assign it as a To-Do task, this only works inside the app, and it is not synced with the Exchange account in case you are using one&lt;/li&gt;
+  &lt;li&gt;Actions: Opens the menu with all the above actions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Another interesting and useful features are &lt;em&gt;Confirm before sending&lt;/em&gt;, &lt;em&gt;Confirm before deleting&lt;/em&gt; and the ability to configure  where to go after you delete a message. Your can choose from going to the previous or older message or go to the conversation list.&lt;/p&gt;
+
+&lt;p&gt;The quick responses are also very useful, and you can create more of them on a per account basis. I find this feature very useful to reply from your mobile device without having to write every response.&lt;/p&gt;
+
+&lt;p&gt;It also recognize automatically a Google Apps account and configure the app for you.&lt;/p&gt;
+
+&lt;h4 id=&quot;important-missing-features&quot;&gt;Important missing features&lt;/h4&gt;
+
+&lt;p&gt;One of the most important things that are missing is the option to configure which IMAP folders act as Trash, Archive or Spam. 
+That is very useful to have all your email clients putting the email in the same place.&lt;/p&gt;
+
+&lt;p&gt;You can not choose the folders to subscribe to, so this is a needed function for IMAP users that have archived old emails in folders, or those who have server side rules that organize emails per sender or subject into folders.&lt;/p&gt;
+
+&lt;p&gt;Beside those points Boxer has you covered on all basic features one may need, and it is only the beta version, I hope they can add new features in the final and future releases.&lt;/p&gt;
+
+&lt;p&gt;Maybe tasks and Notes from the exchange server syncing with your android device would be great, I know Nine has that feature in its roadmap.&lt;/p&gt;
+
+&lt;p&gt;One last missing feature, is the ability to configure your default account, it will hard coded to the first one you set up.&lt;/p&gt;
+
+&lt;h4 id=&quot;closing&quot;&gt;Closing&lt;/h4&gt;
+
+&lt;p&gt;I have been using Boxer for three days both in my Moto G and my Galaxy S3 mini. It has been working great so far, but on the Moto G it was the culprit of 12% of my battery usage in one day with not too much use, that was not the case on the Galaxy S3 mini.&lt;/p&gt;
+
+&lt;p&gt;I am a power email user, and the experience with it has been as good as with the iPhone version, I really hope they to improve even more, and succeed in the Android market.&lt;/p&gt;
+
+&lt;p&gt;As for the price I still do not know anything about it, but I guess it will be something like 10 dollars, which is the norm in this kind of applications, and it will surely worth it.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/thunderbird-best-practices</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/thunderbird-best-practices.html"/>
+    <title>Thunderbird Best Practices</title>
+    <published>2014-08-03T21:28:22-04:00</published>
+    <updated>2014-08-03T21:28:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h4 id=&quot;thunderbird-best-practices&quot;&gt;Thunderbird Best Practices&lt;/h4&gt;
+
+&lt;p&gt;Thunderbird is the email client from Mozilla, it has been around since a long time ago, and it evolved to have all you need from an email client.&lt;/p&gt;
+
+&lt;p&gt;Even though there are other solutions, and that most people read their emails from mobile devices, I do still use my desktop clients a lot. I mostly use Outlook to work with emails as both my corporate and personal emails are exchange accounts, I have installed &lt;em&gt;Thunderbird&lt;/em&gt; on my Mac again.&lt;/p&gt;
+
+&lt;p&gt;My personal account is hosted on Office 365 so I can access it via IMAP protocol, in case you are using Thunderbird with any IMAP server here are some considerations you should have when installing and configuring it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disk space for off-line access&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Thunderbird can download a copy of your emails for you to work with them while off-line, the amount of space you want to use can be configured from:&lt;/p&gt;
+
+&lt;p&gt;On the &lt;em&gt;Accounts Settings&lt;/em&gt;, select &lt;em&gt;Synchronization and Storage&lt;/em&gt; and set the number of days you need to have emails from. I have set mine to two weeks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/thunderbird-off-line-sync.png&quot; alt=&quot;Thunderbird Sync and Disk Space Options&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Configure Special Folders&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Some special folders need to be configured to preserve the way your server works, this folders are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sent&lt;/li&gt;
+  &lt;li&gt;Archives&lt;/li&gt;
+  &lt;li&gt;Drafts&lt;/li&gt;
+  &lt;li&gt;Trash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These folders need to be configured so Thunderbird may use the same folders your server is using, otherwise it will create duplicate folders for each of the purposes listed above.&lt;/p&gt;
+
+&lt;p&gt;Trash will go first, right click on the account you are configuring on the left pane, then select &lt;em&gt;subscribe&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/thunderbird-subscribe-imap-folders.png&quot; alt=&quot;Thunderbird subscribe options for IMAP server&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Be sure to select all folders you will need, in my case:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Archive&lt;/li&gt;
+  &lt;li&gt;Deleted Items&lt;/li&gt;
+  &lt;li&gt;Drafts&lt;/li&gt;
+  &lt;li&gt;Sent Items&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once you have subscribed to the needed folders, you need to tell Thunderbird to use them instead of creating new ones.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;em&gt;Server Settings&lt;/em&gt; on  &lt;em&gt;Account Settings&lt;/em&gt;, and select the right folder in the remote IMAP server to move deleted emails by selecting &lt;em&gt;Move to this folder&lt;/em&gt; option.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/deleted-email.png&quot; class=&quot;img-responsive&quot; alt=&quot;Move deleted emails to IMAP on Thunderbird&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally on the &lt;em&gt;Folders and Copies&lt;/em&gt; under &lt;em&gt;Account Settings&lt;/em&gt; once again, you will configure the rest of folders where you want your Archived, Sent and Draft emails to go.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/folders-copies.png&quot; alt=&quot;Folders and Copies Thunderbird&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now Thunderbird will interact better with the IMAP server and thus with other applications you may be using to access your email. If you fail doing this, you may end with two folders getting your sent email, as each IMAP application may create its own. This is particularly useful with and Outlook 365 Exchange Account.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/svbtle-vs-medium</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/svbtle-vs-medium.html"/>
+    <title>Svbtle vs Medium</title>
+    <published>2014-08-02T12:08:22-04:00</published>
+    <updated>2014-08-02T12:08:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Since last October I’ve been away from the Internet, well not completely, but not following my favorite blogs in a daily basis, wait… Not even in a weekly or bi-weekly basis.&lt;/p&gt;
+
+&lt;p&gt;Because of that I have missed the day when &lt;a href=&quot;http://blog.svbtle.com/open-for-everyone&quot;&gt;Svbtle&lt;/a&gt; opened its door to everyone interested in a nice space to blog. I have been reading some &lt;strong&gt;svbtle&lt;/strong&gt; blogs ever since it was &lt;a href=&quot;https://news.ycombinator.com/item?id=3742314&quot;&gt;featured on Hacker News&lt;/a&gt;, it seems it was on top news again the day it became open &lt;a href=&quot;https://news.ycombinator.com/item?id=7138444&quot;&gt;Open for everyone&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It is interesting to see lot of comments on both days were about the &lt;em&gt;ugly&lt;/em&gt; kind of person Dustin is for keeping the platform closed, now that it is open someone said:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Dustin is a little too late on this one. Medium came along and scooped up whatever chance Svbtle had of becoming accepted by the masses. It should have been open from the start, Dustin’s elitist attitude got in the way and I think it’s only a matter of time before Svbtle dies.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I really do not think you can compare Medium and Svbtle, they are two different things.&lt;/p&gt;
+
+&lt;h3 id=&quot;medium&quot;&gt;Medium&lt;/h3&gt;
+
+&lt;p&gt;Well &lt;a href=&quot;https://medium.com&quot;&gt;Medium&lt;/a&gt; is like a magazine where you may have a column for you to write on it. It started being &lt;em&gt;invitation only&lt;/em&gt; but soon it was open for everyone. You can write in your column read others columns, comment on theirs and they can comment on yours. In fact anyone can comment on your piece of writing, but it is not like the common way to add comments in a blog. People can pick a paragraph and comment about it specifically and then someone else can join the conversation on that specific paragraph, works really nice.&lt;/p&gt;
+
+&lt;p&gt;Medium gives little but most of times enough control on how your post will look like, you can format the text very little, which is good for the most of population. &lt;a href=&quot;https://medium.com/about/writing-in-medium-df8eac9f4a5e&quot;&gt;Medium’s CEO said:&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I find that the happy medium (yes, I did that) between no formatting and full control is the most efficient and comfortable place to live. Once you get used to it, everything else feels like stepping back in time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;With Medium everything is under one domain &lt;em&gt;medium.com&lt;/em&gt; all columns look alike. Well is a magazine you contribute content to it, you get readers for what you write, you interact with them, so it is also a nice community.&lt;/p&gt;
+
+&lt;h3 id=&quot;svbtle&quot;&gt;Svbtle&lt;/h3&gt;
+
+&lt;p&gt;On the other way Svbtle is a blogging platform like Blogger or Wordpress.com where you can create your own site, with your own name and your own domain. Your content may be featured in Svbtle front page (you can opt-out). Even though it is a lot like other blogging platforms, it has a very narrowed set of features. Blogger, Wordpress.com or Tumblr can be customized a lot, while with Svbtle you can only change your icon and main color. All sites will look the same (Good looking for anyone loving minimalism). There is no interaction with readers, as there is no way to comment on anything, readers may contact the writer via Twitter or email if the writer choose to share that information.&lt;/p&gt;
+
+&lt;h3 id=&quot;choosing-the-right-one&quot;&gt;Choosing the right one&lt;/h3&gt;
+
+&lt;p&gt;Now that we know they are not comparable, specially not only because they have a similar appearance. We can choose which one to use.&lt;/p&gt;
+
+&lt;p&gt;First, you do not have to choose, you can use both of them, but if you want to belong to a community of writers, and you love interaction, then you may be better on Medium, if on the other hand you just want your place to write your own ideas, and make them available for anyone interested in your words, then Svbtle is a good place to be, of course you can choose Wordpress.com too, you can add your own domain and it is more customizable.&lt;/p&gt;
+
+&lt;p&gt;If you want something in the middle, Tumblr may be the place to go, you have &lt;em&gt;your place&lt;/em&gt;, while still belonging to a community, just maybe not a readers/writers community.&lt;/p&gt;
+
+&lt;p&gt;Pick your any of them, and start sharing your ideas.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/jekyll-comments-powered-google-plus</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/jekyll-comments-powered-google-plus.html"/>
+    <title>From Disqus to Google Plus</title>
+    <published>2014-07-31T21:18:22-04:00</published>
+    <updated>2014-07-31T21:18:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Three years ago I &lt;a href=&quot;/en/blog/migrating-from-wordpress-to-jekyll.html&quot;&gt;moved my blog to Jekyll&lt;/a&gt; and since then I have been very happy with it, with the time I have &lt;a href=&quot;/en/blog/jekyll-template-based-twitter-bootstrap-2.html&quot;&gt;changed the way it looks&lt;/a&gt; and have gone from &lt;a href=&quot;/en/blog/on-blog-comments.html&quot;&gt;comments&lt;/a&gt; to &lt;a href=&quot;/en/blog/more-on-comments.html&quot;&gt;no comments&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Right now I am switching again, I am switching from Disqus to Google Plus to handle the comments on this blog. No real reason to do this, maybe just to test if more activity come to the blog this way.&lt;/p&gt;
+
+&lt;p&gt;To do it on Jekyll which are just static pages, is really simple, just paste this piece of code where you want the comments to appear.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&quot;https://apis.google.com/js/plusone.js&quot;&amp;gt;
+&amp;lt;/script&amp;gt;
+&amp;lt;div class=&quot;g-comments&quot;
+  data-href=&quot;http://www.garron.me/en/blog/jekyll-comments-powered-google-plus.html&quot;
+  data-width=&quot;642&quot;
+  data-first_party_property=&quot;BLOGGER&quot;
+  data-view_type=&quot;FILTERED_POSTMOD&quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course change the &lt;strong&gt;http://www.garron.me&lt;/strong&gt; for your own url.&lt;/p&gt;
+
+&lt;p&gt;One thing I may miss from Disqus is to be alerted via email when a new comment is posted on the site. Using Google Plus someone will have to mention me (@ggarron) in order to get my attention. I will run this way for some time to see if it was a good move or not.&lt;/p&gt;
+
+&lt;p&gt;One thing that keeps me thinking about this move is that I am not protecting my readers privacy anymore, like I stated everyone should do in &lt;a href=&quot;/en/blog/provide-share-buttons-without-exposing-your-visitors.html&quot;&gt;this post&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/apt-get-1.0-released</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/apt-get-1.0-released.html"/>
+    <title>After 16 years of development apt-get 1.0 is released</title>
+    <published>2014-04-19T19:18:22-04:00</published>
+    <updated>2014-04-19T19:18:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I love Debian, it is together with Arch Linux my favorite distribution of GNU Linux. One thing I love about Debian is apt, actually I switched from Fedora/CentOS to Debian/Ubuntu because in my opinion APT is a lot better than YUM.&lt;/p&gt;
+
+&lt;p&gt;Being APT as good as it could be, there is always room for improvement, and with this new release, which is a major milestone, we have one real important improvement.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;apt-cache&lt;/code&gt; is now “integrated” into &lt;code&gt;apt-get&lt;/code&gt;. You will now be able to run.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get search package-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get list 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which is like running &lt;code&gt;dpkg list&lt;/code&gt;. From &lt;a href=&quot;http://mvogt.wordpress.com/2014/04/04/apt-1-0/&quot;&gt;Michael Vogt’s blog&lt;/a&gt; We get:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;list: which is similar to dpkg list and can be used with flags like –installed or –upgradable.&lt;/li&gt;
+  &lt;li&gt;search: works just like apt-cache search but sorted alphabetically.&lt;/li&gt;
+  &lt;li&gt;show: works like apt-cache show but hide some details that people are less likely to care about (like the hashes). The full record is still available via apt-cache show of course.&lt;/li&gt;
+  &lt;li&gt;update: just like the regular apt-get update with color output enabled.&lt;/li&gt;
+  &lt;li&gt;install,remove: adds progress output during the dpkg run.&lt;/li&gt;
+  &lt;li&gt;upgrade: the same as apt-get dist-upgrade –with-new-pkgs.&lt;/li&gt;
+  &lt;li&gt;full-upgrade: a more meaningful name for dist-upgrade.&lt;/li&gt;
+  &lt;li&gt;edit-sources: edit sources.list using $EDITOR.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s been some months since I am away of Linux, but I think I will install Debian as soon as I can to play with this new apt release. You will have to install Debian Jessie (Testing).&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/windows-8.1-email-app</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/windows-8.1-email-app.html"/>
+    <title>Windows 8 and 8.1 native email app</title>
+    <published>2014-01-22T08:18:22-05:00</published>
+    <updated>2014-01-22T08:18:22-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Maybe because I am a little old (40 years old) I am not an “addict” of Facebook or Instagram, but I have to admit I’m an addict of email. I am constantly evaluating new email applications and services.&lt;/p&gt;
+
+&lt;p&gt;Because I am forced to work with &lt;a href=&quot;/en/blog/windows-8.html&quot;&gt;Windows again&lt;/a&gt; I have tested and used the Windows 8 and 8.1 email application.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Look and usability&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The look and feel of this application remembers a mobile app or a web app, more than a desktop application of some years ago.&lt;/p&gt;
+
+&lt;p&gt;The smooth interface, the soft colors and the full screen view make using it a pleasure.&lt;/p&gt;
+
+&lt;p&gt;The interface is actually very intuitive and really easy to use, having all basic features that a normal user would need.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/01/windows-8-email-app-1.png&quot; alt=&quot;Windows 8 email look and feel&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are basically three panes, one for the folders, starred contacts, and marked for follow up email and where you can also select different accounts. Another for your emails, and the third for the email body itself of the email selected on the second pane.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/01/windows-8-email-app-2.png&quot; alt=&quot;Windows 8 email create new email&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the top right you find three buttons, one is to reply, reply all or forward emails, the other is to compose a new email and the last one to trash the current email.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As I said, all basic features are included, you can mark emails for follow up, reply, forward, emails. You can add or delete folders, add a sub-folder empty folders with one button and anchor a subfolder to the first pane.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/01/windows-8-email-app-3.png&quot; alt=&quot;Windows 8 email folders&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the email itself you can mark one or more as unread/read or trash it, you can multi select emails and act on more than one at a time.&lt;/p&gt;
+
+&lt;p&gt;What you can not do, or at least I have not yet found how to do it, is create search folder (like Outlook) and create rules for incoming emails. Something I actually do not miss at all.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Supported Accounts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The Windows 8 email applications supports POP3, IMAP and ActiveSync protocols, so you can use it to connect with all major providers.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Outlook (Hotmail)&lt;/li&gt;
+  &lt;li&gt;Exchange&lt;/li&gt;
+  &lt;li&gt;Google (Gmail)&lt;/li&gt;
+  &lt;li&gt;Yahoo email&lt;/li&gt;
+  &lt;li&gt;Any other with POP3 or IMAP support.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/01/windows-8-email-app-4.png&quot; alt=&quot;Windows 8 email supported accounts&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As it can be seen it is as complete on this matter as the Mac email app.&lt;/p&gt;
+
+&lt;p&gt;One point where it excels even Outlook is that it can be connected to two ActiveSync accounts, in my case my personal Office 365 email and my Work’s Exchange server account.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Final thoughts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;After being using it for my personal and work accounts I am glad with it, and I am using Outlook less and the Windows 8.1 native email app more.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/windows-8</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/windows-8.html"/>
+    <title>Microsoft again. Now with Windows 8</title>
+    <published>2014-01-05T17:30:22-05:00</published>
+    <updated>2014-01-05T17:30:22-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I have &lt;a href=&quot;http://www.garron.me/en/go2linux/farewell-microsoft.html&quot;&gt;stopped using Windows on 2011&lt;/a&gt; and since then I have been using exclusively Mac OS X and Linux but on October
+ 2013 I have started a new job, and I have been given a Dell Inspiron with Windows 8. The company I work for uses Exchange server so Windows and Outlook is something very usef
+ul. Well I have started using it with some bad feelings I must admit that I am biased against Microsoft, being a Linux advocate for years I simply do not love Microsoft product
+s.&lt;/p&gt;
+
+&lt;p&gt;The truth must be said, Windows 8 is not a bad OS at all, it is definitely not as good as Mac OS X or Linux if you are a developer, but if you just need to: 
+- work with documents
+- read emails
+- surf the web&lt;/p&gt;
+
+&lt;p&gt;And so on, it is a good OS. Sure you can do the same with Linux, Mac OS X or even Chrome which is also great for all tasks listed above. The only advantage of Windows is that it is fully compatible with Microsoft Office, and can run Outlook (if you need it) and a lot of other software like AutoCad. Microsoft Office is still the world standard specially in the corporate world, and Exchange is still the “the facto” email server in the corporate world.&lt;/p&gt;
+
+&lt;p&gt;I am enjoying working with it, and it runs smooth and fast enough in the Dell Inspiron 14 with an Intel core i5 microprocessor. I have been using it for two months already and I have not yet seen the &lt;strong&gt;blue screen&lt;/strong&gt;, I have still did not have any halt of the system.&lt;/p&gt;
+
+&lt;p&gt;Some apps I really enjoy of it, are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Music&lt;/li&gt;
+  &lt;li&gt;Email&lt;/li&gt;
+  &lt;li&gt;Calendar&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All of them very minimalistic and easy to use, email and calendar work great with my personal &lt;a href=&quot;http://www.garron.me/en/blog/testing-office-365-blackberry-cloud-service.html&quot;&gt;Office 365 account&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Music App does not have a lot of features, surely not even near to iTunes, but it does what I want, plays my music while I am working, the app itself is fast and light weighted.&lt;/p&gt;
+
+&lt;p&gt;The calendar app is easy to use, intuitive, and I just miss the possibility to move an appointment using the mouse, you have to edit it and change the date in order to move to another date or time.&lt;/p&gt;
+
+&lt;p&gt;The email app, lets you work while off line with your email, the bad thing is that you have to have an Outlook.com account in order to use it, but once again it is very light, and intuitive.&lt;/p&gt;
+
+&lt;p&gt;I do not miss do not having a menu button, having being working with Mac and OpenBox for Linux as well as Unity on Ubuntu I really do not need a start button. I like the way to find my programs, I just move the mouse all over the right of the screen and then using the magnifying glass, and start typing the name of the program.&lt;/p&gt;
+
+&lt;p&gt;The same magnifying app search for emails if you are using the email app, and for movies if you are using the Netflix app. Talking about Netflix I really like having it as an app instead of using my browser.&lt;/p&gt;
+
+&lt;p&gt;I am now really thinking about buying a Nokia Lumia with Windows 8 OS, in order to better use my productive apps (read Microsoft Office apps)&lt;/p&gt;
+
+&lt;p&gt;I have ditched Google Apps and mainly all Google services in favor of Microsoft ones for my personal account, because I prefer to work with a standard instead of the proprietary services of Google (Imap, Active Sync on G Apps just do not work as they should), I do not like labels on my email, and lots of other things, but just will be another post.&lt;/p&gt;
+
+&lt;p&gt;Finally, I want to say that my personal laptop is still a Macbook Pro, and it will continue that way, my personal phone is a Blackberry, and I may change it for an iPhone in the future.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/ghost</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/ghost.html"/>
+    <title>Ghost</title>
+    <published>2013-11-17T20:51:22-05:00</published>
+    <updated>2013-11-17T20:51:22-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Sometimes it seems like everything has been done in a specific field, and talking about blogging one may think that everything has already been implemented.&lt;/p&gt;
+
+&lt;p&gt;We have Wordpress, and a lot of other CMS tools which can be used to blog, we have some minimalistic tools for geeks, like Jekyll, and we have some great on-line tools, like Wordpress, Blogger, we also have Medium and Svbtle. Then when it seems like all bases are covered Ghost appears on Kickstarter and gets an incredible support.&lt;/p&gt;
+
+&lt;p&gt;Ghost is filling the gab between Svbtle and Wordpress, it has a great minimalistic and easy to use interface, but you do not have to be invited to use it. It is free and it will always be, it will not make money with your content, and inserting ads in your posts, yet it still provide you with a great platform, where you can write.&lt;/p&gt;
+
+&lt;p&gt;When I first read about &lt;a href=&quot;http://dcurt.is/codename-svbtle&quot;&gt;Svbtle&lt;/a&gt; on HackerNews I loved the idea and the interface, and almost immediately installed the copycat &lt;a href=&quot;http://natewienert.com/codename-obtvse&quot;&gt;Obtvse&lt;/a&gt;. Now we have a real tool that is both simple and powerful and with support that focus only in one thing, writing.&lt;/p&gt;
+
+&lt;p&gt;Ghost is just that a platform to write, a blogging tool where you have to focus on content, you have to write and add some pictures to help others understand the idea, and that is it.&lt;/p&gt;
+
+&lt;p&gt;What you get is a screen with two sides, on the left you write using &lt;strong&gt;markdown&lt;/strong&gt;, on the right you see the result, a live preview of how your post is going to look like. If you like writing Ghost is for you.&lt;/p&gt;
+
+&lt;p&gt;You can get it working on &lt;a href=&quot;https://www.digitalocean.com/community/articles/how-to-use-the-digitalocean-ghost-application&quot;&gt;Digital Ocean&lt;/a&gt; or &lt;a href=&quot;http://blog.webfaction.com/2013/10/new-one-click-installers-node-js-and-ghost/&quot;&gt;Webfaction&lt;/a&gt;, And if you want someone focused just on Ghost you can try &lt;a href=&quot;http://hostghost.io/&quot;&gt;HostGhost.io&lt;/a&gt; which will open in beta soon.&lt;/p&gt;
+
+&lt;p&gt;Below some pics about how it &lt;em&gt;feels&lt;/em&gt; and look like.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/11/ghost-1.png&quot; alt=&quot;Ghost Writing&quot; class=&quot;img-responsive&quot; /&gt;
+&lt;br /&gt;
+&lt;img src=&quot;/images/2013/11/ghost-2.png&quot; alt=&quot;Ghost Final&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/enjoy-yourself</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/enjoy-yourself.html"/>
+    <title>Just enjoy yourself</title>
+    <published>2013-11-16T21:00:22-05:00</published>
+    <updated>2013-11-16T21:00:22-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;When I was a kid I loved playing soccer, I was not good at it but liked it anyway. I was playing soccer in every chance I got. It did not really matter if I was good or not, the real thing was that I enjoyed myself doing it.&lt;/p&gt;
+
+&lt;p&gt;That is how kids usually see the life, they enjoy something, and they do it. When did that change? Why grown up people need others to approve what they are doing?&lt;/p&gt;
+
+&lt;p&gt;Everybody should be doing what they like to do, you should be doing what you love. If for some reason that does not pay enough to live, do something else but don’t stop doing what you love to do.&lt;/p&gt;
+
+&lt;p&gt;And forget about what others may think about the way you are performing. If you like to write, then write, if you like to sing, then sing. If you are so fortunate that you can make a living out of what you enjoy doing, that is great. Just don’t stop because you can’t make a living out of that.&lt;/p&gt;
+
+&lt;p&gt;Now it is time for you to start doing what you always wanted, don’t try to be the best at it, just enjoy yourself.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/extraterrestial</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/extraterrestial.html"/>
+    <title>Extraterrestrial life</title>
+    <published>2013-11-16T20:55:22-05:00</published>
+    <updated>2013-11-16T20:55:22-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;In July 7, 1947 an object crashed in a ranch in Roswell, New Mexico. The theories behind what may have happened there varies, but the most common explanation is that an space aircraft, coming from other world is what have crashed there that day. The official story says that an experimental surveillance balloon is what was recovered by the U.S. military. The probability that a spaceship crashed on Earth is remote, in fact, the probability that life from outer space visit us is remote.&lt;/p&gt;
+
+&lt;p&gt;The probability is remote because too many conditions must be met so that life from outer space may visit us. Here are some of the conditions that should be met.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There should be stars with planets (That is easy)&lt;/li&gt;
+  &lt;li&gt;There should be planets where life may be held (Less common, but easy)&lt;/li&gt;
+  &lt;li&gt;The life in such planets should evolve into intelligent life (Not so easy)&lt;/li&gt;
+  &lt;li&gt;That intelligent life have to appear in the same window of time we are existing (Not easy)&lt;/li&gt;
+  &lt;li&gt;That intelligent life that happens to occur in our same small time frame, have to find us. (Difficult)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The last two points are the harder to comply. We know there are planets out there capable to support life, but in this time? How much time did it take to the earth to be able to support life, how much time took life to evolve into intelligent life, and finally how much time are we going to be here?&lt;/p&gt;
+
+&lt;p&gt;What happened here, may happen in another planet, for sure, but to happen in the same time and near enough from here for them to find us. I really do not think so.&lt;/p&gt;
+
+&lt;p&gt;So, unless we are an experiment of some bigger civilization, unless they have planted life in our planet, is really hard to think that some outer space civilization is going to exist in our time frame and that it may find us.&lt;/p&gt;
+
+&lt;p&gt;It took our planet since its creation 4.500 millions of years to have intelligent life, and we may not be here in another million of years, so, do the math.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/happiness</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/happiness.html"/>
+    <title>Happiness</title>
+    <published>2013-11-16T20:51:22-05:00</published>
+    <updated>2013-11-16T20:51:22-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Siddhārtha Gautama, better known as Buddha said:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;He spent good part of his life searching for the “secret” of happiness, and found that it can be achieved by eliminating the causes of suffering. And while achieving happiness and eliminating the pain from us might not be an easy task, we need to understand where happiness roots are.&lt;/p&gt;
+
+&lt;p&gt;The root of happiness is inside us, each one of us have to decide whether you want to be happy or not. Happiness is a state of our minds, is how we feel when facing life’s facts. As a state of our minds, we should be in control of it, and should be able to be happy just because we have decided to.&lt;/p&gt;
+
+&lt;p&gt;Happiness is not something easy to find, specially when we want to achieve way too many goals, and because those are hard to achieve, and because it takes too much time to get to point we want to be and sometimes we never get to it, we start to accumulate frustration. That frustration mines our capability to be happy.&lt;/p&gt;
+
+&lt;p&gt;We need to be able to stop frustration. In fact we must stop making our happiness an effect of achieving goals, or accumulate things. Our happiness must rest on the foundation of our will to be happy.&lt;/p&gt;
+
+&lt;p&gt;I’m not saying we should stop chasing dreams, that can lead to mediocrity, but certainly should stop relying on things or hitting milestones of our life to be happy. The day we finally understand that the roots of happiness are within us, we will have many more happy days than unhappy ones.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/blogging-break</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/blogging-break.html"/>
+    <title>Blogging break</title>
+    <published>2013-11-02T22:22:22-04:00</published>
+    <updated>2013-11-02T22:22:22-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I have started blogging in 2007, it has been a wonderful experience, I have met some great people because of blogging, I have received so may good comments about my site, and have enjoyed every minute about writing here. I have learned a lot during my researching in order to prepare every article post here. I have improved my English a lot (still a lot work to do on that field), because I wanted to use English in order to reach more people.&lt;/p&gt;
+
+&lt;p&gt;But since October 11th, I have got a new job, I am now a lot more busy, and working late at night, it was a nights when I did my research job, and write the drafts of my articles, but now I just got home too late and too tired.&lt;/p&gt;
+
+&lt;p&gt;I am sure that I will get more time in the future, once I get more accustomed to this new job. But, in the meanwhile I will have to take a break about blogging. I continue to follow all my fellow blogs, and continue to follow a lot of interesting people on Twitter, but I just lack the time to write about all those interesting things I read about.&lt;/p&gt;
+
+&lt;p&gt;I do not want to say I will stop writing for ever, because I just like writing too much, but this may be a long (months) time of silence here. The site will continue live, and because it is based on plain text it will not be difficult to keep it running.&lt;/p&gt;
+
+&lt;p&gt;I am also disabling all VPS that support this site, and moving it to webfaction, in order to have some others taking care of the servers. This way I want to be sure the site will continue online.&lt;/p&gt;
+
+&lt;p&gt;Thanks a lot to all my followers and readers of all this years, it was a real pleasure to write for you, and I will try as hard as I can to write at least once a month, in order to stay in touch.&lt;/p&gt;
+
+&lt;p&gt;THANKS!&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/ioflare-review-new-vps-provider</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/ioflare-review-new-vps-provider.html"/>
+    <title>Interview with Vance Davies. ioFlare review</title>
+    <published>2013-10-04T09:22:35-04:00</published>
+    <updated>2013-10-04T09:22:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;ioFlare is a new VPS provider that will be launching in a week, as you will see below Vance (CEO of ioFlare) and his team are planning to offer a new VPS option for all the hacker community. They are aiming at giving us some real competitive prices, and great performance at the same time.&lt;/p&gt;
+
+&lt;p&gt;The basic plan looks pretty good.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cost $5 USD&lt;/li&gt;
+  &lt;li&gt;SSD Accelerated Storage: 15GB&lt;/li&gt;
+  &lt;li&gt;RAM: 0.75GB/1.5GB (Dedicated/Burst) KVM ballooning&lt;/li&gt;
+  &lt;li&gt;CPU: 10 CPU Cores @ 1x priority&lt;/li&gt;
+  &lt;li&gt;Bandwidth: 1.5TB 750GB IN/750GB OUT Premium Network&lt;/li&gt;
+  &lt;li&gt;Port: 1gbit&lt;/li&gt;
+  &lt;li&gt;320gbps  DDOS protection&lt;/li&gt;
+  &lt;li&gt;Location: Montreal QC Canada (BHS) More locations to come soon after opening.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But, I better stop telling you about this and present you this good news from the mouth, or keyboard of Vance Davis.&lt;/p&gt;
+
+&lt;h2 id=&quot;interview&quot;&gt;Interview&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Hi Vance, please introduce yourself to the audience.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. I am Vance Davies, am 35 years old and currently living in Seattle WA. I started Systems Administration about 10 years ago and that love affair started with my love of running gaming servers. I have run servers for a huge amount of games and that evolved into Linux Administration with a focus on Security. I have a family with 2 young boys (1.5 and 3 years). I am a avid Outdoor enthusiast and love getting out into the back country.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. How did you come to this project of a new VPS provider?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. A systems admin friend and I started talking about it over a year ago running through various ideas and if we could bring something competitive and different to the industry. Over the months our ideas evolved substantially and became something entirely different and very exciting. We knew at this point we had something amazing that could directly compete with the big guys like Linode and Digital Ocean.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. So, you are not alone with this. Are you only two people behind?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. There are 3 of us all together. 1 who handles accounting, banking, human resources, 1 that is the main systems admin and responsible for the infrastructure, updating systems, securing etc., and myself who also helps with System administration but main role is marketing, PR, and SEO.&lt;/p&gt;
+
+&lt;p&gt;Our systems admin is a life long systems administrator and absolutely brilliant when it comes to server hardware, networking, and Linux in general. He is also extremely good with web development (PHP, html, CSS, java.). He is 30 and lives in the USA as well.&lt;/p&gt;
+
+&lt;p&gt;The ioFlare group with the exception of Vance have chosen to keep themselves and their names out of the spotlight with is understandable.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Well, basically three young people trying to create something new, and better than what already exists.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. Yes that about sums it up. We knew we could come up with something to make waves in the market and challenge some of the top companies if we really put our minds and hearts into it. We believe we have done just that and will be able to compete directly with companies like Linode and Digital Ocean. We really spent large amounts of time tweeking and testing to squeeze every ounce of speed out of the servers and also keep the price extremely competitive. If you look at the specs on our lowest offering it really is extremely competitive and the speeds exceptional.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Yes it really looks good. But, going more into technical details. And going from bottom to top. What Datacenters are you going to use. How is the connection to Internet, I mean, redundant? Tier 1?.. Energy on those Datacenters?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. Our first location will be in OVHs new datacenter (BHS) which is Tier 3 but meeting requirements for Tier 4 and is also classified as a “green energy” datacenter which we like. The extreme east coast location also is very good for Europeans and offers better routing than even Datacenters such as Choopa and Dupont in New Jersey for Europeans.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Which city is that located?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. Montreal Quebec, Canada&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Good, and nice to see it is green. And how about the software?. What are you using as backend?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. Proxmox handles that. Paired with whmcs for now. But we are working on our own billing solution. All Cloud instances are KVM.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Why did you choose KVM?, why in few words, you consider it to be the best technology?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. We believe it gives the “truest” hardware virtualization and isolation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. So, you are real free software supporters.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. Absolutely. The billing software we are working on for our own systems we do plan on making open source when we feel it is ready for that.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Sound great, congratulations. And on the topic again. What operating systems are you planning to support in the beginning?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. For now OS choices will be fairly basic so the usual: centos, debian, ubuntu, gentoo, OpenSUSE, Arch Linux. OS installs are not done via template at this time.&lt;/p&gt;
+
+&lt;p&gt;The user will need to install his own OS via the console, until we can make our own templates for easy installation.&lt;/p&gt;
+
+&lt;p&gt;We have discussed not using templates and leaving it as a manual install as it appeals to us that way but I doubt some of our customers would agree on that point.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. How are you planning to assure that all customers get the same resources… are you going to release the number of VPSs you have on each server, based on the size of the packages. I mean like Linode?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. Yes the same way as Linode handles it. if you need to upgrade then everything goes with you onto a new server for the larger plan, one that has the available space if the current one does not.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Now, moving into the corporate area, how is this startup funded, is it only you for the moment? did you find some founders? What can you tell us about that?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. The project is funded by all of us. We knew this was coming for the past year and so we put away for the startup.&lt;/p&gt;
+
+&lt;p&gt;There are no outside investors&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Are you looking for investors?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. At this time no.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. OK, Finally and now more into your field.. Talking about marketing. You know that in order to break barriers to entry, you need to offer some “unique” features. Do you have some, can you give us some advance on that?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. We have had the developers over at Module Garden develop the first ever Proxmox API WHMCS Cloud module. This has given us a huge amount of flexibility to easily develop custom storage, networking, backup systems, and much more on top of Proxmox because of its openness. That just isn’t possible in any closed source system. The down side is that Proxmox just isn’t meant to be used as a customer UI. Though it does have a role/permissions system, it is best to just limit access to administration. After seeing other modules that ModulesGarden has built they were the obvious choice to build a WHMCS client interface for complete VM life-cycle automation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GG. Thank you very much for your time. Is there anything else you would like to add, something you think we missed?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;VD. You are welcome. I think you about covered it all. Maybe to say that we will be a unmanaged provider, and keep a eye on our site as we will be giving away 100 of our Nova x1 servers for the grand opening! &lt;a href=&quot;http://ioflare.com&quot;&gt;ioFlare&lt;/a&gt;. Thank you for the interview.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;More info:&lt;/em&gt; &lt;a href=&quot;http://www.ioflare.com/&quot;&gt;ioFlare&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/blog/best-phone-at-email</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/blog/best-phone-at-email.html"/>
+    <title>iPhone better at email than Android</title>
+    <published>2013-09-27T17:32:35-04:00</published>
+    <updated>2013-09-27T17:32:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I have been a Linux and free software advocate for years, and I still am, but I also like to think that I am objective and not just like any other fan-boy.&lt;/p&gt;
+
+&lt;p&gt;When it comes to smart phones, I have tested Blackberries, Android Phones and even though I have never had an iPhone, I do have used an iPad, and I haven been using an iPod touch for years (upgrading it since generation two), so I think I can talk about iPhones.&lt;/p&gt;
+
+&lt;p&gt;I have always said that there &lt;a href=&quot;/en/blog/no-best-smartphone-iphone-android-blackberry.html&quot;&gt;there is not best smart-phone&lt;/a&gt; and I still support that idea, it will all depends on what do you want or need from your device. Having that in mind I have always read that Android gives their users more freedom than any other mobile platform, but it turns out to me that is actually quite the opposite.&lt;/p&gt;
+
+&lt;p&gt;For this comparison to make any sense I want to create an scenario.&lt;/p&gt;
+
+&lt;p&gt;I am considering a smart phone mainly as a communication equipment, and not as a pocket computer. Having said that I will mainly focus on email, instant messaging tools, and social networks.&lt;/p&gt;
+
+&lt;p&gt;Let’s start with email, which is for me the most important feature at the time of buying a phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Blackberry&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Blackberry is great when talking about email, right? Well, that is true on the Blackberry 10, prior to that version, you may need to tie your Blackberry to a Exchange Server using BES, in order to have a complete integration. Blackberry with Gmail or Google Apps also works great if you get some hosted BES for Google Apps, or if you use the Gmail support for Blackberry with Gmail or with Google Apps, the synchronization might be slow, but it happens. If you want to use Blackberry OS 7 or earlier devices with IMAP servers, then you will run into a lot of problems of syncing your device, so not a good experience.&lt;/p&gt;
+
+&lt;p&gt;With Blackberry 10, that have changed, now you can use Exchange and BES servers, you can use Active Sync (Google Apps support it), and you can use IMAP idle, so there is support for every platform out there.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;iPhone&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;With the iPhone you are almost at the same level that Blackberry 10 is. iPhone supports Active Sync for Exchange and Google Apps, you can even configure more than one account with Exchange servers. iPhone also supports IMAP, but not the IMAP idle protocol, so you have to configure your phone to poll your account every “n” minutes, not the best thing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Android&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Well, Android is made by Google, and Google own Gmail, so Android is made with Gmail in mind, it works great with Gmail or Google Apps accounts, but what if you want to use any other provider? Believe it or not, not everybody wants their email managed by Gmail.&lt;/p&gt;
+
+&lt;p&gt;You can install third party clients, but I am talking about the stock client first, and in case of Android that is made only for Gmail.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Considering third party clients&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To be fair, we have to say that there is a lot more options to install third party clients on Android than in any other platform, but let’s be honest, almost all of them are ugly, the UI does not fits the look and feel of Android. K-9 Mail is maybe the best, but it does not support Active Sync. Then you have &lt;em&gt;Exchange by TouchDown Key&lt;/em&gt;, It cost 20 dollars, and it does not integrate with Android’s apps, I mean it has its own calendar, its own notes, so, not the best solution at least for me.&lt;/p&gt;
+
+&lt;p&gt;With the iOS platform, you can install Gmail app, Yahoo app, and others to improve the default mail client, but there is actually not need to do it, the default one works great, and have all the options.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Instant messaging&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;When it comes to instant messaging all three platforms support the major applications, WhatsApp, Facebook messenger, Line and now also BBM is going to be supported by iOS and Android.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Social Networks&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;At least the two main social networks, Facebook and Twitter are supported and highly integrated into the three platforms. Instagram is not supported on Blackberry and Google plus is supported by a third party (not from Google) app.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;All other apps&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;It is no secret that if you want access to all apps, you have to choose between Android and iOS, Blackberry is a good option if you consider that only the main apps are all you need.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;With all the above in mind, I have to say that because I like a physical keyboard, Blackberry is still the best solution for me, and also considering that for me the most important features are email and instant messaging, having Twitter is a plus, but not a must. If I have to leave Blackberry an iPhone is my next best choice, the apps works better, and the support for the features I need the most are a lot better on the iPhone than on an Android phone.&lt;/p&gt;
+
+&lt;p&gt;There is only one think I like better on an Android device than on an iOS device, and that is &lt;a href=&quot;/en/blog/sharing-to-social-networks-ios-iphone-andriod.html&quot;&gt;sharing is easier on and Android than on iPhones&lt;/a&gt;. Having being using a Samsung Galaxy S3 for one year I have switched to a &lt;a href=&quot;/en/blog/smartphone-setup.html&quot;&gt;Blackberry + iPod&lt;/a&gt; instead.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: I have not considered Windows Phones, because I have never used one, and I can not write about what I have not used&lt;/em&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+ 
+</feed>

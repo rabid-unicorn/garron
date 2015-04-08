@@ -1,0 +1,335 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to install and configure awstats to work with Varnish logs from varnishnsca and Logrotate on Ubuntu Linux" />
+
+        <!-- End SEO includes -->
+        <title>Configure varnish logs (varnishnsca), logrotate and awstats</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Configure varnish logs (varnishnsca), logrotate and awstats">
+        <meta name="twitter:description" content="How to install and configure awstats to work with Varnish logs from varnishnsca and Logrotate on Ubuntu Linux">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Configure varnish logs (varnishnsca), logrotate and awstats</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html">Configure varnish logs (varnishnsca), logrotate and awstats</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-05-01 10:36:30 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/tutorial.html">tutorial</a>,</small></p>
+
+<hr>
+<h2 id="introduction">Introduction</h2>
+
+<p><strong>Varnish</strong></p>
+
+<p>Varnish is a reverse cache server:</p>
+
+<blockquote>
+  <p>Varnish is an HTTP accelerator designed for content-heavy dynamic web sites. In contrast to other HTTP accelerators, such as Squid, which began life as a client-side cache, or Apache, which is primarily an origin server, Varnish was designed from the ground up as an HTTP accelerator.
+– Wikipedia</p>
+</blockquote>
+
+<p>I will assume you already have varnish installed and configure on your server, this article will only cover the generation and analysis of the varnish logs, via varnishnsca and awstats.</p>
+
+<h2 id="configure-varnishncsa">Configure varnishncsa</h2>
+
+<p>We’ll use varnishncsa to get the logs that awstats will be able to analyse.</p>
+
+<blockquote>
+  <p>Varnishncsa: Display Varnish logs in Apache / NCSA combined log format</p>
+</blockquote>
+
+<p>The syntax is:</p>
+
+<pre><code>varnishncsa [?a] [?b] [?C] [?c] [?D] [?d] [?f] [?I regex] [?i tag] [?n varnish_name] [?P file] [?r file] [?V] [?w file] [?X regex] [?x tag]
+</code></pre>
+
+<p>What I did is to add this line in the /etc/rc.local file:</p>
+
+<pre><code>varnishncsa -a -w /var/log/varnish/access.log -D -P /var/run/varnishncsa.pid
+</code></pre>
+
+<p>That line tells varnishncsa:</p>
+
+<ul>
+  <li>-a: To append the logs to an already existing file</li>
+  <li>-w: To write the logs to the /var/log/varnish/access.log file</li>
+  <li>-D: To run varnishncsa as a daemon</li>
+  <li>-P: To write the PID file in the /var/run/ folder</li>
+</ul>
+
+<p>We now have varnishncsa up and running, now configure logrotate to rotate the logs, everyday at midnight.</p>
+
+<p>Create the following file /etc/logrotate.d/varnish and put this contents on it:</p>
+
+<pre><code>    /var/log/varnish/*log {
+            create 640 http log
+            compress
+            postrotate
+                    /bin/kill -USR1 `cat /var/run/varnishncsa.pid 2&gt;/dev/null` 2&gt; /dev/null || true
+            endscript
+    }
+</code></pre>
+
+<p>If you need more info or options run: man logrotate</p>
+
+<p>Done, we now have varnish writing logs to a file, and logrotate will rotate them everyday, we only need now to analyse them.</p>
+
+<h2 id="configure-awstats-with-varnish">Configure awstats with varnish</h2>
+
+<p>If you are using ubuntu, run:</p>
+
+<pre><code>sudo apt-get install awstats
+</code></pre>
+
+<p>Then:</p>
+
+<pre><code>sudo cp /etc/awstats/awstats.conf /etc/awstats/awstats.www.domain1.com.conf
+</code></pre>
+
+<p><a href="/en/bits/install-geoip-cpan-ubuntu.html">Install the GeoIP perl module</a></p>
+
+<p>And configure these lines to look like this:</p>
+
+<pre><code>LogFile="/var/log/varnish/www.domain1.com.log"
+SiteDomain="www.domain1.com"
+HostAliases="www.domain1.com localhost 127.0.0.1"
+LogFormat=1
+DNSLookup=0
+LoadPlugin="geoip GEOIP_STANDARD /usr/share/GeoIP/GeoIP.dat"
+</code></pre>
+
+<p>Check here for more info about <a href="/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html">installing awstats and varnishncsa on Ubuntu</a></p>
+
+<p>If you are not using Ubuntu, you can get the latest version <a href="http://awstats.sourceforge.net/#DOWNLOAD">here</a> and install it basically all you need to do is to copy the contents of the .tar.gz file in /usr/local/awstats/ folder, and run the awstats_configure.pl tool, skip (write none) in the webserver config file question, then follow the questions and you will end up with a config file like: /etc/awstats/awstats.www.your.domanin.conf and should look more or less like this:</p>
+
+<pre><code>LogFile="/var/log/varnish/access.log"
+LogType=W
+LogFormat=1
+LogSeparator=" "
+SiteDomain="www.go2linux.org"
+HostAliases="go2linux.org www.go2linux.org 127.0.0.1 localhost"
+# Possible values:
+# 0 - No DNS Lookup
+# 1 - DNS Lookup is fully enabled
+# 2 - DNS Lookup is made only from static DNS cache file (if it exists)
+# Default: 2
+DNSLookup=1
+DirData="/var/lib/awstats"
+DirIcons="/icon"
+AllowToUpdateStatsFromBrowser=0
+AllowFullYearView=2
+</code></pre>
+
+<p><strong>Make awstats update hourly</strong></p>
+
+<p>Create the file /etc/cron.hourly/awstats and copy these lines inside the file:</p>
+
+<pre><code>#!/bin/sh
+/usr/local/awstats/wwwroot/cgi-bin/awstats.pl -update -config=www.your.domain
+</code></pre>
+
+<p>Note: Change www.your.domain with your real domain name, the same one you entered when you configured awstats before.</p>
+
+<p>That will update your awstats database hourly, let’s now make if visible, better only for you:</p>
+
+<p>Copy these folders to your www root directory:</p>
+
+<ul>
+  <li>/usr/local/awstats/wwwroot/clases</li>
+  <li>/usr/local/awstats/wwwroot/css</li>
+  <li>/usr/local/awstats/wwwroot/icon</li>
+</ul>
+
+<p>Do it with these commands.</p>
+
+<pre><code>cp -R /usr/local/awstats/wwwroot/clases /your-html-root-directory
+cp -R /usr/local/awstats/wwwroot/css /your-html-root-directory
+cp -R /usr/local/awstats/wwwroot/icon /your-html-root-directory
+</code></pre>
+
+<p>Be sure to replace your-html-root-directory with something like /html_public/root/ or anything you may have as your root directory, and be sure to use the -R options to copy recursively.</p>
+
+<p>Now edit the /etc/httpd/conf/httpd.conf file and add this lines:</p>
+
+<pre><code>ScriptAlias /awstats/ "/usr/local/awstats/wwwroot/cgi-bin/"
+AllowOverride None
+   	Options None
+	AuthType Basic
+	AuthName 'Private scripts'
+	AuthUserFile '/public_html/root/.htpasswd'
+	Require valid-user
+
+	Order allow,deny
+	Allow from all
+</code></pre>
+
+<p>And now create a user that will be able to read the stats:</p>
+
+<pre><code>httpasswd /public_html/root/.htpasswd user
+</code></pre>
+
+<p>Replace /public_html/root/.htpasswd with the file and folder where you want the password file to be in, but be sure the file and upwards folders are owned by the user that runs your Apache server.</p>
+
+<h2 id="final-steps">Final Steps</h2>
+
+<p>Now restart Apache, and start varnishnsca.</p>
+
+<pre><code>varnishncsa -a -w /var/log/varnish/access.log -D -P /var/run/varnishncsa.pid
+</code></pre>
+
+<p>And the command to restart Apache (It is not the same in all distributions).</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html&text=Configure varnish logs (varnishnsca), logrotate and awstats&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html">linkedin</a> | <a href="mailto:?Subject=Configure varnish logs (varnishnsca), logrotate and awstats&Body=http://www.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/configure-varnish-logs-varnishnsca-logrotate-and-awstats.html&title=Configure varnish logs (varnishnsca), logrotate and awstats" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

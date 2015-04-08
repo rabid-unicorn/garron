@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- SEO includes -->
+        
+
+<link href="/es/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+        <link rel="canonical" href="http://www.garron.me/es/gnu-linux/centos-vs-debian.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="CentOS or Debian, que distribución de GNU/Linux debes escoger a la hora de montar tu servidor web. ¿que consideraciones tomar en cuenta?" />
+
+        <!-- End SEO includes -->    
+        <title>CentOS o Debian, para un servidor Web</title>
+        <!-- CSS -->
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Vollkorn|Old+Standard+TT|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.journal.min.css" rel="stylesheet">
+        <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet">
+        <!-- Custom Css -->
+        <!-- <style>body {background-color: #FFFFFF;}
+
+body,
+input,
+small,
+button,
+select,
+textarea,
+.navbar-search .search-query {
+  font-family: "Source Sans Pro", "Vollkorn", Georgia, "Times New Roman", Times, serif; font-weight: 300; font-size: 18px; line-height: 26px; color: #404040;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josefin Slab", Georgia, "Times New Roman", Times, serif; font-weight: 400; color: #101010;
+}
+
+.gallery-image-wrapper {
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+  margin: 1em;
+  position: relative;
+  text-align: left;
+}
+.gallery-image {
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#text-center {
+text-align: center
+}
+</style> -->
+        <!-- End custom css -->
+        <!-- End CSS -->
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="CentOS o Debian, para un servidor Web">
+        <meta name="twitter:description" content="CentOS or Debian, que distribución de GNU/Linux debes escoger a la hora de montar tu servidor web. ¿que consideraciones tomar en cuenta?">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+            <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-static-top visible-xs visible-sm">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/es/"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/es/">Inicio</a></li>
+            <li><a href="/es/gnu-linux/">Linux</a></li>
+            <li><a href="/es/mac-os/">Mac</a></li>
+            <li><a href="/es/cortos/">Tips</a></li>
+            <li><a href="/es/articulos/">Artículos</a></li>
+            <li><a href="/es/archivos.html">Archivos</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Personales <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/es/bitacora/">Bitacora</a></li>
+                <li><a href="/es/fotos/">Fotos</a></li>
+                <li><a href="/es/recetas/">Comida</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div class="container">
+    <!-- Nav Bar -->
+    <H1><a href="/es/">Guillermo Garron</a></h1>
+<p>Suscribete: <a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p>
+<ol class="breadcrumb">
+
+	<li><a href="/index.html">Geeking</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/index.html">Tecnología</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/gnu-linux/index.html">GNU Linux</a>
+	<li class="divider">&gt;</li>
+
+	<li class="active">CentOS o Debian, para un servidor Web</li>
+</ol>
+
+
+    <!-- Nav Bar -->
+    <div id="content" class="row">
+        <div class="col-md-2 visible-lg visible-md">
+            <h4>Categorias</h4>
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li><h4>Tecnicas</h4></li>
+    <li><a href="/es/gnu-linux/">Linux</a></li>
+    <li><a href="/es/mac-os/">Mac</a></li>
+    <li><a href="/es/cortos/">Tips</a></li>
+    <li><a href="/es/articulos/">Artículos</a></li>
+    <hr>
+    <li><h4>Personales</h4></li>
+    <li><a href="/es/bitacora/">Reflexiones</a></li>
+    <li><a href="/es/fotos/">Fotos</a></li>
+    <li><a href="/es/recetas/">Cocinando</a></li>
+    <hr>
+    <li><a href="/es/archivos.html">Archivos</a></li>
+    <hr>
+    <li><p><a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p></li>
+  </ul>
+</div>
+
+        </div>
+        <div class="col-md-7">
+            <h3><a href="/es/gnu-linux/centos-vs-debian.html">CentOS o Debian, para un servidor Web</a></h3>
+<h6>Escrito por: <a href="/es/acerca-de.html">Guillermo Garron</a> .</h6>
+<h6>Fecha: 2013-06-05 10:32:00 -0400</h6>
+<hr>
+<h2 id="intruccin">Intrucción</h2>
+
+<p>Cuando se llega la hora de instalar un servidor web, una de las primeras cosas que debes decidir es, que sistema operativo usaras. Si te has decidido por GNU/Linux, ahora tienes que decidir cual distribución es la que vas a instalar.</p>
+
+<p>Yo normalmente considero solo dos si el servidor es importante, estas son CentOS y Debian, pero ahora ¿Cual de ellas y por qué?</p>
+
+<p>Has tres cosas (según yo) que se deben considerar.</p>
+
+<ul>
+  <li>Estabilidad</li>
+  <li>Versiones de software disponibles</li>
+  <li>Facilidad de actualización</li>
+</ul>
+
+<h2 id="centos">CentOS</h2>
+
+<p>CentOS, es una distribución de GNU/Linux derivado, o más bien clonado de Red Hat Enterprise Linux, lo que permite una compatibilidad del 100% con los binarios de las aplicaciones desarrolladas para RHEL. Por ello, y al estar “respaldado” por una compañía tan importante como Red Hat, es una de las distribuciones más usadas, de hecho hoy por hoy es la segunda más usada para aplicaciones Web. Según Wikipedia.</p>
+
+<h3 id="versiones-de-las-principales-aplicaciones">Versiones de las principales aplicaciones</h3>
+
+<ul>
+  <li>Apache -&gt; 2.2.15</li>
+  <li>PHP -&gt; 5.3.3</li>
+  <li>MySQL -&gt; 5.1.66</li>
+  <li>PostgreSQL -&gt; 8.4.13</li>
+</ul>
+
+<h3 id="facilidad-de-actualizacin">Facilidad de actualización</h3>
+
+<p>Las actualizaciones pequeñas, como lo son las de seguridad o las de una version x.y a x.w se harán muy fácilmente con <code>yum update &amp;&amp; yum upgrade</code>. El problema se da cuando quieres hacer una actualización mayor, de X a Y.</p>
+
+<p>En este caso, la misma página de CentOS <a href="http://wiki.centos.org/HowTos/MigrationGuide">aquí</a> (en inglés), recomienda que hagas una instalación desde cero, y no hagas un upgrade. Al final, de darte todas las indicaciones de como hacerlo sin realizar una instalación de cero, te desea mucha suerte. ¿Deberías necesitar suerte?, digo yo.</p>
+
+<h3 id="estabilidad">Estabilidad</h3>
+
+<p>Ya hemos dicho que CentOS es un clon de una de las distribuciones comerciales más estables, si no la más estable, por lo que definitivamente en este campo, no hay mucho que decir. CentOS es estable, y es muy dificil que te de problemas si lo haz configurado bien, y siguiendo buenas practicas. Las actualizaciones no romperán nada, salvo que tu aplicación no este preparada para ella, pero eso ya no es problema del CentOS.</p>
+
+<p>Yo tengo un servidor corriendo CentOS por siete años, la verdad aún corre CentOS 4, que ya esta discontinuada y sin soporte. No tengo problema alguno, con esa máquina, y seguramente trabajará sin problemas hasta que el hardware lo permita.</p>
+
+<h2 id="debian">Debian</h2>
+
+<p>Debian es una distribución libre, por completo manejada por la comunidad, no esta basada en ninguna otra distribución y por el contrario la mayor parte de las distribuciones actuales están basadas en Debian. Debian es famoso por filosofia de estabilidad ante todo, por eso mismo, no tiene un cronograma de lanzamiento de nuevas versiones. Estas se liberan <strong>cuando están listas</strong>. Esto hace que sea una de las opciones más estables de GNU/Linux que puedas tener.</p>
+
+<h3 id="versiones-de-las-principales-aplicaciones-1">Versiones de las principales aplicaciones</h3>
+
+<p>Al momento de escribir este artículo las versiones de los siguientes paquetes eran:</p>
+
+<ul>
+  <li>Apache -&gt; 2.2.22</li>
+  <li>PHP -&gt; 5.4.4</li>
+  <li>MySQL -&gt; 5.5.30</li>
+  <li>PostgreSQL -&gt; 9.1.9</li>
+</ul>
+
+<h3 id="actualizacin">Actualización</h3>
+
+<p>La actualización de Debian es mucho más sencilla y menos complicada, si solo tienes instalado software estándard y de sus repositorios, debería ser muy fácil. Puedes ver cuan sencillo es <a href="/es/gnu-linux/actualizando-debian-6-a-7-squeeze-wheezy.html">actualizar Debian</a>.</p>
+
+<h3 id="estabilidad-1">Estabilidad</h3>
+
+<p>Debido a que los desarrolladores detras de Debian, se empeñan en probar todo, antes de liberar una nueva versión, esta es junto con CentOS una de las más estables distribuciones de GNU/Linux disponibles actualmente. Por lo tanto una buena opción definitivamente.</p>
+
+<h2 id="conclucin">Conclución</h2>
+
+<p>Ahora que hemos visto algunos puntos a considerar, saquemos algunas concluciones.</p>
+
+<p>Escoge Debian si:</p>
+
+<ul>
+  <li>Requieres versiones un poco más recientes del software utilizado para servidores Web</li>
+  <li>No tendrás acceso directo al servidor, y las actualizaciones se harán via ssh</li>
+</ul>
+
+<p>Escoge CentOS si:</p>
+
+<ul>
+  <li>Estás más acostumbrado a el, y no tienes el tiempo de acostumbrarte a Debian</li>
+  <li>Si tienes que instalar software específico que no esta diseñado para Debian, como ser CPanel</li>
+</ul>
+
+<p>Por lo demás cualquiera que escojas funcionará muy bien.</p>
+
+<hr>
+En Categoria: <strong><a href="/es/gnu-linux/">es|gnu-linux</a></strong> | <a href="http://www.garron.me/es/gnu-linux/centos-vs-debian.html">permalink</a>
+<hr>
+<p>Si te gusto el artículo, por favor compartelo</p>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/es/gnu-linux/centos-vs-debian.html&text=CentOS o Debian, para un servidor Web&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/es/gnu-linux/centos-vs-debian.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/es/gnu-linux/centos-vs-debian.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/es/gnu-linux/centos-vs-debian.html">linkedin</a> | <a href="mailto:?Subject=CentOS o Debian, para un servidor Web&Body=http://www.garron.me/es/gnu-linux/centos-vs-debian.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/es/gnu-linux/centos-vs-debian.html&title=CentOS o Debian, para un servidor Web" class="ss-icon ss-social-circle">reddit</a></p>
+<hr>
+<div id="discourse-comments"></div>
+
+<script type="text/javascript">
+  var discourseUrl = "http://discusion.detecnologia.org/",
+      discourseEmbedUrl = 'http://www.garron.me/es/gnu-linux/centos-vs-debian.html';
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+</script>
+
+
+
+<hr>
+
+        </div>
+        <div class="col-md-3">
+            <!-- Esta es la columna derecha que debe estar vacía por ahora -->
+        </div>
+    </div>
+</div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/bootstrap/js/magnific-popup.js"></script>
+        <script src="/bootstrap/js/custom.js"></script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

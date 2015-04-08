@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- SEO includes -->
+        
+
+<link href="/es/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+        <link rel="canonical" href="http://www.garron.me/es/bitacora/creando-child-theme-wordpress.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Como crear un child theme para Wordpress basado en un tema padre, para que tus personalizaciones no se pierdan al actualizar el tema original" />
+
+        <!-- End SEO includes -->    
+        <title>Creando un child theme para Wordpress</title>
+        <!-- CSS -->
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Vollkorn|Old+Standard+TT|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.journal.min.css" rel="stylesheet">
+        <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet">
+        <!-- Custom Css -->
+        <!-- <style>body {background-color: #FFFFFF;}
+
+body,
+input,
+small,
+button,
+select,
+textarea,
+.navbar-search .search-query {
+  font-family: "Source Sans Pro", "Vollkorn", Georgia, "Times New Roman", Times, serif; font-weight: 300; font-size: 18px; line-height: 26px; color: #404040;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josefin Slab", Georgia, "Times New Roman", Times, serif; font-weight: 400; color: #101010;
+}
+
+.gallery-image-wrapper {
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+  margin: 1em;
+  position: relative;
+  text-align: left;
+}
+.gallery-image {
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#text-center {
+text-align: center
+}
+</style> -->
+        <!-- End custom css -->
+        <!-- End CSS -->
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Creando un child theme para Wordpress">
+        <meta name="twitter:description" content="Como crear un child theme para Wordpress basado en un tema padre, para que tus personalizaciones no se pierdan al actualizar el tema original">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+            <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-static-top visible-xs visible-sm">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/es/"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/es/">Inicio</a></li>
+            <li><a href="/es/gnu-linux/">Linux</a></li>
+            <li><a href="/es/mac-os/">Mac</a></li>
+            <li><a href="/es/cortos/">Tips</a></li>
+            <li><a href="/es/articulos/">Artículos</a></li>
+            <li><a href="/es/archivos.html">Archivos</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Personales <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/es/bitacora/">Bitacora</a></li>
+                <li><a href="/es/fotos/">Fotos</a></li>
+                <li><a href="/es/recetas/">Comida</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div class="container">
+    <!-- Nav Bar -->
+    <H1><a href="/es/">Guillermo Garron</a></h1>
+<p>Suscribete: <a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p>
+<ol class="breadcrumb">
+
+	<li><a href="/index.html">Geeking</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/index.html">Tecnología</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/bitacora/index.html">Bitacora</a>
+	<li class="divider">&gt;</li>
+
+	<li class="active">Creando un child theme para Wordpress</li>
+</ol>
+
+
+    <!-- Nav Bar -->
+    <div id="content" class="row">
+        <div class="col-md-2 visible-lg visible-md">
+            <h4>Categorias</h4>
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li><h4>Tecnicas</h4></li>
+    <li><a href="/es/gnu-linux/">Linux</a></li>
+    <li><a href="/es/mac-os/">Mac</a></li>
+    <li><a href="/es/cortos/">Tips</a></li>
+    <li><a href="/es/articulos/">Artículos</a></li>
+    <hr>
+    <li><h4>Personales</h4></li>
+    <li><a href="/es/bitacora/">Reflexiones</a></li>
+    <li><a href="/es/fotos/">Fotos</a></li>
+    <li><a href="/es/recetas/">Cocinando</a></li>
+    <hr>
+    <li><a href="/es/archivos.html">Archivos</a></li>
+    <hr>
+    <li><p><a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p></li>
+  </ul>
+</div>
+
+        </div>
+        <div class="col-md-7">
+            <h3><a href="/es/bitacora/creando-child-theme-wordpress.html">Creando un child theme para Wordpress</a></h3>
+<h6>Escrito por: <a href="/es/acerca-de.html">Guillermo Garron</a> .</h6>
+<h6>Fecha: 2015-01-01 09:00:35 -0500</h6>
+<hr>
+<h2 id="como-crear-temas-hijos-child-themes-con-wordpress">Como crear temas hijos “Child themes” con wordpress.</h2>
+
+<h3 id="introduccin">Introducción</h3>
+
+<p>Wordpress es el software CMS más utilizado para desarrollar sitios web en el momento en que esto se escribe.</p>
+
+<p>Con Wordpress se puede crear sitios muy complejos así como simples blogs, se puede personalizar cada pequeño aspecto con el uso de plugins o temas con funciones incorporadas.</p>
+
+<p>Mucho de la personalización puede hacerse con temas o realizando cambios en ellos, pero si realizas cambios en los temas oficiales (bajados del sitio) y estos reciben una actualización tus cambios se perderán. Para evitar esto debes crear un <em>Child Theme</em> o tema hijo, que va a heredar todas las funciones y aspecto del padre, y puedes cambiar cualquiera de ellos.</p>
+
+<h3 id="creando-un-child-theme">Creando un <em>Child Theme</em></h3>
+
+<p>Lo primero que requieres es encontrar un tema que te guste y desees modificar.</p>
+
+<p>Considerando que el tema que crees va a heredar todo del padre, debes escoger inteligentemente, busca un tema con sólido soporte para SEO, buena semántica y mejor si es liviano y posee un buen código, de este modo los cimientos para tu nueva creación serán sólidos.</p>
+
+<p>Una vez que hayas aprendido lo suficiente, podrás comenzar a crear tus temas usando <em>frameworks</em> populares tales como:</p>
+
+<ul>
+  <li><a href="http://my.studiopress.com/themes/genesis/">Génesis</a></li>
+  <li><a href="http://www.woothemes.com/products/canvas/">Canvas</a></li>
+  <li><a href="http://diythemes.com/">Thesis</a></li>
+</ul>
+
+<p>O puedes escoger uno con código abierto:</p>
+
+<ul>
+  <li><a href="http://themeshaper.com/thematic/">Thematic</a></li>
+  <li><a href="http://upplex.de/bootstrap-3-wordpress-theme-framework/">Bootstrap Framework</a></li>
+  <li><a href="http://roots.io/">Roots.io</a></li>
+</ul>
+
+<p>Para este tutorial, vamos a utilizar el nuevo tema oficial de Wordpress <a href="https://wordpress.org/themes/twentyfifteen">TwentyFifteen</a></p>
+
+<h3 id="instala-el-tema-padre">Instala el tema padre</h3>
+
+<p>Si aún no hiciste eso, necesitas bajar e instalar el tema en el que vas a basar tu creación.</p>
+
+<p>Primero ve a la sección de administración, y de Apariencia -&gt; Temas y si aún no esta instalado, ve a “Añadir Nuevo” y busca por <strong>Twenty Fifteen</strong> e instálalo.</p>
+
+<h3 id="crea-el-folder-para-el-child-theme-con-sus-contenidos-mnimos">Crea el folder para el <em>Child Theme</em> con sus contenidos mínimos.</h3>
+
+<p>Lo primero que debes hacer es crear el folder the alojará tu nuevo tema.</p>
+
+<p>Lo puedes hacer de diferentes formas, FTP y ssh son las más comunes, el cómo hacerlo no es parte del contenido de este tutorial, pero debe estar localizado en <code>wp-content/themes/</code>. Una vez allí crea un folder <code>twentyfifteen-child</code>, como que algo obvio ¿verdad?, pero vamos, continuemos.</p>
+
+<p>Dentro de ese folder vamos a poner estos dos archivos:</p>
+
+<ul>
+  <li>style.css</li>
+  <li>functions.php</li>
+</ul>
+
+<p>Cuando los tengamos en su lugar, vamos a agregar esto a style.css</p>
+
+<pre><code>/*
+ Theme Name:   Twenty Fifteen Child
+ Theme URI:    http://the-url-where-theme/can-be-downloaded
+ Description:  Twenty Fifteen Child Theme
+ Author:       Your name
+ Author URI:   http://your-website
+ Template:     twentyfifteen
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         responsive, blog
+ Text Domain:  twenty-fifteen-child
+*/
+</code></pre>
+
+<p>Puedes cambiar cualquiera de esas lineas de acuerdo a tus necesidades, pero la línea <strong>Template</strong> debe apuntar al folder del tema padre.</p>
+
+<p>También vamos a crear el archivo <code>functions.php</code> el cual dejaremos vacío por el momento.</p>
+
+<p>Ahora vamos <em>Apariencia -&gt; Temas</em> en la página de administración y activamos nuestro nuevo tema.</p>
+
+<p>Si revisas la apariencia de tu sitio, te llevaras una fea sorpresa, podrás ver que no tienes en realidad ningún tema. Así que comencemos a trabajar.</p>
+
+<h3 id="personalizando-el-child-theme">Personalizando el <em>child theme</em></h3>
+
+<p>Lo primero que tenemos que saber es como los archivos son manejados, cualquier archivo en el folder de tu tema hijo, reemplazará al archivo con el mismo nombre en el folder del padre, con una excepción, y este es <code>functions.php</code> del cual su contenido será procesado primero que el archivo del mismo nombre en el folder del tema padre.</p>
+
+<p><strong>Importando el estilo del padre</strong></p>
+
+<p>Una de las primeras cosas que debemos hacer agregar algo de estilo a nuestro tema, y para no crear todo de cero (si quieres puedes hacerlo) vamos a importar el estilo del padre, para ello vamos a agregar unas lineas al archivo <code>functions.php</code></p>
+
+<pre><code>&lt;?php 
+    add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+    function theme_enqueue_styles() {
+    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+    wp_enqueue_style( 'child-style', get_stylesheet_uri(), array( 'parent-style' ) );
+    }
+?&gt;
+</code></pre>
+
+<p>Con esto, el tema hijo, se verá exactamente igual al padre, y ahora podemos comenzar a hacer cambios para personalizarlo.</p>
+
+<p><strong>Cambia el tipo de letra del tema</strong></p>
+
+<p>En este ejemplo, vamos a cambiar el tipo de letra únicamente, para efectos de demostración de como funciona la personalización.</p>
+
+<p>Para ello vamos a editar el archivo <code>/wp-content/themes/twentyfifteen-child/style.css</code> y agregar las lineas:</p>
+
+<pre><code>@import url(http://fonts.googleapis.com/css?family=Raleway);
+body {
+    font-family: 'Raleway', sans-serif;
+}
+</code></pre>
+
+<p>El archivo ahora se ve así:</p>
+
+<pre><code>/*
+    Theme Name:   Twenty Fifteen Child
+    Theme URI:    http://the-url-where-theme/can-be-downloaded
+    Description:  Twenty Fifteen Child Theme
+    Author:       Guillermo Garron
+    Author URI:   http://www.garron.me
+    Template:     twentyfifteen
+    Version:      1.0.0
+    License:      GNU General Public License v2 or later
+    License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+    Tags:         responsive, blog
+    Text Domain:  twenty-fifteen-child
+*/
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+body {
+    font-family: 'Raleway', sans-serif;
+}
+</code></pre>
+
+<p>Con esas líneas lo que logramos es importar el tipo de letra <strong>Raleway</strong> de Google, y le decimos al navegador que utilice dicho tipo en lugar de <strong>Noto</strong> que es el tipo por defecto de TwentyFifteen.</p>
+
+<h3 id="resumen">Resumen</h3>
+
+<p>Hemos aprendido a personalizar un tema de Wordpress de un modo en que no se pierdan nuestros cambios cuando actualicemos el tema. Para lograrlo hemos tomado los siguientes pasos:</p>
+
+<ul>
+  <li>Crear un <em>Child Theme</em>
+    <ul>
+      <li>En un nuevo folder creamos dos archivos: style.css y functions.php</li>
+      <li>En style.css se declaró el tema padre</li>
+      <li>En functions.php se importo el estilo del padre</li>
+    </ul>
+  </li>
+  <li>Se agregaron nuestros cambios y personalizaciones al estilo del tema hijo.</li>
+</ul>
+
+<p>Claro que solo cambiar el tipo de letra puede ser algo trivial, y puedes hacer cambios más elaborados, pero sirve para un ejemplo.</p>
+
+
+<hr>
+En Categoria: <strong><a href="/es/bitacora/">es|bitacora</a></strong> | <a href="http://www.garron.me/es/bitacora/creando-child-theme-wordpress.html">permalink</a>
+<hr>
+<p>Si te gusto el artículo, por favor compartelo</p>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/es/bitacora/creando-child-theme-wordpress.html&text=Creando un child theme para Wordpress&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/es/bitacora/creando-child-theme-wordpress.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/es/bitacora/creando-child-theme-wordpress.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/es/bitacora/creando-child-theme-wordpress.html">linkedin</a> | <a href="mailto:?Subject=Creando un child theme para Wordpress&Body=http://www.garron.me/es/bitacora/creando-child-theme-wordpress.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/es/bitacora/creando-child-theme-wordpress.html&title=Creando un child theme para Wordpress" class="ss-icon ss-social-circle">reddit</a></p>
+<hr>
+<div id="discourse-comments"></div>
+
+<script type="text/javascript">
+  var discourseUrl = "http://discusion.detecnologia.org/",
+      discourseEmbedUrl = 'http://www.garron.me/es/bitacora/creando-child-theme-wordpress.html';
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+</script>
+
+
+
+<hr>
+
+        </div>
+        <div class="col-md-3">
+            <!-- Esta es la columna derecha que debe estar vacía por ahora -->
+        </div>
+    </div>
+</div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/bootstrap/js/magnific-popup.js"></script>
+        <script src="/bootstrap/js/custom.js"></script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

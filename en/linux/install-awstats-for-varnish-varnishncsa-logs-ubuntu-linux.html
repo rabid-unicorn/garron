@@ -1,0 +1,261 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Install awstats to work with varnish logs, generated with varnishncsa. Working with multiple virtual servers on Ubuntu Linux" />
+
+        <!-- End SEO includes -->
+        <title>Varnish logs analized with awstats | Multiple virtual servers</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Varnish logs analized with awstats | Multiple virtual servers">
+        <meta name="twitter:description" content="Install awstats to work with varnish logs, generated with varnishncsa. Working with multiple virtual servers on Ubuntu Linux">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Varnish logs analized with awstats | Multiple virtual servers</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html">Varnish logs analized with awstats | Multiple virtual servers</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-01-06 22:13:35 -0500</h6>
+
+<hr>
+<p>Varnish is getting quite popular these days. If you run Varnish in front of Apache and PHP you will unload Apache a lot, and will improve you server hundreds of times.</p>
+
+<p>But this have another effect, because now varnish is handling the load, Apache does not see the hits to your server, therefore it can not log the visits.</p>
+
+<p>If you want to log them, and analyze later you will have to make Varnish do the job instead of Apache.</p>
+
+<p>At the end of this tutorial you will have awstats installed, and analyzing logs for all your virtual hosts.</p>
+
+<p><strong>Install Awstats on Ubuntu</strong></p>
+
+<p>First things first, lets install awstats (I will assume you already have Apache and Varnish configured and running)</p>
+
+<pre><code>sudo apt-get install awstats
+</code></pre>
+
+<p>I will assume you have two virtual hosts. www.domain1.com and www.domain2.com</p>
+
+<p>Create one configuration file for each of them:</p>
+
+<pre><code>sudo cp /etc/awstats/awstats.conf /etc/awstats/awstats.www.domain1.com.conf
+</code></pre>
+
+<p>And:</p>
+
+<pre><code>sudo cp /etc/awstats/awstats.conf /etc/awstats/awstats.www.domain2.com.conf
+</code></pre>
+
+<p>Now edit each one of them, and change this lines (I will show you only domain1.com data)</p>
+
+<pre><code>LogFile="/var/log/varnish/www.domain1.com.log"
+SiteDomain="www.domain1.com"
+HostAliases="www.domain1.com localhost 127.0.0.1"
+LogFormat=1
+DNSLookup=0
+LoadPlugin="geoip GEOIP_STANDARD /usr/share/GeoIP/GeoIP.dat"
+</code></pre>
+
+<p>Locate those lines and make the looks like the above ones.</p>
+
+<p>Now we need to <a href="/en/bits/install-geoip-cpan-ubuntu.html">install the GeoIP perl module</a>.</p>
+
+<p><strong>Split Log files per virtual server</strong></p>
+
+<p>Varnish uses an independent daemon to log visits, it is called <em>varnishncsa</em> and it will aggregated by default all hits to any virtual server on the same file. Even though awstats can manage combined logs, it is better if the are splitted in one file per virtual server. Thanks to my friend <a href="http://linuxaria.com/">Riccardo</a> I know how to split logs.</p>
+
+<p>Run this command, one per virtual server.</p>
+
+<pre><code>varnishncsa -m "RxHeader:^Host: www.domain1.com$" -a -w /var/log/varnish/www.domain1.com -D
+</code></pre>
+
+<p>Those lines should go in the <em>/etc/rc.local</em> file.</p>
+
+<p>You will need to make logrotate to rotate those logs.</p>
+
+<p><strong>Run awstats for the first time</strong></p>
+
+<p>Now that we have all prepared, it is time to run awstats for the first time:</p>
+
+<pre><code>sudo /usr/lib/cgi-bin/awstats.pl -config=www.domain1.com -update
+</code></pre>
+
+<p>You will need to add that line to the cronjob</p>
+
+<pre><code>sudo crontab -e
+</code></pre>
+
+<p>And add this line for domain1.com, and one per domain.</p>
+
+<pre><code>0 */6 * * * /usr/lib/cgi-bin/awstats.pl -config=www.domain1.com -update &gt; /dev/null
+</code></pre>
+
+<p><strong>Make awstast visible from the browser</strong></p>
+
+<p>Finally to be able to see the stats, add these lines for every virtual host you have, probably on each file on <em>/etc/apache2/sites-enabled/</em> folder. These lines goes right before the closing VirtuaHost tag.</p>
+
+<pre><code>Alias /awstatsclasses "/usr/share/awstats/lib/"
+Alias /awstats-icon/ "/usr/share/awstats/icon/"
+Alias /awstatscss "/usr/share/doc/awstats/examples/css"
+ScriptAlias /awstats/ /usr/lib/cgi-bin/
+Options ExecCGI -MultiViews +SymLinksIfOwnerMatch
+</code></pre>
+
+<p>You can now go to http://www.domain1.com/awstats/awstats.pl and see your info. Remember that everybody else can also see your stats, unless you prohibit in the htaccess file for example.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html&text=Varnish logs analized with awstats | Multiple virtual servers&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html">linkedin</a> | <a href="mailto:?Subject=Varnish logs analized with awstats | Multiple virtual servers&Body=http://www.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/install-awstats-for-varnish-varnishncsa-logs-ubuntu-linux.html&title=Varnish logs analized with awstats | Multiple virtual servers" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

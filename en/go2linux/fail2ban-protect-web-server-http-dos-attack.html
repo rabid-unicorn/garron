@@ -1,0 +1,328 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to protect your web server from DOS attacks with fail2ban" />
+
+        <!-- End SEO includes -->
+        <title>Install fail2ban to protect your site from DOS attacks</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Install fail2ban to protect your site from DOS attacks">
+        <meta name="twitter:description" content="How to protect your web server from DOS attacks with fail2ban">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Install fail2ban to protect your site from DOS attacks</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html">Install fail2ban to protect your site from DOS attacks</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-05-29 10:36:30 -0400</h6>
+
+<hr>
+<h3 id="dos-attack">DOS attack</h3>
+
+<p>Denial of service attacks are meant to load a server to a level where it can’t serve the intended users with the service, we will here see a method to avoid that.</p>
+
+<h3 id="install-fail2ban">Install fail2ban</h3>
+
+<p>You can install it using your distribution package manager in case of Debian or Ubuntu run:</p>
+
+<pre><code>apt-get install fail2ban
+</code></pre>
+
+<p>as root, or with sudo in Ubuntu’s case.</p>
+
+<p>For Arch Linux</p>
+
+<pre><code>pacman -Sy fail2ban
+</code></pre>
+
+<p>and So on, depending on the distribution you are using, now to configure it, consider that there are two main configuration files:</p>
+
+<ul>
+  <li>/etc/fail2ban/fail2ban.conf</li>
+  <li>/etc/fail2ban/jail.conf</li>
+</ul>
+
+<p>I’m going to copy this from other article here in Go2linux.</p>
+
+<p><strong>enabled</strong></p>
+
+<p>Defines whether or not a given section is enabled or nor, its possible values are:</p>
+
+<ul>
+  <li>false</li>
+  <li>true</li>
+</ul>
+
+<p><strong>filter</strong></p>
+
+<p>This is not used in the default section as it is used to tell fail2ban client what it is looking for in the logfile, its values could be among others:</p>
+
+<ul>
+  <li>sshd</li>
+  <li>proftpd</li>
+  <li>httpd</li>
+</ul>
+
+<p>basically it is how the service is identified on the log file being parsed</p>
+
+<p><strong>action</strong></p>
+
+<p>This option tells fail2ban what action to take once a rule is broken, could be specified a default action in the default section, and overwritten on each jail section you may need to change the default value.</p>
+
+<p><strong>logpath</strong></p>
+
+<p>With this option we need to pass the file to be parsed, should be taken into account that different distribution has different log files for instance for ssh in:</p>
+
+<ul>
+  <li>Fedora -&gt; /var/log/secure</li>
+  <li>CentOS -&gt; /var/log/secure</li>
+  <li>Debian -&gt; /var/log/auth</li>
+  <li>Ubuntu -&gt; /var/log/auth</li>
+  <li>Sabayon -&gt; /var/log/messages</li>
+</ul>
+
+<p>If you put a wrong value here, it will not work and will give you no errors.</p>
+
+<p><strong>ignoreip</strong></p>
+
+<p>This option is used to set one or some IPs that should not be blocked, no matter how many times a users fail in login from those IPs, use this with care</p>
+
+<p><strong>maxretry</strong></p>
+
+<p>This option is used to set the limit of retries a user have before he gets blocked</p>
+
+<p><strong>bantime</strong></p>
+
+<p>This option is used to set the time (in seconds) an IP will be banned, maybe a good option could be 5 minutes so, 300 seconds, this will put bots away while also letting legitimate users to try again after the ban time ends</p>
+
+<p><strong>destmail</strong></p>
+
+<p>Use this option to set the email of the person who should receive alerts when an IP is banned</p>
+
+<p><strong>banaction</strong></p>
+
+<p>Use this option to instruct with action will be taking in order to ban an offending IP. ie:</p>
+
+<ul>
+  <li>iptables — To use Iptables in order to ban the offending IP</li>
+  <li>iptables-new — To ban only new connections</li>
+  <li>iptables-multiport — To ban all ports from the offending IP</li>
+  <li>shorewall — To use Shorewall instead of Iptables</li>
+</ul>
+
+<p><strong>Protocol</strong></p>
+
+<p>Set here the default protocol to ban, TCP or UDP
+You can read more at: How to configure <a href="/en/go2linux/fail2ban-secure-linux.html">fail2ban</a></p>
+
+<h3 id="how-to-use-fail2ban-to-protect-apache--nginx--varnis--squid--lighthttpd">How to use fail2ban to protect Apache / Nginx / Varnis / Squid / lighthttpd</h3>
+
+<p>As you can see, this method will work for any server you have in front of your real web server, or to the actual web server itself, actually this will mainly protect your port 80.</p>
+
+<p>Consider that you will have to adjust the path to your web server, I’ll use varnish in my case.</p>
+
+<p>Edit your /etc/fail2ban/jail.conf file and add this section:</p>
+
+<pre><code>[http-get-dos]
+enabled = true
+port = http,https
+filter = http-get-dos
+logpath = /var/log/varnish/access.log
+maxretry = 300
+findtime = 300
+#ban for 5 minutes
+bantime = 600
+action = iptables[name=HTTP, port=http, protocol=tcp]
+</code></pre>
+
+<p>Now we need to create the filter, to do that, create the file /etc/fail2ban/filter.d/http-get-dos.conf and copy the text below in it:</p>
+
+<pre><code># Fail2Ban configuration file
+#
+# Author: http://www.go2linux.org
+#
+[Definition]
+
+# Option: failregex
+# Note: This regex will match any GET entry in your logs, so basically all valid and not valid entries are a match.
+# You should set up in the jail.conf file, the maxretry and findtime carefully in order to avoid false positives.
+
+failregex = ^ -.*GET
+
+# Option: ignoreregex
+# Notes.: regex to ignore. If this regex matches, the line is ignored.
+# Values: TEXT
+#
+ignoreregex =
+</code></pre>
+
+<p>Note</p>
+
+<p>Be sure to adjust maxretry and findtime to some values that fits your needs.</p>
+
+<ul>
+  <li>maxretry Is the maximum times of tries before the originating IP gets blocked.</li>
+  <li>findtiem Is the time window (in seconds) where the maxretry times should occur, for the IP to get blocked.</li>
+</ul>
+
+<p>As you can see in my example, I have set up 300 maxretry and 300 for findtime, so, we need to have 300 GETs from the same IP in a time window of 300 seconds to have the originating IP blocked.</p>
+
+<p>Consider that you will have one GET for each css, js, html, ico and other files that are part of your webpage, so if you have 20 components, some client needs only to load 15 pages in 5 minutes to get blocked. Be sure to adjust those values to fit your needs.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>DOS are common ways to attack web server, there are lots of ways to protect your server against that, this is only one of them, be sure to check /var/log/fail2ban.log file to be sure everything is working, and also run this command from time to time: iptables -L to see which IPs are blocked.</p>
+
+<p>One last note, I’m using varnishncsa -a -w /var/log/varnish/access.log -D -P /var/run/varnishncsa.pid command to have varnish logs available for this.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html&text=Install fail2ban to protect your site from DOS attacks&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html">linkedin</a> | <a href="mailto:?Subject=Install fail2ban to protect your site from DOS attacks&Body=http://www.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/fail2ban-protect-web-server-http-dos-attack.html&title=Install fail2ban to protect your site from DOS attacks" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

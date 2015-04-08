@@ -1,0 +1,2197 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>Linux posts</title>
+  <link href="http://www.garron.me/en/linux/"/>
+  <link type="application/atom+xml" rel="self" href="http://www.garron.me/en/linux/atom.xml"/>
+  <updated>2015-04-08T02:13:48-04:00</updated>
+  <id>http://www.garron.me/</id>
+  <author>
+    <name>Guillermo Garron</name>
+    <email>contact@garron.me</email>
+  </author>
+
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/your-own-cdn</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/your-own-cdn.html"/>
+    <title>Your own CDN</title>
+    <published>2015-04-03T17:40:00-04:00</published>
+    <updated>2015-04-03T17:40:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;how-to-speed-up-your-site-and-it-load-faster&quot;&gt;How to speed up your site and it load faster&lt;/h2&gt;
+
+&lt;p&gt;Loading speed is something really important for your site, because it gives your readers the best possible experience, there are a lot of different things you need to do in order to improve your site’s speed, one of them is to put the content as close as possible to the readers. If you write about Spanish news, then chances are that most of your readers will be on Spain, and thus, your server should be located in Spain, that was easy. Now, what happens if your readers are spread all over the world, you have a pair of solutions.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Put your server in U.S. or Europe as almost the whole world get there at reasonable speeds, this is the cheapest but not the best.&lt;/li&gt;
+  &lt;li&gt;Set your server in U.S. or U.K. and then use a CDN company like &lt;a href=&quot;http://www.fastly.com/&quot;&gt;Fastly&lt;/a&gt;, &lt;a href=&quot;https://www.maxcdn.com/&quot;&gt;MaxCDN&lt;/a&gt; or &lt;a href=&quot;https://aws.amazon.com/cloudfront/&quot;&gt;Cloudfront&lt;/a&gt;, prices are not as high as they used to be, MaxCDN is $ 10 per 100 GB, Fastly minimum order is $ 50 and Amazon is pay as you grow.&lt;/li&gt;
+  &lt;li&gt;Get your own Virtual servers located at well distributed Datacenters around world and create your own CDN&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Taking out the first option, to decide between the other two is more a thing of taste, but one consideration should be taken into account.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Traffic of your site&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If your site has a lot of traffic then the CDN may be a better solution, more points of presence and your content nearer to your readers, but if your site does not have too much traffic, then chances are that your content is not going to be present at the edge servers when the reader request it, then your own servers is a better solution, as you control how much time the assets are going to be in each one of your servers.&lt;/p&gt;
+
+&lt;h2 id=&quot;set-up-your-own-cdn-with-amazon-and-digitalocean-or-linode&quot;&gt;Set up your own CDN with Amazon and DigitalOcean or Linode&lt;/h2&gt;
+
+&lt;p&gt;I am going to show here, how to set up your own network of servers to serve your site as near to your readers as possible. We are going to use Amazon Route 53, and &lt;a href=&quot;https://www.digitalocean.com/?refcode=e00a30198abe&quot;&gt;Digital Ocean&lt;/a&gt;’s VPS.&lt;/p&gt;
+
+&lt;h3 id=&quot;amazon-route-53&quot;&gt;Amazon Route 53&lt;/h3&gt;
+
+&lt;p&gt;I will assume you already have an AWS account, if not, you must create one, then go to: &lt;a href=&quot;https://console.aws.amazon.com/route53/&quot;&gt;Amazon Route 53&lt;/a&gt; and create a new zone:&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/aws-route-53-create-zone.png&quot; class=&quot;img-responsive&quot; alt=&quot;How to create a zone in aws route 53&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;We have two options to route traffic to the specific servers, one is &lt;em&gt;Latency routing&lt;/em&gt; and the other is &lt;em&gt;Geo location routing&lt;/em&gt;, there is a comparison of &lt;a href=&quot;http://blog.takipi.com/aws-route-53-benchmarking-the-new-amazon-geolocation-policy/&quot;&gt;Latency vs Geo location&lt;/a&gt; you might want to read.&lt;/p&gt;
+
+&lt;p&gt;Let’s see both ways&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Route 53 Latency configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you have your zone created, and resolving for your domain, create the records for your site, in this example, we will be working with www.garron.me&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;em&gt;Create Record Set&lt;/em&gt; and configure it as in the picture.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/aws-route-53-latency.png&quot; class=&quot;img-responsive&quot; alt=&quot;Configure Latency record in Amazon aws Route 53&quot; /&gt;&lt;/figure&gt;
+
+&lt;p&gt;You need to, of course, change the IP to fit your needs, also, be sure to select the Region that is nearer to your Datacenter, if you choose DigitalOcean or &lt;a href=&quot;https://www.linode.com/?r=74775de9c0e7b94b692de902874cacf3aa5777bf&quot;&gt;Linode&lt;/a&gt; and select East Coast data center, then select &lt;em&gt;use-east-1&lt;/em&gt; region.&lt;/p&gt;
+
+&lt;p&gt;Create one record per each server you deploy, I recommend you deploying one on U.S. one on Europe and one in Asia, that way you should be serving all customers in the world&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Route 53 Geo location configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In case you choose Geo location, once you have your zone created, create the records for your site. Once again go to &lt;em&gt;Create Record Set&lt;/em&gt; and configure it as in the picture below.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&quot;/images/2015/04/aws-route-53-geolocation.png&quot; class=&quot;img-responsive&quot; alt=&quot;Configure geolocation record in Amazon aws Route 53&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;You need now to create as many records as fine tuned you want to distribute your traffic, you can go crazy and create one record per country, and define which data center is going to serve that country, but I recommend to create these records, considering you have one server in U.S., one in Europe and one in Asia.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Record for Asia pointing to Asia’s server&lt;/li&gt;
+  &lt;li&gt;Record for Oceania pointing to Asia’s server&lt;/li&gt;
+  &lt;li&gt;Record for Europe pointing to Europe’s server&lt;/li&gt;
+  &lt;li&gt;Record for Africa pointing to Europe’s server&lt;/li&gt;
+  &lt;li&gt;Record for Israel pointing to Europe’s server (I am sure it is better connected to Europe than to Asia)&lt;/li&gt;
+  &lt;li&gt;Record for Turkey pointing to Europe’s server (Same as with Israel)&lt;/li&gt;
+  &lt;li&gt;Default record pointing to United States’ server (&lt;strong&gt;You must have a default record, this is important&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;configuring-vps-servers-to-work-as-your-private-cdn&quot;&gt;Configuring VPS servers to work as your private CDN&lt;/h3&gt;
+
+&lt;p&gt;This is the way I have configured my network, you may choose a different way.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;One server in New York&lt;/li&gt;
+  &lt;li&gt;One server in Amsterdam&lt;/li&gt;
+  &lt;li&gt;One server in Singapore&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The real application or website should be running in one of those servers, let’s assume it is Amsterdam’s one, and let’s assume you have &lt;a href=&quot;/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html&quot;&gt;Nginx serving Wordpress&lt;/a&gt;. On the other two servers varnish will be installed. You can read how to configure Varnish for Wordpress &lt;a href=&quot;https://www.varnish-cache.org/trac/wiki/VarnishAndWordpress&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Just be sure to have varnish listening on port 80, this is done by editing &lt;code&gt;/etc/default/varnish&lt;/code&gt; on Ubuntu server and find this lines to make them look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DAEMON_OPTS=&quot;-a :80 \
+             -T localhost:6082 \
+             -f /etc/varnish/default.vcl \
+             -S /etc/varnish/secret \
+             -s malloc,256m&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also edit the file &lt;code&gt;/etc/varnish/default.vcl&lt;/code&gt; and be sure to have this lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;backend default {
+    .host = &quot;10.10.10.2&quot;;
+    .port = &quot;80&quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Change to IP to point to the server where your Nginx and Wordpress are, the port should be 80, as that server is also serving directly to visitors from Europe and Africa, if you are serving static content and not Wordpress, that should be enough, for Wordpress, read the instructions on Varnish site.&lt;/p&gt;
+
+&lt;p&gt;On the Nginx server add these lines in http or server block to make Varnish cache your files.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
+   expires 365d;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are using Apache use these lines on .htaccess file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;filesMatch &quot;.(ico|pdf|jpg|jpeg|png|gif|js|css)$&quot;&amp;gt;
+Header set Cache-Control &quot;max-age=31536000, public&quot;
+&amp;lt;/filesMatch&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart all servers, and check that everything is working, the best way is to enter each IP of your server in a browser, you should see a webpage, which may or may not be the one you want, but the default of your origin server, that is OK.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion-and-further-optimizations&quot;&gt;Conclusion and further optimizations&lt;/h2&gt;
+
+&lt;p&gt;With the prices of CDNs like MaxCDN or Cloudfront you may not need to do this, but if you are like me and just like to have control on your servers, and like to tweak everything by you, then you can go this way, if you want even more performance add PageSpeed module to your Nginx server, you will not need any cache plugin on Wordpress if you go this way, just add this lines to your Nginx server configuration in the server block.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;location ~ \.php$ {
+	try_files $uri =404;
+	fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	fastcgi_cache  detecnologia;
+	fastcgi_cache_key $scheme$host$request_uri$request_method;
+	fastcgi_cache_valid 200 301 302 5s;
+	fastcgi_cache_use_stale updating error timeout invalid_header http_500;
+	fastcgi_pass_header Set-Cookie;
+	fastcgi_pass_header Cookie;
+	fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+	fastcgi_pass unix:/var/run/php5-fpm.sock;
+	fastcgi_index index.php;
+	include fastcgi_params;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And this one to &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt; in the  http block&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fastcgi_cache_path /var/cache/nginx/blog.detecnologia.org levels=1:2 keys_zone=detecnologia:10m max_size=1024m inactive=1h;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With that configuration, you will be caching all responses from PHP for 5 seconds, then it is almost imposible to take the server down.&lt;/p&gt;
+
+&lt;p&gt;Hope this gives you a guide to start your own CDN network for any service you have. Take this important considerations into account.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Your origin server should set Cache-Control headers to make Varnish cache the results for static content&lt;/li&gt;
+  &lt;li&gt;Try to use PageSpeed module for Nginx or Apache depending on what you have on your origin server, and use &lt;a href=&quot;https://developers.google.com/speed/pagespeed/module/filter-cache-extend&quot;&gt;Extend Cache&lt;/a&gt; with it.&lt;/li&gt;
+&lt;/ul&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/your-own-cdn.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/nginx-reverse-proxy</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/nginx-reverse-proxy.html"/>
+    <title>Nginx Reverse Proxy. Multiple Applications on One Domain</title>
+    <published>2015-03-29T16:00:00-04:00</published>
+    <updated>2015-03-29T16:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Usually when you install a Web Application you assign its own domain for it, but there are a handful times when you want to install two or even more applications under the same domain. For example, let’s say you have a Wordpress blog, and you want to use &lt;a href=&quot;http://www.zenphoto.org/&quot;&gt;ZenPhoto&lt;/a&gt; for your photo album, and just to complicate it a little more you want to have a forum managed by &lt;a href=&quot;http://www.discourse.org/&quot;&gt;Discourse&lt;/a&gt;. Sure you can just use Wordpress plugins to make Wordpress manage all of these, or use Drupal or any other thing, but for this example let’s suppose you want to do it this way.&lt;/p&gt;
+
+&lt;p&gt;Let’s suppose the structure will have this form:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;/wordpress/ -&amp;gt; Wordpress&lt;/em&gt;
+&lt;em&gt;/photoblog/ -&amp;gt; ZenPhoto&lt;/em&gt;
+&lt;em&gt;/forum/ -&amp;gt; Discourse&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This post will not cover how to install ZenPhoto, Wordpress or Discourse.&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-applications&quot;&gt;Installing applications&lt;/h2&gt;
+
+&lt;p&gt;I have seen two ways the web applications are installed, PHP/MySQL applications that usually are powered by Apache or Nginx, and you can just install them in different folders and run as virtual servers, and those that are build with Ruby on rails or Node.js, like Discourse or the blogging platform Ghost, that have their own web server and usually run on a non-standart port.&lt;/p&gt;
+
+&lt;p&gt;In our example we are going to install Wordpress and ZenPhoto in their own folders or you can even install them on their own servers, just make sure they “know” they are running on a sub-folder. Discourse will be installed as adviced using Docker and responding on an specific port. This is going to be our scenario.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Wordpress, running on 192.168.1.2 port 8080&lt;/em&gt;
+&lt;em&gt;ZenPhoto, running on 192.168.1.3 port 8080&lt;/em&gt;
+&lt;em&gt;Discourse, running on 192.168.1.4 port 8080&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-and-configuring-nginx&quot;&gt;Installing and configuring Nginx&lt;/h2&gt;
+
+&lt;p&gt;Our Nginx and front server will be running on 192.168.1.1 and responding to port 80, it will act as a reverse proxy, it can have micro-cache enabled, which configuration is different for each application of the example, here will not be used, in future posts I will be showing different specific combinations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once installed we will configure the default virtual server to serve as our reverse proxy.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+
+    server_name www.example.com;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /wordpress/ {
+       proxy_set_header X-Real-IP  $remote_addr;
+       proxy_set_header X-Forwarded-For $remote_addr;
+       proxy_set_header Host $host;
+       proxy_pass http://192.168.1.2:8080;
+       }
+
+    location /photoblog/ {
+       proxy_set_header X-Real-IP  $remote_addr;
+       proxy_set_header X-Forwarded-For $remote_addr;
+       proxy_set_header Host $host;
+       proxy_pass http://192.168.1.3:8080;
+    }
+
+       location /forum/ {
+       proxy_set_header X-Real-IP  $remote_addr;
+       proxy_set_header X-Forwarded-For $remote_addr;
+       proxy_set_header Host $host;
+       proxy_pass http://192.168.1.4:8080;
+       }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As it can be seen, Nginx is forwarding the everything back to the appropriate application depending on the folder, behind the scenes each application working to serve the users, the frontpage might be any other application or just a static web page with links to the applications behind.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/nginx-reverse-proxy.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/increase-upload-size-limit-nginx</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/increase-upload-size-limit-nginx.html"/>
+    <title>Wordpress on Nginx upload size limit</title>
+    <published>2015-03-08T19:00:00-04:00</published>
+    <updated>2015-03-08T19:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;how-to-increase-upload-file-size-limit-for-wordpress-running-on-php-fpm-and-nginx&quot;&gt;How to increase upload file size limit for Wordpress running on PHP-FPM and Nginx&lt;/h2&gt;
+
+&lt;p&gt;I am running some Wordpress blogs on Ubuntu LTS server, with Nginx and PHP-FPM, it is really fast and using Nginx caching capabilities incredible scalable.&lt;/p&gt;
+
+&lt;p&gt;I had some problems uploading big theme files, so I had to adjust the configurations a little bit, here are some tips for future references in case I may need to check it out again later, or if anyone need to do the same I did.&lt;/p&gt;
+
+&lt;p&gt;There are two places where you need make some changes in order to increase the upload size limit.&lt;/p&gt;
+
+&lt;h3 id=&quot;nginx&quot;&gt;Nginx&lt;/h3&gt;
+
+&lt;p&gt;Let’s check Nginx first, there was my problem, so adding this line to the &lt;strong&gt;http&lt;/strong&gt; block of your Nginx configuration, will solve the problem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;client_max_body_size 20m;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That line inside the &lt;strong&gt;http&lt;/strong&gt; block will make Nginx to accept files up to 20 Megabytes, that is enough for me, you may want to adjust to your own needs.&lt;/p&gt;
+
+&lt;h3 id=&quot;php-fpm&quot;&gt;PHP-FPM&lt;/h3&gt;
+
+&lt;p&gt;If the problem is not on Nginx side, PHP may be the culprit, so edit the file &lt;code&gt;/etc/php5/fpm/php.ini&lt;/code&gt; and be sure to have these lines.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;upload_max_filesize = 20M
+post_max_size = 20M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is almost sure you will find them, so just edit them to meet your needs.&lt;/p&gt;
+
+&lt;p&gt;Now you have a &lt;strong&gt;Wordpress&lt;/strong&gt; installation running on &lt;strong&gt;PHP-FPM&lt;/strong&gt; and &lt;strong&gt;Nginx&lt;/strong&gt; with an appropriate upload file size limit&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/increase-upload-size-limit-nginx.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/apache-event-php-fpm-mariadb-freebsd.html"/>
+    <title>Apache, PHP-FPM, MariaDB and FreeBSD</title>
+    <published>2015-01-31T23:00:00-05:00</published>
+    <updated>2015-01-31T23:00:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;I always liked the bsd-like ports that Slackware Linux uses and now that &lt;a href=&quot;https://www.digitalocean.com/?refcode=e00a30198abe&quot;&gt;Digital Ocean&lt;/a&gt; offers FreeBSD I am having a great time working with it.&lt;/p&gt;
+
+&lt;p&gt;Today I want to show you how to setup an FAMP (Apache 2.4, MySQL and PHP on FreeBSD 10), we will be installing Apache using Event MPM, and PHP-FPM.&lt;/p&gt;
+
+&lt;p&gt;We will also be using both methods of installation in FreeBSD, first the &lt;em&gt;ports way&lt;/em&gt; then, the &lt;em&gt;pkg binary way&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;apache-mysql-and-php-on-freebsd-from-ports&quot;&gt;Apache, MySQL and PHP on FreeBSD from ports&lt;/h3&gt;
+
+&lt;h4 id=&quot;apache-24-event-mpm&quot;&gt;Apache 2.4 Event MPM&lt;/h4&gt;
+
+&lt;p&gt;Let’s first start with Apache, as I said we will be installing the Event MPM which is a threaded MPM and will serve files a lot faster, actually normal files as fast as Nginx&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/www/apache24/
+make install clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Select these options.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;| [x] ACCESS_COMPAT      mod_access compatibility
+| [x] ACTIONS            Action triggering on requests 
+| [x] ALIAS              Mapping of requests to different filesystem parts
+| [x] AUTHZ_CORE         Core authorization provider vector module
+| [x] AUTHZ_HOST         Host-based authorization control
+| [x] DIR                Directory request handling
+|+[x] EXPIRES            Expires header control
+|+[x] HEADERS            HTTP header control
+|+[x] REWRITE            Rule based URL manipulation
+|+[x] VERSION            Determining httpd version in config files
+|+[x] VHOST_ALIAS        Mass virtual hosting
+|+(*) MPM_EVENT          MPM worker variant with the goal of consuming
+| [x] MIME               Mapp file-ext. to MIME (recommended)
+| [x] PROXY              Build enabled PROXY modules
+| [x] PROXY_FCGI         FastCGI support module for mod_proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I like to have Virtual sites as separate files and not as part of the monolitic httpd.conf file, so let’s configure Apache that way.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir /usr/local/etc/apache24/conf.d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add this line at the end of the file &lt;code&gt;/usr/local/etc/apache24/httpd.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Include etc/apache24/conf.d/*.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;php-56&quot;&gt;PHP 5.6&lt;/h4&gt;
+
+&lt;p&gt;Now it is the turn of PHP, we will build it with PHP-FPM option turned on.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/lang/php56
+
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Configure this way.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;|+[x] CLI       Build CLI version
+|+[x] CGI       Build CGI version
+|+[x] FPM       Build FPM version
+|+[ ] EMBED     Build embedded library
+|+[ ] PHPDBG
+|+[ ] DEBUG     Enable debug
+|+[ ] DTRACE    Enable DTrace support
+|+[x] IPV6      Enable ipv6 support
+|+[ ] MAILHEAD  Enable mail header patch
+|+[x] LINKTHR   Link thread lib (for threaded extensions)
+|+[ ] ZTS       Force Zend Thread Safety (ZTS) build
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally clean the installation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We now have PHP 5.6 installed, but we need the modules, so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ../php56-extensions/
+
+make install clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be sure to mark, GD, CURL and MySQL as well as MySQLi&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;|+[x] CURL          CURL support
+|+[x] GD            GD library support
+|+[x] MYSQL         MySQL database support
+|+[x] MYSQLI        MySQLi database support
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Those among the default ones.&lt;/p&gt;
+
+&lt;h4 id=&quot;mariadb-100&quot;&gt;MariaDB 10.0&lt;/h4&gt;
+
+&lt;p&gt;We are going to install MariaDB instead of MySQL, if you do not know already, MariaDB is a fork of MySQL, where new developments are taking place, but complete compatibility is being manteined&lt;/p&gt;
+
+&lt;p&gt;We are going to install MariaDB 10.0 which according to the oficial &lt;a href=&quot;http://mariadb.com&quot;&gt;site&lt;/a&gt; is:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;MariaDB 10.0 is the current stable version of MariaDB. It is built on the MariaDB 5.5 series with backported features from MySQL 5.6 and entirely new features not found anywhere else.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To install it, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/ports/databases/mariadb100-server
+
+make install clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And keep all defaults. To secure your intallation run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Set a password, and then accept all defaults.&lt;/p&gt;
+
+&lt;h4 id=&quot;finishing-up-installation&quot;&gt;Finishing up installation&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Preparing services to run&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We need to configure all servers to autostart when the computer starts, to do that you need to edit the &lt;code&gt;vim /etc/rc.conf&lt;/code&gt;and add this lines.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apache24_enable=&quot;YES&quot;
+php_fpm_enable=&quot;YES&quot;
+mysql_enable=&quot;YES&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We need to take one more step for Apache. Edit the file &lt;code&gt;/usr/local/etc/httpd.conf&lt;/code&gt; and add this line just before the &lt;em&gt;Include….&lt;/em&gt; line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ServerName localhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now start all services:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service apache24 start
+service mysql-server start
+service php-fpm start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure you have these modules enabled&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LoadModule authn_core_module libexec/apache24/mod_authn_core.so
+LoadModule authz_core_module libexec/apache24/mod_authz_core.so
+LoadModule log_config_module libexec/apache24/mod_log_config.so
+LoadModule expires_module libexec/apache24/mod_expires.so
+LoadModule headers_module libexec/apache24/mod_headers.so
+LoadModule version_module libexec/apache24/mod_version.so
+LoadModule unixd_module libexec/apache24/mod_unixd.so
+LoadModule vhost_alias_module libexec/apache24/mod_vhost_alias.so
+LoadModule dir_module libexec/apache24/mod_dir.so
+LoadModule rewrite_module libexec/apache24/mod_rewrite.so
+LoadModule mime_module  libexec/apache24/mod_mime.so
+LoadModule actions_module libexec/apache24/mod_actions.so
+LoadModule alias_module libexec/apache24/mod_alias.so
+LoadModule authz_host_module libexec/apache24/mod_authz_host.so
+LoadModule access_compat_module libexec/apache24/mod_access_compat.so
+LoadModule proxy_module libexec/apache24/mod_proxy.so
+LoadModule proxy_fcgi_module libexec/apache24/mod_proxy_fcgi.so
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart Apache&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service apache24 restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;test-installation&quot;&gt;Test installation&lt;/h4&gt;
+
+&lt;p&gt;We will create a testing site in order to test everything, and be sure it is all setup and ready to work.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Create a folder for your site&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p /usr/local/www/site1/{public_html,logs}
+chown -R www:www /usr/local/www/site1/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Configure a virtual host&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Create a file in &lt;code&gt;/usr/local/etc/apache24/conf.d/site1.conf&lt;/code&gt;, you can name it any other way you want, and add this content inside:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    &amp;lt;VirtualHost *:80&amp;gt;
+        ServerAdmin webmaster@example.com
+        DocumentRoot &quot;/usr/local/www/site1/public_html&quot;
+        ServerName freebsd.garron.me
+        ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/usr/local/www/site1/public_html/$1
+        ErrorLog &quot;/usr/local/www/site1/logs/error.log&quot;
+        CustomLog &quot;/usr/local/www/site1/logs/access.log&quot; common
+        ScriptAlias /cgi-bin/ &quot;/usr/local/www/site1/cgi-bin/&quot;
+
+    &amp;lt;Directory &quot;/usr/local/www/site1/public_html&quot;&amp;gt;
+        Options +Indexes +FollowSymLinks +ExecCGI
+        AllowOverride AuthConfig FileInfo
+        Require all granted
+        Allow from all
+    &amp;lt;/Directory&amp;gt;
+
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Test the configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I will need to create a file named &lt;code&gt;phpinfo.php&lt;/code&gt; with this contents:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+    phpinfo();
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once saved, I can go to http://freebsd.garron.me/phpinfo.php, and the info of PHP should appear. This is the important line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Server API 	FPM/FastCGI 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That means, you are running PHP-FPM, and this is also a command you want to run to verify the MPM&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;httpd -V | grep MPM
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The reply should be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Server MPM:     event
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/apache-event-php-fpm-mariadb-freebsd.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/starting-freebsd</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/starting-freebsd.html"/>
+    <title>Starting with FreeBSD</title>
+    <published>2015-01-14T21:00:00-05:00</published>
+    <updated>2015-01-14T21:00:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;starting-with-freebsd-on-digital-ocean&quot;&gt;Starting with FreeBSD on Digital Ocean&lt;/h3&gt;
+
+&lt;p&gt;I have received an email today telling me that I am now able to install FreeBSD on DigitalOcean, of course I have inmediately headed to D.O. and created a new droplet and have chosen FreeBSD.&lt;/p&gt;
+
+&lt;p&gt;I have read a lot of good things about FreeBSD, and now that it is available on Digital Ocean I will start experimenting with it a little bit more than before.&lt;/p&gt;
+
+&lt;p&gt;I will be posting on this section of the site some of my discoveries, and on &lt;a href=&quot;/en/bits/&quot;&gt;tips&lt;/a&gt; section small but useful tips I surely will be discovering about FreeBSD operating system. Let’s now see what were the first steps preparing the server to work with it.&lt;/p&gt;
+
+&lt;p&gt;After login in, with the &lt;code&gt;freebsd&lt;/code&gt; account as required, I discovered that I have &lt;a href=&quot;/en/linux/visudo-command-sudoers-file-sudo-default-editor.html&quot;&gt;sudo powers&lt;/a&gt; on that account.&lt;/p&gt;
+
+&lt;p&gt;The first steps for me in every new system I install is to put all the tools I normally use:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;vim&lt;/li&gt;
+  &lt;li&gt;htop&lt;/li&gt;
+  &lt;li&gt;iftop&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;htop-on-freebsd&quot;&gt;Htop on freeBSD&lt;/h3&gt;
+
+&lt;p&gt;To install htop I had to go over these steps&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install htop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then I needed to modify the &lt;code&gt;/etc/fstab&lt;/code&gt; file and add this line. &lt;code&gt;linproc /compat/linux/proc linprocfs rw,late 0 0&lt;/code&gt; so,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo echo &quot;linproc /compat/linux/proc linprocfs rw,late 0 0&quot; &amp;gt;&amp;gt; /etc/fstab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally run this command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mkdir -p /usr/compat/linux/proc; ln -s /usr/compat /compat; mount linproc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Well, I now have &lt;code&gt;htop&lt;/code&gt; installed.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-vim-on-freebsd&quot;&gt;Install vim on FreeBSD&lt;/h3&gt;
+
+&lt;p&gt;Another must have of my tool belt is &lt;code&gt;vim&lt;/code&gt;, this was a simple one.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install vim
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;install-iftop-on-freebsd&quot;&gt;Install iftop on FreeBSD&lt;/h3&gt;
+
+&lt;p&gt;It is now turn of &lt;code&gt;iftop&lt;/code&gt;, this is a tool I use a lot to monitor who is connecting to my system and on which ports, and how much bandwidth it is using.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install iftop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I can now monitor the traffic on my server with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo iftop -i vtnet0 -pP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And I will on realtime the information about who is connecting to my server, on which port, and at what speed.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-vnstat-on-freebsd&quot;&gt;Install vnstat on FreeBSD&lt;/h3&gt;
+
+&lt;p&gt;I use &lt;code&gt;vnstat&lt;/code&gt; to monitor the bandwidth consumed on my VPS server over a month, so I can be sure not to exceep my quota.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pkg install vnstat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;vnstat&lt;/code&gt; cannot be used right away, it needs some configuration, so, let’s do it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mkdir -p /var/lib/vnstat
+
+sudo vnstat -i vtnet0 --create
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/starting-freebsd.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/cluster-wordpress</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/cluster-wordpress.html"/>
+    <title>Wordpress Cluster Powered</title>
+    <published>2014-12-21T18:37:35-05:00</published>
+    <updated>2014-12-21T18:37:35-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;wordpress-installation-on-a-cluster-of-servers&quot;&gt;Wordpress installation on a cluster of servers&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;Blogging is very popular even though a lot of people believe it is not anymore, and Wordpress is still the most used technology, to share your thoughts or work online.&lt;/p&gt;
+
+&lt;p&gt;Now if you want to have a server with multiple installations of Wordpress maybe for your family and friends, and want to be sure it will support the load now, and any future load if one or more of the hosted blogs become popular. Then, you want to prepare the infrastructure to be able to handle a big load.&lt;/p&gt;
+
+&lt;p&gt;Today we are going to see how to accomplish that.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-ingredients&quot;&gt;The ingredients&lt;/h3&gt;
+
+&lt;p&gt;What we are going to use for this setup is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu LTS (14.04 at the time of this writing)&lt;/li&gt;
+  &lt;li&gt;Nginx (As a web server and cache)&lt;/li&gt;
+  &lt;li&gt;MySQL (To host the databases)&lt;/li&gt;
+  &lt;li&gt;PHP-FPM to handle the code.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-setup&quot;&gt;The setup&lt;/h3&gt;
+
+&lt;p&gt;We will have and Nginx server in front of the cluster of servers, one or more PHP-FPM servers behind and MySQL server behind all of that, the MySQL server can be a cluster too, but that is beyond the scope of this tutorial.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;MySQL as StandAlone&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s first prepare the MySQL server, I recommend you using Linode or Digital Ocean.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install mysql-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then run security installation program.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you have to make MySQL to listen to the NIC instead of only localhost, to do that edit file: &lt;code&gt;/etc/mysql/my.conf&lt;/code&gt; and change this line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bind-address            = 127.0.0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To a new one with the IP you need it to listen on, something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bind-address            = 10.1.1.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You better use private network IPs, both Digital Ocean and Linode offer you that.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PHP server&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Usually PHP is installed with Apache and mod_php module, which is far from ideal, because it forces Apache to run in prefork MPM (here you can read &lt;a href=&quot;http://www.garron.me/en/blog/apache2-mpm-worker-prefork-php.html&quot;&gt;prefork vs worker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;What we are going to do now is to install PHP-FPM which is a standalone PHP server that can be invoked by Nginx or any other web server, proceses the code the return back the result.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install php5-fpm php5-cli php5-mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now edit the file &lt;code&gt;/etc/php5/fpm/php.ini&lt;/code&gt; and be sure you have this line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;upload_max_filesize = 8M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And this one too:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;post_max_size = 8M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is going to set the upload size limit for the files uploaded, like pictures to 8M, you can increase it even more if you want.&lt;/p&gt;
+
+&lt;p&gt;Set the port to listen for request, better if on a private IP where only your server can access.&lt;/p&gt;
+
+&lt;p&gt;Edit the file: &lt;code&gt;/etc/php5/fpm/pool.d/www.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Look for this line: &lt;code&gt;listen = /var/run/php5-fpm.sock&lt;/code&gt; and change to something like this: &lt;code&gt;listen = 10.132.150.129:9000&lt;/code&gt;, be sure to set the right IP&lt;/p&gt;
+
+&lt;p&gt;Finally restart PHP-FPM&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo service php5-fpm restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Do it again with all other PHP-FPM servers you are installing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Nginx for Wordpress with caching enabled&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;It is now the turn for the Nginx server, we will configure it to also cache responses for not logged users, Nginx is great at serving static content and also as a reverse cache proxy server.&lt;/p&gt;
+
+&lt;p&gt;We will be installing the latest version available from PPA maintained by the official Nginx team.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo add-apt-repository ppa:nginx/stable
+sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+sudo apt-get install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is now time to configure Nginx to work with Wordpress, I will be following the instructions in &lt;a href=&quot;http://codex.wordpress.org/Nginx&quot;&gt;Wordpress Site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First create the global folder inside the Nginx configuration main folder.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir /etc/nginx/global
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And put this two files there:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;restrictions.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Global restrictions configuration file.
+# Designed to be included in any server {} block.&amp;lt;/p&amp;gt;
+location = /favicon.ico {
+	log_not_found off;
+	access_log off;
+}
+
+location = /robots.txt {
+	allow all;
+	log_not_found off;
+	access_log off;
+}
+
+# Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
+# Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
+location ~ /\. {
+	deny all;
+}
+
+# Deny access to any files with a .php extension in the uploads directory
+# Works in sub-directory installs and also in multisite network
+# Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
+location ~* /(?:uploads|files)/.*\.php$ {
+	deny all;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And wordpress.conf&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# WordPress single blog rules.
+# Designed to be included in any server {} block.
+
+# This order might seem weird - this is attempted to match last if rules below fail.
+# http://wiki.nginx.org/HttpCoreModule
+location / {
+	try_files $uri $uri/ /index.php?$args;
+}
+
+# Add trailing slash to */wp-admin requests.
+rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+
+# Directives to send expires headers and turn off 404 error logging.
+location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|   gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
+       access_log off; log_not_found off; expires max;
+}
+
+# Uncomment one of the lines below for the appropriate caching plugin (if used).
+#include global/wordpress-wp-super-cache.conf;
+#include global/wordpress-w3-total-cache.conf;
+
+# Pass all .php files onto a php-fpm/php-fcgi server.
+location ~ [^/]\.php(/|$) {
+	fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+	if (!-f $document_root$fastcgi_script_name) {
+		return 404;
+	}
+	# This is a robust solution for path info security issue and works with    &quot;cgi.fix_pathinfo = 1&quot; in /etc/php.ini (default)
+
+	include fastcgi.conf;
+	fastcgi_index index.php;
+#	fastcgi_intercept_errors on;
+	fastcgi_pass php;
+    fastcgi_cache_bypass $no_cache;
+    fastcgi_no_cache $no_cache;
+
+    fastcgi_cache WORDPRESS;
+    fastcgi_cache_valid 200 5m;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These files are for single Wordpress installations, and not for multisite ones, if you are planning to install multisite read &lt;a href=&quot;http://codex.wordpress.org/Nginx&quot;&gt;here&lt;/a&gt; again.&lt;/p&gt;
+
+&lt;p&gt;In the above files fast CGI cache is already included.&lt;/p&gt;
+
+&lt;p&gt;We now have almost everything ready to create our first site, so let’s create it, go to &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt; and create a file called &lt;code&gt;www.your-url.com.conf&lt;/code&gt; (change name to reflect a real url you own and can use, actually the name is not important, but for better debugging in the future this name convention is a good one).&lt;/p&gt;
+
+&lt;p&gt;There are still few things to tweak.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p /var/cache/nginx/cache/wordpress.garron.me
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To create the place where cache files are going to be stored. And make sure the &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt; file looks like this one:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user www-data;
+worker_processes 4;
+pid /run/nginx.pid;
+
+events {
+	worker_connections 768;
+	# multi_accept on;
+}
+
+http {
+
+	##
+	# Basic Settings
+	##
+
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+	# server_tokens off;
+
+	# server_names_hash_bucket_size 64;
+	# server_name_in_redirect off;
+
+	include /etc/nginx/mime.types;
+	default_type application/octet-stream;
+
+	##
+	# SSL Settings
+	##
+
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+	ssl_prefer_server_ciphers on;
+
+	##
+	# Logging Settings
+	##
+
+	access_log /var/log/nginx/access.log;
+	error_log /var/log/nginx/error.log;
+
+	##
+	# Gzip Settings
+	##
+
+	gzip on;
+	gzip_disable &quot;msie6&quot;;
+
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_buffers 16 8k;
+	gzip_http_version 1.1;
+	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+
+                   &#39;&quot;$status&quot; $body_bytes_sent &quot;$http_referer&quot; &#39;
+
+                   &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+	upstream php {
+    server 10.132.150.129:9000;
+    server 10.132.150.130:9000;
+}
+
+	##
+	# Virtual Host Configs
+	##
+
+        fastcgi_cache_path /var/cache/nginx/cache/wordpress.garron.me levels=1:2 keys_zone=WORDPRESS:50m inactive=60m;
+		     fastcgi_cache_key &quot;$scheme$request_method$host$request_uri&quot;;
+		     fastcgi_cache_use_stale error timeout invalid_header http_500;
+
+
+	include /etc/nginx/conf.d/*.conf;
+	include /etc/nginx/sites-enabled/*;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be sure that this part is correctly configured:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	upstream php {
+    server 10.132.150.129:9000;
+    server 10.132.150.130:9000;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It should point to all the PHP server you have available.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Synchronizing servers&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Nginx does not sent the whole file to the PHP server it just sent the location of the file, so PHP server can parse it and return with a result.&lt;/p&gt;
+
+&lt;p&gt;Because of that all PHP-FPM stand alone servers need to have the same info in the same places, therefore we need to copy all wordpress installation folder from the main Nginx server to all PHP-FPM servers.&lt;/p&gt;
+
+&lt;p&gt;We will use NFS share to sync data between servers, there are other ways to do this, but this way is simpler.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;On the server side:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get install nfs-kernel-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then share the web root folder&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim /etc/exports
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add this to the file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/var/www/wordpress.garron.me 10.132.150.129(rw,sync,no_root_squash,no_subtree_check)
+/var/www/wordpress.garron.me 10.132.150.130(rw,sync,no_root_squash,no_subtree_check)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create the table of your exports.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo exportfs -a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And start the NFS server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo service nfs-kernel-server start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;On the client side&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This will have to be done twice, or more, one per each PHP server you have.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get install nfs-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Create the folder where the shares are going to be mounted, should be the same place where they are in the Nginx server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mkdir -p /var/www/wordpress.garron.me
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is for this example only, be sure to match the Nginx path.&lt;/p&gt;
+
+&lt;p&gt;Finally configure the client to mount the shares every time it is booted.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim /etc/fstab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And add something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1.2.3.4:/home    /var/www/wordpress.garron.me   nfs auto,noatime,nolock,bg,nfsvers=4,intr,tcp,actimeo=1800 0 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be sure to change 1.2.3.4 to match the IP of your Nginx server. (better using internal private IPs)&lt;/p&gt;
+
+&lt;h3 id=&quot;installing-wordpress&quot;&gt;Installing Wordpress&lt;/h3&gt;
+
+&lt;p&gt;You can now follow the famous 5 minutes installation guide from the Wordpress site:&lt;/p&gt;
+
+&lt;p&gt;Just be sure to create the Database using something like the command below in order to permit remote access, remember that the PHP server is not the same as the MySQL one.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GRANT ALL PRIVILEGES ON *.* TO &#39;USERNAME&#39;@&#39;%&#39; IDENTIFIED BY &#39;PASSWORD&#39; WITH GRANT OPTION;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codex.wordpress.org/Installing_WordPress#Detailed_Instructions&quot;&gt;Here&lt;/a&gt; is the detailed installation instructions for Wordpress.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/cluster-wordpress.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/email-fetchmail-procmail-postfix</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/email-fetchmail-procmail-postfix.html"/>
+    <title>Classify Email with Fetchmail, Procmail and Postfix</title>
+    <published>2014-09-07T16:30:35-04:00</published>
+    <updated>2014-09-07T16:30:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;connecting-email-accounts-using-fetchmail-and-postfix&quot;&gt;Connecting Email Accounts Using Fetchmail and Postfix&lt;/h3&gt;
+
+&lt;p&gt;I know that most email providers have to option to connect accounts, so your main account can collect emails from all others using POP protocol, so you can have all your email concentrated in just one account.&lt;/p&gt;
+
+&lt;p&gt;That is not the way I do it, I use Fetchmail and Postfix on an Debian server to do the job. I know there is no reason to do it that way, but as people likes to play soccer I like to work with servers (And play soccer).&lt;/p&gt;
+
+&lt;p&gt;Here is what you need:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A Linux server that is online all time (I prefer Ubuntu or Debian)&lt;/li&gt;
+  &lt;li&gt;Fetchmail install on that server to collect emails&lt;/li&gt;
+  &lt;li&gt;Postfix to send collected emails to your main account&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I am using a Debian server on &lt;a href=&quot;https://www.digitalocean.com/?refcode=e00a30198abe&quot;&gt;Digital Ocean&lt;/a&gt; (affiliate link)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fetchmail Setup&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;These are the contents on &lt;em&gt;~/.fetchmailrc&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set no bouncemail
+defaults:
+  antispam -1 
+  batchlimit 100
+poll pop.gmail.com port 995 with protocol pop3
+user account1@domain password password is user
+ssl
+sslproto SSL3
+fetchall
+keep
+no rewrite
+mda &quot;/usr/bin/procmail -f %F -d %T&quot;;
+
+poll pop.gmail.com port 995 with protocol pop3
+user account2@gmail.com password passed is user
+ssl
+sslproto SSL3
+fetchall
+keep
+no rewrite
+mda &quot;/usr/bin/procmail -f %F -d %T&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see I am polling email from a Google Apps account and a Gmail account, and passing them to &lt;code&gt;procmail&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Procmail Setup&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;These are the contents of &lt;em&gt;~/.procmailrc&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:0
+	* .*
+{
+    #:0 c
+    #$DEFAULT
+
+    :0 
+    !user@domain
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This just instructs Procmail to send all collected email to the user@domain address. You can of course uncomment the two commented lines to have a local copy of all collected emails. I do not want that. Check out this great &lt;a href=&quot;http://www.panix.com/~elflord/unix/procmail.html#procmailrc&quot;&gt;Procmail Guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Postfix Setup&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, somebody has to take care of sending all collected emails to the main account. That is going to be postfix. Debian comes with Exim as default, but as soon as you install Postfix, Exim is uninstalled.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get install postfix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the &lt;code&gt;/etc/postfix/main.cf&lt;/code&gt; file has this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias_database = hash:/etc/aliases
+alias_maps = hash:/etc/aliases
+append_dot_mydomain = no
+biff = no
+config_directory = /etc/postfix
+home_mailbox = Maildir/
+inet_interfaces = all
+mailbox_command =
+mailbox_size_limit = 0
+mydestination = your_domain, wordpress, localhost.localdomain, localhost
+myhostname = servername.domain
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+myorigin = your_domain_here
+readme_directory = no
+recipient_delimiter = +
+relay_domains = localhost
+relayhost =
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+smtpd_helo_restrictions = reject_invalid_helo_hostname, reject_non_fqdn_helo_hostname, reject_unknown_helo_hostname
+smtpd_recipient_restrictions = reject_invalid_hostname, reject_unknown_recipient_domain, reject_unauth_destination, reject_rbl_client sbl.spamhaus.org, permit
+smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_tls_session_cache_database = btree:${data_directory}	smtpd_scache
+smtpd_use_tls = yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With this configuration, it will send emails by itself, I mean it is not configured to send emails through a SmartHost.&lt;/p&gt;
+
+&lt;p&gt;If that is what you want you can read &lt;a href=&quot;http://www.garron.me/en/mac/postfix-relay-gmail-mac-os-x-local-smtp.html&quot;&gt;here for Postfix&lt;/a&gt; and &lt;a href=&quot;http://www.garron.me/en/go2linux/sendmail-exim-smarthost.html&quot;&gt;Here for Exim or Sendmail&lt;/a&gt;&lt;/p&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/email-fetchmail-procmail-postfix.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/ubuntu-version</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/ubuntu-version.html"/>
+    <title>Which version of Ubuntu am I running?</title>
+    <published>2014-08-23T23:30:35-04:00</published>
+    <updated>2014-08-23T23:30:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;You should usually know the version of Ubuntu you are running, but in case you can not determine the version you are running, just run this command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cat /etc/issue
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That command will tell you the version of Ubuntu you are using.&lt;/p&gt;
+
+&lt;p&gt;[Update]&lt;/p&gt;
+
+&lt;p&gt;Somebody sent me an email telling me that this commands are a lot better.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lsb_release -a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lsb_release -rcs
+&lt;/code&gt;&lt;/pre&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/ubuntu-version.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/debian-anniversary</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/debian-anniversary.html"/>
+    <title>Happy Birthday Debian</title>
+    <published>2014-08-16T11:40:35-04:00</published>
+    <updated>2014-08-16T11:40:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h4 id=&quot;debian-anniversary&quot;&gt;Debian Anniversary&lt;/h4&gt;
+
+&lt;p&gt;Today August 16th is the 21st anniversary of the GNU/Linux distribution Debian.&lt;/p&gt;
+
+&lt;p&gt;It was released by Ian Murdock on this day 21 years ago. The name is derived from the combination of Ian’s girlfriend at that time Debra, and his own name.&lt;/p&gt;
+
+&lt;p&gt;Since then Debian has just grown in popularity, and now is the base of the most popular GNU/Linux distributions according to &lt;a href=&quot;http://distrowatch.com/&quot;&gt;Distrowatch&lt;/a&gt; Debian code is on the three first positions:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Mint&lt;/li&gt;
+  &lt;li&gt;Ubuntu&lt;/li&gt;
+  &lt;li&gt;Debian&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;As Ubuntu is based on Debian, and Mint on Ubuntu you can see the great success of Debian over the years.&lt;/p&gt;
+
+&lt;p&gt;It serves most of the websites we visit daily, it powers a very large number of servers around the world.&lt;/p&gt;
+
+&lt;p&gt;So, for all of that, &lt;strong&gt;Happy 21st anniversary Debian&lt;/strong&gt; I wonder what we will see from you in the next 21 years.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/debian-anniversary.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/bash-password-manager</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/bash-password-manager.html"/>
+    <title>Your Own Password Manager</title>
+    <published>2014-08-16T00:30:35-04:00</published>
+    <updated>2014-08-16T00:30:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h4 id=&quot;your-own-password-manager&quot;&gt;Your own password manager&lt;/h4&gt;
+
+&lt;p&gt;There are a lot of options when your want and application to store and manage your passwords. Maybe the best known options are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;LastPass&lt;/li&gt;
+  &lt;li&gt;Keepass&lt;/li&gt;
+  &lt;li&gt;Dashlane&lt;/li&gt;
+  &lt;li&gt;Keeper&lt;/li&gt;
+  &lt;li&gt;And more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But if you are the kind of guy that wants everything simple (KISS principle, remember?), and done by your own, then you can do it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Generate your passwords randomly&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openssl rand -base64 12
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Store them securely&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Copy the generated password, and paste it in a simple text file, after that, encrypt that file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gpg -c passwords.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Use a very strong passphrase. Delete the original file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rm passwords.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you need your password again, just decrypt the file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gpg passwords.txt.gpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Enter the passphrase, and you have access to your passwords.&lt;/p&gt;
+
+&lt;p&gt;Nothing is automatic, but it is useful, and you do not have your password stored in the cloud.&lt;/p&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/bash-password-manager.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/elementary-luna</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/elementary-luna.html"/>
+    <title>First week with Elementary Luna. Review of the best Ubuntu based distribution</title>
+    <published>2013-08-26T01:13:35-04:00</published>
+    <updated>2013-08-26T01:13:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;I have installed a week ago with Elementary Luna, if you like GNU/Linux operating Linux, then you should have heard about Elementary Luna but if not, I will tell you that Elementary Luna is a new GNU/Linux distribution that is based on Ubuntu 12.04, the last Long term Ubuntu released.&lt;/p&gt;
+
+&lt;p&gt;Elementary is directly based on Ubuntu repositories, it has added some PPAs to support the look it has, so actually Elementary is Ubuntu 12.04 with another look and feel. But the look of it is what is great about it. Take a look at this screenshots.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/08/elementary-luna-desktop-screenshot.jpg&quot; alt=&quot;Elementary Luna GNU/Linux&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;applications&quot;&gt;Applications&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Email&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Elementary uses Geary as its email application. It is almost pre-configured to work with Gmail, which is the most used email service these days. It works as a native Gmail application, something most of stand alone email applications does not do, and you have to manually modify the default settings to work the way Gmail works.&lt;/p&gt;
+
+&lt;p&gt;With Elementary, you have labels support out of the box, archive instead of delete when you delete any email. Well, that is something I do not like, I do not like to archive emails I do not want to keep. I like to delete emails, why to keep spam emails in your mail box?&lt;/p&gt;
+
+&lt;p&gt;Because I use Exchange server for my emails, I had to install Thunderbird and ExQuilla (a plugin that adds support for Exchange to Thunderbird)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Music&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The music app that comes with Elementary Luna is simple, clean, easy to use and does exactly what it should. I use iTunes a lot to play my tunes, but after the last upgrade it got too complacated, I love minimalistic things so I love how &lt;em&gt;Music&lt;/em&gt; looks like. It comes with equalizer, support for album covers, similar songs automatic list and iPod sync.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Text editor&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Scratch also looks great, minimalistic look, syntax support and everything you may need from a simple text editor.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Web browser&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Midori is the web browser that comes installed, it uses WebKit rendering engine, the same rendering engine that powers Google Chrome and Apple’s Safari. It works well, but I had to install Firefox, because it is my favorite one.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Messenger&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Elementary Luna comes with Empathy, that is an app for IRC, Facebook, Jabber/XMPP and some more, so you are pretty well covered on that field.&lt;/p&gt;
+
+&lt;p&gt;What it lacks, is an Office Application, I really do not know why it comes with none installed, so I had to install LibreOffice to work with documents.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Elementary Luna is of course a stable GNU/Linux distribution as it is based on Ubuntu LTS 12.04, but it gives it a complete new look, a modern minimalistic look, something I like a lot. Actually I love my Mac, and Elementary looks a lot like it, maybe even better.&lt;/p&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/elementary-luna.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/apache-mpm-worker-php-fpm-mysql-centos</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/apache-mpm-worker-php-fpm-mysql-centos.html"/>
+    <title>Apache MPM Worker and PHP-FPM on CentOS</title>
+    <published>2013-07-13T10:04:11-04:00</published>
+    <updated>2013-07-13T10:04:11-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;A LAMP server is one of the most used configurations of the GNU/Linux operating system. And being Wordpress the most used CMS to power Internet sites, it is not surprise that Apache + PHP + MySQL is mostly used to power Wordpress installations.&lt;/p&gt;
+
+&lt;p&gt;Apache can work in different modes, being prefork the most used one, but worker is more efficient. Read more about &lt;a href=&quot;/en/blog/apache2-mpm-worker-prefork-php.html&quot;&gt;differences between prefork and worker MPM&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have shown in the past &lt;a href=&quot;/en/blog/ubuntu-lamp-apache2-mpm-worker-and-php-fpm.html&quot;&gt;how to install Apache MPM Worker and PHP-FPM on Ubuntu&lt;/a&gt;, because Ubuntu and Debian is what I use the most. But a friend asked me how to do it for CentOS, so, here we go.&lt;/p&gt;
+
+&lt;h3 id=&quot;installing-apache-mpm-worker-with-php-fpm-and-mysql-on-centos&quot;&gt;Installing Apache MPM Worker with PHP-FPM and MySQL on CentOS&lt;/h3&gt;
+
+&lt;p&gt;This have been tested on CentOS 6, and more specifically on a 64 bits installation on a Digital Ocean VPS.&lt;/p&gt;
+
+&lt;p&gt;First we need to add one repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rpm --import http://dag.wieers.com/rpm/packages/RPM-GPG-KEY.dag.txt
+cd /tmp/
+wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+rpm -ivh rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let’s install the needed packages.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;yum install vim php-fpm mod_fastcgi httpd mysql mysql-server php-mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And make all daemons start automatically when we reboot the server&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chkconfig --levels 235 httpd on
+chkconfig --levels 235 mysqld on
+chkconfig --levels 235 php-fpm on
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add a name to the Apache server, this is to avoid the warning message of, &lt;em&gt;Could not reliably determine the server’s fully qualified domain name, using 127.0.1.1 for ServerName&lt;/em&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &quot;ServerName localhost&quot; &amp;gt;&amp;gt; /etc/httpd/conf.d/servername.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, configure the fastcgi Apache module. We need to make to changes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim /etc/httpd/conf.d/fastcgi.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Change this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FastCgiWrapper On
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;for this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FastCgiWrapper Off
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and add this at the end&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;IfModule mod_fastcgi.c&amp;gt;
+    AddHandler php5-fcgi .php
+    Action php5-fcgi /php5-fcgi
+    Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
+    FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -socket /var/run/php5-fpm.sock -pass-header Authorization
+&amp;lt;/IfModule&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will make it possible for Apache to pass PHP code back to PHP-FPM and get the responce once the code have been executed.&lt;/p&gt;
+
+&lt;p&gt;Because we are using the folder &lt;em&gt;/usr/lib/cgi-bin/&lt;/em&gt; we need to create it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p /usr/lib/cgi-bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On Debian, PHP-FRM listens to a socket by default, but on CentOS it listens to a TPC port, in order to reserver TCP ports for Apache, we will change PHP-FPM to be like Debian.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim /etc/php-fpm.d/www.conf 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;change this line&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;listen = 127.0.0.1:9000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;for this one&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;listen = /var/run/php5-fpm.sock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finall restart all servers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;service httpd restart
+service php-fpm restart
+service mysqld restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can now install your PHP application, and have a more efficient Apache server.&lt;/p&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/apache-mpm-worker-php-fpm-mysql-centos.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/cron-job-crontab-how-to-examples</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/cron-job-crontab-how-to-examples.html"/>
+    <title>Crontab and cron job</title>
+    <published>2013-06-26T17:41:11-04:00</published>
+    <updated>2013-06-26T17:41:11-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Cron jobs are added tasks to the cron daemon, for it to run them periodically, at specific times.&lt;/p&gt;
+
+&lt;p&gt;You usually want your jobs or tasks executed every, Monday, or every day at 5 pm, etc. Cron is very powerful and flexible, so you can tweak it a lot. Let’s see what cron is.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Cron is a time-based job scheduler in Unix-like computer operating systems. Cron enables users to schedule jobs (commands or shell scripts) to run periodically at certain times or dates. It is commonly used to automate system maintenance or administration, though its general-purpose nature means that it can be used for other purposes, such as connecting to the Internet and downloading email&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now under Linux, Cron Jobs can be added in two ways.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Adding them to the user cron job script&lt;/li&gt;
+  &lt;li&gt;Adding them to the root’s @hourly, @dayly, @monthly or @weekly folders&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;add-a-cron-job-in-gnulinux-or-mac-or-any-unix-based-operating-system&quot;&gt;Add a Cron Job in GNU/Linux, or Mac or any Unix based operating system&lt;/h2&gt;
+
+&lt;p&gt;Let’s see now the first way to add a job to the cron. You’ll need to run this command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;crontab -e
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will edit the actual user cron script, the file you’ll see could be empty or already have some jobs in it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Syntax&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The syntax of this file is:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Min Hour Day Month DoW /path/to/command arg1 arg2 … arg&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Where:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Min = Minute, should be numeric value from 0 to 59&lt;/li&gt;
+  &lt;li&gt;Hour = Hour at which the command is executed, also a numeric value from 0 to 23&lt;/li&gt;
+  &lt;li&gt;Day = The day of the month when the command is executed, numeric value from 1 to 31&lt;/li&gt;
+  &lt;li&gt;Month = The month when the command is executed, numeric value from 1 to 12, where 1 is January&lt;/li&gt;
+  &lt;li&gt;DoW = Day of week, when the command is executed, also a numeric value from 0 to 7 where 0 and 7 is Sunday&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can put an ‘*’ asterisk on any or all field to indicate that at all Hours, minutes, etc. should the command be executed.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;30 * * * * /home/user/backup.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And backup.sh may look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rsync --progress --partial -avz /folder/to/copy/ user@remote.server:/remote/folder
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also use intervals, in any field, example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;30 23 * * 1-5 /home/user/script.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will execute in all week days at 23:30 the scrip.sh&lt;/p&gt;
+
+&lt;p&gt;Now the second way is, if you want to execute a task hourly, weekly, monthly or daily, just insert your scrip in one of these folders:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/etc/cron.daily/&lt;/li&gt;
+  &lt;li&gt;/etc/cron.hourly/&lt;/li&gt;
+  &lt;li&gt;/etc/cron.monthly/&lt;/li&gt;
+  &lt;li&gt;/etc/cron.weekly/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Depending on what you need or want, you should make your script executable once in that folder, and root will execute it, you will need to have permissions to write on those folders.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Linux Cron Jobs, should be used everytime you need to execute a task periodically, do not forget to read the man pages of crontab and crond&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/cron-job-crontab-how-to-examples.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/centos-vs-debian</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/centos-vs-debian.html"/>
+    <title>Debian vs CentOS</title>
+    <published>2013-06-04T15:41:11-04:00</published>
+    <updated>2013-06-04T15:41:11-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;When it comes to setup web servers, or Internet servers (web, email and ftp) there is usually two GNU/Linux distributions that comes to mind, Debian and CentOS. Some people are starting to use Ubuntu server, but let’s focus on CentOS and Debian, as Ubuntu is a Debian derivative.&lt;/p&gt;
+
+&lt;p&gt;I think you should consider two main points when choosing a web server.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Stability&lt;/li&gt;
+  &lt;li&gt;Software versions&lt;/li&gt;
+  &lt;li&gt;Easy of upgrades&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;centos&quot;&gt;CentOS&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;CentOS (Community Enterprise Operating System) is a Linux distribution which attempts to provide a free enterprise class computing platform which has 100% binary compatibility with its upstream source, Red Hat Enterprise Linux (RHEL). As of version 6.4, it officially supports x86 and x86-64 architecture with Physical Address Extension, while a beta is expected to be available for PowerPC
+– Wikipedia&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So CentOS is a community driven clone of Red Had Enterprise Linux. This should make it very, very stable and suitable to be used as web server. In fact by the time of this writing CentOS is the second most used distribution for web servers, according to Wikipedia.&lt;/p&gt;
+
+&lt;h3 id=&quot;main-software-versions&quot;&gt;Main Software versions&lt;/h3&gt;
+
+&lt;p&gt;By the time of this writing, the main software version needed for web server applications in “vanilla” CentOS are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apache -&amp;gt; 2.2.15&lt;/li&gt;
+  &lt;li&gt;PHP -&amp;gt; 5.3.3&lt;/li&gt;
+  &lt;li&gt;MySQL -&amp;gt; 5.1.66&lt;/li&gt;
+  &lt;li&gt;PostgreSQL -&amp;gt; 8.4.13&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;upgrading&quot;&gt;Upgrading&lt;/h3&gt;
+
+&lt;p&gt;When you are choosing a software, any kind of software that is going to be used in a production environment. You should always consider how easy or hard it to upgrade it.&lt;/p&gt;
+
+&lt;p&gt;Consider that this server is almost for sure going to be located far from you, and you will only have ssh access to it.&lt;/p&gt;
+
+&lt;p&gt;CentOS is not an easy GNU/Linux distribution to upgrade, actually in the &lt;a href=&quot;http://wiki.centos.org/HowTos/MigrationGuide&quot;&gt;official Wiki&lt;/a&gt; it recommends:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A fresh install is generally strongly preferred over an upgrade.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And at the end of the page, it says.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Good Luck. Enjoy!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;stability&quot;&gt;Stability&lt;/h3&gt;
+
+&lt;p&gt;CentOS is one of the most tested and stable GNU/Linux distributions, and that is why it is also one of the most used ones.&lt;/p&gt;
+
+&lt;p&gt;I have personally run a CentOS server for seven years, actually it is still the same machine for all those years. I still run CentOS 4 on it. It is my office firewall and DHCP server, it was once my mail and web server too.&lt;/p&gt;
+
+&lt;p&gt;I have never had a problem with it. I am sure that if something is going to fail, it will be the hardware.&lt;/p&gt;
+
+&lt;h2 id=&quot;debian&quot;&gt;Debian&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Debian is an operating system—developed by the Debian project mostly composed of free and open source software carrying the GNU General Public License. However, it also includes non-GPL software outside its official repositories to comply with its guidelines of providing free software.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;main-software-versions-1&quot;&gt;Main Software versions&lt;/h3&gt;
+
+&lt;p&gt;By the time of this writing, Debian Stable Wheezy has these software versions.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apache -&amp;gt; 2.2.22&lt;/li&gt;
+  &lt;li&gt;PHP -&amp;gt; 5.4.4&lt;/li&gt;
+  &lt;li&gt;MySQL -&amp;gt; 5.5.30&lt;/li&gt;
+  &lt;li&gt;PostgreSQL -&amp;gt; 9.1.9&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;upgrading-1&quot;&gt;Upgrading&lt;/h3&gt;
+
+&lt;p&gt;Upgrading Debian from one stable version to the next stable version is easy and not painful. I have written in the past about &lt;a href=&quot;/en/linux/upgrade-debian-squeeze-wheezy-6.0-7.0.html&quot;&gt;upgrade Debian Squeeze to Wheezy&lt;/a&gt;. And I have done it in the past as I still have a Desktop I started running Debian Sarge, and now it is running Debian Jessie.&lt;/p&gt;
+
+&lt;h3 id=&quot;stability-1&quot;&gt;Stability&lt;/h3&gt;
+
+&lt;p&gt;The Debian’s release philosophy “Release when ready” makes it stable to the most, only when all bugs have been addressed, only when everything has been fully tested and only when everybody is sure that there are no issues, a new stable version is released. This make Debian one of the most stable distributions available.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Finally, which one should you choose?&lt;/p&gt;
+
+&lt;p&gt;I would pick Debian, because it usually have more up to date packages, and because it is easier to upgrade. I have started my GNU/Linux journey with Red Hat Linux, and then I have always used CentOS and Fedora in my Desktop. Some years ago I tested Debian, and switched to it for me servers (except the one I have talked about above).&lt;/p&gt;
+
+&lt;p&gt;But, if you are more used to CentOS and are more accustomed to work with it, then there is no real reason to switch to Debian. CentOS and Debian are both the best options you have when choosing a GNU/Linux distribution to install in your web server. They both:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Have The most possible updated version of packages &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+  &lt;li&gt;Are a very solid and stable GNU/Linux distribution&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;They are not equally easy to upgrade, but you only have to do so once every two to three years, so you should even be able to afford a fresh installation.&lt;/p&gt;
+
+&lt;p&gt;Update: June 5, 2013: One more thing you have to consider when installing a Web Server. If you are going to use this server as a reseller tool. You may want to install CPanel, and in such a case you have to go with CentOS, as it is officially supported.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;The most possible updated version, without sacrifice stability. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/centos-vs-debian.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/add-secondary-ip-linux</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/add-secondary-ip-linux.html"/>
+    <title>Linux add a second IP address, permanent or temporary</title>
+    <published>2013-05-24T17:11:11-04:00</published>
+    <updated>2013-05-24T17:11:11-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;add-a-secondary-ip-to-linux&quot;&gt;Add a secondary IP to Linux&lt;/h2&gt;
+
+&lt;h3 id=&quot;add-a-second-temporary-ip-address&quot;&gt;Add a second temporary IP address&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Using ifconfig&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want to add a secondary IP address to a NIC already in use in Linux, and have that change only temporary. Enter this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ifconfig [nic]:0 [IP-Address] netmask [mask] up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;An example is shown below&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ifconfig eth0:0 192.168.1.2 netmask 255.255.255.0 up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You need to be root in order to execute that command.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Using ip command&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you prefer to use the ip command instead of ifconfig&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ip address add [ip]/[mask-digits] dev [nic]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is an example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ip address add 192.168.99.37/24 dev eth0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With this command you can add more ip address to the same dev NIC, the second is considered as secondary.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-a-permanent-ip-address&quot;&gt;Add a permanent IP address&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Ubuntu&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For Ubuntu systems, edit the /etc/network/interfaces file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim /etc/network/interfaces
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add this for one extra IP&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;auto [NIC]:[n]
+iface [NIC]:[n] inet static
+address [ip.add.rr.ss]
+gateway [gw.ip.ad.rs]
+netmask [ne.tm.as.kk]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here an example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;auto eth0:1
+iface eth0:1 inet static
+address 192.168.0.1
+gateway 192.168.0.254
+netmask 255.255.255.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can add as many blocks as you want. Just change eth0:1 for eth0:2, eth0:3 and so on.&lt;/p&gt;
+
+&lt;p&gt;If you are adding additional IPs to eth1, or eth2 also modify that on the example.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/add-secondary-ip-linux.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/how-to-install-django-virtualenv-virtualenvwrapper-ubuntu</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/how-to-install-django-virtualenv-virtualenvwrapper-ubuntu.html"/>
+    <title>Django, virtualenv and Python in Ubuntu</title>
+    <published>2013-05-09T17:17:35-04:00</published>
+    <updated>2013-05-09T17:17:35-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Today for the very first time I needed to install a Django server, so after reading a little some links I had stored from my experiments with Hyde (Which needed Phyton, virtualenv and virtualenvwrapper) I was able to have it installed.&lt;/p&gt;
+
+&lt;p&gt;So, let’s see how to do it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update your Ubuntu server&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Install Ubuntu packages&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install python-setuptools python-dev build-essential
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Install Python specific software&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo easy_install pip
+
+sudo pip install virtualenv virtualenvwrapper
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Everything is installed now, all you need is to set up some variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is better to have those in your .bashrc file, you can modify them a little and then run this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &#39;export WORKON_HOME=~/virtualenvs&#39; &amp;gt;&amp;gt; ~/.bashrc
+echo &#39;source /usr/local/bin/virtualenvwrapper.sh&#39; &amp;gt;&amp;gt; ~/.bashrc
+echo &#39;export PIP_VIRTUALENV_BASE=~/virtualenvs&#39; &amp;gt;&amp;gt; ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now activete the variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Install Django&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You are now ready to install Django. Just create a virtualenv space:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkvirtualenv first_project
+pip install django
+&lt;/code&gt;&lt;/pre&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/how-to-install-django-virtualenv-virtualenvwrapper-ubuntu.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/ubuntu-network-speed-duplex-lan</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/ubuntu-network-speed-duplex-lan.html"/>
+    <title>Ubuntu Network Speed and full or half duplex LAN</title>
+    <published>2013-05-09T11:11:11-04:00</published>
+    <updated>2013-05-09T11:11:11-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;If you need to change your Networks settings in Ubuntu from half duplex to full duplex or the other way, or if you need to change the speed of the port from 10, 100 or 1000 Mbps to any of the other options. Then, here is how to.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Install the tools&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install ethtool net-tools
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Check the names of your interfaces&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cat /proc/net/dev | awk &#39;{print $1}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will list all available interfaces, but you will not know which one you are using, so maybe is better to use.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ip addr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check the one with the ip address you are using, if your PC is not connected you will have to try to guess. In my case the first card is named &lt;em&gt;em1&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Check the supported speeds and modes of your interface&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You need to be sure that the mode and speed you want to assign to your interface is supported.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo ethtool em1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output in my case is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Supported ports: [ TP ]
+Supported link modes:   10baseT/Half 10baseT/Full 
+                        100baseT/Half 100baseT/Full 
+                        1000baseT/Full 
+Supported pause frame use: No
+Supports auto-negotiation: Yes
+Advertised link modes:  10baseT/Half 10baseT/Full 
+                        100baseT/Half 100baseT/Full 
+                        1000baseT/Full 
+Advertised pause frame use: No
+Advertised auto-negotiation: Yes
+Speed: 100Mb/s
+Duplex: Full
+Port: Twisted Pair
+PHYAD: 2
+Transceiver: internal
+Auto-negotiation: on
+MDI-X: off
+Supports Wake-on: pumbg
+Wake-on: g
+Current message level: 0x00000007 (7)
+		       drv probe link
+Link detected: yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see that my hardware supports, 10baseT and 100baseT in half and full duplex, but 1000baseT only in Full duplex.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Set the desired mode&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo ethtool -s em1 autoneg off speed 100 duplex full
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will set the interface em1 to stop auto negotiating and the speed at 100baseT and to full duplex mode.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Making changes permanent&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you need to have this settings every time you boot up the PC, you have to add a command in the &lt;code&gt;/etc/network/interfaces&lt;/code&gt; file, so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /etc/network/interfaces
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And at the beginning of the file add:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pre-up /usr/sbin/ethtool -s em1 autoneg off 100 duplex full
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will set the parameters before bringing the interface up.&lt;/p&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/ubuntu-network-speed-duplex-lan.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/install-kvm-qemu-ubuntu</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/install-kvm-qemu-ubuntu.html"/>
+    <title>Install KVM on Ubuntu</title>
+    <published>2013-02-02T11:30:35-05:00</published>
+    <updated>2013-02-02T11:30:35-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Kernel-based Virtual Machine (KVM) is a virtualization infrastructure for the Linux kernel. KVM requires a processor with hardware virtualization extension.&lt;/p&gt;
+
+&lt;p&gt;I am installing it on my home PC, because there are some services I prefer not to install in my main installation. Like apt-cacher, LAMP, squid, and other servers I like to play with. But I do not want them messing my Desktop PC configuration. I prefer to have them on one or more virtual machines.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Check your system for compatibility&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;First thing, is to be sure your hardware supports KVM. We will do that with &lt;code&gt;kvm-ok&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install cpu-checker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo kvm-ok
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should get something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INFO: /dev/kvm exists
+KVM acceleration can be used
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You may also want to run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;egrep -c &#39;(vmx|svm)&#39; /proc/cpuinfo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If it returns 0, it means, your hardware does not support hardware virtualization. Any other number might be OK&lt;/p&gt;
+
+&lt;p&gt;It is probable that you will have to enable hardware virtualization from BIOS.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Install KVM&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the hardware is ready it is as simple as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install qemu-kvm virt-manager ubuntu-virt-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo adduser `id -un` libvirtd
+
+sudo adduser `id -un` kvm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Reboot your computer, and you are ready to start using KVM, and creating your first virtual machine&lt;/p&gt;
+
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/install-kvm-qemu-ubuntu.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html"/>
+    <title>Install cacti on Ubuntu Server with Apache and PHP-FPM</title>
+    <published>2013-01-27T21:03:35-05:00</published>
+    <updated>2013-01-27T21:03:35-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;If you need to monitor Linux servers, or routers, or any other SNMP enabled device or software, Cacti is maybe your best choice.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Cacti is a complete network graphing solution designed to harness the power of RRDTool’s data storage and graphing functionality. Cacti provides a fast poller, advanced graph templating, multiple data acquisition methods, and user management features out of the box. All of this is wrapped in an intuitive, easy to use interface that makes sense for LAN-sized installations up to complex networks with hundreds of devices.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;– Cacti Home page&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;cacti-on-ubuntu-server&quot;&gt;Cacti on Ubuntu Server&lt;/h2&gt;
+
+&lt;p&gt;The simplier and easiest way to install cacti on Ubuntu is to run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install cacti
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The problem with this way is that, it is going to try to install Apache, with pre-fork MPM and run PHP as a module and &lt;a href=&quot;/en/blog/apache2-mpm-worker-prefork-php.html&quot;&gt;Apache with MPM Worker&lt;/a&gt; is a lot more efficient.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Install Cacti on Ubuntu Server with Apache2 MPM worker and extarnal PHP/CGI PHP-FPM&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We will need to &lt;a href=&quot;/en/blog/ubuntu-lamp-apache2-mpm-worker-and-php-fpm.html&quot;&gt;Apache, MySQL, PHP-FPM&lt;/a&gt;. Once that is done we will continue to adapt the installation to work with cacti. Cacti will be downloaded from its page.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Prepare the server for cacti&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This are packages need to support cacti. First install the dependencies needed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install dbconfig-common fontconfig libcairo2 libdatrie1 libdbi1 rrdtool php5-snmp php5-ldap snmp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Configure PHP&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;PHP needs to have some modules enabled for this work. Here is the list of needed modules:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;mysql&lt;/li&gt;
+  &lt;li&gt;SNMP&lt;/li&gt;
+  &lt;li&gt;XML&lt;/li&gt;
+  &lt;li&gt;Session&lt;/li&gt;
+  &lt;li&gt;Sockets&lt;/li&gt;
+  &lt;li&gt;LDAP&lt;/li&gt;
+  &lt;li&gt;GD&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You may run this command to be sure you have all modules available.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;php -m
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Configure Apache&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I prefer to run cacti on its own server, or at least on its own virtual server, so I will create that virtual server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p /var/www/monitor.domain.com/{public_html,logs}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then create the file in &lt;em&gt;/etc/apache2/sites-available/&lt;/em&gt; It will have this content::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;VirtualHost *:80&amp;gt;
+	ServerAdmin webmaster@localhost
+	ServerName monitor.domain.com
+
+	DocumentRoot /var/www/monitor.domain.com/public_html
+	&amp;lt;Directory /&amp;gt;
+		Options FollowSymLinks
+		AllowOverride All
+	&amp;lt;/Directory&amp;gt;
+	&amp;lt;Directory /var/www/monitor.domain.com/public_html/&amp;gt;
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	&amp;lt;/Directory&amp;gt;
+
+	ErrorLog /var/www/monitor.domain.com/logs/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/www/monitor.domain.com/logs/access.log combined
+	
+
+	&amp;lt;IfModule mod_fastcgi.c&amp;gt;
+	    AddHandler php5-fcgi .php
+	    Action php5-fcgi /php5-fcgi
+	    Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
+	    # FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -socket /var/run/php5-fpm.sock -pass-header Authorization
+	&amp;lt;/IfModule&amp;gt;
+
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now enable the site:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo a2ensite monitor.domain.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Download Cacti&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;You have to download the latest version, which you can get from &lt;a href=&quot;http://www.cacti.net/download_cacti.php&quot;&gt;cacti download page&lt;/a&gt;. Once downloaded, uncompress it, and copy its contents to &lt;em&gt;/var/www/monitor.domain.com/public_html/&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Configure MySQL&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We need to create the database and prepare it for cacti, run all these commands, you will need the MySQL root password.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysqladmin --user=root -p create cacti
+mysql -u root -p cacti &amp;lt; cacti.sql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The file &lt;em&gt;cacti.sql&lt;/em&gt; comes with your cacti package.&lt;/p&gt;
+
+&lt;p&gt;Now, get the MySQL command prompt.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql -u root -p
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And there run these commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GRANT ALL ON cacti.* TO &quot;cacti&quot;@&quot;localhost&quot; IDENTIFIED BY &#39;your-strong-password&#39;;
+FLUSH PRIVILGES;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Two more steps. Create a user that will run cacti, give him the ownership of some folders, and add a cronjob.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo adduser cactiuser
+sudo chown -R cactiuser rra/ log/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last command should be run in your cacti folder, in this case &lt;em&gt;/var/www/monitor.domain.com/public_html/&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finally add the cronjob:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo crontab -e
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And add this line at the end::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;*/5 * * * * cactiuser php /var/www/monitor.domain.com/public_html/poller.php &amp;gt; /dev/null 2&amp;gt;&amp;amp;1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Configure Cacti&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Because I am running cacti in the root directory I need to change some defaults.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /var/www/monitor.domain.com/public_html/include/config.php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And be sure you have these lines::&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$database_type = &quot;mysql&quot;;
+$database_default = &quot;cacti&quot;;
+$database_hostname = &quot;localhost&quot;;
+$database_username = &quot;cacti&quot;;
+$database_password = &quot;your-strong-password&quot;;
+$database_port = &quot;3306&quot;;
+$database_ssl = false;
+
+$url_path = &quot;/&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;You are now ready to monitor your servers, and you have cacti running in an efficient server with Apache, and PHP-FPM as an external CGI instead of a module, which is less efficient.&lt;/p&gt;
+
+&lt;p&gt;Be sure to update cacti to the latest version, as soon as new ones are released. This is important in order to protect the security your information, and also the security of your server.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/install-cacti-on-ubuntu-php-fpm.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/linux/custom-404-page-not-found-error-apache2-ubuntu-linux</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/linux/custom-404-page-not-found-error-apache2-ubuntu-linux.html"/>
+    <title>Apache2 configure custom 404 page not found error page</title>
+    <published>2013-01-11T14:47:35-05:00</published>
+    <updated>2013-01-11T14:47:35-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Two years ago I have posted about &lt;a href=&quot;/en/go2linux/nginx-create-custom-404-page-not-found-error-page.html&quot;&gt;how to set custom 404 “Page not found” error in Nginx&lt;/a&gt;. I am working more with Apache than with Nginx these days. After learning about &lt;a href=&quot;/en/blog/apache2-mpm-worker-prefork-php.html&quot;&gt;Apache MPM Worker&lt;/a&gt; I started with Apache again.&lt;/p&gt;
+
+&lt;p&gt;Well today I will show you different ways to configure 404 custom pages with Apache2. For my tests I have used Ubuntu 12.10, but it should work the same on any other distribution.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Custom 404 “Page Not Found” with Apache2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are different options.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;.htaccess file&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;When you do not have access to the Apache configuration file, which is the case with mosts shared web hosting providers. But they most of the time gives you access to the htaccess file where you can configure your custom error page or message. With a text editor create an error page, you can name it anything you want, what about 404.html&lt;/p&gt;
+
+&lt;p&gt;Inside you can enter something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+	&amp;lt;head&amp;gt;
+		&amp;lt;title&amp;gt;Page not found&amp;lt;/title&amp;gt;
+		&amp;lt;!-- css or anything needed goes here --&amp;gt;
+	&amp;lt;/head&amp;gt;
+	&amp;lt;body&amp;gt;
+		&amp;lt;H1&amp;gt;Page not found&amp;lt;/H1&amp;gt;
+		&amp;lt;p&amp;gt;Sorry but the page you are looking for is not here, please got to our &amp;lt;a href=&quot;/&quot;&amp;gt;Home page&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+	&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now add to your &lt;em&gt;htaccess&lt;/em&gt; file, this line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ErrorDocument 404 /404.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be sure to have 404.html on the root folder of your server.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Virtual host individual file&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you are working with Ubuntu, you will find two important folders under Apache configuration which are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/etc/apache2/sites-available&lt;/li&gt;
+  &lt;li&gt;/etc/apache2/sites-enabled&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The latter are symlinks to the former, so you can go to that folder and pick each of files there (each one is one virtual server) and add this line before the &lt;code&gt;&amp;lt;/VirtualServer&amp;gt;&lt;/code&gt; tag.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ErrorDocument 404 /404.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Global configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also configure one path for all Virtual servers. In that case add the line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ErrorDocument 404 /404.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To the file &lt;em&gt;/etc/apache2/conf.d/localized-error-pages&lt;/em&gt;, you can run this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo sh -c &#39;echo &quot;ErrorDocument 404 /404.html&quot; &amp;gt;&amp;gt; etc/apache2/conf.d/localized-error-pages&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Final notes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you are using a CMS like Drupal or Wordpress they are going to manage 404 errors, and that is a better way, but if your site is a static site, then you can add custom 404 pages this way, and make that page match your design.&lt;/p&gt;
+
+    &lt;a title=&quot;Permalink&quot; class=&quot;permalink&quot; href=&quot;/en/linux/custom-404-page-not-found-error-apache2-ubuntu-linux.html&quot;&gt;
+        ∞ Permalink
+    &lt;/a&gt;
+    </content>
+  </entry>
+  
+ 
+</feed>

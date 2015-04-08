@@ -1,0 +1,253 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/go2linux/save-android-battery-tasker.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="How to use tasker to save your Android's battery" />
+
+        <!-- End SEO includes -->
+        <title>Save Battery on Android with Tasker</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Save Battery on Android with Tasker">
+        <meta name="twitter:description" content="How to use tasker to save your Android's battery">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/go2linux/index.html">Go2Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Save Battery on Android with Tasker</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/go2linux/save-android-battery-tasker.html">Save Battery on Android with Tasker</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-03-25 10:36:30 -0400</h6>
+
+<hr>
+<h2>Introduction</h2>
+
+<p>Battery duration is a concern to all smart phone users, well maybe the Nokia E Series and the Black Berry users are less concerned about this, I do not know if it is becase Symbian and Black Berry OS are better in saving the battery juice, or becase they have less applications running in the background.</p>
+
+<p>But, for the iPhone users and of course for the Android users, battery duration is a concern. Talking about Android, there are some programs that try to give you more battery hours (juice). And the most famous are:</p>
+
+<ul>
+<li>Advance Task Manager</li>
+<li>Advance Task Killer</li>
+<li>Juice Defender</li>
+</ul>
+
+<p>The first two, aims to kill programs running the background that may be eating your battery, this is done periodically, but in a lot of forums I&#8217;ve read that the benefit is smaller than the problem at using this kind of programs. A lot of people say that it consumes more power running in the background and killing apps, than the power they save.</p>
+
+<p>The last one, really helps, what it does is to disable radios (wifi and data) and therefore save a lot of power.  The most power consuming tasks in your Android phone are:</p>
+
+<ul>
+<li>Reading something (enabling screen)</li>
+<li>Syncing, or downloading from Internet (enabling 3G/Edge data or wifi)</li>
+</ul>
+
+<p>So, if you limit those two you&#8217;ll save power, how you do it?. Well there are lots of ways.</p>
+<!--break-->
+<h2>Saving battery on Android Phones</h2>
+
+<p>As usually in life, you have to give something to get something else, in this case is exactly the same way. So here are some points to have in mind if you really need your phone battery to last some extra hours.</p>
+
+<ul>
+<li>Avoid turning screen on, too many times, and when done, turn it off as soon as you can.</li>
+<li>Switch to 2G if you can, if data is too slow in 2G then go to 3G but try to avoid &#8220;Dual mode&#8221;, as it will make your phone scan two networks, so choose one of them, unless you have areas with only 2G coverage and others with only 3G coverage, but be ready to pay the price (battery will last less time).</li>
+<li>Sync your applications less frequently, unless you really need to be in push mode, try to avoid it.</li>
+</ul>
+
+<p>Now, let&#8217;s focus in syncing schedule.</p>
+
+<h2>Sync less frequently your Android phone</h2>
+
+<p>This is the best way to save some battery juice, and I&#8217;ve tested three ways to do this.</p>
+
+<ol>
+<li>Manually disabling all data, and sync and wifi in your phone, and manually enabling it when you need to.</li>
+<li>Use Juice Defender to sync your phone periodically, without your intervention.</li>
+<li>Use tasker to sync your phone without your intervention.</li>
+</ol>
+
+<p>The first option is somehow obvious, but it is also annoying to have to check for new email, or tweets manually, unless you only do that at night when at home, but in that case, you may not need a smart phone and better you check your email at your laptop or desktop computer.</p>
+
+<p>The second one, is to use <a href="http://latedroid.com/juicedefender">Juice Defender</a>. According to its webpage:</p>
+
+<blockquote>
+  <p>Being online at any time and any place is what smartphones are all about. But this continuous connectivity comes with a pretty annoying drawback: high power consumption, hence short battery life.</p>
+
+<p>JuiceDefender extends your battery life by intelligently and transparently managing the most battery-draining components of your Android device, like 3G/4G connectivity and WiFi.</p>
+</blockquote>
+
+<p>It worked, and really improved battery life, as my mail was synced only every 15 minutes, no updates at night (I need some sleep), I&#8217;ve turned wifi location on, which is a feature that learns where your wifi networks are, and only turn wifi on, when you are near those places. It must be said that it does not need the GSP but only the network location features of the phone.</p>
+
+<p>I&#8217;ve bought the ultimate version, but had problems with my Xperia mini pro as my phone restarted few times in the day with no reason, and that even happened to me during a long distance call, so I decided to stop using it.</p>
+
+<p>I&#8217;ve started with <a href="http://tasker.dinglisch.net/">tasker</a>, it is not intended to be a battery safer, but more like a crontab file, well actually little bit more than just a crontab file, as it does not only act on scheduled task, but also respond to different situations, like position, state of the phone, state of some applications.</p>
+
+<p>So, how did I configure it, to save some battery.</p>
+
+<p>Well, I&#8217;ve turned off Data, wifi, and sycn by default, and every 1 hour I turn Data and sync on for 2 minutes, I&#8217;ve also configured a task, to turn on Data and sync when I turn Gmail or Whatsapp on. You may add browser, skype, market and other apps there.</p>
+
+<p>You can make it turn gps on, when you are using maps, and you can also make it enable wifi when you are at certain location, for that you set a variable when are near a GSM cell.</p>
+
+<p>And then turn on wifi is that variable is set at that value and turn it off when not, I of course created a variable wifi-near and put it to &#8216;1&#8217; when near my home and office, and to &#8216;0&#8217; when not, so wifi is turned on if I&#8217;m at home or at my office.  That was just a test, and then I better turned wifi of, unless I really want to turn it on manually, (I have a 300M data plan).</p>
+
+<h2>Conclusion</h2>
+
+<p>Using this last method I&#8217;ve achieved 2 days and 16 hours with 5% of battery remaining after full charge. And at that time my battery usage was:</p>
+
+<ul>
+<li>Phone 55%</li>
+<li>Cell standby 33%</li>
+<li>Display 9%</li>
+<li>Wifi 3%</li>
+<li>Android System 3%</li>
+<li>Voice calls 2%</li>
+</ul>
+
+<p>I forgot to say that from 23 hours to 6 hours, my phone goes to <a href="http://en.wikipedia.org/wiki/Flight_mode">airplane mode</a></p>
+
+<hr>
+<a href="http://www.garron.me/en/go2linux/save-android-battery-tasker.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/go2linux/save-android-battery-tasker.html&text=Save Battery on Android with Tasker&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/go2linux/save-android-battery-tasker.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/go2linux/save-android-battery-tasker.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/go2linux/save-android-battery-tasker.html">linkedin</a> | <a href="mailto:?Subject=Save Battery on Android with Tasker&Body=http://www.garron.me/en/go2linux/save-android-battery-tasker.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/go2linux/save-android-battery-tasker.html&title=Save Battery on Android with Tasker" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

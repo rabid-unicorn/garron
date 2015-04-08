@@ -1,0 +1,394 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/iptables-manual.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Small iptables manual, with tips and examples" />
+
+        <!-- End SEO includes -->
+        <title>iptables: Small manual and tutorial with some examples and tips</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="iptables: Small manual and tutorial with some examples and tips">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">iptables: Small manual and tutorial with some examples and tips</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/iptables-manual.html">iptables: Small manual and tutorial with some examples and tips</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-04-18 14:06:00 -0400</h6>
+
+<hr>
+<p>This is a small manual of <code>iptables</code>, I’ll show some basic commands, you may need to know to keep your computer secure.</p>
+
+<h3 id="basic-commands">Basic commands</h3>
+
+<p><strong>List rules</strong></p>
+
+<pre><code>iptables -L
+</code></pre>
+
+<p>This is going, list the default table “Filter”.</p>
+
+<p>Edit: You may prefer to use <code>iptables -L -vn</code> to get more information, and to see ports as numbers instead of its names.</p>
+
+<p><strong>List rules in specific table</strong></p>
+
+<pre><code>iptables -L -t nat
+</code></pre>
+
+<p>You can also list the other tables like: mangle, raw and security. You should consider reading a bit more about tables. You can do it in the <em>Tables</em> section in the man page of <code>iptables</code></p>
+
+<p><strong>Delete all rules</strong></p>
+
+<pre><code>iptables -F
+</code></pre>
+
+<p><strong>Delete specific table liket nat</strong></p>
+
+<pre><code>iptables -t nat -F
+</code></pre>
+
+<p><strong>Specify chain policies</strong></p>
+
+<p><code>iptables</code> let’s you configure default policies for <em>chains</em> in the filter table, where INPUT, FORWARD and OUTPUT, are the main ones (or at least the most used). Users can even define new chains.</p>
+
+<p>These aforementioned chains, are better explained in this graph that comes from Wikipedia.</p>
+
+<p><img src="/images/2012-04/Netfilter-packet-flow.svg" class="img-responsive" alt="iptables chains" /></p>
+
+<p>You can see the original image <a href="http://upload.wikimedia.org/wikipedia/commons/3/37/Netfilter-packet-flow.svg">here</a></p>
+
+<pre><code>iptables -P INPUT DROP
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT DROP
+</code></pre>
+
+<p>You can define the default policy as <em>ACCEPT</em> and then deny specific traffic, or define default policies as <em>DROP</em> and then open specific traffic to and/or from your box. The last one is more secure, but require more job.</p>
+
+<p><strong>Block IP traffic from an specific IP or Network.</strong></p>
+
+<p>Block from an IP</p>
+
+<pre><code>iptables -A INPUT -s 11.22.33.44 -j DROP
+</code></pre>
+
+<p>If you want to block only on an specific NIC</p>
+
+<pre><code>iptables -A INPUT -s 11.22.33.44 -i eth0 -j DROP
+</code></pre>
+
+<p>Or an specific port</p>
+
+<pre><code>iptables -A INPUT -s 11.22.33.44 -p tcp -dport 22 -j DROP
+</code></pre>
+
+<p>Using a Network and not only one IP</p>
+
+<pre><code>iptables -A INPUT -s 11.22.33.0/24 -j DROP
+</code></pre>
+
+<p><strong>Block traffic from a specific MAC address</strong></p>
+
+<p>Suppose you want to bloc traffic some a MAC address instead of an IP address. This is handy if a DHCP server is changing the IP of the maching you want to protect from.</p>
+
+<pre><code>iptables -A INPUT -m mac --mac-source 00:11:2f:8f:f8:f8 -j DROP
+</code></pre>
+
+<p><strong>Block a specific port</strong></p>
+
+<p>If all you want is to block a port, <code>iptables</code> can still do it.</p>
+
+<p>And you can block incoming or outgoing traffic.</p>
+
+<p><em>Block incoming traffic to a port</em></p>
+
+<p>Suppose we need to block port 21 for incoming traffic:</p>
+
+<pre><code>iptables -A INPUT -p tcp --destination-port 21 -j DROP
+</code></pre>
+
+<p>But if you have two-NIC server, with one NIC facing the Internet and the other facing your local private Network, and you only one to block FTP access from outside world.</p>
+
+<pre><code>iptables -A INPUT -p tcp -i eth1 -p tcp --destination-port 21 -j DROP
+</code></pre>
+
+<p>In this case I’m assuming eth1 is the one facing the Internet.</p>
+
+<p>You can also block a port from a specific IP address:</p>
+
+<pre><code>iptables -A INPUT -p tcp -s 22.33.44.55 --destination-port 21 -j DROP
+</code></pre>
+
+<p>Or even block access to a port from everywhere but a specific IP range.</p>
+
+<pre><code>iptables -A INPUT p tcp -s ! 22.33.44.0/24 --destination-port 21 -j DROP
+</code></pre>
+
+<p><em>Block outgoing traffic to a port</em></p>
+
+<p>If you want to forbid outgoing traffic to port 25, this is useful, in the case you are running a Linux firewall for your office, and you want to stop virus from sending emails.</p>
+
+<pre><code>iptables -A FORWARD -p tcp --dport 25 -j DROP
+</code></pre>
+
+<p>I’m using FORWARD, as in this example the server is a firewall, but you can use OUTPUT too, to block also server self traffic.</p>
+
+<p><strong>Log traffic, before taking action</strong></p>
+
+<p>If you want to log the traffic before blocking it, for example, there is a rule in an office, where all employees have been said not to log into a given server, and you want to be sure everybody obeys the rule by blocking access to ssh port. But, at the same time you want to find the one who tried it.</p>
+
+<pre><code>iptables -A INPUT -p tcp --dport 22 -j LOG --log-prefix "dropped access to port 22"
+iptables -A INPUT -p tcp --dport 22 -j DROP
+</code></pre>
+
+<p>You will be able to see which IP tried to access the server, but of course he couldn’t.</p>
+
+<h3 id="tips-and-tricks">Tips and Tricks</h3>
+
+<p>Because <code>iptables</code> executes the rules in order, if you want to change something you need to insert the rule in the specific position, or the desired effect is not going to be achieved.</p>
+
+<p><strong>List rules with numbers</strong></p>
+
+<pre><code>iptables -nL --line-numbers
+</code></pre>
+
+<p>This is going to list all your rules with numbers preceding the rules. Determine where you want the inserted rule and write:</p>
+
+<p><strong>List specific chains</strong></p>
+
+<pre><code>iptables -nL INPUT
+</code></pre>
+
+<p>Will list all INPUT rules.</p>
+
+<pre><code>iptables -nL FORWARD
+</code></pre>
+
+<p>Will list all OUTPUT rules</p>
+
+<p><strong>Insert rules</strong></p>
+
+<pre><code>iptables -I INPUT 3 -s 10.0.0.0/8 -j ACCEPT
+</code></pre>
+
+<p>That is going to add a rule in position 3 of the “array”</p>
+
+<p><strong>Delete rules</strong></p>
+
+<pre><code>iptables -D INPUT 3
+</code></pre>
+
+<p>That is going to remove the rule inserted above. You can also remove it, by matching it.</p>
+
+<pre><code>iptables -D INPUT -s 10.0.0.0/8 -j ACCEPT
+</code></pre>
+
+<p><strong>Delete flush all rules and chains</strong></p>
+
+<p>This steps are very handy if you want to start with a completely empty and default tables:</p>
+
+<pre><code>iptables --flush
+iptables --table nat --flush
+iptables --table mangle --flush
+iptables --delete-chain
+iptables --table nat --delete-chain
+iptables --table mangle --delete-chain
+</code></pre>
+
+<p><em>NOTE: do not execute this rules if you are connected via ssh or something similar, you may get locked out</em></p>
+
+<h3 id="simple-scripts-for-specific-needs">Simple scripts for specific needs</h3>
+
+<p><strong>How to stop brute force attacks</strong></p>
+
+<p>You can also use <code>iptables</code> to stop brute force attacks to your server, for example: Allow only three attempts to log through ssh before banning the IP for 15 minutes, this should let legitimate users to log to the servers, but bots will not be able. <strong>Remember to always use strong passwords</strong></p>
+
+<pre><code>iptables -F
+iptables -A INPUT -i lo -p all -j ACCEPT
+iptables -A OUTPUT -o lo -p all -j ACCEPT                    
+iptables -A INPUT -i eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p tcp --dport ssh -j ACCEPT
+iptables -A INPUT -p tcp --dport www -j ACCEPT
+iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --set
+iptables -I INPUT -p tcp --dport 22 -i eth0 -m state --state NEW -m recent --update --seconds 900 --hitcount 3 -j DROP
+iptables -P INPUT DROP
+</code></pre>
+
+<p><strong>How to NAT with <code>iptables</code></strong></p>
+
+<p><code>iptables</code> is also very useful to configure NAT routers, a Linux mashing can act as a router, and share its public IP with a private networks behind it. It is also useful to configure the DHCP in the same server.</p>
+
+<p>To configure a NAT router, you will be better with a server with two NICs, let’s suppose you have:</p>
+
+<ul>
+  <li>eth0: 12.13.14.15</li>
+  <li>eth1: 10.1.1.1</li>
+</ul>
+
+<p>Now configure NAT to forward all traffic from 10.1.1.0 network through eth0 IP. You may want to empty all tables and start with a fresh chains and tables (see how above).</p>
+
+<pre><code>iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE
+iptables --append FORWARD --in-interface eth1 -j ACCEPT
+</code></pre>
+
+<p>That is it, you only have to enable kernel forwarding now:</p>
+
+<pre><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</code></pre>
+
+<hr>
+<a href="http://www.garron.me/en/linux/iptables-manual.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/iptables-manual.html&text=iptables: Small manual and tutorial with some examples and tips&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/iptables-manual.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/iptables-manual.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/iptables-manual.html">linkedin</a> | <a href="mailto:?Subject=iptables: Small manual and tutorial with some examples and tips&Body=http://www.garron.me/en/linux/iptables-manual.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/iptables-manual.html&title=iptables: Small manual and tutorial with some examples and tips" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

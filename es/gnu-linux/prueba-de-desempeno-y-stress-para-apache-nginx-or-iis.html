@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- SEO includes -->
+        
+
+<link href="/es/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+        <link rel="canonical" href="http://www.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Prueba de desempeño y stress para Apache, Nginx or IIS" />
+
+        <!-- End SEO includes -->    
+        <title>Prueba de desempeño y stress para Apache, Nginx or IIS</title>
+        <!-- CSS -->
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Vollkorn|Old+Standard+TT|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.journal.min.css" rel="stylesheet">
+        <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet">
+        <!-- Custom Css -->
+        <!-- <style>body {background-color: #FFFFFF;}
+
+body,
+input,
+small,
+button,
+select,
+textarea,
+.navbar-search .search-query {
+  font-family: "Source Sans Pro", "Vollkorn", Georgia, "Times New Roman", Times, serif; font-weight: 300; font-size: 18px; line-height: 26px; color: #404040;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josefin Slab", Georgia, "Times New Roman", Times, serif; font-weight: 400; color: #101010;
+}
+
+.gallery-image-wrapper {
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+  margin: 1em;
+  position: relative;
+  text-align: left;
+}
+.gallery-image {
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#text-center {
+text-align: center
+}
+</style> -->
+        <!-- End custom css -->
+        <!-- End CSS -->
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Prueba de desempeño y stress para Apache, Nginx or IIS">
+        <meta name="twitter:description" content="Prueba de desempeño y stress para Apache, Nginx or IIS">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+            <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-static-top visible-xs visible-sm">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/es/"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/es/">Inicio</a></li>
+            <li><a href="/es/gnu-linux/">Linux</a></li>
+            <li><a href="/es/mac-os/">Mac</a></li>
+            <li><a href="/es/cortos/">Tips</a></li>
+            <li><a href="/es/articulos/">Artículos</a></li>
+            <li><a href="/es/archivos.html">Archivos</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Personales <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/es/bitacora/">Bitacora</a></li>
+                <li><a href="/es/fotos/">Fotos</a></li>
+                <li><a href="/es/recetas/">Comida</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div class="container">
+    <!-- Nav Bar -->
+    <H1><a href="/es/">Guillermo Garron</a></h1>
+<p>Suscribete: <a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p>
+<ol class="breadcrumb">
+
+	<li><a href="/index.html">Geeking</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/index.html">Tecnología</a>
+	<li class="divider">&gt;</li>
+
+	<li><a href="/es/gnu-linux/index.html">GNU Linux</a>
+	<li class="divider">&gt;</li>
+
+	<li class="active">Prueba de desempeño y stress para Apache, Nginx or IIS</li>
+</ol>
+
+
+    <!-- Nav Bar -->
+    <div id="content" class="row">
+        <div class="col-md-2 visible-lg visible-md">
+            <h4>Categorias</h4>
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li><h4>Tecnicas</h4></li>
+    <li><a href="/es/gnu-linux/">Linux</a></li>
+    <li><a href="/es/mac-os/">Mac</a></li>
+    <li><a href="/es/cortos/">Tips</a></li>
+    <li><a href="/es/articulos/">Artículos</a></li>
+    <hr>
+    <li><h4>Personales</h4></li>
+    <li><a href="/es/bitacora/">Reflexiones</a></li>
+    <li><a href="/es/fotos/">Fotos</a></li>
+    <li><a href="/es/recetas/">Cocinando</a></li>
+    <hr>
+    <li><a href="/es/archivos.html">Archivos</a></li>
+    <hr>
+    <li><p><a href="/es/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=BitacoraGuillermo&amp;loc=en_US" class="ss-icon ss-social-circle">email</a></p></li>
+  </ul>
+</div>
+
+        </div>
+        <div class="col-md-7">
+            <h3><a href="/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html">Prueba de desempeño y stress para Apache, Nginx or IIS</a></h3>
+<h6>Escrito por: <a href="/es/acerca-de.html">Guillermo Garron</a> .</h6>
+<h6>Fecha: 2012-05-15 14:25:00 -0400</h6>
+<hr>
+<p>Si estas usando un servidor web, ya sea este Apache, Nginx, lighthttpd, Cherokee o incluso IIS (que no recomiendo), debes querer saber como se desempeña bajo una fuerte carga.</p>
+
+<p>Cualquiera de los anteriormente mencionados servidores web, reaccionaran bien, con los parámetros por defecto, pero cuando tu sitio es listado en menéame.net, o tu página se vuelve viral en Twitter o Facebook, entonces, puedes estar en problemas y desilusionar a tus visitantes.</p>
+
+<p>Lo mejor que puedes hacer es probar tu sitio, y simular grandes cargas de trabajo, para que puedas ajustar las configuraciones del servidor que te encuentres usando, y así puedas soportar la carga en ese gran día.</p>
+
+<p>Vamos a usar <code>ab</code> para realizar la prueba.</p>
+
+<p>Veamos que es lo que necesitamos:</p>
+
+<ul>
+  <li>Servidor a ser probado
+    <ul>
+      <li>Archivo html</li>
+      <li>Archivo PHP</li>
+      <li>Archivo de imagen (puede ser png o jpg)</li>
+    </ul>
+  </li>
+  <li>Otro servidor con Apache instalado, desde este correremos las pruebas, debe haber suficiente ancho de banda disponible entre ambos, para que los resultados no sean sesgados. De ser posible, ambos servidores deben estar en el mismo Data Center.</li>
+</ul>
+
+<p>He aquí el contenido de los archivos arriba listados:</p>
+
+<p><em>El Archivo HTML</em></p>
+
+<pre><code> &lt;html&gt;
+ &lt;title&gt;Simple HTML file for testing server&lt;/title&gt;
+ &lt;h1&gt;Heading number 1&lt;/h1&gt;
+ &lt;p&gt;With this file I will test an Apache server&lt;/p&gt;
+ &lt;p&gt;&lt;a href="http://bitacora.garron.me/linux/"&gt;Linux&lt;/p&gt;
+ &lt;/html&gt;
+</code></pre>
+
+<p><em>El Archivo PHP</em></p>
+
+<pre><code> &lt;html&gt;
+ &lt;Title&gt;PHP info&lt;/title&gt;
+ &lt;?php
+
+      // Lista información de PHP
+      phpinfo();
+
+      // Muestra información de los módulos
+      phpinfo(INFO_MODULES);
+
+  ?&gt;
+  &lt;/html&gt;
+</code></pre>
+
+<p><em>El Archivo de Imagen</em></p>
+
+<p>El archivo de imagen es un archivo jpg de 72.252 bytes.</p>
+
+<p><strong>Corriendo la prueba</strong></p>
+
+<p>Se alojan los tres archivos en un directorio de tu servidor web y corres las siguientes pruebas:</p>
+
+<pre><code> ab -kc 1000 -n 10000 http://www.some-site.cc/tmp/index.html
+</code></pre>
+
+<p>Eso enviará 1.000 sesiones concurrentes 10.000 veces, y los resultados son:</p>
+
+<pre><code> This is ApacheBench, Version 2.0.41-dev &lt;$Revision: 1.141 $&gt; apache-2.0       
+ Copyright (c) 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/  
+ Copyright (c) 2006 The Apache Software Foundation, http://www.apache.org/     
+ 
+ Benchmarking www.some-site.cc (be patient)
+ Completed 1000 requests
+ Completed 2000 requests
+ Completed 3000 requests
+ Completed 4000 requests
+ Completed 5000 requests
+ Completed 6000 requests
+ Completed 7000 requests
+ Completed 8000 requests
+ Completed 9000 requests
+ Finished 10000 requests
+ 
+ 
+ Server Software:        Apache/2.2.9
+ Server Hostname:        www.some-site.cc
+ Server Port:            80
+ 
+ Document Path:          /tmp/index.html
+ Document Length:        207 bytes
+ 
+ Concurrency Level:      1000
+ Time taken for tests:   6.571282 seconds
+ Complete requests:      10000
+ Failed requests:        0
+ Write errors:           0
+ Keep-Alive requests:    9923
+ Total transferred:      5744865 bytes
+ HTML transferred:       2083869 bytes
+ Requests per second:    1521.77 [#/sec] (mean)
+ Time per request:       657.128 [ms] (mean)
+ Time per request:       0.657 [ms] (mean, across all concurrent requests)
+ Transfer rate:          853.71 [Kbytes/sec] received
+ 
+ Connection Times (ms)
+               min  mean[+/-sd] median   max
+ Connect:        0    3  26.1      0     225
+ Processing:     1   69 482.3     12    5947
+ Waiting:        0   68 482.3     12    5946
+ Total:          1   72 504.3     12    6143
+ 
+ Percentage of the requests served within a certain time (ms)
+   50%     12
+   66%     17
+   75%     21
+   80%     21
+   90%     37
+   95%     39
+   98%    130
+   99%   2647
+  100%   6143 (longest request)
+</code></pre>
+
+<p>Hagamos lo mismo con el archivo PHP, y los resultados son:</p>
+
+<pre><code>This is ApacheBench, Version 2.0.41-dev &lt;$Revision: 1.141 $&gt; apache-2.0      
+Copyright (c) 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/ 
+Copyright (c) 2006 The Apache Software Foundation, http://www.apache.org/    
+
+Benchmarking www.some-site.cc (be patient)
+Completed 1000 requests                   
+Completed 2000 requests                   
+Completed 3000 requests
+Completed 4000 requests
+Completed 5000 requests
+Completed 6000 requests
+Completed 7000 requests
+Completed 8000 requests
+Completed 9000 requests
+Finished 10000 requests
+
+
+Server Software:        Apache/2.2.9
+Server Hostname:        www.some-site.cc
+Server Port:            80
+
+Document Path:          /tmp/index.php
+Document Length:        62446 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   157.530617 seconds
+Complete requests:      10000
+Failed requests:        21
+   (Connect: 0, Length: 21, Exceptions: 0)
+Write errors:           0
+Keep-Alive requests:    0
+Total transferred:      628658346 bytes
+HTML transferred:       626254006 bytes
+Requests per second:    63.48 [#/sec] (mean)
+Time per request:       15753.062 [ms] (mean)
+Time per request:       15.753 [ms] (mean, across all concurrent requests)
+Transfer rate:          3897.17 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0 3898 9601.3    132   93114
+Processing:   711 4816 9077.5   2852  151641
+Waiting:       96 4079 8403.1   2434  147921
+Total:        964 8715 13258.0   4959  152406
+
+Percentage of the requests served within a certain time (ms)
+  50%   4959
+  66%   6265
+  75%   8895
+  80%  11189
+  90%  19319
+  95%  25519
+  98%  50649
+  99%  69027
+ 100%  152406 (longest request)
+</code></pre>
+
+<p>Y finalmente con la imagen:</p>
+
+<pre><code> This is ApacheBench, Version 2.0.41-dev &lt;$Revision: 1.141 $&gt; apache-2.0               
+ Copyright (c) 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/          
+ Copyright (c) 2006 The Apache Software Foundation, http://www.apache.org/             
+ 
+ Benchmarking www.some-site.cc (be patient)
+ Completed 1000 requests
+ Completed 2000 requests
+ Completed 3000 requests
+ Completed 4000 requests
+ Completed 5000 requests
+ Completed 6000 requests
+ Completed 7000 requests
+ Completed 8000 requests
+ Completed 9000 requests
+ Finished 10000 requests
+ 
+ 
+ Server Software:        Apache/2.2.9
+ Server Hostname:        www.some-site.cc
+ Server Port:            80
+ 
+ Document Path:          /tmp/38_TaylorSwift.jpg
+ Document Length:        72252 bytes
+ 
+ Concurrency Level:      1000
+ Time taken for tests:   30.131674 seconds
+ Complete requests:      10000
+ Failed requests:        0
+ Write errors:           0
+ Keep-Alive requests:    10000
+ Total transferred:      730617980 bytes
+ HTML transferred:       726894150 bytes
+ Requests per second:    331.88 [#/sec] (mean)
+ Time per request:       3013.167 [ms] (mean)
+ Time per request:       3.013 [ms] (mean, across all concurrent requests)
+ Transfer rate:          23679.20 [Kbytes/sec] received
+ 
+ Connection Times (ms)
+               min  mean[+/-sd] median   max
+ Connect:        0    5  49.6      0     552
+ Processing:   311  440 153.4    422    5346
+ Waiting:        7  190 172.0    201    4912
+ Total:        311  446 184.0    422    5898
+ 
+ Percentage of the requests served within a certain time (ms)
+   50%    422
+   66%    433
+   75%    455
+   80%    460
+   90%    474
+   95%    496
+   98%    566
+   99%    820
+  100%   5898 (longest request)
+</code></pre>
+
+<p>Vamos ahora con las partes mas relevantes de los resultados y expliquemos un poco su significado.</p>
+
+<p><strong>Para el archivo html</strong>
+     Requests per second:    1521.77 [#/sec] (mean)
+     Time per request:       657.128 [ms] (mean)
+<strong>Para el archivo PHP</strong>
+     Requests per second:    63.48 [#/sec] (mean)
+     Time per request:       15753.062 [ms] (mean)
+<strong>Para el archivo de imagen</strong>
+     Requests per second:    331.88 [#/sec] (mean)
+     Time per request:       3013.167 [ms] (mean)</p>
+
+<p>Como pueden ver, para el archivo html, se sirven 1.521 peticiones por segundo, para la imagen 331 y para el php solo 63, esto es porque, el PHP requiere de mucho más trabajo del procesador y esto hace que cada requerimiento se sirva mas lento, lo que pone en cola muchos requerimientos al servidor, haciendo que incluso algunos no sean atendidos.</p>
+
+<p>He aquí una imagen de los resultados de htop, cuando se esta corriendo la prueba sobre el archivo PHP</p>
+
+<p><img src="/images/2013/04/htop-apache.png" alt="imagen top htop de apache bajo stress" class="img-responsive" /></p>
+
+<p>Algo que pueden hacer, es instalar cache de algún tipo, como ser APC. Ese seria el más efectivo para este caso, aunque varnish también puede ayudar bastante. Lo bueno es que ya saben como probar en cada fase de su configuración.</p>
+
+<hr>
+En Categoria: <strong><a href="/es/gnu-linux/">es|gnu-linux</a></strong> | <a href="http://www.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html">permalink</a>
+<hr>
+<p>Si te gusto el artículo, por favor compartelo</p>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html&text=Prueba de desempeño y stress para Apache, Nginx or IIS&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html">linkedin</a> | <a href="mailto:?Subject=Prueba de desempeño y stress para Apache, Nginx or IIS&Body=http://www.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html&title=Prueba de desempeño y stress para Apache, Nginx or IIS" class="ss-icon ss-social-circle">reddit</a></p>
+<hr>
+<div id="discourse-comments"></div>
+
+<script type="text/javascript">
+  var discourseUrl = "http://discusion.detecnologia.org/",
+      discourseEmbedUrl = 'http://www.garron.me/es/gnu-linux/prueba-de-desempeno-y-stress-para-apache-nginx-or-iis.html';
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+</script>
+
+
+
+<hr>
+
+        </div>
+        <div class="col-md-3">
+            <!-- Esta es la columna derecha que debe estar vacía por ahora -->
+        </div>
+    </div>
+</div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/bootstrap/js/magnific-popup.js"></script>
+        <script src="/bootstrap/js/custom.js"></script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

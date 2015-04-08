@@ -1,0 +1,320 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html" />
+        
+<meta name="robots" content="noopd, noydir" />
+
+
+<meta name="description" content="Make Wordpress fly with Nginx, PHP-FPM, APC and Varnish" />
+
+        <!-- End SEO includes -->
+        <title>Nginx, PHP-FPM, APC, Varnish and Wordpress</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Nginx, PHP-FPM, APC, Varnish and Wordpress">
+        <meta name="twitter:description" content="Make Wordpress fly with Nginx, PHP-FPM, APC and Varnish">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Nginx, PHP-FPM, APC, Varnish and Wordpress</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">Nginx, PHP-FPM, APC, Varnish and Wordpress</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-04-27 17:20:00 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/wordpress.html">wordpress</a>,<a href="/en/tag/tutorial.html">tutorial</a>,</small></p>
+
+<hr>
+<h3 id="installing-needed-software">Installing needed software</h3>
+
+<p>I’m using Arch Linux as the server, so let’s install needed software.
+First be sure you have the latest available software now install all the stuff.</p>
+
+<pre><code>pacman -Syu
+</code></pre>
+
+<p>Now install <em>Nginx</em>, <em>PHP-FPM</em> and <em>MySQL</em></p>
+
+<pre><code>pacman -S nginx php-fpm mysql
+</code></pre>
+
+<p>Now let’s first take some steps to be sure mysql installation is secure.</p>
+
+<pre><code>/etc/rc.d/mysqld start
+mysql_secure_installation
+</code></pre>
+
+<p>In case you need help answering the questions, you can find some help in <a href="http://www.howtoforge.com/installing-nginx-with-php5-and-php-fpm-and-mysql-support-on-centos-6.0">this page</a> check the <em>MySQL</em> section.</p>
+
+<h3 id="configure-php-fpm">Configure PHP-FPM</h3>
+
+<p>First let’s be sure <em>PHP-FPM</em> is using a socks instead of listening to a port, that makes it more efficient. In my Arch Linux version, that is already that way. Anyway look for these lines.</p>
+
+<pre><code>;listen = 127.0.0.1:9000
+listen = /var/run/php-fpm/php-fpm.sock
+</code></pre>
+
+<p>And be sure that the one listening to a port is commented and not the one listening to a socket, if you need to add the line do it.</p>
+
+<p>You also need to uncomment these lines from <code>php.ini</code> file:</p>
+
+<pre><code>;extension=mysqli.so
+;extension=mysql.so
+</code></pre>
+
+<p>And make them look like this:</p>
+
+<pre><code>extension=mysqli.so
+extension=mysql.so
+</code></pre>
+
+<p>This way PHP will be able to connect with MySQL, which is needed by Wordpress</p>
+
+<h3 id="configure-nginx">Configure Nginx</h3>
+
+<p>Now that we have <em>PHP-FPM</em> working and listing to a socket, let’s make Nginx send PHP requests to that socket.</p>
+
+<p>Add this to your server snippet:</p>
+
+<pre><code>    location ~ \.php$ {
+            try_files $uri =404;
+            fastcgi_pass   unix:/var/run/php-fpm/php-fpm.sock;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+    }
+</code></pre>
+
+<p>We should now have a server capable to manage PHP scripts.</p>
+
+<h3 id="configure-mysql">Configure MySQL</h3>
+
+<p>It is <em>MySQL</em> turn now, let’s create the database:</p>
+
+<pre><code>mysql -u root -p
+</code></pre>
+
+<p>Now create the database, and grant access to the user.</p>
+
+<pre><code>CREATE DATABASE `wordpress`;
+GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpress'@'localhost' IDENTIFIED BY 'your-password';
+FLUSH PRIVILEGES;
+EXIT
+</code></pre>
+
+<p><strong>Enable MySQL Query Cache</strong></p>
+
+<p>Add this to the <code>my.cnf</code> file in the <code>[mysqld]</code> section:</p>
+
+<pre><code>query_cache_limit = 1M
+query_cache_size = 16M
+query_cache_type = 1
+</code></pre>
+
+<p>This will make MySQL a little bit more efficient, as it will be able to cache some queries.</p>
+
+<h3 id="install-and-enable-apc">Install and enable APC</h3>
+
+<p>In my case with Arch Linux I did:</p>
+
+<pre><code>pacman -S php-apc
+</code></pre>
+
+<p>And to enable it:</p>
+
+<ul>
+  <li>Edit <code>php.ini</code> file</li>
+  <li>Add this line: <code>extension=apc.so</code></li>
+</ul>
+
+<p>APC is:</p>
+
+<blockquote>
+  <p>Alternative PHP Cache is a free, open source (PHP license) framework that optimizes PHP intermediate code and caches data and compiled code from the PHP bytecode compiler in shared memory. (Source: Wikipedia)</p>
+</blockquote>
+
+<h3 id="install-varnish">Install Varnish</h3>
+
+<p>APC will increase performance with logged users, but for not logged users, the best way to increase performance is by using <a href="https://www.varnish-cache.org/">Varnish Cache</a>.</p>
+
+<p><strong>Installing Varnish Cache</strong></p>
+
+<pre><code>pacman -S varnish
+</code></pre>
+
+<p><strong>Configure Varnish Cache for Wordpress</strong></p>
+
+<h3 id="install-wordpress">Install Wordpress</h3>
+
+<p>You are now ready to go to <a href="http://www.wordpress.org">wordpress</a> site and download the latest version, and install it.</p>
+
+<h3 id="full-configuration-files">Full Configuration Files</h3>
+
+<p>If you want to get the full configuration files, download them <a href="/uploaded-files/conf-files.tar.gz">here</a></p>
+
+<p>Here is a description of what you will find:</p>
+
+<ul>
+  <li>/etc/nginx/conf/nginx.conf</li>
+  <li>/etc/php/php.ini</li>
+  <li>/etc/php/php-fpm</li>
+  <li>/etc/conf.d/varnish</li>
+  <li>/etch/varnish/default.vcl</li>
+</ul>
+
+<h3 id="comparing-nginx-and-apache">Comparing Nginx and Apache</h3>
+
+<p>You can see some differences between <a href="/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">Apache and Nginx while running Wordpress, with and without APC and Varnish</a></p>
+
+<hr>
+<a href="http://www.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html&text=Nginx, PHP-FPM, APC, Varnish and Wordpress&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html">linkedin</a> | <a href="mailto:?Subject=Nginx, PHP-FPM, APC, Varnish and Wordpress&Body=http://www.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/nginx-php-fpm-mysql-apc-varnish-wordpress-cache-performance.html&title=Nginx, PHP-FPM, APC, Varnish and Wordpress" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

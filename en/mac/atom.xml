@@ -1,0 +1,989 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>Mac posts</title>
+  <link href="http://www.garron.me/en/mac/"/>
+  <link type="application/atom+xml" rel="self" href="http://www.garron.me/en/mac/atom.xml"/>
+  <updated>2015-04-08T02:13:48-04:00</updated>
+  <id>http://www.garron.me/</id>
+  <author>
+    <name>Guillermo Garron</name>
+    <email>contact@garron.me</email>
+  </author>
+
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/use-mac</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/use-mac.html"/>
+    <title>Use Mac</title>
+    <published>2014-11-02T21:45:00-05:00</published>
+    <updated>2014-11-02T21:45:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;We always hear that Apple products just work, and yesterday I have been convinced that Apple engineers really think about everything even the most minimal details have been considered.&lt;/p&gt;
+
+&lt;p&gt;I have a Mac Book Pro mid 2010, it is a 4 years old product, and even it works as if it was new, and I am running the latest version of Mac OS X available, I have decided to upgrade its hard disk. An SSD hard disk have come to my hands, and I installed it on my MBP.&lt;/p&gt;
+
+&lt;p&gt;After the installation I have realized that I did not have created a bootable or installation CD or USB, so I installed the old hard disk on an external enclosure and connected it to a USB port on the Mac, it booted from it without a problem, so I got access to all my information and I was supposed to be able to create an installation media. The problem was that I needed to download the OS app again, and those 5 Gigs in my metered connection was not the best idea, I was in trouble. After googling a little bit, I found that Macs from 2011 were able to boot from Apple servers, and here comes what is great about Apple.&lt;/p&gt;
+
+&lt;p&gt;My laptop is from 2010, but the firmware have been upgraded I have not done it intentionally, I did not have to mess with firmware upgrades, I just happened so now my old laptop was able to boot from Apple servers. So I did and it offered me to restore everything from the time machine backup, so I switched the disk on the external enclosure and told the Mac to restore from it.&lt;/p&gt;
+
+&lt;p&gt;Now I have everything as it was before and running on a new SSD hard disk, it boots up a lot faster now.&lt;/p&gt;
+
+&lt;p&gt;I would have never thought I would need to boot from Apple servers over the Internet, but Apple engineers think about every simple detail making life for users a lot simplier.&lt;/p&gt;
+
+&lt;p&gt;So if you have the opportunity to buy a Mac instead of a PC running Windows, do it, you won’t regret it. And if you buy a PC, try to install Linux on it :).&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/mutt-mac-imap</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/mutt-mac-imap.html"/>
+    <title>Mutt, Mac and IMAP</title>
+    <published>2014-09-07T15:15:00-04:00</published>
+    <updated>2014-09-07T15:15:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;using-mutt-with-mac-to-read-office-365-imap-account&quot;&gt;Using Mutt with Mac to read Office 365 IMAP account&lt;/h3&gt;
+
+&lt;p&gt;I love using lightweight software to do simple tasks, I mean why on earth would you like to use bloated software to perform easy tasks like reading and writing emails?&lt;/p&gt;
+
+&lt;p&gt;That is why I decided to use &lt;strong&gt;mutt&lt;/strong&gt; when on my Mac to read my personal email account.&lt;/p&gt;
+
+&lt;p&gt;Here is my setup.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Office 365 Exchange account (Just because it is not expensive and supports ActiveSync)&lt;/li&gt;
+  &lt;li&gt;Mutt on my Mac to read and write while working on the computer&lt;/li&gt;
+  &lt;li&gt;Postfix configured to work with a SmartHost for sending emails&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Mutt Setup&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I have installed mutt using &lt;a href=&quot;http://brew.sh&quot;&gt;Homebrew&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install mutt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are on Ubuntu, &lt;code&gt;sudo apt-get install mutt&lt;/code&gt; will work.&lt;/p&gt;
+
+&lt;p&gt;We know need to configure mutt to work with your IMAP account.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#Authentication
+set imap_user=“user@domain” #your IMAP user name or login
+set imap_pass=“password” #your IMAP password
+
+set smtp_authenticators=&quot;login&quot;
+set ssl_use_sslv3=yes
+set timeout=15
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I know it is not a good idea to put your password in a simple text file, but I am the only one with access to this computer and if I lost it, I have my hard drive encrypted using FileVault. In my Ubuntu machine I have my home folder encrypted too. If you really are paranoid you can of course leave &lt;em&gt;imap_pass&lt;/em&gt; unset and mutt will ask for your password.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#IMAP
+set mbox=&quot;imap://outlook.office365.com/INBOX&quot;
+set postponed=&quot;imap://outlook.office365.com/Drafts&quot;
+set spoolfile=&quot;imap://outlook.office365.com/INBOX&quot;
+set folder=&quot;imap://outlook.office365.com/&quot;
+set record=&quot;imap://outlook.office365.com/Sent Items&quot;   #set trash=&quot;imap://outlook.office365.com/Deleted Items&quot;
+mailboxes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pretty self explanatory, but the trash variable can not be used on my Mac, as the version from brew was not compiled with it, so, the emails I delete on mutt are gone forever as soon as I close Mutt. I am OK with that.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#SMTP
+#set smtp_url=&quot;smtp://user@domain@smtp.office365.com:587/&quot;
+#set smtp_pass=“password”
+set smtp_url=&quot;smtp://localhost/&quot;
+set from=&quot;g@garron.co&quot;
+set realname=&quot;Guillermo Garron&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, &lt;em&gt;smtp_url&lt;/em&gt; and &lt;em&gt;smtp_pass&lt;/em&gt; are commented, that is as I said I am relying on local Postfix to deliver my emails, this is because if I loss Internet connectivity while writing my email I do not want Mutt waiting forever for the connection. That is Postfix’s job.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Postfix Setup&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Now is the turn for Postfix, I have set it up to work with Office 365 STMP server so my mails are not bounced depending on the IP.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;biff = no
+command_directory = /usr/sbin
+config_directory = /etc/postfix
+daemon_directory = /usr/libexec/postfix
+data_directory = /var/lib/postfix
+debug_peer_level = 2	
+debugger_command = PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin xxgdb $daemon_directory/$process_name $process_id &amp;amp;	sleep 5
+dovecot_destination_recipient_limit = 1
+html_directory = /usr/share/doc/postfix/html
+imap_submit_cred_file =
+inet_interfaces = loopback-only
+inet_protocols = ipv4
+mail_owner = _postfix
+mailbox_size_limit = 0
+mailq_path = /usr/bin/mailq
+manpage_directory = /usr/share/man
+message_size_limit = 10485760
+mydomain_fallback = localhost
+mynetworks = 127.0.0.0/8, [::1]/128
+newaliases_path = /usr/bin/newaliases
+queue_directory = /private/var/spool/postfix
+readme_directory = /usr/share/doc/postfix
+recipient_delimiter = +
+relayhost = [smtp.office365.com]:587
+sample_directory = /usr/share/doc/postfix/examples
+sendmail_path = /usr/sbin/sendmail
+setgid_group = _postdrop
+smtp_generic_maps = hash:/etc/postfix/generic
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_password
+smtp_sasl_security_options = noanonymous
+smtp_use_tls = yes
+smtpd_client_restrictions = permit_mynetworks	permit_sasl_authenticated permit
+smtpd_tls_ciphers = medium
+smtpd_tls_exclude_ciphers = SSLv2, aNULL, ADH, eNULL
+tls_random_source = dev:/dev/urandom
+unknown_local_recipient_reject_code = 550
+use_sacl_cache = yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two more steps before it is ready.&lt;/p&gt;
+
+&lt;p&gt;Put in &lt;code&gt;/etc/postfix/sasl_password&lt;/code&gt; file something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;smtp.office365.com user@domain:password
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo postmap /etc/postfix/sasl_password
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally add this line to &lt;code&gt;/etc/postfix/generic&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user@localhost user@domain
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo postmap /etc/postfix/generic
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is it, you now just have to restart Postfix&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo postfix reload
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And start using Mutt.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/brew-update</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/brew-update.html"/>
+    <title>Solve Brew Update problem on Mac</title>
+    <published>2014-08-17T15:05:00-04:00</published>
+    <updated>2014-08-17T15:05:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h4 id=&quot;problem-updating-brew-on-mac&quot;&gt;Problem updating brew on Mac&lt;/h4&gt;
+
+&lt;p&gt;After trying to update brew on my Mac today I have run into this error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ggarron$ brew update
+error: SSL certificate problem: Invalid certificate chain while accessing https://github.com/Homebrew/homebrew.git/info/refs?service=git-upload-pack
+fatal: HTTP request failed
+Error: Failure while executing: git pull -q origin refs/heads/master:refs/remotes/origin/master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After doing some research I have found that the problem was an Expired Certificate from &lt;a href=&quot;https://www.digicert.com&quot;&gt;DigiCert&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The way to solve the problem is explained &lt;a href=&quot;https://blog.digicert.com/expired-intermediate-certificate/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;After removing all expired certificates I got this ones.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/keychain-access-mac.png&quot; class=&quot;img-responsive&quot; alt=&quot;Keychain Access Mac&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In case you are missing one of them, you can download from this webpage: &lt;a href=&quot;https://www.digicert.com/digicert-root-certificates.htm&quot;&gt;DigiCert Certificates&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Just choose one of them, copy the url by righ-clicking on the &lt;em&gt;Download&lt;/em&gt; link and selecting &lt;em&gt;Copy link location&lt;/em&gt;, then go to your terminal and download it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -O [the link goes here]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You then have to double click on the file using finder, it will ask for our password and the certificate will be installed.&lt;/p&gt;
+
+&lt;p&gt;You should now be able to run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew update
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/vnstat-mac-traffic-monitor-tool.html"/>
+    <title>Network Traffic Monitor Tool for Mac</title>
+    <published>2014-06-28T23:05:00-04:00</published>
+    <updated>2014-06-28T23:05:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;If you have a capped connection to the Internet, something like LTE o 3G connection, then you may want to monitor how much bandwidth your Mac is using. There are some tools to help you on this.&lt;/p&gt;
+
+&lt;p&gt;The best option for me is &lt;strong&gt;vnstat&lt;/strong&gt;, it will let you monitor the monthly used bandwidth by your Mac, then you can add it to what was used by your phone, and know how much your bill is going to be.&lt;/p&gt;
+
+&lt;p&gt;Of course this is an estimation, but it is better than nothing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Install vnstat&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To install vnstat, I used &lt;a href=&quot;http://brew.sh/&quot;&gt;brew&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install vnstat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;How to use it&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The first time you run it, it will initialize the database, after that, you just run.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vnstat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And it will have and output like this one:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; en1:
+       May &#39;14    991.13 MiB  /  243.85 MiB  /    1.21 GiB
+       Jun &#39;14      3.47 GiB  /  308.60 MiB  /    3.77 GiB  /    	4.04 GiB
+     yesterday    206.69 MiB  /   11.44 MiB  /  218.13 MiB
+         today    536.80 MiB  /   33.95 MiB  /  570.75 MiB  /     	587 MiB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can have a daily usage report.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vnstat -d -i en1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;em&gt;-d&lt;/em&gt; option tells the command to show the &lt;em&gt;day&lt;/em&gt; usage, and &lt;em&gt;-i en1&lt;/em&gt; tells it to show that data from the &lt;strong&gt;en1&lt;/strong&gt; interface, which is my wifi interface in my Mac. The output will be something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; en1  /  daily
+
+         day         rx      |     tx      |    total    |   	avg. rate
+     ------------------------+-------------+-------------+---------------
+      05/24/14      4.67 MiB |    1.14 MiB |    5.80 MiB |    0.55 kbit/s
+      05/25/14    461.26 MiB |   19.67 MiB |  480.93 MiB |   45.60 kbit/s
+      05/26/14     47.67 MiB |    7.03 MiB |   54.70 MiB |    5.19 kbit/s
+      05/27/14    202.47 MiB |   19.53 MiB |  222.00 MiB |   21.05 kbit/s
+      05/28/14     38.70 MiB |  164.02 MiB |  202.71 MiB |   19.22 kbit/s
+      05/29/14    122.98 MiB |   11.75 MiB |  134.73 MiB |   12.77 kbit/s
+      05/30/14     64.29 MiB |   11.86 MiB |   76.14 MiB |    7.22 kbit/s
+      05/31/14     49.10 MiB |    8.85 MiB |   57.96 MiB |    5.49 kbit/s
+      06/01/14     84.87 MiB |   11.63 MiB |   96.50 MiB |    9.15 kbit/s
+      06/02/14     64.61 MiB |    3.34 MiB |   67.95 MiB |    6.44 kbit/s
+      06/06/14     99.24 MiB |   16.25 MiB |  115.49 MiB |   10.95 kbit/s
+      06/07/14     97.61 MiB |   29.81 MiB |  127.42 MiB |   12.08 kbit/s
+      06/08/14    189.66 MiB |   17.25 MiB |  206.91 MiB |   19.62 kbit/s
+      06/09/14     17.85 MiB |    6.21 MiB |   24.07 MiB |    2.28 kbit/s
+      06/11/14     17.63 MiB |    7.67 MiB |   25.30 MiB |    2.40 kbit/s
+      06/13/14     23.33 MiB |    3.25 MiB |   26.58 MiB |    2.52 kbit/s
+      06/14/14    293.95 MiB |   12.74 MiB |  306.69 MiB |   29.08 kbit/s
+      06/15/14    262.32 MiB |   83.59 MiB |  345.91 MiB |   32.80 kbit/s
+      06/16/14     48.44 MiB |    1.34 MiB |   49.78 MiB |    4.72 kbit/s
+      06/17/14         0 KiB |       0 KiB |       0 KiB |    0.00 kbit/s
+      06/19/14     14.34 MiB |    2.16 MiB |   16.50 MiB |    1.56 kbit/s
+      06/20/14      3.29 MiB |     979 KiB |    4.24 MiB |    0.40 kbit/s
+      06/21/14      1.52 GiB |   62.21 MiB |    1.58 GiB |  153.10 kbit/s
+      06/22/14      6.46 MiB |    1.43 MiB |    7.89 MiB |    0.75 kbit/s
+      06/24/14     29.54 MiB |    3.03 MiB |   32.56 MiB |    3.09 kbit/s
+      06/25/14       570 KiB |     361 KiB |     931 KiB |    0.09 kbit/s
+      06/27/14    206.69 MiB |   11.44 MiB |  218.13 MiB |   20.68 kbit/s
+      06/28/14    536.80 MiB |   33.95 MiB |  570.75 MiB |   55.86 kbit/s
+     ------------------------+-------------+-------------+---------------
+     estimated       553 MiB |      34 MiB |     587 MiB |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see I don’t use my Mac everyday.&lt;/p&gt;
+
+&lt;p&gt;Hope this may help someone having the same needs I had.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/how-to-enable-htaccess-apache-mac-os-x</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/how-to-enable-htaccess-apache-mac-os-x.html"/>
+    <title>Enable htaccess file in Mac OS X</title>
+    <published>2013-05-03T13:05:00-04:00</published>
+    <updated>2013-05-03T13:05:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;&lt;a href=&quot;/es/mac-os/como-activar-htaccess-en-mac-os-x.html&quot;&gt;Spanish version&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Using your Mac for development of web applications or websites, is very easy as it already comes with Apache pre-installed, the problem is that .htaccess file does not work by default.&lt;/p&gt;
+
+&lt;p&gt;But it is easy to enable it.&lt;/p&gt;
+
+&lt;p&gt;First some changes in the main configuration file of Apache.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /etc/apache2/httpd.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first thing I will do is to change the Document root from the default &lt;em&gt;/Library/WebServer/Documents&lt;/em&gt; to my Sites folder under my home directory.&lt;/p&gt;
+
+&lt;p&gt;So, look for these lines:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;DocumentRoot &quot;/Library/WebServer/Documents&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&amp;lt;Directory &quot;/Library/WebServer/Documents&quot;&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And change them to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;DocumentRoot &quot;/Users/your-username/Sites&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&amp;lt;Directory &quot;/Users/your-username/Sites&quot;&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Of course instead of &lt;strong&gt;your-username&lt;/strong&gt; insert there your real username.&lt;/p&gt;
+
+&lt;p&gt;I prefer to have it there, as I do not need root permissions to add content to that folder.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enable .htaccess file in Mac OS X&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In the same file, under the section &lt;code&gt;&amp;lt;Directory &quot;/Users/your-username/Sites&quot;&amp;gt;&lt;/code&gt; look for:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AllowOverride None&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And change it to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AllowOverride All&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also edit this file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /etc/apache2/users/your-username.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And look for the same line &lt;em&gt;AllowOverride None** and change it to *AllowOverride All&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Then restart apache:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apachectl restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You are now ready to put files to ~/Sites/ folder and when you go to: http://localhost/ you will see those files appear, and if you add a .htaccess file, that is going to work.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/ia-writer-review-markdown-editor</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/ia-writer-review-markdown-editor.html"/>
+    <title>iA Writer Review</title>
+    <published>2012-11-30T15:05:00-05:00</published>
+    <updated>2012-11-30T15:05:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;You may know that this site is written 100% using &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt;. I usually use &lt;em&gt;vim&lt;/em&gt; to write the articles of this site. That is when I’m on my Linux, when I’m working on  my Mac, it is a different story. I use &lt;em&gt;MultiMarkdown Composer&lt;/em&gt; or &lt;em&gt;iA Writer&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lets talk about iA Writer, which is the one I’m reviewing right now.&lt;/p&gt;
+
+&lt;p&gt;Writing should be pleasant, and to write pleasantly you have to focus on what you are doing, with not a single distraction.&lt;/p&gt;
+
+&lt;p&gt;That is exactly what iA Writer gives you to you, and pristine distraction-free interface. With no menus, no icons, just a white board for you to write on it. You just need to go to “full-screen” (upper right corner) and enable “Focus” mode (lower left corner), and you will have something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/ia-writer.jpg&quot; class=&quot;img-responsive&quot; alt=&quot;iA Writer screenshot, focus mode on and full screen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Formatting&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As I have already mentioned, iA Writer uses Markdown natively. So, you need to know Markdown to be able to format your documents? The answer is yes, but do not stop reading just yet. Markdown is not as complicated as it might sound, you can learn &lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;Markdown Syntax&lt;/a&gt; in about an hour or even less.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Export documents&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You can export your writings as &lt;em&gt;Rich Text Format&lt;/em&gt; documents or as &lt;em&gt;HTML&lt;/em&gt; pages.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Uses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use it for maybe 90% of the documents needed these days. Simple letters, school documents or essays, and much more.&lt;/p&gt;
+
+&lt;p&gt;Only if you need something too complicated you might need to go a Document Processor, and in that case I prefer LaTeX.&lt;/p&gt;
+
+&lt;p&gt;Of course there is one problem, maybe all your co-workers are already using Microsoft Word, so in that case you will have to keep iA Writer specifically and Markdown in general for you own personal documents and notes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To finish this small review of iA Writer, I want to say that if you own a Mac, and if you like to write with no distractions (maybe just a little of good music), then you may want to give &lt;a href=&quot;http://www.iawriter.com/&quot;&gt;iA Writer&lt;/a&gt; a try.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/itunes-11-first-impressions</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/itunes-11-first-impressions.html"/>
+    <title>iTunes 11 released</title>
+    <published>2012-11-29T17:54:00-05:00</published>
+    <updated>2012-11-29T17:54:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Today Apple have released iTunes 11. I have just downloaded it, and I’m starting to review its new features.&lt;/p&gt;
+
+&lt;p&gt;The first impression I have about it, is that it is cleaner than the previous version.&lt;/p&gt;
+
+&lt;p&gt;It is more focussed on what you are really doing. The left pane has disappeared by default, and that gives you more space for the discs you have on your library.&lt;/p&gt;
+
+&lt;p&gt;As usually with Mac, it has a more Minimalistic view, and that is what I like about it.&lt;/p&gt;
+
+&lt;p&gt;The new compact view is a lot more useful as you can pulldown the next songs to be played. Easier to follow. Before this version I have almost never used the compact view (Mini player), now I think I will use it more than the normal one.&lt;/p&gt;
+
+&lt;p&gt;iTunes expanded view on the Albums pane, looks nice, the possibility to check directly from there the iTunes store is good for the users, but maybe better for Apple. They may increase sells.&lt;/p&gt;
+
+&lt;p&gt;I can clearly see some iOS influence on its design. Well, all Max OS X is going in that direction, so why not iTunes?&lt;/p&gt;
+
+&lt;p&gt;Mac is anyway redefining the PC interfaces, you can check Windows 8 and Gnome too. iTunes 11 is one more step in that direction. iTunes now looks more like a modern Mac App.&lt;/p&gt;
+
+&lt;p&gt;My favorite new feature is called &lt;strong&gt;Up Next&lt;/strong&gt;, as you can easily  check what is coming in your play list, and modify it on the fly. Just right click on a song and select &lt;em&gt;Add to up next&lt;/em&gt; and that is it. Nice.&lt;/p&gt;
+
+&lt;p&gt;My first impression on the look only: &lt;strong&gt;It looks a lot better than the previous version, and I like it&lt;/strong&gt;. Here some screenshots.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/itunes-11-screenshot-1.jpg&quot; class=&quot;img-responsive&quot; alt=&quot;iTunes 11 screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;First screen you will see&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/itunes-11-screenshot-2.jpg&quot; class=&quot;img-responsive&quot; alt=&quot;iTunes 11 screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Normal view&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/itunes-11-screenshot-3.jpg&quot; class=&quot;img-responsive&quot; alt=&quot;iTunes 11 screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Mini player&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/google-to-release-maps-app-for-ios</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/google-to-release-maps-app-for-ios.html"/>
+    <title>Waiting for Google Maps on iOS 6 to be available</title>
+    <published>2012-11-16T16:27:00-05:00</published>
+    <updated>2012-11-16T16:27:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Apple Maps are improving, but they still suck. I have read a lot of complains about them from users in U.S. and Europe. Imagine us in Latin America.&lt;/p&gt;
+
+&lt;p&gt;I live in Bolivia, and all my neighbor does not exist for Apple Maps. Here a comparison of Google Maps vs Apple Maps of the same area.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/google-maps-android.png&quot; class=&quot;img-responsive&quot; alt=&quot;Google maps app&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This is Google Maps&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/apple-maps-ipod-touch.png&quot; class=&quot;img-responsive&quot; alt=&quot;Apple Maps iOS 6&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This is Apple Maps&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, there is a lot of difference, also Apple Maps are unable to find a route between two points in my country. While Google Maps does an excellent job on that.&lt;/p&gt;
+
+&lt;p&gt;Google is preparing its maps app, and I am really waiting for it, and hoping that Apple authorize it in the market. I’m sure I’m not alone on this.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/resize-images-mac-iphoto-preview</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/resize-images-mac-iphoto-preview.html"/>
+    <title>Resize images you have in iPhoto or any other place in your Mac</title>
+    <published>2012-11-08T16:24:00-05:00</published>
+    <updated>2012-11-08T16:24:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;If you want to resize your iPhoto pictures to send them by email, or to use them in some website you own. You can do it easily without the need to download anything. Your Mac already has all the needed tools.&lt;/p&gt;
+
+&lt;p&gt;What you first need to do is to copy the photos outside iPhoto, you can drag n drop to any folder in Finder app. You can also copy and paste them.&lt;/p&gt;
+
+&lt;p&gt;Once outside to the folder where they are and open them with Preview (right click on one or all of them and select open with -&amp;gt; Preview.app)&lt;/p&gt;
+
+&lt;p&gt;When you have them opened, select the one you want to resize first and go to Tools -&amp;gt; Adjust Size…&lt;/p&gt;
+
+&lt;p&gt;You will see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/preview-app-resize-picture-mac.png&quot; class=&quot;picture&quot; alt=&quot;resize pictures with Mac preview iPhoto app&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There just select the new size you want for your picture, you can keep the ratio or resize only one of the dimensions of the photo. And you can also use different measurement units like: cm, inches, pixels, percentage, mm or points.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/schedule-mac-os-x-sleep-wake-up-power-off</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/schedule-mac-os-x-sleep-wake-up-power-off.html"/>
+    <title>Schedule wake up/sleep or power on/off of your Mac</title>
+    <published>2012-07-13T07:00:00-04:00</published>
+    <updated>2012-07-13T07:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;If you need your Mac to turn on or off, or to wake up or sleep at given times, every day, or every week or weekend day, you can schedule that process.&lt;/p&gt;
+
+&lt;p&gt;Computers are great for repetitive tasks, so, if you want to download that backup file from the server, every Friday at night, you can easily do it with your Mac.&lt;/p&gt;
+
+&lt;p&gt;To achieve the example above, the steps are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Turn the Mac on&lt;/li&gt;
+  &lt;li&gt;Run the cronjob (This will download the backup file by any means - say, using curl, from a given url - )&lt;/li&gt;
+  &lt;li&gt;Turn the Mac off&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Of course in the example above, the best way to turn the Mac off, is using the &lt;code&gt;shutdown&lt;/code&gt; in same script that downloads the backup file. That is out of the scope of this article.&lt;/p&gt;
+
+&lt;p&gt;Well, to schedule Mac to turn on and off at given days and hours, go to:&lt;/p&gt;
+
+&lt;p&gt;_System Preferences -&amp;gt; Energy Saver -&amp;gt; Schedule… _&lt;/p&gt;
+
+&lt;p&gt;You have to see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/07/mac-os-x-schedule-power-on-off-sleep-wake-up.png&quot; alt=&quot;Mac OS X schedule power off and on, or sleep and wake up&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From there just configure according to your needs.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If you are on a Macbook, or Macbook pro, the wake-up or power-on, will only work if the laptop is connected to the AC source.&lt;/em&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/install-htop-mac-os-x</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/install-htop-mac-os-x.html"/>
+    <title>How to Install htop on Mac OS X using macports</title>
+    <published>2012-04-06T17:10:00-04:00</published>
+    <updated>2012-04-06T17:10:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;On a fresh Linux install the first thing I install is &lt;a href=&quot;http://htop.sourceforge.net/&quot;&gt;htop&lt;/a&gt; which is a top-like monitor tool, but better.&lt;/p&gt;
+
+&lt;p&gt;Here is a screenshot of it on my Debian Linux, taken some years ago:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012-04/htop_screenshot.png&quot; class=&quot;img-responsive&quot; alt=&quot;htop screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some months ago I’ve sold my IBM T60 laptop and bought a Macbook Pro, so now I’m using Mac OS X instead of Linux on the laptop. But I still want to have &lt;code&gt;htop&lt;/code&gt; available so let’s see how to install it.&lt;/p&gt;
+
+&lt;p&gt;First install &lt;a href=&quot;http://www.macports.org/install.php&quot;&gt;macports&lt;/a&gt; and once you have it installed, you will be able to install a lot of software just like in Linux. For &lt;code&gt;htop&lt;/code&gt; just run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo port install htop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you have it installed, here is how it looks like in my Macbook&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012-04/htop-mac-os-x.png&quot; class=&quot;img-responsive&quot; alt=&quot;htop mac os x&quot; /&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/3hub-amazon-s3-browser-mac</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/3hub-amazon-s3-browser-mac.html"/>
+    <title>3Hub: An Amazon S3 client for Mac OS X</title>
+    <published>2012-04-05T07:30:00-04:00</published>
+    <updated>2012-04-05T07:30:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Amazon S3 is great for a series of uses. Like, traffic off-loading of static files, backup files and data or exchange info, I’m sure there are other uses as well.&lt;/p&gt;
+
+&lt;p&gt;There are a lot of tools or S3 clients, for different platforms, but one I really like is &lt;a href=&quot;http://3hubapp.com/&quot;&gt;3Hub&lt;/a&gt; for Mac.&lt;/p&gt;
+
+&lt;p&gt;According to its site you can:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Manage multiple S3 accounts.&lt;/li&gt;
+  &lt;li&gt;Queue files and directories for download or upload.&lt;/li&gt;
+  &lt;li&gt;Throttle your download and upload bandwidth.&lt;/li&gt;
+  &lt;li&gt;Simulate sub-directories. The folders you create are compatible with other S3 clients.&lt;/li&gt;
+  &lt;li&gt;Keep track of other S3 users you want to share files with or give permissions to.&lt;/li&gt;
+  &lt;li&gt;Using the “Auto apply” feature, you can automatically set permissions on newly uploaded files.&lt;/li&gt;
+  &lt;li&gt;Using the Shares feature, you can share buckets for other 3Hub users, and view files they’ve shared with you.&lt;/li&gt;
+  &lt;li&gt;Rename files.&lt;/li&gt;
+  &lt;li&gt;Setup custom Content-Type for files.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And more.&lt;/p&gt;
+
+&lt;p&gt;I really enjoyed the way you can change the headers to a lot of files at once.&lt;/p&gt;
+
+&lt;p&gt;I needed to modify the meta info of the files in my bucket to reflect, “Cache-Control: max-age=” in the headers. That was as easy as selecting a folder and right-click on it, and modify headers.&lt;/p&gt;
+
+&lt;p&gt;If you are hosting from Amazon S3, and you have a Mac, you might consider buying this app.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012-04/3Hub-amazon-s3-mac.png&quot; class=&quot;img-responsive&quot; alt=&quot;3Hub Mac app client for Amazon S3&quot; /&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/awk-work-csv-comma-value-files</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/awk-work-csv-comma-value-files.html"/>
+    <title>Using awk to Work with CSV files in the Command Line Terminal</title>
+    <published>2012-04-02T17:15:00-04:00</published>
+    <updated>2012-04-02T17:15:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I work a lot on the terminal, either on my Linux or Mac computers, and when I need to work with CSV files, awk is a very good ally.&lt;/p&gt;
+
+&lt;p&gt;Let’s say you have a file like this one:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Linux, Mac OS X, Windows XP, Windows 8
+Ubuntu, iOS, Windows Mobile, Blackberry OS
+Firefox, Safari, Internet Explorer, Blackberry Browser
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And let’s say you want to print only column 2 of that file, here is how:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;awk -F &quot;,&quot; &#39;{print $2 }&#39; filename.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And if you want to print two columns at once:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;awk -F &quot;,&quot; &#39;{print $1, $3 }&#39; filename.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Column 1 and 3 in this case.&lt;/p&gt;
+
+&lt;p&gt;If you separator is not a command, and it is let’s say a pipe, just do something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;awk -F &quot;|&quot; &#39;{print $1, $3 }&#39; filename.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/install-s3cmd-mac-os-x</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/install-s3cmd-mac-os-x.html"/>
+    <title>Install s3tools, s3cmd on Mac OS X</title>
+    <published>2012-03-30T21:37:00-04:00</published>
+    <updated>2012-03-30T21:37:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;If you are planning to use Amazon S3 services, and you own a Mac, you may want to install &lt;code&gt;s3cmd&lt;/code&gt; command from &lt;em&gt;s3tools&lt;/em&gt; in your Mac.&lt;/p&gt;
+
+&lt;p&gt;Here is how:&lt;/p&gt;
+
+&lt;p&gt;First you need to get the software, you can download from &lt;a href=&quot;http://s3tools.org/download&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then just run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And finally configure it running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;s3cmd --configure.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can read more about &lt;a href=&quot;/en/linux/use-s3cmd-s3tools-command-line-amazon-s3.html&quot;&gt;how to use s3cmd&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/postfix-relay-gmail-mac-os-x-local-smtp</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/postfix-relay-gmail-mac-os-x-local-smtp.html"/>
+    <title>Use Postfix as Local SMTP Mac OS X</title>
+    <published>2012-03-16T21:11:00-04:00</published>
+    <updated>2012-03-16T21:11:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;As I’m constantly trying and changing my default email application on my Mac, I’m currently using Thunderbird, the native email application and also Pilot.&lt;/p&gt;
+
+&lt;p&gt;So, decided to use my own local SMTP in order to not store my credentials on each application, and for an easy configuration. Also because I like emails to go fast from y outbox. Then it will be Postfix responsibility to deliver the email properly.&lt;/p&gt;
+
+&lt;p&gt;The problem is that my laptop is constantly changing its IP, so most of my emails will not get its destinations if I try to deliver them directly from the Macbook.&lt;/p&gt;
+
+&lt;p&gt;What I did, was to configure postfix to relay on Gmail to deliver my emails.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Instalation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There is nothing to install postfix is already installed on my Mac.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;First things first, let’s create a file to store our credentials.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /etc/postfix/sasl_passwd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then add inside something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;smtp.gmail.com:587 username@gmail.com:password
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are using Google Apps, replace &lt;em&gt;gmail.com&lt;/em&gt; for your own domain.&lt;/p&gt;
+
+&lt;p&gt;Now run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo postmap /etc/postfix/sasl_passwd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And finally prepare the postfix main configuration file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /etc/postfix/main.cf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And add these lines, check if they are not already present before you add them to your file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mydomain_fallback = localhost
+mail_owner = postfix
+setgid_group = postdrop
+relayhost=smtp.gmail.com:587
+smtp_sasl_auth_enable=yes
+smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd
+smtp_use_tls=yes
+smtp_tls_security_level=encrypt
+tls_random_source=dev:/dev/urandom
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Start the Service&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo postfix start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Configure your Client to Use localhost as SMTP Server&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Point your email client to point localhost at port  25, that is it.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/clean-writer-pro-review</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/clean-writer-pro-review.html"/>
+    <title>Clean Writer Pro Review for Mac OSX Lion</title>
+    <published>2012-02-29T14:48:00-05:00</published>
+    <updated>2012-02-29T14:48:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I’ve just bought &lt;strong&gt;Clean Writer Pro&lt;/strong&gt; from the Mac App Store, to use it to write the articles in this site, I usually use &lt;em&gt;vim&lt;/em&gt;, but I like testing new software, so I’m giving this one a try.&lt;/p&gt;
+
+&lt;p&gt;If you buy it, (It is for sale now only 99 cents) the first thing you will notice is that it is really minimalistic, if you put it in “full screen mode” you will get no distractions on the screen, just your text.&lt;/p&gt;
+
+&lt;p&gt;I also like the in-build spell checker, and grammar checker. One good feature is that it highlights the line you are working on, and fade out all the others, so you can focus on where you are in the document.&lt;/p&gt;
+
+&lt;p&gt;If you write markdown, you will love it, as it has a “Markdown Preview” feature, and you can see how your final text is going to look, but you can also copy the &lt;em&gt;html&lt;/em&gt; output to paste it directly in your web server or in you blog. All of that with two clicks of the mouse, or one keyboard shortcut.&lt;/p&gt;
+
+&lt;p&gt;I really recommend it, if you like to write with no distractions, and focussed on your job.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/itunes-match-finally-working</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/itunes-match-finally-working.html"/>
+    <title>Finally after three days iTunes Match is Working</title>
+    <published>2012-01-21T09:05:00-05:00</published>
+    <updated>2012-01-21T09:05:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Yesterday night and after three days of seeing &lt;a href=&quot;http://garron.me/mac/could-not-purchase-5002-error.html&quot;&gt;Error 5002 iTunes&lt;/a&gt;, I’ve been able to subscribe to the service, and it is actually uploading my music.&lt;/p&gt;
+
+&lt;p&gt;What I can’t understand is why some music I have bought in iTunes have not been recognized and is going to be uploaded.&lt;/p&gt;
+
+&lt;p&gt;I have purchased some country music from the U.S. iTunes market and now that I’m in the Bolivia iTunes market, that music is not recognized by iTunes Match and is going to be uploaded.&lt;/p&gt;
+
+&lt;p&gt;Anyway, I’m happy to be able to see this image:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012-01/itunes-match-upload.png&quot; alt=&quot;itunes match upload&quot; class=&quot;image&quot; /&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/could-not-purchase-5002-error</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/could-not-purchase-5002-error.html"/>
+    <title>Could not purchase "iTunes Match". An unknown error occurred (5002)</title>
+    <published>2012-01-17T15:37:00-05:00</published>
+    <updated>2012-01-17T15:37:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/images/2012-01/itunes-error.png&quot; class=&quot;image&quot; alt=&quot;itunes error 5002&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;iTunes Match was released today in other 19 countries, including Argentina, Bolivia, Chile, Colombia, Costa Rica, Dominican Republic, Ecuador, El Salvador, Estonia, Guatemala, Honduras, Latvia, Lithuania, Netherlands, Nicaragua, Panama, Paraguay, Peru, and Venezuela.&lt;/p&gt;
+
+&lt;p&gt;I live in Bolivia, and I immediately tried to get the service, but could not, I got this message:&lt;/p&gt;
+
+&lt;p&gt;Could not purchase “iTunes Match”. An unknown error occurred (5002)&lt;/p&gt;
+
+&lt;p&gt;I’ve contacted via email the tech support at Apple, and in a matter of minutes I got the answer, it is because too many people is trying to subscribe to the service and their servers just can’t manage the load.&lt;/p&gt;
+
+&lt;p&gt;I’m not really buying that, but I’ll just wait and try in few more hours again, as the person from Apple suggested me.&lt;/p&gt;
+
+&lt;p&gt;My questions are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Are there so many people in Latin America trying to subscribe?&lt;/li&gt;
+  &lt;li&gt;Is Apple really unable to manage the load of the customers?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I’ve found different ways to solve that, like, disabling the credit card and enabling it again, but that just did not work for me, and at my back can’t see the intent of transaction from Apple.&lt;/p&gt;
+
+&lt;p&gt;I also bought a song from iTunes just to be sure my card is working, and I got the song, and my bank saw the transaction.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/ios-5-almost-released</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/ios-5-almost-released.html"/>
+    <title>iOS 5 release date almost here</title>
+    <published>2011-10-12T01:00:00-04:00</published>
+    <updated>2011-10-12T01:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I’ve just upgraded my iTunes to 10.5, I’m sure iOS 5 is almost here, iTunes is just getting ready for it.&lt;/p&gt;
+
+&lt;p&gt;iOS 5 comes with more than 200 new features, and I can’t wait to see it action, this is a very important release as it is also the last one in which Steve Jobs actively participated and also presented to the public, some months ago.&lt;/p&gt;
+
+&lt;p&gt;A lot of sites started to announce that iOS 5 is coming this October 12th.&lt;/p&gt;
+
+&lt;p&gt;Let’s get ready for it.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/mac/macbook-hibernate-sleep-deep-standby</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/mac/macbook-hibernate-sleep-deep-standby.html"/>
+    <title>Understanding and choosing between Mac sleep, standby or hibernate</title>
+    <published>2011-08-10T07:10:00-04:00</published>
+    <updated>2011-08-10T07:10:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;So you’ve got your the new OS X Lion and you are using a Macbook pro or Macbook Air?&lt;/p&gt;
+
+&lt;p&gt;We all know that one of the more important features of a laptop is its battery capacity, it makes no sense to have a laptop that only last for an hour on batteries, another important thing now a days, is that we all want our laptops to be “always on” I mean, like our phones, always in standby just like an iPad.&lt;/p&gt;
+
+&lt;p&gt;And, as you may have notice this are opposite features, if you have it always on you will loose battery and if you save battery, it will not wake up as fast as you may want it to do it.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s understand a little bit the differences between sleep and hibernate:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sleep mode&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In sleep mode the computer tries to cut the energy from all computer’s components like hard disks, display and others, and only keeps the power to the RAM, as there is where the current settings are stored.&lt;/p&gt;
+
+&lt;p&gt;In this mode the wake up time is really short (just a pair of seconds) but the power is still draining as RAM is working.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hibernate mode&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In this mode, the operating system is going to copy the RAM contents to the hard disk, and will shut the computer off, when you want it to wake up, it will boot from this image saved on the disk, and will restore the computer the last state it has before going to hibernate.&lt;/p&gt;
+
+&lt;p&gt;Enough, let’s now see how we can be sure we have the best of both worlds with our Macbook.&lt;/p&gt;
+
+&lt;p&gt;Let’s see the current state of the power management settings.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pmset -g 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see something like this:&lt;/p&gt;
+
+&lt;pre&gt;
+Active Profiles:
+Battery Power		-1*
+AC Power		-1
+Currently in use:
+ standbydelay	1200
+ standby	1
+ halfdim	1
+ sms		1
+ panicrestart	157680000
+ hibernatefile	/var/vm/sleepimage
+ disksleep	10
+ sleep		10
+ hibernatemode	3
+ ttyskeepawake	1
+ displaysleep	2
+ acwake		0
+ lidwake	1
+&lt;/pre&gt;
+
+&lt;p&gt;There are three parameters that we want to check here:&lt;/p&gt;
+
+&lt;p&gt;From the man page:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;hibernatemode&lt;/strong&gt; takes a bitfield argument defining SafeSleep behavior. Passing 0 disables SafeSleep altogether, forcing the computer into a regular sleep.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;standby&lt;/strong&gt; causes kernel power management to automatically hibernate a machine after it has slept for a specified time period. This saves power while asleep. This setting defaults to ON for supported hardware. The setting standby will be visible in pmset -g if the feature is supported on this machine.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;standbydelay&lt;/strong&gt; specifies the delay, in seconds, before writing the hibernation image to disk and powering off memory for Standby.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;With &lt;strong&gt;hibernatemode&lt;/strong&gt; in “3” we have the default settings, which means that the computer will use sleep and not hibernate, as the default when the lid is closed, but because &lt;strong&gt;standby&lt;/strong&gt; is set to ON, the computer will wait &lt;strong&gt;standbydelay&lt;/strong&gt; seconds, before switching from &lt;em&gt;sleep&lt;/em&gt; to &lt;em&gt;hibernate&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see this is great, as you can now close the lid of your laptop, and you have &lt;em&gt;n&lt;/em&gt; seconds to go back to it, and still have a fast “boot” time, but if you stay away more than that, it will go into hibernate mode, and will save your battery.&lt;/p&gt;
+
+&lt;p&gt;You can change the time you want your laptop to wait before going into hibernate mode with this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pmset -a standbydelay 1200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Change 1200 to the number of seconds you want it to wait in sleep mode before going to hibernate mode.&lt;/p&gt;
+
+&lt;p&gt;If you need to set you laptop in sleep mode and turn on the standby mode (They should be on, as those are the default), enter these commands.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pmset -a standby 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pmset -a hibernatemode 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With those settings, I have a laptop that waits for me in sleep mode for 30 minutes, after that, it better goes to hibernate as it may take longer for me to return to work :).&lt;/p&gt;
+
+&lt;p&gt;One last note:&lt;/p&gt;
+
+&lt;p&gt;If you forget to close the lid, the &lt;em&gt;sleep&lt;/em&gt; parameter will dictate when your computer is going to go to sleep, that setting is in minutes, so in my case it will wait for 10 minutes on, and then if there is no activity on the keyboard or mouse, it will go to sleep for 30 minutes and finally to hibernate.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+ 
+</feed>

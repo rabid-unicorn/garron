@@ -1,0 +1,291 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/switching-drupal-jekyll-migrate.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="The story of my migration from Drupal to Jekyll" />
+
+        <!-- End SEO includes -->
+        <title>Why and how I migrated from Drupal to Jekyll</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Why and how I migrated from Drupal to Jekyll">
+        <meta name="twitter:description" content="The story of my migration from Drupal to Jekyll">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Why and how I migrated from Drupal to Jekyll</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/switching-drupal-jekyll-migrate.html">Why and how I migrated from Drupal to Jekyll</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-08-12 16:30:00 -0400</h6>
+
+        <hr>
+        <p><small>Tags: <a href="/en/tag/jekyll.html">jekyll</a>,</small></p>
+
+<hr>
+<h3 id="introduction">Introduction</h3>
+
+<p>I started blogging about <a href="http://www.go2linux.org">Linux</a>, in 2007, it all started because I was writing almost daily in some Linux distribution lists, so I thought it could have made sense to put all my writings on line in a single place, so others can use them.</p>
+
+<p>I started writing about my discoveries, how to tutorials, and other things, mainly as notes to myself and from time to time pointing other people from the forums to my posts, when they were looking for a solution I have already wrote about.</p>
+
+<p>I started using Joomla, it was OK for some months, the I stumbled upon <a href="http://www.tuxmachines.org">Tuxmachines</a>, and discovered Drupal, so I immediately started using it and migrate from Joomla to Drupal, and the blog started to grow, both in content and visitors.</p>
+
+<p>With the time, the site grew up, and I was getting 7.000 views per day, by that time, there was not chance to stop blogging, not even mention putting the blog off-line. In all that time I learned a lot about Drupal, I’m not expert in PHP, but I never needed it as Drupal is really easy to and powerful at the same time.</p>
+
+<h3 id="my-blogging-learning-curve">My blogging learning curve</h3>
+
+<p>In all these years I have learned a few things about blogging platforms, about web servers, and about scalability.</p>
+
+<p>My blog started at a <a href="http://www.vmware.com/">VMWare</a> virtual machine in my office computer, where I’ve public IPs, but when <a href="http://news.slashdot.org/story/07/03/30/045242/Ulteo-The-New-Worlds-Easiest-Linux">this post</a> hit Slashdot, and put my server on its knees, I realized that I needed to move it, so I did it, and it was moved to a Shared virtual hosting server.</p>
+
+<p>Next time was Digg hitting <a href="http://www.go2linux.org/firefox-3-vs-firefox-2">this page</a>, the one who put my site off-line, this time I moved it to a VPS server, now I was able to monitor which processes were the resource-hungry ones, and soon I discovered that MySQL was the culprit.</p>
+
+<p>So, I learned about <a href="http://drupal.org/project/boost">boost module</a>, and I installed Squid as a reverse proxy in my server, then I switched to <a href="http://www.go2linux.org/linux/2011/04/nginx-varnish-compared-nginx-941">NGinx + Varnish</a> with Apache+PHP+MySQL as the backend for the pages not cached by boost.</p>
+
+<h3 id="too-much-maintenance">Too much maintenance</h3>
+
+<p>As you can see in order to keep a server ready to receive the next tsunami of visits, I had to do too much work keeping Apache, PHP, MySQL, Nginx, Varnish and Drupal up to date and secured, also being sure that all of them could work in sync.</p>
+
+<p>I heard about <a href="http://www.go2linux.org/mt/linux-ht/2010/10/movable-type-1.html">Movable Type</a>, and loved the idea of the static content, it can be compared to Drupal working together with boost module, but in the case of Movable Type if the backend application dies, you will not be able to post new articles but all your site will still be alive, while in the case of Drupal, if somehow the application stops working, after the expiration period your site will become off-line, or if someone wanted to open a page not yet cached, he won’t be able to do it.</p>
+
+<p>It seems that Movable Type could be a better option, but you can read all over the Internet stories about Movable Type dying, and stories about people switching from it to WordPress or Drupal, so I went back to Drupal, and never actually did the switch to Movable Type.</p>
+
+<p>All the idea about serving static content have been in my mind for months, until one day when, while visiting my favorite site Hacker News, I read <a href="http://news.ycombinator.com/item?id=2799081">this post</a>, and decided to give it a try, but not because I visit Hacker News it really means I’m a hacker, so could not make it work, but I read that day also about Jekyll, and decided to try it out, this time I was able to make it work, and started this site.</p>
+
+<p>Now it was time to migrate Go2linux from Drupal to Jekyll.</p>
+
+<h3 id="migrating-from-drupal-to-jekyll">Migrating from Drupal to Jekyll</h3>
+
+<p><strong>The problems</strong></p>
+
+<p><a href="http://jekyllrb.com/">Jekyll</a>, provides excellent migrating tools to help you move your blog from almost every platform to Jekyll, and the script to migrate a Drupal site to Jekyll works great if you are using <em>clean urls</em> but not url alias.</p>
+
+<p>So basically it will move a site with this structure:</p>
+
+<p>http://www.site.com/node/23</p>
+
+<p>to:</p>
+
+<p>http://www.site.com/2009/10/23/title-of-posts.html</p>
+
+<p>But that is not my case, and I’m sure that most of Drupal users do use the url_alias module, and also the path_auto module, another problem I have in all these years I have been modifying the url schema of my Drupal site, so I have these kind of urls.</p>
+
+<ul>
+  <li>http://www.go2linux.org/arch-linux-review</li>
+  <li>http://www.go2linux.org/blogs/2011/04/thinking-about-buying-and-ipad-1005</li>
+  <li>http://www.go2linux.org/linux/2011/05/move-window-when-title-bar-not-visible-over-sized-1019</li>
+  <li>http://www.go2linux.org/linux/2011/07/use-varnish-avoid-hot-linking-or-image-leeching-1123.html</li>
+  <li>http://www.go2linux.org/mt/linux-ht/2010/11/slackware-review-1.html</li>
+</ul>
+
+<p>So as you can see there is not way to follow some kind of rule to recover my urls, as I have at least five models of them, so what I needed was a script that import the url from the Drupal database, actually from the url_alias table, and use it to create a permalink for every post imported from Drupal.</p>
+
+<p><strong>The solution</strong></p>
+
+<p>What I’ve done is to use the script available in Jekyll’s site, and modify it to allow me import together with the posts, also the contents of url_alias and create with that the <a href="https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter">Yaml front matter</a>.</p>
+
+<p>I stepped there into a new problem, how to manage the relationship between a post and its url_alias, the url_alias table has this format:</p>
+
+<pre>
++----------+------------------+------+-----+---------+----------------+
+| Field    | Type             | Null | Key | Default | Extra          |
++----------+------------------+------+-----+---------+----------------+
+| pid      | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| src      | varchar(128)     | NO   | MUL |         |                |
+| dst      | varchar(128)     | NO   | MUL |         |                |
+| language | varchar(12)      | NO   |     |         |                |
++----------+------------------+------+-----+---------+----------------+
+</pre>
+
+<p>And the node table has this structure:</p>
+
+<pre>
++-----------+------------------+------+-----+---------+----------------+
+| Field     | Type             | Null | Key | Default | Extra          |
++-----------+------------------+------+-----+---------+----------------+
+| nid       | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| vid       | int(10) unsigned | NO   | UNI | 0       |                |
+| type      | varchar(32)      | NO   | MUL |         |                |
+| language  | varchar(12)      | NO   |     |         |                |
+| title     | varchar(255)     | NO   | MUL |         |                |
+| uid       | int(11)          | NO   | MUL | 0       |                |
+| status    | int(11)          | NO   | MUL | 1       |                |
+| created   | int(11)          | NO   | MUL | 0       |                |
+| changed   | int(11)          | NO   | MUL | 0       |                |
+| comment   | int(11)          | NO   |     | 0       |                |
+| promote   | int(11)          | NO   | MUL | 0       |                |
+| moderate  | int(11)          | NO   | MUL | 0       |                |
+| sticky    | int(11)          | NO   |     | 0       |                |
+| tnid      | int(10) unsigned | NO   | MUL | 0       |                |
+| translate | int(11)          | NO   | MUL | 0       |                |
++-----------+------------------+------+-----+---------+----------------+
+</pre>
+
+<p>So, the value node.nid, is related with url_alias.src, and I modified the original script to work with that:</p>
+
+<p><a href="http://pastebin.com/xwgMEXbF">Here</a> is the script if you want to use it:</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>By today both <a href="http://www.go2linux.org">Go2linux</a> and this site have been generated by <a href="http://jekyllrb.com/">Jekyll</a>, and are served to you as static content, this it should be faster, another good thing is there are less possible points of failure, actually only the web server.</p>
+
+<p>Because Jekyll only generates the html using your own layouts, you can have full control of how your site will look like, there is no need of plugins, or any other thing, if you want to add something like a Facebook fan “widget” you just add the code to the proper place in your layout, and you can make it match your CSS and the colors of your template.</p>
+
+<p>One last thing, if you are concerned about the size of the site you can manage with Jekyll, I need to say you, that Go2Linux has over a thousand pages, and it is generated in some 10 seconds, in a modern laptop.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/switching-drupal-jekyll-migrate.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/switching-drupal-jekyll-migrate.html&text=Why and how I migrated from Drupal to Jekyll&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/switching-drupal-jekyll-migrate.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/switching-drupal-jekyll-migrate.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/switching-drupal-jekyll-migrate.html">linkedin</a> | <a href="mailto:?Subject=Why and how I migrated from Drupal to Jekyll&Body=http://www.garron.me/en/linux/switching-drupal-jekyll-migrate.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/switching-drupal-jekyll-migrate.html&title=Why and how I migrated from Drupal to Jekyll" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

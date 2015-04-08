@@ -1,0 +1,281 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/use-incron-rsync-dropbox-backup.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Sync folder when changes occur, you may use this to backup to Dropbox every time a file change" />
+
+        <!-- End SEO includes -->
+        <title>Use incron to Trigger Action when File Changes</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Use incron to Trigger Action when File Changes">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Use incron to Trigger Action when File Changes</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/use-incron-rsync-dropbox-backup.html">Use incron to Trigger Action when File Changes</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2012-03-12 08:30:00 -0400</h6>
+
+<hr>
+<h2 id="introduction">Introduction</h2>
+
+<p>There are some situations, when you need to start an action or run a command when a given file has changed in your file system.</p>
+
+<p>The real life example I have is as follows:</p>
+
+<p>I have a git repository, from where I manage this blog, I have a remote branch of it on the same server, from where Nginx serves this pages.</p>
+
+<p>I also have another remote branch in my Macbook Pro (With the correspondent <em>Time Machine</em> backup). But, I’m a paranoid guy, so I just want more backups. I decided I wanted to backup all my blog files to my Dropbox account.</p>
+
+<p>These are the needed tools:</p>
+
+<ul>
+  <li>A Dropbox account (may be a free one)</li>
+  <li><code>incron</code> daemon, to look for changes and sync, when changes occur</li>
+</ul>
+
+<p>This post will only talk about the <code>incron</code> slice of the cake, the Dropbox one is really ease, just get your <a href="http://www.dropbox.com">free dropbox account</a>.</p>
+
+<h2 id="incron">incron</h2>
+
+<p><a href="http://inotify.aiken.cz/?section=incron&amp;page=about&amp;lang=en">incron</a> is according to its page:</p>
+
+<blockquote>
+  <p>This program is an “inotify cron” system. It consists of a daemon and a table manipulator. You can use it a similar way as the regular cron. The difference is that the inotify cron handles filesystem events rather than time periods.</p>
+</blockquote>
+
+<p>As you can see, this is just the tool we need to accomplish this task.</p>
+
+<p><strong>Installation</strong></p>
+
+<p>Installation, should be very straight forward. Just use your Linux distribution package manager to install it. In my case using <em>Arch Linux</em> was:</p>
+
+<pre><code>pacman -S incron
+</code></pre>
+
+<p>The package came with a configuration example file: <code>/etc/incron.conf.example</code> which listed some other configuration files.</p>
+
+<ul>
+  <li><code>/etc/incron.allow</code> : Here you configure the users allowed to use incron</li>
+  <li><code>/etc/incron.deny</code> : Here you configure the users to deny the use incron</li>
+  <li><code>/etc/incron.d</code> : This directory is examined by incrond for system table files.</li>
+</ul>
+
+<p><strong>Configuration</strong></p>
+
+<p>Basically, all you need to run <code>incron</code> is:</p>
+
+<ol>
+  <li>Create the file <code>/etc/incron.allow</code> (check in <code>etc/incron.conf</code> if that is the right file to allow users), and add root and your user</li>
+  <li>Run: <code>incrontab -e</code></li>
+  <li>Enter the folder to watch, the event to look for, and the command to run if the event happens.</li>
+</ol>
+
+<p>The syntax of <code>incrontab</code> is:</p>
+
+<p><code>&lt;folder&gt; &lt;mask&gt; &lt;command&gt;</code></p>
+
+<p>Where:</p>
+
+<p><code>&lt;folder&gt;</code> is: The absolute path to the folder to watch</p>
+
+<p><code>&lt;mask&gt;</code> is: A symbolic or numeric mask for events (see below)</p>
+
+<p><code>&lt;command&gt;</code> is: The command to run on events.</p>
+
+<p><strong>Mask</strong></p>
+
+<ul>
+  <li>IN_ACCESS - File was accessed (read)</li>
+  <li>IN_ATTRIB - Metadata changed (permissions, timestamps, extended attributes, etc.)</li>
+  <li>IN_CLOSE_WRITE - File opened for writing was closed</li>
+  <li>IN_CLOSE_NOWRITE - File not opened for writing was closed</li>
+  <li>IN_CREATE - File/directory created in watched directory</li>
+  <li>IN_DELETE - File/directory deleted from watched directory</li>
+  <li>IN_DELETE_SELF - Watched file/directory was itself deleted</li>
+  <li>IN_MODIFY - File was modified</li>
+  <li>IN_MOVE_SELF - Watched file/directory was itself moved</li>
+  <li>IN_MOVED_FROM - File moved out of watched directory</li>
+  <li>IN_MOVED_TO - File moved into watched directory</li>
+  <li>IN_OPEN - File was opened</li>
+</ul>
+
+<p>The  IN_ALL_EVENTS  symbol  is  defined  as  a  bit  mask  of  all of the above events. Two additional convenience symbols are IN_MOVE, which is a combination of IN_MOVED_FROM and IN_MOVED_TO, and IN_CLOSE which combines IN_CLOSE_WRITE and IN_CLOSE_NOWRITE.</p>
+
+<h2 id="solving-our-problem">Solving Our Problem</h2>
+
+<p>Our real life example, was to be able to sync my <em>jekyll</em> blog with my <em>dropbox</em> folder when something change in my <em>Jekyll</em> folder.</p>
+
+<p><em>Note: It is important to know that <code>incron</code> is not recursive, so you need to manually add all sub-directories you want it to watch</em></p>
+
+<p>I’m only going to look for changes in <code>_posts</code> and <code>images</code> folders. I’m going to add these lines in my user table:</p>
+
+<pre><code>incrontab -e
+</code></pre>
+
+<p>And will add these lines:</p>
+
+<pre><code>/path/to/my/jekyll/_post IN_CREATE,IN_DELETE,IN_CLOSE_WRITE rsync -av --delete --checksum /path/to/my/jekyll /home/my_user/Dropbox
+/path/to/my/jekyll/images IN_CREATE,IN_DELETE,IN_CLOSE_WRITE rsync -av --delete --checksum /path/to/my/jekyll /home/my_user/Dropbox
+</code></pre>
+
+<p>Now I’m ready. Every time something change in those folders my server will sync my <em>Jekyll</em> folder with my <em>Dropbox</em> folder.</p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/use-incron-rsync-dropbox-backup.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/use-incron-rsync-dropbox-backup.html&text=Use incron to Trigger Action when File Changes&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/use-incron-rsync-dropbox-backup.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/use-incron-rsync-dropbox-backup.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/use-incron-rsync-dropbox-backup.html">linkedin</a> | <a href="mailto:?Subject=Use incron to Trigger Action when File Changes&Body=http://www.garron.me/en/linux/use-incron-rsync-dropbox-backup.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/use-incron-rsync-dropbox-backup.html&title=Use incron to Trigger Action when File Changes" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

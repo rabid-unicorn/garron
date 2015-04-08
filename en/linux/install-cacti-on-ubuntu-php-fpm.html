@@ -1,0 +1,345 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to install cacti on Ubuntu server with Apache or Nginx and PHP-FPM PHP-CGI" />
+
+        <!-- End SEO includes -->
+        <title>Install cacti on Ubuntu Server with Apache and PHP-FPM</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Install cacti on Ubuntu Server with Apache and PHP-FPM">
+        <meta name="twitter:description" content="How to install cacti on Ubuntu server with Apache or Nginx and PHP-FPM PHP-CGI">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Install cacti on Ubuntu Server with Apache and PHP-FPM</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/install-cacti-on-ubuntu-php-fpm.html">Install cacti on Ubuntu Server with Apache and PHP-FPM</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-01-27 21:03:35 -0500</h6>
+
+<hr>
+<h2 id="introduction">Introduction</h2>
+
+<p>If you need to monitor Linux servers, or routers, or any other SNMP enabled device or software, Cacti is maybe your best choice.</p>
+
+<blockquote>
+  <p>Cacti is a complete network graphing solution designed to harness the power of RRDTool’s data storage and graphing functionality. Cacti provides a fast poller, advanced graph templating, multiple data acquisition methods, and user management features out of the box. All of this is wrapped in an intuitive, easy to use interface that makes sense for LAN-sized installations up to complex networks with hundreds of devices.</p>
+</blockquote>
+
+<blockquote>
+  <p>– Cacti Home page</p>
+</blockquote>
+
+<h2 id="cacti-on-ubuntu-server">Cacti on Ubuntu Server</h2>
+
+<p>The simplier and easiest way to install cacti on Ubuntu is to run:</p>
+
+<pre><code>sudo apt-get install cacti
+</code></pre>
+
+<p>The problem with this way is that, it is going to try to install Apache, with pre-fork MPM and run PHP as a module and <a href="/en/blog/apache2-mpm-worker-prefork-php.html">Apache with MPM Worker</a> is a lot more efficient.</p>
+
+<p><strong>Install Cacti on Ubuntu Server with Apache2 MPM worker and extarnal PHP/CGI PHP-FPM</strong></p>
+
+<p>We will need to <a href="/en/blog/ubuntu-lamp-apache2-mpm-worker-and-php-fpm.html">Apache, MySQL, PHP-FPM</a>. Once that is done we will continue to adapt the installation to work with cacti. Cacti will be downloaded from its page.</p>
+
+<p><strong>Prepare the server for cacti</strong></p>
+
+<p>This are packages need to support cacti. First install the dependencies needed.</p>
+
+<pre><code>sudo apt-get install dbconfig-common fontconfig libcairo2 libdatrie1 libdbi1 rrdtool php5-snmp php5-ldap snmp
+</code></pre>
+
+<p><em>Configure PHP</em></p>
+
+<p>PHP needs to have some modules enabled for this work. Here is the list of needed modules:</p>
+
+<ul>
+  <li>mysql</li>
+  <li>SNMP</li>
+  <li>XML</li>
+  <li>Session</li>
+  <li>Sockets</li>
+  <li>LDAP</li>
+  <li>GD</li>
+</ul>
+
+<p>You may run this command to be sure you have all modules available.</p>
+
+<pre><code>php -m
+</code></pre>
+
+<p><em>Configure Apache</em></p>
+
+<p>I prefer to run cacti on its own server, or at least on its own virtual server, so I will create that virtual server.</p>
+
+<pre><code>mkdir -p /var/www/monitor.domain.com/{public_html,logs}
+</code></pre>
+
+<p>Then create the file in <em>/etc/apache2/sites-available/</em> It will have this content::</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+	ServerAdmin webmaster@localhost
+	ServerName monitor.domain.com
+
+	DocumentRoot /var/www/monitor.domain.com/public_html
+	&lt;Directory /&gt;
+		Options FollowSymLinks
+		AllowOverride All
+	&lt;/Directory&gt;
+	&lt;Directory /var/www/monitor.domain.com/public_html/&gt;
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	&lt;/Directory&gt;
+
+	ErrorLog /var/www/monitor.domain.com/logs/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/www/monitor.domain.com/logs/access.log combined
+	
+
+	&lt;IfModule mod_fastcgi.c&gt;
+	    AddHandler php5-fcgi .php
+	    Action php5-fcgi /php5-fcgi
+	    Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
+	    # FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -socket /var/run/php5-fpm.sock -pass-header Authorization
+	&lt;/IfModule&gt;
+
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Now enable the site:</p>
+
+<pre><code>sudo a2ensite monitor.domain.com
+</code></pre>
+
+<p><em>Download Cacti</em></p>
+
+<p>You have to download the latest version, which you can get from <a href="http://www.cacti.net/download_cacti.php">cacti download page</a>. Once downloaded, uncompress it, and copy its contents to <em>/var/www/monitor.domain.com/public_html/</em>.</p>
+
+<p><em>Configure MySQL</em></p>
+
+<p>We need to create the database and prepare it for cacti, run all these commands, you will need the MySQL root password.</p>
+
+<pre><code>mysqladmin --user=root -p create cacti
+mysql -u root -p cacti &lt; cacti.sql
+</code></pre>
+
+<p>The file <em>cacti.sql</em> comes with your cacti package.</p>
+
+<p>Now, get the MySQL command prompt.</p>
+
+<pre><code>mysql -u root -p
+</code></pre>
+
+<p>And there run these commands:</p>
+
+<pre><code>GRANT ALL ON cacti.* TO "cacti"@"localhost" IDENTIFIED BY 'your-strong-password';
+FLUSH PRIVILGES;
+</code></pre>
+
+<p>Two more steps. Create a user that will run cacti, give him the ownership of some folders, and add a cronjob.</p>
+
+<pre><code>sudo adduser cactiuser
+sudo chown -R cactiuser rra/ log/
+</code></pre>
+
+<p>The last command should be run in your cacti folder, in this case <em>/var/www/monitor.domain.com/public_html/</em>.</p>
+
+<p>Finally add the cronjob:</p>
+
+<pre><code>sudo crontab -e
+</code></pre>
+
+<p>And add this line at the end::</p>
+
+<pre><code>*/5 * * * * cactiuser php /var/www/monitor.domain.com/public_html/poller.php &gt; /dev/null 2&gt;&amp;1
+</code></pre>
+
+<p><em>Configure Cacti</em></p>
+
+<p>Because I am running cacti in the root directory I need to change some defaults.</p>
+
+<pre><code>sudo vim /var/www/monitor.domain.com/public_html/include/config.php
+</code></pre>
+
+<p>And be sure you have these lines::</p>
+
+<pre><code>$database_type = "mysql";
+$database_default = "cacti";
+$database_hostname = "localhost";
+$database_username = "cacti";
+$database_password = "your-strong-password";
+$database_port = "3306";
+$database_ssl = false;
+
+$url_path = "/";
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>You are now ready to monitor your servers, and you have cacti running in an efficient server with Apache, and PHP-FPM as an external CGI instead of a module, which is less efficient.</p>
+
+<p>Be sure to update cacti to the latest version, as soon as new ones are released. This is important in order to protect the security your information, and also the security of your server.</p>
+
+<hr>
+<a href="http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html&text=Install cacti on Ubuntu Server with Apache and PHP-FPM&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html">linkedin</a> | <a href="mailto:?Subject=Install cacti on Ubuntu Server with Apache and PHP-FPM&Body=http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/install-cacti-on-ubuntu-php-fpm.html&title=Install cacti on Ubuntu Server with Apache and PHP-FPM" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

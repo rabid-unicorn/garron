@@ -1,0 +1,452 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+
+        <link rel="canonical" href="http://www.garron.me/en/articles/scp.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="scp command, syntax, uses and tips of the scp command both on Linux and Max OS X platforms" />
+
+        <!-- End SEO includes -->
+        <title>scp command</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="scp command">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/articles/index.html">Articles</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">scp command</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h2 id="scp-command-tutorial">scp command Tutorial</h2>
+
+<p><strong>Contents</strong></p>
+
+<ol>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#syntax">Syntax</a></li>
+  <li><a href="#examples">Examples</a></li>
+  <li><a href="#tips">Tips</a></li>
+  <li><a href="#windows">Windows</a></li>
+</ol>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>scp stands for secure cp (copy), which means you can copy files across ssh connection. That connection will be securely encrypted, it is a very secure way to copy files between computers.</p>
+
+<p>scp uses by default the port 22, and connect via an encrypted connection or secure shell connection. (ssh for short)</p>
+
+<p>You can use scp to copy files from or to a remote server. You can also copy files from one remote server to another remote server, without passing traffic through your PC.</p>
+
+<p>You can use scp on Linux, Mac and Windows (using WinSCP). You may also want to check <a href="/en/articles/sftp.html">sftp</a></p>
+
+<h3 id="syntax">Syntax</h3>
+
+<pre><code>scp [-12346BCEpqrv] [-c cipher] [-F ssh_config] [-i identity_file] [-l limit] [-o ssh_option] [-P port] [-S program] [[user@]host1:]file1 ... [[user@]host2:]file2
+</code></pre>
+
+<p>Explaining the complete syntax and every option of this command is out of the scopy of this page, you can always enter a the command prompt</p>
+
+<pre><code>man scp
+</code></pre>
+
+<p>Or you can read it online <a href="http://linux.die.net/man/1/scp">here</a></p>
+
+<p>We are going to explain the basic part of it:</p>
+
+<pre><code>scp [[user@]host1:]file1 ... [[user@]host2:]file2
+</code></pre>
+
+<dl class="dl-horizontal text-overflow">
+<dt>scp</dt><dd>Is the command itself and tells the operating system to copy one or more files over a secure shell connection, better known as ssh connection.</dd>
+<dt>[[user@]host1:]file1</dt><dd>The origin, where you specify the file or files to be copied, it can contain or not the information about a remote host, and it can also contain the information about the user owning the file or files in that remote host. If the user is not specified it will defaults to the current user in the machine where you are typing the command. If the host is not specified, it will look for the file locally using any given path.</dd>
+<dt>[[user@]host2:]file2</dt><dd>The destination, where you specify the path where the files are going to be copied, once again, it can contain or not the information about the remote host and/or user in that host. Same as above if the user is not specified but a hostname is given it will defaults to the current username and will try to log in the remote server using that user. And in the same way as with origin, if the host is not specified, the files will be copied locally.</dd>
+</dl>
+
+<p>Just to clarify, you can avoid specifying both username and host in origin and destination, and the <code>scp</code> command will work just like the <code>cp</code> command, copying a local file to a local destination.</p>
+
+<h3 id="examples">Examples</h3>
+
+<p><strong>Copy one single local file to a remote destination</strong></p>
+
+<pre><code>scp /path/to/source-file user@host:/path/to/destination-folder/
+</code></pre>
+
+<p>So, if you wan to copy the file <code>/home/user/table.csv</code> to a remote host named <code>host.example.com</code> and copy there to jane’s home folder, use this command.</p>
+
+<pre><code>scp /home/user/table.csv jane@host.example.com:/home/jane/
+</code></pre>
+
+<p><strong>Copy one single file from a remote server to your current local server</strong></p>
+
+<pre><code>scp user@host:/path/to/source-file /path/to/destination-folder
+</code></pre>
+
+<p>Let’s say now you want to copy the same file from jane’s home folder in <code>host.example.com</code> to your local home folder.</p>
+
+<pre><code>scp jane@host.example.com:/home/jane/table.csv /home/user/
+</code></pre>
+
+<p><strong>Copy one single file from a remote server to another remote server</strong></p>
+
+<p>With <code>scp</code> you can copy files between remote servers from a third server without the need to ssh into any of them, all weight lifting will be done by <code>scp</code> itself.</p>
+
+<pre><code>scp user1@server1:/path/to/file user2@server2:/path/to/folder/
+</code></pre>
+
+<p>Let’s say now you want to copy the same table file from jane’s home folder to pete’s home folder in another remote machine.</p>
+
+<pre><code>scp jane@host.example.com:/home/jane/table.csv pete@host2.example.com:/home/pete/
+</code></pre>
+
+<p><strong>Copy one single file from a remote host to the same remote host in another location</strong></p>
+
+<pre><code>scp jane@host.example.com:/home/jane/table.csv pete@host.example.com:/home/pete/
+</code></pre>
+
+<p>This time, you will be copying from one host to the same host, but on different folders under the control of different users.</p>
+
+<p><strong>Copy all files of a specific type</strong></p>
+
+<pre><code>scp /path/to/folder/*.ext user@server:/path/to/folder/
+</code></pre>
+
+<p>This will copy all files of a given extension to the remote server. For instance, you want to copy all your text files (txt extension) to a new folder.</p>
+
+<pre><code>scp /home/user/*.txt jane@host.example.com:/home/jane/
+</code></pre>
+
+<p>You can make use of wildcards in any way you want.</p>
+
+<p><strong>Copy all files in a folder to a remote server</strong></p>
+
+<pre><code>scp /path/to/folder/* user@server:/path/to/folder/
+</code></pre>
+
+<p>This will copy all files inside local folder to the remote folder, let’s see an example.</p>
+
+<pre><code>scp /home/user/html/* jane@host.example.com:/home/jane/backup/
+</code></pre>
+
+<p>All files in local folder html, will be copied to backup folder in host.example.com</p>
+
+<p><strong>Copy all files in a folder recursively to a remote server</strong></p>
+
+<pre><code>scp -r /home/user/html/* jane@host.example.com:/home/jane/backup/
+</code></pre>
+
+<p>Same as the previous example, but this time it will copy all contentes recursively</p>
+
+<p><strong>Copy a folder and all its contents to a remote server</strong></p>
+
+<pre><code>scp -r /path/to/source-folder user@server:/path/to/destination-folder/
+</code></pre>
+
+<p>This time the folder itself is copied with all its contents and not only the contents. One more time we’ll use an example.</p>
+
+<pre><code>scp -r /home/user/html jane@host.example.com:/home/jane/backup/
+</code></pre>
+
+<p>This will result in having in the remote server this: <code>/home/jane/backup/html/....</code> The whole html folder and its contentes recursively have been copied to the remote server.</p>
+
+<h3 id="tips">Tips</h3>
+
+<p>We have seen the basic uses scp, now we will see some special uses and tricks of this great command</p>
+
+<p><strong>Increase Speed</strong></p>
+
+<p><code>scp</code> uses AES-128 to encrypt data, this is very secure, but also a litle bit slow. If you need more speed and still have security, you can use Blowfish or RC4.</p>
+
+<p>To increase scp speed change chipher from the default AES-128 to Blowfish</p>
+
+<pre><code>scp -c blowfish user@server:/home/user/file .
+</code></pre>
+
+<p>Or use RC4 which seems to be the fastest</p>
+
+<pre><code>scp -c arcfour user@server:/home/user/file .
+</code></pre>
+
+<p>This last one is not very secure, and it may not be used if security is really an issue for you.</p>
+
+<p><strong>Increase Security</strong></p>
+
+<p>If security is what you want, you can increase it, you will lose some speed though.</p>
+
+<pre><code>scp -c 3des user@server:/home/user/file .
+</code></pre>
+
+<p><strong>Limit Bandwidth</strong></p>
+
+<p>You may limit the bandwidth used by scp command</p>
+
+<pre><code>scp -l limit username@server:/home/uername/* .
+</code></pre>
+
+<p>Where limit is specified in Kbit/s. So for example, if you want to limit speed at 50 Kbps</p>
+
+<pre><code>scp -l50 user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p><strong>Save Bandwidth</strong></p>
+
+<p>Yoy can save bandwidth by enabling compression, let’s see our example with compression.</p>
+
+<pre><code>scp -C user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p><strong>Use IPv4 or IPv6</strong></p>
+
+<p>If you want to force the use of either IPv4 or IPv6 use any of these ones.</p>
+
+<pre><code>scp -4 user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p>The above one is for IPv4, and below for IPv6.</p>
+
+<pre><code>scp -6 user@server:/path/to/file /path/to/folder
+</code></pre>
+
+<p><strong>Specify a port</strong></p>
+
+<p>If the remote server does not have ssh listening on default 22 port, you can make <code>scp</code> to use the port where the remote server is listening to:</p>
+
+<pre><code>scp -P [port] [user]@[server]:[path/to/]file [/path/to/]file
+</code></pre>
+
+<p>Using the capital letter P you can make <code>scp</code> to use a port other than 22 which is the default for ssh. Let’s say your remote server is listening on 2222.</p>
+
+<pre><code>scp -P 2222 user@server:/home/jane/file /home/jane/
+</code></pre>
+
+<h3 id="windows">Windows</h3>
+
+<p>If you are working on a Windows powered computer, you can still enjoy <code>scp</code> in various ways, of course if you are a “*nix guy” you will prefer the command line, and you also have GUI tools available.</p>
+
+<h4>pscp</h4>
+
+<p><code>pscp</code> is a shell command that works almost on Windows Shell almost the same way that <code>scp</code> works on Linux or Mac OS X, you first need to download it from this <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">page</a>, here is the direct <a href="http://the.earth.li/~sgtatham/putty/latest/x86/pscp.exe">link</a>.</p>
+
+<p>Once downloaded you can invoque it from the Windows command line, go to the start menu and click on <em>run</em> then write</p>
+
+<pre><code>cmd
+</code></pre>
+
+<p>And press ENTER, if you are on Windows 8.x hit the Windows/Super key and click on the magnifier lens, type cmd and hit ENTER.</p>
+
+<p>Once in the command line, be sure to be in the directory where the pscp file was downloaded, or add that folder to your PATH, let’s suppose the folder is your Downloads folder, run this command:</p>
+
+<pre><code>SET PATH=C:\Users\Guillermo\Downloads;%PATH%
+</code></pre>
+
+<p>You will have to set that command every time you open a new command shell, or you can add the path permanently, how to do that is out of the scope of this article.</p>
+
+<p>Below are the options of the command, you will see that the options available let you do almost everything.</p>
+
+<pre><code>PuTTY Secure Copy client
+Release 0.63
+Usage: pscp [options] [user@]host:source target
+       pscp [options] source [source...] [user@]host:target
+       pscp [options] -ls [user@]host:filespec
+Options:
+  -V        print version information and exit
+  -pgpfp    print PGP key fingerprints and exit
+  -p        preserve file attributes
+  -q        quiet, don't show statistics
+  -r        copy directories recursively
+  -v        show verbose messages
+  -load sessname  Load settings from saved session
+  -P port   connect to specified port
+  -l user   connect with specified username
+  -pw passw login with specified password
+  -1 -2     force use of particular SSH protocol version
+  -4 -6     force use of IPv4 or IPv6
+  -C        enable compression
+  -i key    private key file for authentication
+  -noagent  disable use of Pageant
+  -agent    enable use of Pageant
+  -batch    disable all interactive prompts
+  -unsafe   allow server-side wildcards (DANGEROUS)
+  -sftp     force use of SFTP protocol
+  -scp      force use of SCP protocol
+</code></pre>
+
+<p><strong>Copy files from Windows to Linux</strong></p>
+
+<p>You can use scp command to copy files from Linux to Windows</p>
+
+<pre><code>pscp c:\path\to\file user@remote-server:/path/to/remote-folder
+</code></pre>
+
+<p><strong>Copy files from Linux to Windows</strong></p>
+
+<p>You can also copy files from Windows to Linux, using <code>pscp</code> from the Windows computer you can “push” the files to the Linux, Max OS X or *BSD server.</p>
+
+<pre><code>pscp user@remote-server:/path/to/remote-file c:\path\to\local-folder\
+</code></pre>
+
+<p><strong>Specify protocol</strong></p>
+
+<p>You can specify the protocol that scp command for Windows will use at the time of connection.</p>
+
+<dl class="dl-horizontal text-overflow">
+<dt>-scp</dt>
+<dd>This will force pscp to use scp protocol</dd>
+<dt>-sftp</dt>
+<dd>This will force pscp to use sftp protocol, which is a newer protocol than scp protocol</dd>
+</dl>
+
+<h4>WinSCP</h4>
+
+<p>WinSCP is a GUI version of scp, mainly for Windows, its development was started on 2.000 by <strong>Martin Přikryl</strong> and it is licenced under GNU licence.</p>
+
+<p>It is not only a SCP client, but also SFTP and FTP client too.</p>
+
+<p><strong>Screenshot</strong></p>
+
+<p>Below you can see a Screenshot of WinSCP</p>
+
+<p><img src="/images/2015/01/winscp.png" class="img-responsive" alt="WinSCP screenshot, scp for Windows" /></p>
+
+<p><strong>Main Features</strong></p>
+
+<p>Some of its main features are:</p>
+
+<dl class="dl-horizontal text-overflow">
+<dt>Full Sync</dt>
+<dd>This feature will keep both remote and local folders in sync, so any change you perform in any of the ends of the connection will be updated on the other end. The application should be kept on, and connected to keep this functionality running</dd>
+<dt>Sync Remote</dt>
+<dd><p>This feature will keep only the remote end in sync with the local, so any change made on the local side, will be updated in the remote side. But this will not work in other way. That is any change in remote will not be updated in local.</p>
+<p>You can decide to delete remote files or not at the time of starting the syncronization. If you turn it on, any files deleted on local, will be deleted on remote, but if not, only new added files or changes to existing ones will be updated</p></dd>
+<dt>Drag and Drop</dt>
+<dd><p>You can also use the drag and drop feature to copy files from remote to local or viceversa</p></dd>
+</dl>
+
+<p>As you can see, you can optain the same basic functionality for Windows that Linux users already enjoy, and this is maybe the best and easieste way to transfer files from Windows and Linux and viceversa.</p>
+
+<hr />
+
+<p><em>Last edit on: January 17, 2015</em></p>
+
+<p><em>By: Guillermo Garron</em></p>
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

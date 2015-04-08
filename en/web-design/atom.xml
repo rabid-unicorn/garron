@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>Linux posts</title>
+  <link href="http://www.garron.me/en/web-design/"/>
+  <link type="application/atom+xml" rel="self" href="http://www.garron.me/en/web-design/atom.xml"/>
+  <updated>2015-04-08T02:13:48-04:00</updated>
+  <id>http://www.garron.me/</id>
+  <author>
+    <name>Guillermo Garron</name>
+    <email>contact@garron.me</email>
+  </author>
+
+  
+  <entry>
+    <id>http://www.garron.me/en/web-design/clean-wordpress-theme</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/web-design/clean-wordpress-theme.html"/>
+    <title>Clean and Simple, a Wordpress Theme</title>
+    <published>2014-12-28T15:25:35-05:00</published>
+    <updated>2014-12-28T15:25:35-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;This is my first experiment creating Wordpress Themes, and I am sure it will be no success, but I hope it may be useful for somebody.&lt;/p&gt;
+
+&lt;p&gt;It is a minimalistic theme, aimed at written blogs (not for your cat’s pictures).&lt;/p&gt;
+
+&lt;p&gt;I made it thinking specially in those who love share what they write.&lt;/p&gt;
+
+&lt;p&gt;This theme is very basic, and it has no special functionality, here some of its characteristics.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bootstrap 3 based&lt;/li&gt;
+  &lt;li&gt;One column layout&lt;/li&gt;
+  &lt;li&gt;Typography:
+    &lt;ul&gt;
+      &lt;li&gt;Josefin Slab for headings&lt;/li&gt;
+      &lt;li&gt;Open Sans for regular text&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Background is almost white, with a FAFAFA color&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I am not sure if the background color is the best option, or maybe plain white is better.&lt;/p&gt;
+
+&lt;p&gt;The theme has some logic to make the Title clickable only when not in the front page, and the titles of posts clickable only when not displaying a single post.&lt;/p&gt;
+
+&lt;p&gt;Below you can see a screenshot of it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/12/wordpress-theme.png&quot; alt=&quot;My First Wordpress Theme&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have learned a lot about Wordpress Theming this last weekend, first working with child themes, and later creating my first Wordpress Theme.&lt;/p&gt;
+
+&lt;p&gt;You can download it for free and use it in anyway, read more about it &lt;a href=&quot;/en/projects/clean-and-simple.html&quot;&gt;here&lt;/a&gt; and you can see a &lt;a href=&quot;http://demo.garron.me/clean-and-simple/&quot;&gt;demo&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/web-design/wordpress-child-theme</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/web-design/wordpress-child-theme.html"/>
+    <title>Wordpress Child Themes</title>
+    <published>2014-12-25T15:31:35-05:00</published>
+    <updated>2014-12-25T15:31:35-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;developing-a-wordpress-child-theme&quot;&gt;Developing a Wordpress Child Theme&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;Wordpress is the most widely used CMS software to develop websites by the time of this writing.&lt;/p&gt;
+
+&lt;p&gt;With Wordpress you can power complex sites as well as simple blogs, you can customize almost every aspect of it with the use of plugins or rich feature themes with lots of functions build in.&lt;/p&gt;
+
+&lt;p&gt;Lots of its customization can be done with themes or changes to them, but when you change something in a theme and then that theme gets an upgrade your changes are overwritten, there is a way to overcome that, and that is creating a child theme.&lt;/p&gt;
+
+&lt;h3 id=&quot;definition&quot;&gt;Definition&lt;/h3&gt;
+
+&lt;p&gt;A child theme is a theme that inherits its functions and styling from the parent theme, and where you can change or add any functionality or styling without the risk of losing them when the parent is upgraded.&lt;/p&gt;
+
+&lt;h3 id=&quot;creating-the-child-theme&quot;&gt;Creating the child theme&lt;/h3&gt;
+
+&lt;p&gt;Let’s go to hands job training and see step by step how to accomplish our task.&lt;/p&gt;
+
+&lt;p&gt;We are going to “fork” the newest Wordpress official theme to just change the font it uses.&lt;/p&gt;
+
+&lt;p&gt;Twenty Fifteen uses Google’s Noto Sans and Serif fonts, we are going to change it to use&lt;/p&gt;
+
+&lt;h4 id=&quot;choosing-the-parent-theme&quot;&gt;Choosing the parent theme&lt;/h4&gt;
+
+&lt;p&gt;The first thing you need to do is to find a parent theme you want to modify or add features to.&lt;/p&gt;
+
+&lt;p&gt;Considering that your newly created theme will inherit everything from the parent one, you will want to choose wisely, go with a solid theme with good SEO, good layout options so you can have solid bases for your work.&lt;/p&gt;
+
+&lt;p&gt;Once you have learned and mastered the child theme creation, you can start building your themes over popular frameworks like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://my.studiopress.com/themes/genesis/&quot;&gt;Genesis&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.woothemes.com/products/canvas/&quot;&gt;Canvas&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://diythemes.com&quot;&gt;Thesis&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Or go with some Open Source frameworks:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://themeshaper.com/thematic/&quot;&gt;Thematic&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://upplex.de/bootstrap-3-wordpress-theme-framework/&quot;&gt;Bootstrap Framework&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://roots.io&quot;&gt;Roots.io&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For this tutorial, we will simply start with Wordpress’ &lt;a href=&quot;https://wordpress.org/themes/twentyfifteen&quot;&gt;Twenty Fifteen&lt;/a&gt; theme.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-the-parent-theme&quot;&gt;Install the parent theme&lt;/h3&gt;
+
+&lt;p&gt;If you have not done this already, you need to download and install the theme that is going to be the base of your work.&lt;/p&gt;
+
+&lt;p&gt;First go to the admin section of your Wordpress installation, which is http://your-site-url/wp-admin/. Then choose Appearance -&amp;gt; Themes from the left side of your screen.&lt;/p&gt;
+
+&lt;p&gt;Once there select &lt;em&gt;Add New&lt;/em&gt; and look for &lt;strong&gt;Twenty Fifteen&lt;/strong&gt; if it is not already installed (if you have the latest version of Wordpress, it should be already installed).&lt;/p&gt;
+
+&lt;h3 id=&quot;create-the-child-folder-and-add-minimum-files&quot;&gt;Create the child folder and add minimum files&lt;/h3&gt;
+
+&lt;p&gt;First thing you need to do, is to create the child theme folder, where its files are going to be.&lt;/p&gt;
+
+&lt;p&gt;You can do this in very different ways, being FTP and ssh the most common ones, how to do it via either of them is outside the scope of this tutorial, but it has be be located in: &lt;em&gt;wp-content/themes/&lt;/em&gt;, if you are on a fresh Wordpress installation you will find these folders inside &lt;em&gt;wp-content/themes/&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;twentyfifteen&lt;/li&gt;
+  &lt;li&gt;twentyfourteen&lt;/li&gt;
+  &lt;li&gt;twentythirteen&lt;/li&gt;
+  &lt;li&gt;twentytwelve&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So let’s create a new one, which can be named, twentyfifteen-child pretty obvious right?&lt;/p&gt;
+
+&lt;p&gt;Inside that folder there are two files that are a must:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;style.css&lt;/li&gt;
+  &lt;li&gt;functions.php&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once you have those files in place, add this to style.css.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/*
+ Theme Name:   Twenty Fifteen Child
+ Theme URI:    http://the-url-where-theme/can-be-downloaded
+ Description:  Twenty Fifteen Child Theme
+ Author:       Your name
+ Author URI:   http://your-website
+ Template:     twentyfifteen
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         responsive, blog
+ Text Domain:  twenty-fifteen-child
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can change any of those lines according to your needs, the only one you can’t write at your discretion, is the &lt;strong&gt;Template&lt;/strong&gt; line, it must reflect the folder of the parent theme.&lt;/p&gt;
+
+&lt;p&gt;You also have to create a &lt;em&gt;functions.php&lt;/em&gt; which we will keep empty for a while.&lt;/p&gt;
+
+&lt;p&gt;You now have a new theme that you can activate from the *Appearance -&amp;gt; Themes * menu in the Admin page of your Wordpress Admin Panel.&lt;/p&gt;
+
+&lt;p&gt;Once activated, you will see that you have a blog with no theme at all, so it is time to start customizing your new theme.&lt;/p&gt;
+
+&lt;h3 id=&quot;customize-your-newly-created-theme&quot;&gt;Customize your newly created theme&lt;/h3&gt;
+
+&lt;p&gt;The first thing we need to know is how files are treated, any file you have in your child theme’s folder is going to replace the original one in parent folder, this with the exception of &lt;code&gt;functions.php&lt;/code&gt; which contents are going to be added to the parent’s &lt;code&gt;functions.php&lt;/code&gt; file, but at top of it, so child’s functions are loaded before parent’s ones.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Import parents styling&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Maybe the very first thing we need to do is to import the parent’s styling so we can modify them instead of creating everything again.&lt;/p&gt;
+
+&lt;p&gt;In order to do it, copy this snippet in your child’s functions file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php 
+add_action( &#39;wp_enqueue_scripts&#39;, &#39;theme_enqueue_styles&#39; );
+function theme_enqueue_styles() {
+wp_enqueue_style( &#39;parent-style&#39;, get_template_directory_uri() . &#39;/style.css&#39; );
+wp_enqueue_style( &#39;child-style&#39;, get_stylesheet_uri(), array( &#39;parent-style&#39; ) );
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once that is done you have a child theme that is equal to the parent one, but now you are really ready to start customizing it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Change the font of the theme&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In this example we have decided to change the default font family of TwentyFifteen theme in order to show how to customize a child theme.&lt;/p&gt;
+
+&lt;p&gt;To do that, we are going to edit the /wp-content/themes/twentyfifteen-child/style.css file, and add this lines to it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@import url(http://fonts.googleapis.com/css?family=Raleway);
+body {
+    font-family: &#39;Raleway&#39;, sans-serif;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So the complete new style.css file will look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/*
+    Theme Name:   Twenty Fifteen Child
+    Theme URI:    http://the-url-where-theme/can-be-downloaded
+    Description:  Twenty Fifteen Child Theme
+    Author:       Guillermo Garron
+    Author URI:   http://www.garron.me
+    Template:     twentyfifteen
+    Version:      1.0.0
+    License:      GNU General Public License v2 or later
+    License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+    Tags:         responsive, blog
+    Text Domain:  twenty-fifteen-child
+*/
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+body {
+    font-family: &#39;Raleway&#39;, sans-serif;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The added lines will import a new font from Google fonts, Raleway in this case, and the rest of lines tells The browser to use Raleway instead of Noto which is the default for TwentyFifteen theme.&lt;/p&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;We have learned how to customize a Wordpress theme in a way we will not lose any change when upgrading the theme. To accomplish that we have taken this steps.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a child theme
+    &lt;ul&gt;
+      &lt;li&gt;In a new theme folder add style.css and functions.php&lt;/li&gt;
+      &lt;li&gt;In style.css declare the parent theme&lt;/li&gt;
+      &lt;li&gt;In functions.php import the parent theme’s style to the child&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add your style changes to the child’s style.css file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Of course you can do more elaborated changes, and not only change the font of the theme.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+ 
+</feed>

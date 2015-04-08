@@ -1,0 +1,805 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>Linux posts</title>
+  <link href="http://www.garron.me/en/tech/"/>
+  <link type="application/atom+xml" rel="self" href="http://www.garron.me/en/tech/atom.xml"/>
+  <updated>2015-04-08T02:13:48-04:00</updated>
+  <id>http://www.garron.me/</id>
+  <author>
+    <name>Guillermo Garron</name>
+    <email>contact@garron.me</email>
+  </author>
+
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/web-whatsapp</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/web-whatsapp.html"/>
+    <title>WhatsApp Web</title>
+    <published>2015-01-22T08:55:00-05:00</published>
+    <updated>2015-01-22T08:55:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;With some 700 million users around the world, WhatsApp is the most popular instant messaging app in Europe and Latin America. And recently has announced a long waited feature. You can now use WhatsApp from the PC using an official web-app.&lt;/p&gt;
+
+&lt;p&gt;There are some downsides but it works, here are some of those downsides.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Does not work for iOS, only for Android, Windows and Blackberry&lt;/li&gt;
+  &lt;li&gt;Only works for Google Chrome, but they promise solutions for other browsers “soon”&lt;/li&gt;
+  &lt;li&gt;Your phone needs to be connected to the Internet for this solution to work&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-use-whatsapp-from-the-web-on-your-pc&quot;&gt;How to use WhatsApp from the Web on your PC&lt;/h3&gt;
+
+&lt;p&gt;What you need:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Your phone connected to the Internet&lt;/li&gt;
+  &lt;li&gt;A PC connected to the Internet (Linux, Windows, Mac or Chromebook)&lt;/li&gt;
+  &lt;li&gt;Google Chrome browser installed&lt;/li&gt;
+  &lt;li&gt;Latest version of WhatsApp on an Android, Windows Phone or Blackberry&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Go to &lt;a href=&quot;https://web.whatsapp.com&quot;&gt;web.whatsapp.com&lt;/a&gt; and you will a screen like this one.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/01/web-whatsapp/web-whatsapp-1.png&quot; class=&quot;img-responsive&quot; alt=&quot;Use WhatsApp from the Web&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Open WhatsApp app in your phone and go to menu-&amp;gt;WhatsApp web, and scan the barcode you’ve got on the sceen like the above one.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/01/web-whatsapp/web-whatsapp.png&quot; class=&quot;img-responsive&quot; alt=&quot;WhatsApp on the web&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When you are finally connected you will see something like this will all your contacts.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2015/01/web-whatsapp/web-whatsapp-2.png&quot; class=&quot;img-responsive&quot; alt=&quot;WhatsApp on your PC&quot; /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/mailwise</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/mailwise.html"/>
+    <title>mailwise</title>
+    <published>2014-08-30T00:15:00-04:00</published>
+    <updated>2014-08-30T00:15:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;mailwise&quot;&gt;mailwise&lt;/h3&gt;
+
+&lt;h4 id=&quot;introduction&quot;&gt;Introduction&lt;/h4&gt;
+
+&lt;p&gt;mailwise is yet another mail app for Android, one I have just discovered, so far, I’m loving it. It is clean, easy to use and support all major email providers.&lt;/p&gt;
+
+&lt;h4 id=&quot;main-features&quot;&gt;Main features&lt;/h4&gt;
+
+&lt;p&gt;According to its site these are the main features:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Conversations - e-mails are combined in a clear organized way&lt;/li&gt;
+  &lt;li&gt;Fully secure – MailWise stores all of your data locally on your device keeping it safe and secure&lt;/li&gt;
+  &lt;li&gt;Clean inbox – Smart Grouping by contacts&lt;/li&gt;
+  &lt;li&gt;Connect to the most popular email providers: Exchange, Yahoo!, Outlook, AOL, Gmail, Hotmail email and more&lt;/li&gt;
+  &lt;li&gt;Email setup is simple and easy to configure&lt;/li&gt;
+  &lt;li&gt;MailWise email client connects to IMAP and ActiveSync (Exchange email) servers (Unfortunately we do not support POP3 at this time)&lt;/li&gt;
+  &lt;li&gt;Enable\Disable Avatars&lt;/li&gt;
+  &lt;li&gt;Quiet time for notifications&lt;/li&gt;
+  &lt;li&gt;Import all your email accounts - Mail Wise supports multiple email accounts so you can manage (for example) your Hotmail Inbox alongside your Exchange ActiveSync&lt;/li&gt;
+  &lt;li&gt;Productive - swipe for immediate actions&lt;/li&gt;
+  &lt;li&gt;Sort inbox by unread or starred&lt;/li&gt;
+  &lt;li&gt;Clear email – proven to save you time by removing excessive formatting and signatures, getting directly to the heart of an email&lt;/li&gt;
+  &lt;li&gt;Easy add to Contacts – simply press the picture to add the email address and details to your contacts&lt;/li&gt;
+  &lt;li&gt;Quick email search – find your old emails fast&lt;/li&gt;
+  &lt;li&gt;Restricted Optional Exchange Email Security Bypass&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here are my favorites:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Conversations:&lt;/strong&gt; mailwise groups all emails with the same subject, so you can easily follow the conversation. Now, you may say that lots of other clients already do this, but with mailwise you will also have the conversation view uncluttered, clean and easy to follow.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/mailwise-1.png&quot; class=&quot;img-responsive&quot; alt=&quot;mailwise conversations&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Support for ActiveSync and Imap:&lt;/strong&gt; This one is good too, as you can configure all your major accounts in one single application. And have access from one app to your corporate and personal accounts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/mailwise.png&quot; class=&quot;img-responsive&quot; alt=&quot;mailwise&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Quit Time for Notifications:&lt;/strong&gt; Nothing worse than being woke up at 3 a.m. just because that person in Europe decided to reply to your email. Now you can set a quite time, this way your phone will not alert about new emails during the hours you set up.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There is also one thing I do not like about it, it does not support IMAP Idle, so you will have to configure it to check your emails every &lt;em&gt;n&lt;/em&gt; minutes, this will of course drain your battery if you set it to check for new emails too frequently, or  you may miss that important email if you set it the gap between polls too wide.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/add-custom-domain-outlook-com</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/add-custom-domain-outlook-com.html"/>
+    <title>Custom domain for Outlook.com</title>
+    <published>2013-06-21T17:00:00-04:00</published>
+    <updated>2013-06-21T17:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Microsoft have disabled the option to add custom domains to Outlook.com service, now you shoudl go to &lt;a href=&quot;http://office365.com&quot;&gt;Office 365&lt;/a&gt; and the the Exchange package to have your own domain with Microsoft service. You will get a full Exchange server in this case.&lt;/p&gt;
+
+&lt;p&gt;Every knows that you can use Google server to host email for your company, family or club. It was once free, but know that option has gone and you have to pay a fee in order to host your email solution on Google. Well, Microsoft now offers the same thing Google was offering once.&lt;/p&gt;
+
+&lt;p&gt;You can add custom domains to your outlook.com account and use it to manage your club, family or small company emails. Let’s see how to do it.&lt;/p&gt;
+
+&lt;p&gt;First go to &lt;a href=&quot;http://domains.live.com&quot;&gt;Microsoft’s domain admin site&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/06/ms-domains/live-admin-center.png&quot; class=&quot;img-responsive&quot; alt=&quot;Microsoft custom domain dashboard&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on “get started”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/06/ms-domains/get-started.png&quot; class=&quot;img-responsive&quot; alt=&quot;getting started with custom domains outlook.com&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Enter the domain you want to add to outlook.com, you will know be given the option to create a new account, or use one you already have. I’m sure you have a hotmail.com account somewhere, use it, or create a new one. But you better use an existing one, or create a new one and verify it in another browser because the process works better if you use an existent account.&lt;/p&gt;
+
+&lt;p&gt;Once you sign in you will be given the options to review everything.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/06/ms-domains/review-settings.png&quot; class=&quot;img-responsive&quot; alt=&quot;Review settings custom domain outlook.com&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now you need to prove the ownsership of the domain you are adding, various options are given to you. Use the one that best works for you, it will depends on where you have the DNS hosted. I will not cover that, as it varies too much from one user to another.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/06/ms-domains/prove-ownership.png&quot; alt=&quot;prove ownsership custom domain outlook.com&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you finish this step with your DNS service provider, you can add accounts to your newly added custom domain in outlook.com. You have up to 50 accounts available, and 25 Giga Bytes on each one.&lt;/p&gt;
+
+&lt;p&gt;At the end, you will end up with this nice view. I really like how minimalistic and clean it looks like.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/06/ms-domains/final.png&quot; class=&quot;img-responsive&quot; alt=&quot;outlook.com clean layout&quot; /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/sync-open-tabs-firefox</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/sync-open-tabs-firefox.html"/>
+    <title>Sync Firefox Open tabs</title>
+    <published>2013-06-06T13:00:00-04:00</published>
+    <updated>2013-06-06T13:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I want to note that I am not going to show you how to sync Firefox between two different computers as it is already well documented by Mozilla. But once you have two PCs or a PC and a Tablet or phone with their Firefox synced, how do you access the open tabs in one device from the other one?&lt;/p&gt;
+
+&lt;p&gt;And this is easy.&lt;/p&gt;
+
+&lt;p&gt;Just open Firefox, and in the address field enter:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; about:sync-tabs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That’s all.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/blackberry-OS-5-8520-bbm-7-voice-voip.blackberry.com-certificate-problem</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/blackberry-OS-5-8520-bbm-7-voice-voip.blackberry.com-certificate-problem.html"/>
+    <title>BBM 7 certificate problem. Invalid certificate chain for *.voip.blackberry.com</title>
+    <published>2013-03-24T10:17:00-04:00</published>
+    <updated>2013-03-24T10:17:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;If you have a Blackberry 8520 with OS 5.0 and you have just upgraded to BBM 7 to enable BBM voice over WiFi, then you may be facing the same problem I found.&lt;/p&gt;
+
+&lt;p&gt;When the Blackberry connects to a WiFi network it complains about the *.voip.blackberry.com certificate authenticity. You will get a message like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;invalid certificate chain for *.voip.blackberry.com&lt;/strong&gt; And you are given with the options:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Continue&lt;/li&gt;
+  &lt;li&gt;Close connection&lt;/li&gt;
+  &lt;li&gt;View Certificate&lt;/li&gt;
+  &lt;li&gt;Trust Certificate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This message will continue to appear from time to time. The solution to the problem is to install some certificates.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Thawte Primary Root CA - G1 (EV)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Download it from this &lt;a href=&quot;https://www.verisign.com/support/thawte-roots.zip&quot;&gt;link&lt;/a&gt;, unzip it and then you can upload the certificate to the phone using any way, bluetooth is one, but I have used the email. Send the certificate via email to yourself, open it in the blackberry, click on it and select import certificate.&lt;/p&gt;
+
+&lt;p&gt;Once imported the problem should disappear.&lt;/p&gt;
+
+&lt;p&gt;If it does not happen, you can download and import this other certificates:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.tbs-internet.com/thawte/ThawtePCA-SS.crt&quot;&gt;First&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.tbs-internet.com/thawte/ThawteSSLCA.crt&quot;&gt;Second&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Just click the links and look for the import option at the end. If the option is not there, it may be because the certificate is already installed.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/configure-netflix-android-to-only-stream-over-wifi</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/configure-netflix-android-to-only-stream-over-wifi.html"/>
+    <title>Configure Netflix for Android to stream only on WiFi</title>
+    <published>2013-02-12T18:17:00-05:00</published>
+    <updated>2013-02-12T18:17:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;You can configure Netflix for Android to be able to stream or watch instantly over the 3G network and WiFi or only over WiFi.&lt;/p&gt;
+
+&lt;p&gt;If you do not have an unlimited data plan, or a big enough one, you may want to configure Netflix to work only over WiFi Networks.  One movie can be more than 200 MBytes.&lt;/p&gt;
+
+&lt;p&gt;To configure Netflix on Android to only stream over WiFi. Enter into the application, and scroll over your recommendations, down to the end. You will see, at the bottom a button to enter into your account information. And there you can configure it to only work over WiFi networks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/02/netflix-android-only-wifi.jpg&quot; alt=&quot;Configure Netflix for Android to work only over WiFi networks&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/vine-new-twitter-app-6-seconds-video-sharing</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/vine-new-twitter-app-6-seconds-video-sharing.html"/>
+    <title>Vine. Six seconds video sharing</title>
+    <published>2013-01-29T08:57:00-05:00</published>
+    <updated>2013-01-29T08:57:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Last week Vine was introduced to the public, it is a new video sharing service. You can download the app for iOS. It is still not available app for Android but I am sure that is going to change soon.&lt;/p&gt;
+
+&lt;p&gt;Just like Twitter with 140 characters, Vine gives you only six seconds of video sharing.&lt;/p&gt;
+
+&lt;p&gt;The app takes full advantage of touch screens, as you can only capture video while touching the screen. This way you can better use your six seconds and make some creative videos.&lt;/p&gt;
+
+&lt;p&gt;Most people have started using it to create some nice &lt;a href=&quot;http://en.wikipedia.org/wiki/Stop_motion&quot;&gt;stop motion&lt;/a&gt; pictures.&lt;/p&gt;
+
+&lt;p&gt;As with all other tools that people invents, the way you use it is up to you. A lot of people started using it to create porn pictures under the #porn hashtag. That hashtag have been banned by Vine.&lt;/p&gt;
+
+&lt;p&gt;As usually, I recommned you to deny the app the access to your location information. It is a security thread, and you can be sure that people will find the way to use it in bad ways.&lt;/p&gt;
+
+&lt;p&gt;If you have already granted the vine app permission to access your location information, you can go to:&lt;/p&gt;
+
+&lt;p&gt;Settings -&amp;gt; Privacy -&amp;gt; Location Services&lt;/p&gt;
+
+&lt;p&gt;Look for Vine in the list, and toggle it off.&lt;/p&gt;
+
+&lt;p&gt;Happy video sharing.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/swiftkey-one-of-best-android-keyboard-app</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/swiftkey-one-of-best-android-keyboard-app.html"/>
+    <title>Swiftkey 3 review</title>
+    <published>2013-01-18T15:37:00-05:00</published>
+    <updated>2013-01-18T15:37:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;One thing that still today a lot of users miss from Blackberry, is the hardware keyboard, typing in a touch screen is not as easy as using a real keyboard. They have improved a lot since the first days of the iPhone and right now with the iPhone 5, and more space for the keyboard in landscape mode is a lot easier to type.&lt;/p&gt;
+
+&lt;p&gt;If you are using an Android phone like the Galaxy S3 you really have plenty of space, but even then, you miss the letter from time to time. In the Android world you can change the default keyboard that comes with your phone with another one. I have tested quite a few, and the best one for me is &lt;a href=&quot;http://www.swiftkey.net/en/&quot;&gt;Swiftkey&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;According to the site, this is what swiftkey is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;TIME-SAVING
+SwiftKey speeds up touchscreen typing because it understands the way words work together, predicting and correcting your input in a smarter way.
+
+PERSONALIZED
+SwiftKey automatically learns the words and phrases that matter to you, intelligently auto-correcting and predicting based on your writing style. It can also learn your lingo by syncing with Gmail, Facebook, Twitter or your blog.
+
+NUMBER ONE
+SwiftKey is used by millions of people around the globe. Our users have saved so many keystrokes while typing, they would stretch to the Moon if printed in 12pt font. We&#39;ve also won some of the most prestigious awards in the industry for our commitment to innovation.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I have used it first with my &lt;em&gt;xperia x10 mini&lt;/em&gt; and it learns from your typing and constantly adjust itself, to prove its guessing when you hit the wrong key.&lt;/p&gt;
+
+&lt;p&gt;You can also link it with your gmail account, facebook account, twitter account or even you the rss feed of your blog. This way Swiftkey, learns how you type, your style, and which words you usually use after certain other words. That way it starts guessing the words you type in real time.&lt;/p&gt;
+
+&lt;p&gt;Another good feature is that you can load up to three languages, and you can mix them while typing, so you can have French, English and Spanish. Then you can type something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Bon appetit, I hope you enjoyed la ensalada
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You do not need to change from one languages to another while typing, I mean there is no switch button like with the iPhone, you just type in the language you want, the software will detect which one you are using.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Final note&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you need to type a lot from your Android smartphone, and you need to do it fast and with the less possible errors. Then you may need to buy Swiftkey 3 keyboard app for Android. You will not regret it.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/how-to-take-screenshot-android-samsung-galaxy-s3</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/how-to-take-screenshot-android-samsung-galaxy-s3.html"/>
+    <title>How to take screenshot with Samsung Galaxy S3</title>
+    <published>2013-01-18T12:17:00-05:00</published>
+    <updated>2013-01-18T12:17:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;To take screenshots with the Samsung Galaxy S3 Android phone, is only a matter of a gesture with you hand.&lt;/p&gt;
+
+&lt;p&gt;First we have to enable it at:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Settings -&amp;gt; Motion -&amp;gt; Palm swipe to capture&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Enable it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/01/galaxy-s3-take-screenshot-1.png&quot; alt=&quot;Enable screenshot for Galaxy S3&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And also be sure that in the former step, Motion is also enabled:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2013/01/galaxy-s3-take-screenshot-2.png&quot; alt=&quot;How to take screenshot with Galaxy S3&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that it is enable, just swipe the screen with your palm, from right to left or left to right. Just if you were cleaning the Galaxy S3 screen, and the screenshot will be taken, and put in your gallery.&lt;/p&gt;
+
+&lt;p&gt;If you have Dropbox enabled, it will be uploaded there, for you to share it easily&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/find-big-emails-gmail-size-operator-search</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/find-big-emails-gmail-size-operator-search.html"/>
+    <title>New size operators for advance search in Gmail</title>
+    <published>2012-11-16T17:04:00-05:00</published>
+    <updated>2012-11-16T17:04:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Few days ago Gmail added a much awaited feature. &lt;strong&gt;Search email by size&lt;/strong&gt;, this is very handy, to locate those emails with big attachments that are filling your inbox.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/gmail-advanced-search-size.png&quot; class=&quot;img-responsive&quot; alt=&quot;Gmail find emails by size. Advanced search operators&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Because, even though Gmail says you have unlimited space for your emails, and you do not need to erase a single one. That is not true, and you can fill up your inbox easily if you are receiving big attachments with your emails.&lt;/p&gt;
+
+&lt;p&gt;Now, you can find those big emails which may be using some 80% of your space, and they may be not more than 10% of all your emails.&lt;/p&gt;
+
+&lt;p&gt;The new operators for advance search are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;size&lt;/li&gt;
+  &lt;li&gt;larger&lt;/li&gt;
+  &lt;li&gt;smaller&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Where size and larger seems to behave the same.&lt;/p&gt;
+
+&lt;p&gt;Some other operators introduced let you find emails older or newer than x days, months or years. Those operators are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;newer_than&lt;/li&gt;
+  &lt;li&gt;older_than&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And the abbreviations to be used are: days(d), months(m), years(y).&lt;/p&gt;
+
+&lt;p&gt;With these new tools, you can now find your big emails of the last year.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;larger:5m older_than:1y newer_than:2y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Will return all emails larger than 5 Mbytes that are between 2 years and 1 year old. You can also find all emails larger than 10 Mbytes that are 5 years old in your inbox.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;larger:10m older_than:5y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You got the idea, now if you need, go and clean up your Gmail inbox.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/how-to-take-screenshot-android-galaxy-ace</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/how-to-take-screenshot-android-galaxy-ace.html"/>
+    <title>How to take screenshot with Samsung Galaxy Ace</title>
+    <published>2012-11-16T16:17:00-05:00</published>
+    <updated>2012-11-16T16:17:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Some days ago, while trying to answer a call I accidentally took a screenshot with my Galaxy Ace instead of answering the call.&lt;/p&gt;
+
+&lt;p&gt;I do not know if this works for all Android phones, but it works with my Samsung Galaxy Ace&lt;/p&gt;
+
+&lt;p&gt;I’m running Android 2.3.4 Gingerbread.&lt;/p&gt;
+
+&lt;p&gt;To take the screenshot just hold on the &lt;em&gt;back button&lt;/em&gt;, and then press and release the &lt;em&gt;home button&lt;/em&gt; while still holding down the &lt;em&gt;back button&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Your images should go to &lt;em&gt;ScreenCapture&lt;/em&gt; folder in your phone gallery.&lt;/p&gt;
+
+&lt;p&gt;Here is a picture of the specs of my phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/2012/11/android-screen-shot.png&quot; class=&quot;img-responsive&quot; alt=&quot;Android Screenshot Samsung Galaxy Ace&quot; /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/internal-memory-a-feature-to-look-at-when-choosing-android-phones</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/internal-memory-a-feature-to-look-at-when-choosing-android-phones.html"/>
+    <title>Look at internal memory while choosing you next Android phone</title>
+    <published>2012-10-26T10:17:00-04:00</published>
+    <updated>2012-10-26T10:17:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Yesterday I was looking for some low-end Android phones for a friend of mine.&lt;/p&gt;
+
+&lt;p&gt;While looking at Galaxy ACE 2 and Galaxy ACE Plus, I realized the differences are not that big, also the prices delta is really small. So, where to look to decide?&lt;/p&gt;
+
+&lt;p&gt;I asked the vendor what were the differences? He told me that mainly the processor speed as the plus have a mono-core 1 GHz processor and the 2 have a dual core 800 MHz, so the 2 may be considered as 1.6 GHz.&lt;/p&gt;
+
+&lt;p&gt;Well that is not really a true, only if the app you are running can take advantage of parallel processing you can count it as 1.6 GHz. Anyway 1 GHz and 800 MHz is not really a big difference.&lt;/p&gt;
+
+&lt;p&gt;To me the real difference between these two, and this is maybe the most important feature to look at, when you are choosing between low-level Android smartphones is the internal memory. Internal memory is going to limit the amount of apps you will be able to install on your phone. It does not matter that some of them can be installed in external memory, a small part of every app will reside in the internal memory of the phone.&lt;/p&gt;
+
+&lt;p&gt;In this case the Galaxy ACE Plus comes with 512 Mbytes and the Galaxy ACE 2 comes with 768 MBytes RAM. That is 50% more space for apps!, you are provably not going to realize the speed difference between the processors, but of course you are going to be mad when your phone start telling you that some app can not be installed because you do not have enough memory.&lt;/p&gt;
+
+&lt;p&gt;Apps are bigger and bigger every day, even the native apps like Youtube, Gmail or Maps receive upgrades periodically. That takes memory.&lt;/p&gt;
+
+&lt;p&gt;If you are buying high-end phones, you maybe do not have to worry about this, and should pay more attention to another specs, like screen or camera but with low-end phones, check internal RAM.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/host-your-site-from-dropbox-site44-review</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/host-your-site-from-dropbox-site44-review.html"/>
+    <title>Absurdly easy way to host your static site using Dropbox</title>
+    <published>2012-07-06T10:45:00-04:00</published>
+    <updated>2012-07-06T10:45:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;I’m always looking and experimenting with new technology. Today while reading &lt;a href=&quot;http://news.ycombinator.com/item?id=4061160&quot;&gt;hacker news&lt;/a&gt;, I step on &lt;a href=&quot;http://www.site44.com&quot;&gt;site44&lt;/a&gt;, which is an app that lets you publish your static site to the public, right from your Dropbox account.&lt;/p&gt;
+
+&lt;p&gt;These are the simple steps to have a site up and running and no time.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Authorize site44.com to access your Dropbox account. Do that from &lt;a href=&quot;https://www.site44.com/admin&quot;&gt;site44 admin page&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Create a new site (From the same admin page)&lt;/li&gt;
+  &lt;li&gt;Put some html files in your newly created folder.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Three simple steps you are running.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What you get&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You have the option to run free or paid accounts, the differences are:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Site44 provides free hosting for low-traffic accounts. Accounts that have five or fewer websites, and that use less than 100MB/month of total data transfer (across all sites) are free.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For just $4.95/month, Site44 accounts can have up to 50 websites and 40GB/month of total data transfer.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Where is your site hosted?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As far as I could see your site will be hosted in &lt;a href=&quot;http://aws.amazon.com/ec2/&quot;&gt;Amazon EC2&lt;/a&gt;, but, do not worry, you do not need to have an Amazon account, site44 takes care of that.&lt;/p&gt;
+
+&lt;p&gt;I can guess Nginx will be the power behind your site, but the fronted is Varnish. Here the headers of my test site:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;HTTP/1.1 200 OK
+Age: 157
+Cache-Control: public, max-age=217
+Content-Type: text/html
+Date: Fri, 06 Jul 2012 14:13:30 GMT
+Last-Modified: Fri, 06 Jul 2012 14:09:53 GMT
+Vary: Accept-Encoding
+Via: 1.1 varnish
+X-Varnish: 102681006 102680936
+Connection: keep-alive
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most of the competitors uses your Dropbox to host your site, so if you site becomes popular you can exhaust your daily quota easily. Site44 seems to just sync your content from your Dropbox to their servers and serve the content from there.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Easy of posting&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Once again comparing this with other similar apps, you have that others, like &lt;a href=&quot;http://pancake.io/&quot;&gt;pancake.io&lt;/a&gt;, or &lt;a href=&quot;http://droppages.com/&quot;&gt;DropPage&lt;/a&gt;, let you use Markdown to create your pages, which them later transform into html. In site44 case, you need to create the html pages by yourself.&lt;/p&gt;
+
+&lt;p&gt;I think both have their possible users, while DropPages and Pancake.io are good for people who knows little or nothing about creating a site, site44 is for those looking for a good alternative to host their Jekyll-generated site, (could be anything else besides Jekyll).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Advanced features&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I like some of the advanced features available. It is great to have the ability to declare the mime/type of your files, so you can serve extension-less files/urls. Also the ability to create 301 redirects is a great think, you never know when you will need to move a page, but all those who have bookmarked your content should still be able to access it.&lt;/p&gt;
+
+&lt;p&gt;You can have custom domains both in the free and paid accounts.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/blackberry-imap-sent-items-sync-solved</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/blackberry-imap-sent-items-sync-solved.html"/>
+    <title>Have Blackberry Sent Items Sync with Imap Folders</title>
+    <published>2012-04-29T09:12:00-04:00</published>
+    <updated>2012-04-29T09:12:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Using Blackberry BIS you can sync your phone email client with any Imap server. I’m using Dovecot running over Arch Linux for my tests.&lt;/p&gt;
+
+&lt;p&gt;Everything worked great, but I had one simple problem, none of the emails sent from the blackberry were visible in the sent folder in Thunderbird or the iPhone.&lt;/p&gt;
+
+&lt;p&gt;After researching a little, I found that Blackberry expects that a folder named &lt;em&gt;“Sent Items”&lt;/em&gt; (without the quotes) exists in the root of your Imap server.&lt;/p&gt;
+
+&lt;p&gt;Once I created it (using Thunderbird) all emails sent from the Blackberry started to appear in that folder. Next I configured iPhone and Thunderbird to put sent emails in the same folder and now all my clients are in sync.&lt;/p&gt;
+
+&lt;p&gt;It is also good to note that Blackberry does mark as read the emails read in other clients. But the other way it works.&lt;/p&gt;
+
+&lt;p&gt;Also the deleted emails in other clients are deleted from the blackberry.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/new-ipad</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/new-ipad.html"/>
+    <title>New iPad</title>
+    <published>2012-03-09T15:00:00-05:00</published>
+    <updated>2012-03-09T15:00:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Two days ago Apple released the iPad 3, or how Apple is calling it the ‘New iPad’.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.financialpost.com/m/wp/fp-tech-desk/blog.html?b=business.financialpost.com/2012/03/07/new-apple-ipad-does-little-to-fend-off-rivals-advance&quot;&gt;Some reviews&lt;/a&gt; are saying that because this new iPad is comming with so few new features, this is the opportunity the rivals were waiting for. That this is the opportunity for others tablet makers to surpass Apple.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For Apple’s rivals, most notably Google Inc. and Microsoft Corp., the incremental improvements in the latest iPad may be just the opportunity they need to establish themselves as legitimate competitors to the world’s most valuable company.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And add&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In some respects, Apple has become a victim of its own success. Over the past few years, the world has become accustomed to Apple offering up a near constant parade of innovative products, blowout earnings results and record sales figures.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Well, according to &lt;em&gt;Matt Hartley&lt;/em&gt; these improvements are not enough. But what about other people?&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gdgt.com/discuss/ipad-3rd-gen-first-impressions-169l/&quot;&gt;Ryan from GDT&lt;/a&gt;, said:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Amazing. Seriously amazing. I really love the Retina Display on the iPhone 4/4S, but this feels like a step forward even from that. Not because it’s a better display (which it may well be), but because the much larger scale of the screen makes it feel transformative to the experience of looking at a Retina Display and using an iPad.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Answering to himself &lt;strong&gt;“So how IS the Retina Display on the new iPad?”&lt;/strong&gt;, so, this shows that this simple feature is a big feature and a big earning in the new iPad.&lt;/p&gt;
+
+&lt;p&gt;To me, there is now way to qualify a tablet as the best one in the market, there are some of them that are actually great, being Apple one of them of course. And this new feature is not a way to stand in front of the others is just something that makes the iPad even better.&lt;/p&gt;
+
+&lt;p&gt;Your decision to buy an iPad or an Android tablet, should be based on your needs and not on reviews of fan boys from one or the other side.&lt;/p&gt;
+
+&lt;p&gt;If you need something small, you maybe need the Samsung Galaxy Tab 7.7, if you have a Mac, and an iPhone your best bet is the iPad, if you need to use the keyboard a lot, and have your email account in Google Apps, and plan to use your tablet mainly to consume media and emails and social networks, maybe the Asus Slider is the way to go.&lt;/p&gt;
+
+&lt;p&gt;So, too few improvements? is Apple’s iPad losing the race?. No way it is a great feature, and the iPad users now have an even better one.&lt;/p&gt;
+
+&lt;p&gt;I’ll cite &lt;a href=&quot;http://daringfireball.net/2012/03/only_apple&quot;&gt;John Gruber’s comment&lt;/a&gt; to close this post:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Two years after announcing the original iPad, Apple has produced a version that simply blows that original model away in every single regard. It’s faster, it’s thinner, it feels better in hand, it supports LTE networking, and yet battery life is better. The retina display is simply astounding to behold. Eight days from today they’re shipping a product that two years ago would have been impossible at any price, and they’ve made it look easy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This summarize all improvements the new iPad has to offer you.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/sync-google-labels-bes-blackberry</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/sync-google-labels-bes-blackberry.html"/>
+    <title>Sync Blackberry Folders with Google Apps Labels Using BES Server</title>
+    <published>2012-01-19T10:15:00-05:00</published>
+    <updated>2012-01-19T10:15:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;If you are using Google Apps premier or Education edition, you can sync your email with Blackberry phones, using BES server, it could be your own BES server or a hosted BES service.&lt;/p&gt;
+
+&lt;p&gt;It will sync by default just your “Sent Mail” and “Inbox” folder/label, but if you want other labels to be pushed to your blackberry follow this procedure.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Open Messages on your BlackBerry&lt;/li&gt;
+  &lt;li&gt;Press the Menu key&lt;/li&gt;
+  &lt;li&gt;Go to Options -Email Preferences&lt;/li&gt;
+  &lt;li&gt;Press the Menu key again&lt;/li&gt;
+  &lt;li&gt;Select Folder Redirection&lt;/li&gt;
+  &lt;li&gt;Select the folders you want to to synchronize with your BlackBerry&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Use the plus (+) sign to expand labels/folders.&lt;/p&gt;
+
+&lt;p&gt;Save the changes and you are done, now all new emails with those labels applied will be pushed to your Blackberry. Because of the way Gmail manage labels, you can have duplicated emails in your Blackberry, as any mail can have more than one label at a time.&lt;/p&gt;
+
+&lt;p&gt;Also consider that old email with those labels with not be synced with your phone, and only as new email arrives, or is applied a given label will be pushed to your device.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/wifi-hotspot-tethering-blackberry</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/wifi-hotspot-tethering-blackberry.html"/>
+    <title>Blackberry tethering</title>
+    <published>2012-01-13T10:23:00-05:00</published>
+    <updated>2012-01-13T10:23:00-05:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;It was about time, I was able to do this with my Nokia E71 some years ago, even before the iPhone and Android powered phones. Now Blackberry is announcing with Blackberry OS 7.1 the possibility to create WiFi Hotspots, for up to five clients.&lt;/p&gt;
+
+&lt;p&gt;This is a long waiting feature, that even though it is late, it is happily received.&lt;/p&gt;
+
+&lt;p&gt;No one wants to have to connect the phone to the laptop with a USB cable to use the Internet, and considering the iPod, or your Game console does not have usb, you are forced to connect them to Internet using WiFi.&lt;/p&gt;
+
+&lt;p&gt;I have an unlimited data plan in my Blackberry, but was not able to share with my other devices specially with my iPod touch, Now I’ll be able. Yes, first I need to upgrade my Bold 2 (9780) to a new model able to run OS 7.1&lt;/p&gt;
+
+&lt;p&gt;Here are the news from Blackberry blog:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Mobile Hotspot: Turn your BlackBerry 7.1 OS device into a Wi-Fi router anywhere, anytime! The new OS seamlessly provides Internet access for up to five Wi-Fi devices, including laptops and tablets.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you want to read the whole new features that come with this upgrade, read &lt;a href=&quot;http://blogs.blackberry.com/2012/01/blackberry-7-1-update/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/blackberry-network-data-traffic-control</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/blackberry-network-data-traffic-control.html"/>
+    <title>Control your blackberry data usage</title>
+    <published>2011-09-18T11:00:00-04:00</published>
+    <updated>2011-09-18T11:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;When you get a blackberry, you usually also get a Data Plan associated with it, this can be an unlimited data plan or a fixed data plan.&lt;/p&gt;
+
+&lt;p&gt;If you are getting a fixed data plan, you may be interested in an application which is able, to monitor and control your blackberry data usage. Otherwise you may end up with a big invoice because of the extra data you may have consumed.&lt;/p&gt;
+
+&lt;p&gt;I’ve an unlimited data plan on my blackberry, but after testing some of the network traffic monitor apps, I’ve found one that seems to be the best for me.&lt;/p&gt;
+
+&lt;p&gt;Here are some of its feature as listed in the blackberry app world:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Shows traffic separated by radio and WiFi traffic:
+    &lt;ul&gt;
+      &lt;li&gt;Radio traffic in, out and total today and this month&lt;/li&gt;
+      &lt;li&gt;WiFi traffic in, out and total today and this month&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Differentiates between traffic sent out and received.&lt;/li&gt;
+  &lt;li&gt;Billing setup
+    &lt;ul&gt;
+      &lt;li&gt;Over-usage alarm (de)activation&lt;/li&gt;
+      &lt;li&gt;First day of month of your telephone bill (this helps to calculate charges within a billing cycle)&lt;/li&gt;
+      &lt;li&gt;Packages traffic (i.e. you have a 10 MB BlackBerry® Data Plan)&lt;/li&gt;
+      &lt;li&gt;Price per KB thereafter (i.e. traffic charges when you use more than 10 MB of your data plan)&lt;/li&gt;
+      &lt;li&gt;Maximum traffic fee (i.e. if you are OK to spend $10 on traffic more per month, you will get a notification when your monthly traffic is over $10)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Global over-usage notification
+    &lt;ul&gt;
+      &lt;li&gt;Homescreen notification icon: You will now see an ?over-usage? icon in your BlackBerry® homescreen, you are over your monthly traffic maximum.&lt;/li&gt;
+      &lt;li&gt;Global dialog notification: Whatever you are using right now and you exceed the traffic limit, a dialog will pop up and show a notification about traffic ?over-usage?.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Auto starts network tracking on device reset and runs in light-weight mode in background.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It really consumes very little resources of the phone, both processing cycles and battery juice, so if you have a limited data plan associated with your blackberry, and you are a little concerned about how many megs you are using, you may want to test &lt;a href=&quot;http://appworld.blackberry.com/webstore/content/6998?lang=en&quot;&gt;blackberry Network Traffic Control app&lt;/a&gt;. It is also important to say that it is free.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/lower-case-edge-gprs-blackberry-logo-3g</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/lower-case-edge-gprs-blackberry-logo-3g.html"/>
+    <title>Meaning of lower case edge or gprs and 3G without the blackberry logo</title>
+    <published>2011-08-24T07:00:00-04:00</published>
+    <updated>2011-08-24T07:00:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;p&gt;Your Blackberry should normally show you how it is connected to the data network, if it is not using WIFI, it should be using either Edge, GPRS or 3G. For Edge and GPRS, the letters should be in uppercase, (EDGE or GPRS), and that indicate that your phone is connected to the blackberry services, in case of 3G, you should see the Blackberry points logo near the 3G indicator.&lt;/p&gt;
+
+&lt;p&gt;If the logo is not present or the words edge and gprs appears in lowercase, that means that you phone is connected to your cell phone provider data network, but not to the blackberry services/servers.&lt;/p&gt;
+
+&lt;p&gt;In other words, your phone provider may have lost its internet connection, or its connection to blackberry network, you can turn on WIFI if you can to have connection again.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://www.garron.me/en/tech/are-tablets-good</id>
+    <link type="text/html" rel="alternate" href="http://www.garron.me/en/tech/are-tablets-good.html"/>
+    <title>Are tablets suitable for you?</title>
+    <published>2011-08-05T16:20:00-04:00</published>
+    <updated>2011-08-05T16:20:00-04:00</updated>
+    <author>
+      <name>Guillermo Garron</name>
+      <uri>http://www.garron.me/</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;are-tablets-good-or-bad&quot;&gt;Are Tablets good or bad?&lt;/h3&gt;
+
+&lt;p&gt;I understand that is a subjective question, in fact that kind of questions are the ones you should try not to ask, so, let’s change it.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Are Tablets useful for you/me?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;OK, now that is a better question, and the answer is: &lt;strong&gt;It depends&lt;/strong&gt;, and it depends on what you want to do with it, and what do  you want it for.&lt;/p&gt;
+
+&lt;p&gt;In the last months I was really tempted to buy an iPad, have also been looking at Motorola’s Xoom, Dell Streak 7 or Samsung Galaxy Tab, but then I made myself this question.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;What are you going to use it for?&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In my case, the anwser was:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;To read emails&lt;/li&gt;
+      &lt;li&gt;To surf the web&lt;/li&gt;
+      &lt;li&gt;To edit documents&lt;/li&gt;
+      &lt;li&gt;To travel lighter&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You may have different reasons, but as far as I could have seen a tablet is only good for these task:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Surf the web&lt;/li&gt;
+  &lt;li&gt;Read emails&lt;/li&gt;
+  &lt;li&gt;Reply with short emails&lt;/li&gt;
+  &lt;li&gt;Use social networks&lt;/li&gt;
+  &lt;li&gt;Play games&lt;/li&gt;
+  &lt;li&gt;Watch videos&lt;/li&gt;
+  &lt;li&gt;Listen to music&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As you can see in my opinion besides the email part, a tablet is not good for productive task, and only good for leisure/fun activities, activities I can do in my phone (yes smaller screen, but easier to transport too).&lt;/p&gt;
+
+&lt;p&gt;In my case I need a computing device to prepare spreadsheets, to access my servers, to blog, to work with documents and create PDF documents, so for me it is better to get a good Laptop instead of a Tablet. At the end of the day I would be carrying two devices (not small ones) with me, I prefer to surf the web and reply to short emails with my Blackberry or Android phone (smaller than a tablet) and use the Laptop for other tasks.&lt;/p&gt;
+
+&lt;p&gt;So as Jeff Hoogland says in &lt;a href=&quot;http://jeffhoogland.blogspot.com/2011/08/why-tablet-craze.html&quot;&gt;Why the Tablet Craze?&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you have an extra few hundred dollars laying around and want a new toy - go ahead and pick one up.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;What did I buy?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Well, I got a Macbook Pro, yes it is not powered by my beloved Linux, but anyway &lt;a href=&quot;http://jeffhoogland.blogspot.com/2011/07/six-signs-android-really-isnt-linux.html&quot;&gt;Android is not Linux&lt;/a&gt; :)&lt;/p&gt;
+
+</content>
+  </entry>
+  
+ 
+</feed>

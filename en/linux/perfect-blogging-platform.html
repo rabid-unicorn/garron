@@ -1,0 +1,278 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/linux/perfect-blogging-platform.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="Perfect blogging tools: Gentoo, Nginx and Jekyll" />
+
+        <!-- End SEO includes -->
+        <title>The Perfect Tools for the Linux Geek's Blog</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="The Perfect Tools for the Linux Geek's Blog">
+        <meta name="twitter:description" content="">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/linux/index.html">GNU Linux</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">The Perfect Tools for the Linux Geek's Blog</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/linux/perfect-blogging-platform.html">The Perfect Tools for the Linux Geek's Blog</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2011-08-29 07:50:00 -0400</h6>
+
+<hr>
+<p>You have decided it is time to start your blog, and you are not just any person. You are a Linux geek, so which is the best platform for your blog?</p>
+
+<p>Before answering that question let’s consider these other things:</p>
+
+<ul>
+  <li>You want to be the owner of your content</li>
+  <li>You want your server be able to handle the load if a post of you get listed in /., Reddit or Hacker News.</li>
+</ul>
+
+<p>Now, as we know, you are a Linux geek, you are not going to host your blog at <a href="http://posterous.com">posterous</a>, <a href="http://tumblr.com">tumblr</a> or <a href="http://www.wordpress.com">wordpress</a> right? Of course not!.</p>
+
+<p>You are going to host your own blog, in your own server, and you are not going to use Ubuntu, right? You are going to host your blog on <a href="http://www.gentoo.org/">Gentoo Linux</a>.</p>
+
+<p>I’m going too fast, let’s first mention all the tools your are going to use, and that way answer the question on the top of this post:</p>
+
+<ol>
+  <li><a href="http://www.gentoo.org/">Gentoo Linux</a></li>
+  <li><a href="http://nginx.org/en/">Nginx</a></li>
+  <li><a href="http://jekyllrb.com/">Jekyll</a></li>
+</ol>
+
+<p>Let’s start setting up your geeky blog platform.</p>
+
+<ul>
+  <li>Disclaimer: This is not going to be a full how-to and only guide -</li>
+</ul>
+
+<p>First you’ll need to setup a Gentoo base system, as it is impossible to write a better guide to Gentoo than the official one, here is the link to <a href="http://www.gentoo.org/doc/en/handbook/">Gentoo Handbook</a>, once you have Gentoo installed, it is time to install Nginx.</p>
+
+<p>First set the USE flags to use only what you’ll really need from Nginx</p>
+
+<pre><code>www-servers/nginx  http http-cache ipv6 pcre vim-syntax -aio -debug -libatomic -ssl nginx_modules_http_access nginx_modules_http_auth_basic anginx_modules_http_utoindex nginx_modules_http_browser nginx_modules_http_charset nginx_modules_http_empty_gif -nginx_modules_http_fastcgi nginx_modules_http_geo nginx_modules_http_gzip nginx_modules_http_limit_req nginx_modules_http_limit_zone map -nginx_modules_http_memcached nginx_modules_http_proxy nginx_modules_http_referer nginx_modules_http_rewrite -nginx_modules_http_scgi nginx_modules_http_split_clients -nginx_modules_http_ssi nginx_modules_http_upstream_ip_hash nginx_modules_http_userid nginx_modules_http_uwsgi -nginx_modules_http_addition -nginx_modules_http_cache_purge -nginx_modules_http_dav -nginx_modules_http_degradation -nginx_modules_http_ey_balancer -nginx_modules_http_flv -nginx_modules_http_geoip nginx_modules_http_gzip_static -nginx_modules_http_headers_more -nginx_modules_http_image_filter -nginx_modules_http_passenger -nginx_modules_http_perl -nginx_modules_http_push -nginx_modules_http_random_index -nginx_modules_http_realip -nginx_modules_http_secure_link -nginx_modules_http_slowfs_cache -nginx_modules_http_stub_status -nginx_modules_http_sub -nginx_modules_http_upload -nginx_modules_http_xslt -nginx_modules_mail_imap -nginx_modules_mail_pop3 -nginx_modules_mail_smtp
+</code></pre>
+
+<p>Now run:</p>
+
+<pre><code>emerge nginx
+</code></pre>
+
+<p>Now you have Nginx installed, let’s create the configuration file:</p>
+
+<pre><code>worker_processes  4; # Default 1
+events {
+worker_connections  512; # Default 1024
+}
+http {
+include       mime.types;
+default_type  application/octet-stream;
+log_format main '$remote_addr - $remote_user [$time_local] '
+'"$request" $status $body_bytes_sent "$http_referer" '
+'"$http_user_agent" "$http_x_forwarded_for"' ;
+access_log /var/log/nginx/access.log main;
+
+## Compression
+gzip              on;
+gzip_buffers      16 8k;
+gzip_comp_level   5;
+gzip_http_version 1.0;
+gzip_min_length   1100;
+gzip_types        text/plain text/css application/x-javascript;
+gzip_vary         on;
+gzip_static       on; #Needs compilation with gzip_static support
+gzip_proxied      any;
+gzip_disable      "MSIE [1-6]\.";
+server {
+listen [::]:80;
+gzip on;
+server_name site.com;
+expires +1h;
+access_log /var/log/nginx/access.log;
+root /srv/http/nginx;
+location / {
+index index.html;
+charset utf-8;
+proxy_set_header Accept-Encoding "";
+}
+}
+}
+</code></pre>
+
+<p>Now you have Nginx ready to host your site, let’s prepare Jekyll to help you generate your site. Follow this <a href="https://github.com/mojombo/jekyll/wiki/install">Jekyll installation</a> guide, and you will be ready to start creating content.</p>
+
+<p>I’m here assuming you will create your content on your own server using <code>vim</code> you are a Linux geek remember? So every time you create new content you can run this small script to have your site updated.</p>
+
+<pre><code>jekyll
+sudo rsync -av --delete --size-only _site/ /srv/http/nginx/
+sudo find /srv/http/nginx -name "*.css" -type f -exec /bin/sh -c "gzip -c '{}' &gt; '{}.gz'" \;
+sudo find /srv/http/nginx -name "*.html" -type f -exec /bin/sh -c "gzip -c '{}' &gt; '{}.gz'" \;
+sudo find /srv/http/nginx -name "*.js" -type f -exec /bin/sh -c "gzip -c '{}' &gt; '{}.gz'" \;
+</code></pre>
+
+<ul>
+  <li>The first line generates your site</li>
+  <li>The second line copy only the changed files to Nginx root folder.</li>
+  <li>The last three lines create gzipped copies of all compressible files.</li>
+</ul>
+
+<p>We only update de changed files, because we need to keep the dates of the old ones, that way proxy servers around the world will help improve your site. You’ll also want to serve already gripped versions of your files.</p>
+
+<p>If you need to learn about Jekyll, read the <a href="https://github.com/mojombo/jekyll/wiki">Jekyll’s wiki pages</a></p>
+
+
+<hr>
+<a href="http://www.garron.me/en/linux/perfect-blogging-platform.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/linux/perfect-blogging-platform.html&text=The Perfect Tools for the Linux Geek's Blog&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/linux/perfect-blogging-platform.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/linux/perfect-blogging-platform.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/linux/perfect-blogging-platform.html">linkedin</a> | <a href="mailto:?Subject=The Perfect Tools for the Linux Geek's Blog&Body=http://www.garron.me/en/linux/perfect-blogging-platform.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/linux/perfect-blogging-platform.html&title=The Perfect Tools for the Linux Geek's Blog" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<h4>You may want to subscribe to my newsletter</h4>
+<p>If you want to receive articles similar to this every month sign in to our Newsletter and joing other 2.000 readers</p>
+<p>You can see an example of what is going to be sent to you <a href="/en/tag/tutorial.html">here</a></p>
+<form class="all-centered" action="https://tinyletter.com/linux" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/linux', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Please enter your email in the box below</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>

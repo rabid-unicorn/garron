@@ -1,0 +1,239 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- SEO includes -->
+        
+<link href="/en/atom.xml" rel="alternate" title="Guillermo Garron" type="application/atom+xml" />
+
+
+        <link rel="canonical" href="http://www.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html" />
+        
+<meta name="robots" content="noodp, noydir" />
+
+
+<meta name="description" content="How to clone a bootable usb key, or copy to disk for storage. Useful to create copies of bootable usb memory" />
+
+        <!-- End SEO includes -->
+        <title>Clone a bootable usb key</title>
+        <!-- <link rel="stylesheet" href="/foundation/css/foundation.css" /> -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/app.css">
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Slab|Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/webfonts/ss-social-circle.css" type="text/css">
+        <!-- <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet"> -->
+        <link href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" rel="stylesheet">
+        <!-- Twitter cards -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@ggarron">
+        <meta name="twitter:creator" content="@ggarron">
+        <meta name="twitter:title" content="Clone a bootable usb key">
+        <meta name="twitter:description" content="How to clone a bootable usb key, or copy to disk for storage. Useful to create copies of bootable usb memory">
+        <!-- End Twitter Cards -->
+        <!-- FB property -->
+        <meta property="fb:admins" content="613797474" />
+        <!-- End FB Property -->
+        <!-- <script src="/foundation/js/vendor/modernizr.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="row">
+    <div class="contain-to-grid sticky"> 
+        <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/en/">Home</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li><a href="/en/linux/">Linux</a></li>
+                    <li><a href="/en/mac/">Mac</a></li>
+                    <li><a href="/en/bits/">Tips</a></li>
+                    <li><a href="/en/tech/">Tech</a></li>
+                    <li><a href="/en/articles/">Articles</a></li>
+                    <li><a href="/en/blog/">Blog</a></li>
+                    <li><a href="/en/food/">Food</a></li>
+                    <li><a href="/en/pictures/">Photos</a></li>
+                    <li><a href="/en/projects/">Projects</a></li>
+                    <li><a href="/en/web-design/">Web Designg</a></li>
+                </ul>
+            </section>
+        </nav> 
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>Get updates via: <a href="/en/atom.xml" class="ss-icon ss-social-circle">rss</a> | <a href="http://twitter.com/ggarron" class="ss-icon ss-social-circle">twitter</a> | <a href="http://feedburner.google.com/fb/a/mailverify?uri=GuillermoGarronMainSite&amp;loc=en_US" class="ss-icon ss-social-circle">email</a> | <a href="https://plus.google.com/u/0/115745027821234071812" class="ss-icon ss-social-circle">google+</a></p>
+        <ul class="breadcrumbs">
+            
+            <li><a href="/index.html">Geeking</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/index.html">Tech Blog</a>
+            <li class="divider">&gt;</li>
+            
+            <li><a href="/en/bits/index.html">Tips</a>
+            <li class="divider">&gt;</li>
+            
+            <li class="active">Clone a bootable usb key</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 large-9 large-centered medium-9 medium-centered columns">
+        <h3><a href="/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html">Clone a bootable usb key</a></h3>
+<h6>Written by <a href="/en/about.html">Guillermo Garron</a> .</h6>
+<h6>Date: 2013-01-15 09:50:13 -0500</h6>
+
+<hr>
+<p>If you have a bootable usb key, or a ssd bootable memory, that you want to store for backup purposes, or you want to clone to another usb media or ssd disk, follow this guide.</p>
+
+<p>First be sure to know where your media is located by Linux or Mac. I use df instead of fdisk, because it is easier.</p>
+
+<p>First run <code>df</code> with the usb key not inserted, you will see something like this:</p>
+
+<pre><code>Filesystem                        512-blocks      Used Available Capacity  Mounted on
+/dev/disk0s2                       623463232 358680744 264270488    58%    /
+devfs                                    367       367         0   100%    /dev
+map -hosts                                 0         0         0   100%    /net
+map auto_home                              0         0         0   100%    /home
+localhost:/C62iTGV_5XeelNQUPuE2no  623463232 623463232         0   100%    /Volumes/MobileBackups
+</code></pre>
+
+<p>Then insert the key and run <code>df</code> again:</p>
+
+<pre><code>df
+</code></pre>
+
+<p>You will now see this:</p>
+
+<pre><code>Filesystem                        512-blocks      Used Available Capacity  Mounted on
+/dev/disk0s2                       623463232 358727728 264223504    58%    /
+devfs                                    371       371         0   100%    /dev
+map -hosts                                 0         0         0   100%    /net
+map auto_home                              0         0         0   100%    /home
+localhost:/C62iTGV_5XeelNQUPuE2no  623463232 623463232         0   100%    /Volumes/MobileBackups
+/dev/disk1s1                        31250400    614240  30636160     2%    /Volumes/NO NAME
+</code></pre>
+
+<p>As you can see there a new device at <em>/dev/disk1s1</em>. That is on my Mac, on Linux is very similar:</p>
+
+<p>With no usb inserted:</p>
+
+<pre><code>Filesystem     1K-blocks     Used Available Use% Mounted on
+/dev/sda2      201585632 29185432 162160200  16% /
+udev              981796       12    981784   1% /dev
+tmpfs             396400      832    395568   1% /run
+none                5120        0      5120   0% /run/lock
+none              990996      980    990016   1% /run/shm
+none              102400       20    102380   1% /run/user
+</code></pre>
+
+<p>With the usb key inserted:</p>
+
+<pre><code>Filesystem     1K-blocks     Used Available Use% Mounted on
+/dev/sda2      201585632 29185452 162160180  16% /
+udev              981796       12    981784   1% /dev
+tmpfs             396400      844    395556   1% /run
+none                5120        0      5120   0% /run/lock
+none              990996      980    990016   1% /run/shm
+none              102400       20    102380   1% /run/user
+/dev/sdc1       15625200   307216  15317984   2% /media/admin/389A-DA08
+</code></pre>
+
+<p>You can see the usb is located at <em>/dev/sdc1</em>.</p>
+
+<p>Now to copy the contents of it to the hard disk run:</p>
+
+<pre><code>dd if=/dev/sdc of=/home/admin/backup-usb.dd conv=notrunc
+</code></pre>
+
+<p>To copy the image again to a usb disk</p>
+
+<pre><code>dd if=/home/admin/backup-usb.dd of=/dev/sdc conv=notrunc
+</code></pre>
+
+<p>Be sure that your usb key is again at /dev/sdc, and keep in mind that <strong>all contents of the usb key will be deleted</strong></p>
+
+
+<hr>
+<a href="http://www.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html">permalink</a>
+<hr>
+<p>If you enjoyed the article, please share it</a>
+<p><a class="ss-icon ss-social-circle" href="http://twitter.com/intent/tweet?url=http://www.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html&text=Clone a bootable usb key&via=ggarron">twitter</a> | <a class="ss-icon ss-social-circle" href="http://facebook.com/sharer.php?u=http://www.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html">facebook</a> | <a class="ss-icon ss-social-circle" href="https://plus.google.com/share?url=http%3A%2F%2Fwww.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html">google+</a> | <a class="ss-icon ss-social-circle" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html">linkedin</a> | <a href="mailto:?Subject=Clone a bootable usb key&Body=http://www.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html" class="ss-icon ss-social-circle">email</a> | <a href="http://reddit.com/submit?url=http://www.garron.me/en/bits/convert-store-copy-bootable-usb-iso-file-another-usb.html&title=Clone a bootable usb key" class="ss-icon ss-social-circle">reddit</a></p>
+
+<hr>
+<!-- <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'garronblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
+
+
+    </div>
+</div>
+      
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- <script src="/foundation/js/vendor/jquery.js"></script> -->
+        <!-- <script src="/foundation/js/foundation.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/foundation/5.5.1/js/foundation.min.js"></script>
+        <!-- <script src="/foundation/js/rainbow.min.js"></script> -->
+        <script src="//cdn.jsdelivr.net/rainbow/1.1.9/rainbow.min.js"></script>
+        <!-- <script src="/bootstrap/js/magnific-popup.js"></script> -->
+        <script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
+        <!-- To start magnific popup -->
+        <script src="/bootstrap/js/custom.js"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <!-- Analytics -->
+        <!-- <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1514170-11']);
+  _gaq.push(['_setDomainName', 'www.garron.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>    -->
+        <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.go2linux.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='http://d2lx14ao1t3d4g.cloudfront.net/piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.go2linux.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+
+
+        <!-- end analytics -->
+    </body>
+</html>
